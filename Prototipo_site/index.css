@@ -1,3 +1,20 @@
+@font-face {
+    font-family: Kollektif;
+    src: url(kollektif/Kollektif.ttf);
+}
+
 body {
     background-color: #0f132e;
+    padding: 0;
+    margin: 0;
+    font-family: Kollektif;
+}
+
+.navbar {
+    height: 20vh;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
