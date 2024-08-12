@@ -8,13 +8,24 @@ body {
     padding: 0;
     margin: 0;
     font-family: Kollektif;
+    background-image: url(imagens/imagemFundo.jpg);
+    background-size: cover;
+}
+
+.footer{
+    background-color: #0f132e;
 }
 
 .navbar {
     height: 20vh;
-    background-color: white;
+    background-color: #0f132e;
     display: flex;
+    color: white;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+.sobreNos{
+    background-color: #5e6174;
 }
