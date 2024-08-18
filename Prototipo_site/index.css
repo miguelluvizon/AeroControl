@@ -56,5 +56,12 @@ body {
 }
 
 .subsection {
-    font-size: 35px;
+    font-size: 30px;
+}
+
+.login_button {
+    position: absolute;
+    left: 93vw;
+    top: 15vh;
+    color: white;
 }
