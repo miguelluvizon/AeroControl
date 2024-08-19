@@ -13,12 +13,29 @@ body {
     background-position-y: 20vh;
 }
 
+@media (min-width: 320px) and (max-width: 480px){
+   .navbar{
+    display: grid;
+    flex-basis: 100%;
+    width: 100%;
+    grid: 100%;
+   }
+}
+
+@media (max-width: 600px){
+    .conteiner{
+        flex-wrap: wrap;
+        align-items: center;
+    }
+}
+
 .footer{
     background-color: #0f132e;
 }
 
 .navbar {
     height: 20vh;
+    width: 100%;
     background: rgb(19,7,46);
     background: linear-gradient(90deg, rgba(19,7,46,1) 41%, rgba(109,86,128,1) 92%);
     /* Gradiente feito no https://cssgradient.io/ */
@@ -64,4 +81,9 @@ body {
     left: 93vw;
     top: 15vh;
     color: white;
+}
+
+.linha-navbar{
+    display: flex;
+    flex-direction: column;
 }
