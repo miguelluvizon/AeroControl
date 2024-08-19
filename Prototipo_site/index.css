@@ -3,16 +3,11 @@
     src: url(kollektif/Kollektif.ttf);
 }
 
-body {
-    background-color: #0f132e;
-    padding: 0;
-    margin: 0;
-    font-family: Kollektif;
-    background-image: url(imagens/imagemFundo2.png);
-    background-size: auto;
-    background-position-y: 20vh;
+@media (min-width: 480px) { /*Tamanho celular*/
+
 }
 
+<<<<<<< HEAD
 @media (min-width: 320px) and (max-width: 480px){
    .navbar{
     display: grid;
@@ -87,3 +82,109 @@ body {
     display: flex;
     flex-direction: column;
 }
+=======
+@media (min-width: 800px) { /*Tamanho tablet*/
+
+}
+
+@media (min-width: 1025px) { /*Tamanho desktop*/
+    body {
+        background-color: #0f132e;
+        padding: 0;
+        margin: 0;
+        font-family: Kollektif;
+    }
+    
+    .header {
+        height: 100vh;
+    
+    }
+    
+    .footer{
+        background-color: #0f132e;
+    }
+    
+    .navbar {
+        height: 20vh;
+        background: rgb(19,7,46);
+        background: linear-gradient(90deg, rgba(19,7,46,1) 41%, rgba(109,86,128,1) 92%);
+        /* Gradiente feito no https://cssgradient.io/ */
+        display: flex;
+        color: white;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+    }
+    
+    .navbar ul {
+        padding: 0;
+        list-style: none;
+        display: flex;
+        flex-direction: row;
+        width: 500px;
+        justify-content: space-around;
+        margin-bottom: 0;
+    }
+    
+    .sobreNos{
+        /* position: absolute; */
+        display: flex;
+    
+        width: 100%;
+        color: white;
+        background-image: url(imagens/imagemFundo2.png);
+        background-size: auto;
+        height: 80vh;
+        justify-content: center;
+    }
+    
+    .container {
+        display: flex;
+        height: 100%;
+        width: 95%;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+    }
+    
+    .logo {
+        width: 250px;
+    }
+    
+    .subtitle {
+        font-size: 60px;
+        margin-top: 0;
+    }
+    
+    .subsection {
+        font-size: 30px;
+    }
+    
+    
+    .logo{
+        height: 55%;
+    }
+    
+    .opcoes{
+        height: 40%;
+        width: 100%;
+        flex-direction: row;
+        display: flex;
+    }
+    
+    .esquerda{
+        display: flex;
+        width: 20%;
+    }
+    .centro{
+        display: flex;
+        width: 60%;
+        justify-content: center;
+    }
+    
+    .direita{
+        display: flex;
+        width: 20%;
+    }
+}
+>>>>>>> 7a286a81a0decf4b5ea5b0f4f79a627ad42abf85
