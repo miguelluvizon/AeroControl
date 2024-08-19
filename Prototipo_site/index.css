@@ -1,3 +1,67 @@
+@font-face {
+    font-family: Kollektif;
+    src: url(kollektif/Kollektif.ttf);
+}
+
 body {
     background-color: #0f132e;
+    padding: 0;
+    margin: 0;
+    font-family: Kollektif;
+    background-image: url(imagens/imagemFundo2.png);
+    background-size: auto;
+    background-position-y: 20vh;
+}
+
+.footer{
+    background-color: #0f132e;
+}
+
+.navbar {
+    height: 20vh;
+    background: rgb(19,7,46);
+    background: linear-gradient(90deg, rgba(19,7,46,1) 41%, rgba(109,86,128,1) 92%);
+    /* Gradiente feito no https://cssgradient.io/ */
+    display: flex;
+    color: white;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 20px;
+}
+
+.navbar ul {
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    width: 300px;
+    height: 50px;
+    justify-content: space-around;
+}
+
+.sobreNos{
+
+    margin-top: 100px;
+    margin-left: 20px;
+    color: white;
+}
+
+.logo {
+    width: 250px;
+}
+
+.subtitle {
+    font-size: 60px;
+}
+
+.subsection {
+    font-size: 30px;
+}
+
+.login_button {
+    position: absolute;
+    left: 93vw;
+    top: 15vh;
+    color: white;
 }
