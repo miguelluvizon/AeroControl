@@ -3,6 +3,10 @@
     src: url(kollektif/Kollektif.ttf);
 }
 
+* {
+    font-family: Kollektif;
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -45,6 +49,29 @@ button {
     width: 50%;
     font-size: 20px;
     font-weight: bold;
+    border: none;
+    height: 38px;
+}
+
+input {
+    border-radius: 30px;
+}
+
+input::placeholder {
+    padding-left: 10px;
+}
+
+button {
+    border-radius: 30px;
+}
+
+button:hover {
+    background-color: #6467ec;
+    cursor: pointer;
+}
+
+input::placeholder {
+    margin-left: 20px;
 }
 
 .link {
@@ -236,17 +263,39 @@ button {
     .imgLogo {
         width: 10%;
     }
-    
+
+    .entradas {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        height: 25%;
+        width: 100%;
+    }
+
+    .botao {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        height: 10%;
+        width: 100%;
+    }
+
+
     .box {
         background-color: white;
-        width: 40%;
+        width: 30%;
         height: 80%;
         display: flex;
         flex-direction: column;
         align-items: center;
         text-align: center;
         justify-content: space-around;
-        border-radius: 10%;
+        border-radius: 50px;
     }
+
+
+
 }
 
