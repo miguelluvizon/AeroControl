@@ -71,6 +71,33 @@ button {
     border-radius: 10%;
 }
 
+/* Telas extremamente pequenas */
+@media screen and (max-width: 320px) {
+    .logo {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 30vh;
+    }
+    
+    .imgLogo {
+        display: none;
+    }
+
+    .box {
+        background-color: white;
+        width: 90%;
+        height: fit-content;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        justify-content: space-around;
+        /* border-radius: 10%; */
+    }
+}
+
 /* Celular */
 @media screen and (min-width: 320px) and (max-width: 480px) {
     .logo {
@@ -129,7 +156,7 @@ button {
 @media screen and (min-width: 769px) and (max-width: 1200px) {
     .box {
         background-color: white;
-        width: 50%;
+        width: 40%;
         height: 80%;
         display: flex;
         flex-direction: column;
@@ -212,7 +239,7 @@ button {
     
     .box {
         background-color: white;
-        width: 20%;
+        width: 40%;
         height: 80%;
         display: flex;
         flex-direction: column;
@@ -222,3 +249,4 @@ button {
         border-radius: 10%;
     }
 }
+
