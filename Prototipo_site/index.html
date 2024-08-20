@@ -10,17 +10,6 @@
 </head>
 
 <body>
-<<<<<<< HEAD
-    <div class="navbar">
-        <div><img class="logo" src="imagens/logoAerocontrol.png" alt=""></div>
-            <div class="linha-navbar">
-                <ul>
-                <li>Soluções</li>
-                <li>Sobre</li>
-                <li>Contato</li>
-            </ul>
-            <div class="login_button">Login</div>
-=======
     <div class="header">
         <div class="navbar">
             <div class="logo">
@@ -46,28 +35,74 @@
 
 
         </div>
-        <div class="sobreNos">
-            <div class="container">
-                <h2 class="subtitle">MONITORAMENTO SEGURO <br> E SUPERVISIONADO</h2>
-                <div class="subsection">AQUI NÓS GARANTIMOS A SEGURANÇA<br>PARA SEU SISTEMA DE CONTROLE DE <br> TRÁFEGO
-                    AÉREO </div>
+        <div class="carousel">
+            <div data-js="carousel__item" class="carousel__item">
+                <div class="sobreNos img1">
+                    <div class="container">
+                        <h2 class="subtitle">MONITORAMENTO SEGURO <br> E SUPERVISIONADO</h2>
+                        <div class="subsection">AQUI NÓS GARANTIMOS A SEGURANÇA<br>PARA SEU SISTEMA DE CONTROLE DE <br>
+                            TRÁFEGO
+                            AÉREO
+                        </div>
+                    </div>
+                </div>
             </div>
->>>>>>> 7a286a81a0decf4b5ea5b0f4f79a627ad42abf85
+
+            <div data-js="carousel__item" class="carousel__item">
+                <div class="sobreNos img2">
+                    <div class="container">
+                        <h2 class="subtitle">MONITORAMENTO SEGURO <br> E SUPERVISIONADO</h2>
+                        <div class="subsection">AQUI NÓS GARANTIMOS A SEGURANÇA<br>PARA SEU SISTEMA DE CONTROLE DE <br>
+                            TRÁFEGO
+                            AÉREO
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div data-js="carousel__item" class="carousel__item">
+                <div class="sobreNos img3">
+                    <div class="container">
+                        <h2 class="subtitle">MONITORAMENTO SEGURO <br> E SUPERVISIONADO </h2>
+                        <div class="subsection">AQUI NÓS GARANTIMOS A SEGURANÇA<br>PARA SEU SISTEMA DE CONTROLE DE <br>
+                            TRÁFEGO
+                            AÉREO
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
-        
     </div>
-<<<<<<< HEAD
-    <section class="sobreNos">
-        <div class="conteiner">
-            <h2 class="subtitle">MONITORAMENTO SEGURO <br> E SUPERVISIONADO</h2>
-            <div class="subsection">AQUI NÓS GARANTIMOS A SEGURANÇA<br>PARA SEU SISTEMA DE CONTROLE DE <br> TRÁFEGO AÉREO </div>
-        </div>
-    </section>
-
-    
-=======
-
->>>>>>> 7a286a81a0decf4b5ea5b0f4f79a627ad42abf85
 </body>
 
 </html>
+<script>
+    
+const slides = document.querySelectorAll('[data-js="carousel__item"]'); //Constante que seleciona todos os elementos dessa classe
+
+let currentSlideIndex = 0; //  armazena o índice do slide que está sendo exibido atualmente no carrossel.
+
+showSlides();
+
+function showSlides() {
+    // Remove a classe que torna todos os slides visíveis
+    slides.forEach(slide => {
+        slide.classList.remove('carousel__item--visible');
+    });
+
+    // Mostra o slide atual
+    slides[currentSlideIndex].classList.add('carousel__item--visible');
+
+    // Avança para o próximo slide
+    currentSlideIndex++;
+
+    // Se chegou ao fim dos slides, volta ao início
+    if (currentSlideIndex == slides.length) {
+        currentSlideIndex = 0;
+    }
+
+    // Define um temporizador para mudar para o próximo slide após 2 segundos
+    setTimeout(showSlides, 3000);
+}
+</script>

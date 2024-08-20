@@ -7,82 +7,6 @@
 
 }
 
-<<<<<<< HEAD
-@media (min-width: 320px) and (max-width: 480px){
-   .navbar{
-    display: grid;
-    flex-basis: 100%;
-    width: 100%;
-    grid: 100%;
-   }
-}
-
-@media (max-width: 600px){
-    .conteiner{
-        flex-wrap: wrap;
-        align-items: center;
-    }
-}
-
-.footer{
-    background-color: #0f132e;
-}
-
-.navbar {
-    height: 20vh;
-    width: 100%;
-    background: rgb(19,7,46);
-    background: linear-gradient(90deg, rgba(19,7,46,1) 41%, rgba(109,86,128,1) 92%);
-    /* Gradiente feito no https://cssgradient.io/ */
-    display: flex;
-    color: white;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding-top: 20px;
-}
-
-.navbar ul {
-    padding: 0;
-    list-style: none;
-    display: flex;
-    flex-direction: row;
-    width: 300px;
-    height: 50px;
-    justify-content: space-around;
-}
-
-.sobreNos{
-
-    margin-top: 100px;
-    margin-left: 20px;
-    color: white;
-}
-
-.logo {
-    width: 250px;
-}
-
-.subtitle {
-    font-size: 60px;
-}
-
-.subsection {
-    font-size: 30px;
-}
-
-.login_button {
-    position: absolute;
-    left: 93vw;
-    top: 15vh;
-    color: white;
-}
-
-.linha-navbar{
-    display: flex;
-    flex-direction: column;
-}
-=======
 @media (min-width: 800px) { /*Tamanho tablet*/
 
 }
@@ -127,15 +51,33 @@
     }
     
     .sobreNos{
-        /* position: absolute; */
         display: flex;
-    
         width: 100%;
         color: white;
-        background-image: url(imagens/imagemFundo2.png);
         background-size: auto;
         height: 80vh;
         justify-content: center;
+       
+    }
+
+    .img1{
+        background-image: url(imagens/imagemFundo2.png);
+    }
+
+    .img2{
+        background-image: url(imagens/torrejpg.jpg);
+        background-size: cover; 
+        background-position: center;
+        background-repeat: no-repeat; 
+    }
+
+    .img3{
+     
+        background-size: cover; 
+        background-position: center; 
+        background-repeat: no-repeat; 
+        background-image: url(imagens/imagemFundo.jpg);
+       
     }
     
     .container {
@@ -158,6 +100,7 @@
     
     .subsection {
         font-size: 30px;
+
     }
     
     
@@ -186,5 +129,35 @@
         display: flex;
         width: 20%;
     }
+
+    .carousel {
+  overflow: hidden;
+  position: relative;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
->>>>>>> 7a286a81a0decf4b5ea5b0f4f79a627ad42abf85
+
+
+.carousel .carousel__item--visible {
+  display: block;
+  animation: fadeVisibility 0.3s;
+  width: 100%;
+}
+
+.carousel .carousel__actions {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  position: absolute;
+  top: 20%;
+  transform: translateY(-50%);
+}
+
+.carousel__item {
+  display: none;
+  width: 100%;
+
+}
+}
