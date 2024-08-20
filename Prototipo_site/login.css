@@ -46,7 +46,7 @@ button {
     color: white;
     padding: 5px;
     border-radius: 15px;
-    width: 50%;
+    width: 100%;
     font-size: 20px;
     font-weight: bold;
     border: none;
@@ -100,16 +100,29 @@ input::placeholder {
 
 /* Telas extremamente pequenas */
 @media screen and (max-width: 320px) {
+
+    button {
+        background-color: #40169f;
+        color: white;
+        padding: 5px;
+        border-radius: 15px;
+        width: 100%;
+        font-size: 20px;
+        font-weight: bold;
+        border: none;
+        height: 38px;
+    }
+
     .logo {
         width: 100%;
         display: flex;
         align-items: center;
         justify-content: center;
-        height: 30vh;
+        height: 20vh;
     }
     
     .imgLogo {
-        display: none;
+        width: 50%;
     }
 
     .box {
@@ -121,7 +134,15 @@ input::placeholder {
         align-items: center;
         text-align: center;
         justify-content: space-around;
-        /* border-radius: 10%; */
+        border-radius: 10px;
+    }
+    .entradas {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        height: 50px;
+        width: 100%;
     }
 }
 
@@ -150,6 +171,15 @@ input::placeholder {
         justify-content: space-around;
         border-radius: 10%;
     }
+
+    .entradas {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        height: 45%;
+        width: 100%;
+    }
 }
 
 /* tablets */
@@ -163,7 +193,7 @@ input::placeholder {
     }
     
     .imgLogo {
-        width: 40%;
+        width: 30%;
     }
     
     .box {
@@ -176,6 +206,15 @@ input::placeholder {
         text-align: center;
         justify-content: space-around;
         border-radius: 10%;
+    }
+
+    .entradas {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        height: 45%;
+        width: 100%;
     }
 }
 
@@ -191,6 +230,15 @@ input::placeholder {
         text-align: center;
         justify-content: space-around;
         border-radius: 10%;
+    }
+
+    .entradas {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        height: 45%;
+        width: 100%;
     }
 
     /* telas largas e altas */
@@ -239,7 +287,7 @@ input::placeholder {
             color: white;
             padding: 5px;
             border-radius: 15px;
-            width: 50%;
+            width: 100%;
             font-size: 30px;
             font-weight: bold;
         }
@@ -279,7 +327,7 @@ input::placeholder {
         align-items: center;
         justify-content: space-around;
         height: 10%;
-        width: 100%;
+        /* width: 100%; */
     }
 
 
