@@ -46,7 +46,7 @@ button {
     color: white;
     padding: 5px;
     border-radius: 15px;
-    width: 50%;
+    width: 100%;
     font-size: 20px;
     font-weight: bold;
     border: none;
@@ -100,6 +100,19 @@ input::placeholder {
 
 /* Telas extremamente pequenas */
 @media screen and (max-width: 320px) {
+
+    button {
+        background-color: #40169f;
+        color: white;
+        padding: 5px;
+        border-radius: 15px;
+        width: 100%;
+        font-size: 20px;
+        font-weight: bold;
+        border: none;
+        height: 38px;
+    }
+
     .logo {
         width: 100%;
         display: flex;
@@ -239,7 +252,7 @@ input::placeholder {
             color: white;
             padding: 5px;
             border-radius: 15px;
-            width: 50%;
+            width: 100%;
             font-size: 30px;
             font-weight: bold;
         }
@@ -279,7 +292,7 @@ input::placeholder {
         align-items: center;
         justify-content: space-around;
         height: 10%;
-        width: 100%;
+        /* width: 100%; */
     }
 
 
