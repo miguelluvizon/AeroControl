@@ -103,7 +103,7 @@
                     <div class="palavra">
                         <h2>CONTROLE</h2>
                     </div>
-                    
+
                 </div>
                 <div class="legenda">
                     <div class="icone">
@@ -112,31 +112,80 @@
                     <div class="palavra">
                         <h2>EFICIÊNCIA</h2>
                     </div>
-                  
+
                 </div>
 
             </div>
             <div class="caixas">
                 <div class="caixa">
                     <div class="texto">
-                        <p>A segurança cibernética é crucial para proteger a comunicação e o funcionamento dos sistemas aeroportuários, prevenindo ataques que poderiam comprometer a aviação.</p>
+                        <p>A segurança cibernética é crucial para proteger a comunicação e o funcionamento dos sistemas
+                            aeroportuários, prevenindo ataques que poderiam comprometer a aviação.</p>
                     </div>
                 </div>
                 <div class="caixa">
                     <div class="texto">
-                        <p>O monitoramento e a análise contínua de indicadores e incidentes é fundamental para manter e aprimorar os mais altos padrões de segurança nas operações aeroportuárias.</p>
+                        <p>O monitoramento e a análise contínua de indicadores e incidentes é fundamental para manter e
+                            aprimorar os mais altos padrões de segurança nas operações aeroportuárias.</p>
                     </div>
-                    
+
                 </div>
                 <div class="caixa">
                     <div class="texto">
-                        <p>É uma prioridade que nas operações aeroportuárias,sendo responsável por garantir um ambiente seguro para todos os usuários.
+                        <p>É uma prioridade que nas operações aeroportuárias,sendo responsável por garantir um ambiente
+                            seguro para todos os usuários.
                         </p>
                     </div>
-                    
+
                 </div>
             </div>
-           
+
+        </div>
+
+    </div>
+    <div class="pagina3">
+        <div class="parte1">
+            <div class="solucao">
+                <div class="tituloSolucao">
+                    <div class="textoSolucao">
+                        <h1>SOLUÇÃO</h1>
+                    </div>
+
+                    <div class="iconeSolucao">
+                        <img src="imagens/solucao-de-problemas (1).png" width="75px">
+                    </div>
+
+
+                </div>
+                <div class="corpoSolucao">
+                    <div class="texto1">
+                        <p>O sistema AeroControl disponiliza o monitoramento em tempo real do sistema operacional de
+                            CTA.</p>
+                    </div>
+                    <div class="texto2">
+                        <p>Está interessado?</p>
+                    </div>
+
+
+                </div>
+                <div class="botaoSolucao">
+                    <button onclick="" id="cadastre">CADASTRE-SE AQUI</button>
+
+                </div>
+
+
+            </div>
+            <div class="foto1">
+                <img src="imagens/dash.png" width="460px" height="518px">
+
+            </div>
+
+        </div>
+        <div class="parte2">
+            <div class="foto2">
+                <img src="imagens/Firefly dentro da torre de controle pessoas trabalhando em computadores e esta de noite 65806.jpg" width="570px" height="256px">
+            </div>
+          
         </div>
 
     </div>
@@ -145,31 +194,31 @@
 </html>
 
 <script>
-    
-const slides = document.querySelectorAll('[data-js="carousel__item"]'); //Constante que seleciona todos os elementos dessa classe
 
-let currentSlideIndex = 0; //  armazena o índice do slide que está sendo exibido atualmente no carrossel.
+    const slides = document.querySelectorAll('[data-js="carousel__item"]'); //Constante que seleciona todos os elementos dessa classe
 
-showSlides();
+    let currentSlideIndex = 0; //  armazena o índice do slide que está sendo exibido atualmente no carrossel.
 
-function showSlides() {
-    // Remove a classe que torna todos os slides visíveis
-    slides.forEach(slide => {
-        slide.classList.remove('carousel__item--visible');
-    });
+    showSlides();
 
-    // Mostra o slide atual
-    slides[currentSlideIndex].classList.add('carousel__item--visible');
+    function showSlides() {
+        // Remove a classe que torna todos os slides visíveis
+        slides.forEach(slide => {
+            slide.classList.remove('carousel__item--visible');
+        });
 
-    // Avança para o próximo slide
-    currentSlideIndex++;
+        // Mostra o slide atual
+        slides[currentSlideIndex].classList.add('carousel__item--visible');
 
-    // Se chegou ao fim dos slides, volta ao início
-    if (currentSlideIndex == slides.length) {
-        currentSlideIndex = 0;
+        // Avança para o próximo slide
+        currentSlideIndex++;
+
+        // Se chegou ao fim dos slides, volta ao início
+        if (currentSlideIndex == slides.length) {
+            currentSlideIndex = 0;
+        }
+
+        // Define um temporizador para mudar para o próximo slide após 2 segundos
+        setTimeout(showSlides, 3000);
     }
-
-    // Define um temporizador para mudar para o próximo slide após 2 segundos
-    setTimeout(showSlides, 3000);
-}
 </script>
