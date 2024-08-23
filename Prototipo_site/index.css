@@ -3,10 +3,157 @@
     src: url(kollektif/Kollektif.ttf);
 }
 
-@media (min-width: 480px) {
+@media (max-width: 480px) {
     /*Tamanho celular*/
 
+    body{
+        background-color: #0f132e;
+        font-family: Kollektif;
+    }
+
+    .img1 {
+        background-image: url(imagens/imagemFundo2.png);
+    }
+
+    .img2 {
+        background-image: url(imagens/torrejpg.jpg);
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .img3 {
+
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-image: url(imagens/imagemFundo.jpg);
+
+    }
+
+    .logo img{
+        max-width: 110px;
+        height: auto;
+    }
+
+    .header{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex-wrap: nowrap;
+        text-align: center;
+        
+    }
+
+    .carousel{
+        width: 100vh;
+        overflow: hidden;
+        height: auto;
+        word-wrap: break-word;
+        background-size: cover;
+        position: relative;
+        top: -40px;
+        height: 667px;
+    }
+
+    .carousel__item{
+        display: none;
+        width: 100%;
+        background-size: cover;
+        background-position: center;
+    }
+    
+    .container h2{
+        display: flex;
+        position: relative;
+        top: 30px;
+        flex-direction: column;
+    }    
+
+    .container .subsection{
+        display: flex;
+        position: relative;
+        top: 390px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .carousel__item--visible{
+        display: block;
+        width: 100%;
+        animation: fadeVisibility 0.3s;
+        color: white;
+        background-size: cover;
+    }
+
+    .img1, .img2, .img3 {
+        height: 100vh;
+        width: 100%;
+        background-position: center;
+        background-size: cover;
+    }
+
+    .opcoes{
+        display: flex;
+        justify-content: center;
+    }
+
+    .direita{
+        display: flex;
+        position: relative;
+        top: -1.5px;
+    }
+
+    .opcoes ul{
+        display: flex;
+        list-style: none;
+        padding: 0;
+        justify-content: space-around;
+        flex-direction: row;
+        align-items: center;
+        text-align: center;
+        width: 100%;
+        flex-wrap: nowrap;
+    }
+
+    .opcoes ul li{
+        margin: 0 10px;
+    }
+
+    .navbar{
+        display: flex;
+        background: linear-gradient(90deg, rgba(19, 7, 46, 1) 41%, rgb(92, 59, 119) 92%);
+        color: white;
+        flex-direction: column;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+        width: 100%;
+        padding: 10px;
+        position: relative;
+        top: -20px;
+        font-size: small;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: linear-gradient(90deg, rgba(19, 7, 46, 1) 41%, rgb(84, 47, 114) 92%);
+        border-radius: 1.3px;
+        /* Bordas arredondadas */
+        border: 1.3px solid #e1e1e1;
+        /* Borda externa para criar efeito de espessura */
+    }
+
+    .sobre{
+        padding: 20px;
+        text-align: center;
+        color: white;
+    }
+
+    .footer {
+        background-color: #0f132e;
+    }
+
 }
+
 
 @media (min-width: 800px) {
     /*Tamanho tablet*/
