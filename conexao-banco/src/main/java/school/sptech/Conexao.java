@@ -10,8 +10,8 @@ public class Conexao {
         BasicDataSource dataSource = new BasicDataSource();
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
         dataSource.setUrl("jdbc:mysql://localhost:3306/teste"); // onde está escrito 'teste' deve ir o nome da database previamente criado.
-        dataSource.setUsername("root");
-        dataSource.setPassword("211004");
+        dataSource.setUsername("");
+        dataSource.setPassword("");
 
         conexaoDoBanco = new JdbcTemplate(dataSource);
     }
