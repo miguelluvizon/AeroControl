@@ -26,7 +26,7 @@ else:
     limite = 1;
     modo = int(input("Bem vindo. Escolha o modo do sistema:\n 1 - teste rápido \n 2 - detecção de picos \n 3 - análise de 15 minutos \n"))
     if modo == 1:
-        print("Iniciando sistema. Ele irá mostrar dados 10 vezes durante 25 segundos.")
+        print("Iniciando sistema. Ele irá mostrar dados 10 vezes durante 50 segundos.")
         tempo = 5;
         limite = 10;
     elif (modo == 2):
@@ -50,6 +50,11 @@ else:
             cursor.execute(sql, val)
             mydb.commit()
             print(cursor.rowcount, "record inserted.")
+        elif (modo == 2):
+            if (porcentagemRAM >= 90):
+                print("A RAM está com uso excessivo!")
+            if (porcentagemCPU >= 70):
+                print("A CPU esta com uso excessivo!")
         print(limite)
         limite = limite - 1;
         time.sleep(tempo)
