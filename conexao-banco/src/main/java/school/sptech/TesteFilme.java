@@ -45,8 +45,8 @@ public class TesteFilme {
 
 //        con.update("delete from filme where id = 3");
 
-        Filme filmeDoBanco = con.queryForObject("select * from filme where id = 2", new BeanPropertyRowMapper<>(Filme.class));
-        System.out.println(filmeDoBanco);
+//        Filme filmeDoBanco = con.queryForObject("select * from filme where id = 2", new BeanPropertyRowMapper<>(Filme.class));
+//        System.out.println(filmeDoBanco);
         //retorna apenas 1 valor
     }
 }
