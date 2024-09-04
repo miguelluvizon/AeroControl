@@ -50,7 +50,7 @@ elif (modo1 == 2):
             porcentagemCPU = (psutil.cpu_percent(interval = 1))
             usoRAM = round(psutil.virtual_memory().used / pow(10, 9), 2)
             porcentagemRAM = psutil.virtual_memory().percent
-            print("Uso CPU: {}GHz\nPorcentagem de uso da CPU: {}%\n\nUso de memória RAM: {}GB\nPorcentagem RAM: {}%\n".format(usoCPU, porcentagemCPU, usoRAM, porcentagemRAM))
+            print("Porcentagem de uso da CPU: {}%\n\nUso de memória RAM: {}GB\nPorcentagem RAM: {}%\n".format(porcentagemCPU, usoRAM, porcentagemRAM))
             if (modo2 == 3):
                 sql = "INSERT INTO DadoComputador VALUES (default, default, %s, %s, %s, %s, %s, %s)"
                 val = (porcentagemCPU, porcentagemRAM, discoTotal, discoLivre  usoRAM, idMaquina)
