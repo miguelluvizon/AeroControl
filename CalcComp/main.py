@@ -35,15 +35,13 @@ else:
     if inserirBoolean == 's':
         inserir = True;
     while (limite >=0):
-        discoTotal = round(psutil.disk_usage('C:\\').total / pow(10, 9), 2)
-        discoLivre = round(psutil.disk_usage('C:\\').free / pow(10, 9), 2)
         porcentagemCPU = (psutil.cpu_percent(interval = 1))
         usoRAM = round(psutil.virtual_memory().used / pow(10, 9), 2)
         porcentagemRAM = psutil.virtual_memory().percent
         print("\nPorcentagem de uso da CPU: {}%\n\nUso de memória RAM: {}GB\nPorcentagem RAM: {}%\n\nTotal disco: {}\nDisco livre: {}".format(porcentagemCPU, usoRAM, porcentagemRAM, discoTotal, discoLivre))
         if (inserir):
             sql = "INSERT INTO DadoComputador VALUES (default, default, %s, %s, %s, %s, %s, %s)"
-            val = (porcentagemCPU, porcentagemRAM, discoTotal, discoLivre,  usoRAM, idMaquina)
+            val = (porcentagemCPU, porcentagemRAM, usoRAM, idMaquina)
             cursor.execute(sql, val)
             mydb.commit()
             print(cursor.rowcount, "record inserted.")
