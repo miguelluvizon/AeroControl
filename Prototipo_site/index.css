@@ -12,7 +12,7 @@
     }
 
     .img1 {
-        background-image: url(imagens/imagemFundo2.png);
+        background-image: url(imagens/aviaoAero\ \(2\).jpeg);
     }
 
     .img2 {
@@ -27,8 +27,7 @@
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
-        background-image: url(imagens/imagemFundo.jpg);
-
+        background-image: url(imagens/LHR-background.jpeg);
     }
 
     .logo img{
@@ -53,7 +52,8 @@
         background-size: cover;
         position: relative;
         top: -40px;
-        height: 667px;
+        height: 607px;
+        overflow: hidden;
     }
 
     .carousel__item{
@@ -146,6 +146,30 @@
         padding: 20px;
         text-align: center;
         color: white;
+    }
+
+    .imagem{
+        display: flex;
+        position: relative;
+        left: 180px;
+    }
+
+     .imagem .aviao{
+        display: flex;
+        position: relative;
+        top: -93px;
+        left: 90px;
+    }
+
+    .imagem{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .imagem .aviao{
+        display: flex;
+        position: relative;
+        left: 80px;
     }
 
     .footer {
