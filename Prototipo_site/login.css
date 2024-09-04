@@ -1,0 +1,349 @@
+@font-face {
+    font-family: Kollektif;
+    src: url(kollektif/Kollektif.ttf);
+}
+
+* {
+    font-family: Kollektif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: rgb(19, 7, 46);
+    font-family: Kollektif;
+    background: linear-gradient(90deg, rgba(19, 7, 46, 1) 41%, rgba(109, 86, 128, 1) 92%);
+}
+
+.logo {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 10vh;
+}
+
+.imgLogo {
+    width: 15%;
+}
+
+.title {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+input {
+    background-color: #ededed;
+    border: none;
+    height: 30px;
+    padding: 5px;
+    border-radius: 15px;
+    width: 50%;
+}
+
+button {
+    background-color: #40169f;
+    color: white;
+    padding: 5px;
+    border-radius: 15px;
+    width: 100%;
+    font-size: 20px;
+    font-weight: bold;
+    border: none;
+    height: 38px;
+}
+
+input {
+    border-radius: 30px;
+}
+
+input::placeholder {
+    padding-left: 10px;
+}
+
+button {
+    border-radius: 30px;
+}
+
+button:hover {
+    background-color: #6467ec;
+    cursor: pointer;
+}
+
+input::placeholder {
+    margin-left: 20px;
+}
+
+.link {
+    color: lightblue;
+    text-decoration: underline;
+}
+
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
+
+.box {
+    background-color: white;
+    width: 25%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: space-around;
+    border-radius: 10%;
+}
+
+/* Telas extremamente pequenas */
+@media screen and (max-width: 320px) {
+
+    button {
+        background-color: #40169f;
+        color: white;
+        padding: 5px;
+        border-radius: 15px;
+        width: 100%;
+        font-size: 20px;
+        font-weight: bold;
+        border: none;
+        height: 38px;
+    }
+
+    .logo {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 20vh;
+    }
+    
+    .imgLogo {
+        width: 50%;
+    }
+
+    .box {
+        background-color: white;
+        width: 90%;
+        height: fit-content;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        justify-content: space-around;
+        border-radius: 10px;
+    }
+    .entradas {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        height: 50px;
+        width: 100%;
+    }
+}
+
+/* Celular */
+@media screen and (min-width: 320px) and (max-width: 480px) {
+    .logo {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 15vh;
+    }
+    
+    .imgLogo {
+        width: 50%;
+    }
+    
+    .box {
+        background-color: white;
+        width: 80%;
+        height: 80%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        justify-content: space-around;
+        border-radius: 10%;
+    }
+
+    .entradas {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        height: 45%;
+        width: 100%;
+    }
+}
+
+/* tablets */
+@media screen and (min-width: 481px) and (max-width: 768px) {
+    .logo {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 15vh;
+    }
+    
+    .imgLogo {
+        width: 30%;
+    }
+    
+    .box {
+        background-color: white;
+        width: 60%;
+        height: 80%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        justify-content: space-around;
+        border-radius: 10%;
+    }
+
+    .entradas {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        height: 45%;
+        width: 100%;
+    }
+}
+
+/* Laptops */
+@media screen and (min-width: 769px) and (max-width: 1200px) {
+    .box {
+        background-color: white;
+        width: 40%;
+        height: 80%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        justify-content: space-around;
+        border-radius: 10%;
+    }
+
+    .entradas {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        height: 45%;
+        width: 100%;
+    }
+
+    /* telas largas e altas */
+    @media screen and (min-height: 800px) {
+        .box {
+            background-color: white;
+            width: 80%;
+            height: 80%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            justify-content: space-around;
+            border-radius: 10%;
+        }
+
+        .logo {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 15vh;
+        }
+        
+        .imgLogo {
+            width: 30%;
+        }
+
+        .title {
+            font-size: 40px;
+            font-weight: bold;
+        }
+        
+        input {
+            background-color: #ededed;
+            border: none;
+            height: 60px;
+            padding: 5px;
+            border-radius: 15px;
+            width: 50%;
+            font-size: 30px;
+        }
+        
+        button {
+            background-color: #40169f;
+            color: white;
+            padding: 5px;
+            border-radius: 15px;
+            width: 100%;
+            font-size: 30px;
+            font-weight: bold;
+        }
+        
+        .redirectCadastro {
+            font-size: 30px;
+        }
+    }
+}
+
+/* Telas maiores */
+@media screen and (min-width: 1201px) {
+    .logo {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 15vh;
+    }
+    
+    .imgLogo {
+        width: 10%;
+    }
+
+    .entradas {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        height: 25%;
+        width: 100%;
+    }
+
+    .botao {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        height: 10%;
+        /* width: 100%; */
+    }
+
+
+    .box {
+        background-color: white;
+        width: 30%;
+        height: 80%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        justify-content: space-around;
+        border-radius: 50px;
+    }
+
+
+
+}
+

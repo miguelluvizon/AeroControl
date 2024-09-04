@@ -1,0 +1,125 @@
+@font-face {
+    font-family: Kollektif;
+    src: url(kollektif/Kollektif.ttf);
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    font-family: Kollektif;
+    background: rgb(19,7,46);
+    background: linear-gradient(90deg, rgba(19,7,46,1) 49%, rgba(63,33,130,1) 100%);
+}
+
+.sidebar {
+    height: 100vh;
+    width: 12vw;
+    background-color: white;
+}
+
+.logo_div {
+    width: 100%;
+    height: fit-content;
+}
+
+.logo_img {
+    width: 100%;
+}
+
+.div_botoes {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    height: 50%;
+}
+
+.botao_nuvem {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url(imagens/imagem_nuvem.png);
+    background-size: contain;
+    background-position: center;
+    height: 20%;
+    width: 80%;
+    background-repeat: no-repeat;
+}
+
+.botao {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    height: 10%;
+    color: white;
+    background: rgb(19,7,46);
+    background: linear-gradient(90deg, rgba(19,7,46,1) 49%, rgba(63,33,130,1) 100%);
+    border-radius: 30px;
+}
+
+.gap {
+    height: 5vh;
+    width: 100%;
+}
+
+.linha {
+    display: none;
+}
+
+.div_icone {
+    display: none;
+}
+
+@media screen and (max-width: 480px) {
+    .sidebar {
+        width: 100vw;
+        height: 30vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+    }
+
+    .gap {
+        display: none;
+    }
+
+    .logo_div {
+        width: 100%;
+        height: 30%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .logo_img {
+        width: 40%;
+    }
+
+    .linha {
+        display: block;
+        width: 80%;
+        height: 1%;
+        border-radius: 10px;
+        background: rgb(19,7,46);
+        background: linear-gradient(90deg, rgba(19,7,46,1) 49%, rgba(63,33,130,1) 100%);
+    }
+
+    .div_botoes {
+        display: none;
+    }
+
+    .div_icone {
+        display: flex;
+        width: 70%;
+        height: 30%;
+        justify-content: space-between;
+    }
+
+    .icone {
+        display: block;
+        height: 100%;
+        width: 15%;
+        background-color: blue;
+    }
+}
