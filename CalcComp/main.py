@@ -20,48 +20,38 @@ resultado = cursor.fetchall();
 idMaquina = resultado[0][0]
 tempo = 10
 
-modo1 = int(input("Bem vindo. Escolha o que deseja fazer:\n 1 - Visualizar dados já capturados; \n 2 - Capturar dados em tempo real \n"))
-
-if (modo1 == 1):
-    # Aqui vai a parte de obter as médias de todas as máquinas
-    print('')
-elif (modo1 == 2):
-    if (len(resultado) < 1):
-        print("Sua máquina não está no sistema")
-    else:
-        modo = 0;
-        limite = 1;
-        modo2 = int(input("Escolha o modo do sistema:\n 1 - teste rápido \n 2 - detecção de picos \n 3 - análise de 15 minutos \n"))
-        if modo2 == 1:
-            print("Iniciando sistema. Ele irá mostrar dados 10 vezes durante 50 segundos.")
-            tempo = 5;
-            limite = 10;
-        elif (modo2 == 2):
-            print("Iniciando sistema. Ele irá mostrar dados 10 vezes durante 5 minutos. Se um pico for detectado, será mostrado.")
-            tempo = 30;
-            limite = 10;
-        elif (modo2 == 3):
-            print("Iniciando sistema. Ele irá mostrar dados 15 vezes durante 15 minutos. Será feita a incerção no banco.")
-            tempo = 60;
-            limite = 15;
-
-        while (limite >=0):
-            discoTotal = round(psutil.disk_usage('C:\\').total / pow(10, 9), 2)
-            discoLivre = round(psutil.disk_usage('C:\\').free / pow(10, 9), 2)
-            porcentagemCPU = (psutil.cpu_percent(interval = 1))
-            usoRAM = round(psutil.virtual_memory().used / pow(10, 9), 2)
-            porcentagemRAM = psutil.virtual_memory().percent
-            print("\nPorcentagem de uso da CPU: {}%\n\nUso de memória RAM: {}GB\nPorcentagem RAM: {}%\n\nTotal disco: {}\nDisco livre: {}".format(porcentagemCPU, usoRAM, porcentagemRAM, discoTotal, discoLivre))
-            if (modo2 == 3):
-                sql = "INSERT INTO DadoComputador VALUES (default, default, %s, %s, %s, %s, %s, %s)"
-                val = (porcentagemCPU, porcentagemRAM, discoTotal, discoLivre,  usoRAM, idMaquina)
-                cursor.execute(sql, val)
-                mydb.commit()
-                print(cursor.rowcount, "record inserted.")
-            elif (modo2 == 2):
-                if (porcentagemRAM >= 90):
-                    print("A RAM está com uso excessivo!")
-                if (porcentagemCPU >= 70):
-                    print("A CPU esta com uso excessivo!")
+if (len(resultado) < 1):
+    print("Sua máquina não está no sistema")
+else:
+    modo = 0;
+    limite = 1;
+    tempo = int(input("Escolha o intervalo de capturas (segundos): \n"))
+    limiteBoolean = str(input("Deseja impor um limite no número de capturas? (s/n) \n"))
+    limite = 0;
+    if limiteBoolean == 's':
+        limite = int(input("Escolha o número de vezes que o sistema deve capturar. \n"))
+    inserirBoolean = str(input("Deseja inserir no Banco de Dados? (s/n) \n"))
+    inserir = False;    
+    if inserirBoolean == 's':
+        inserir = True;
+    while (limite >=0):
+        discoTotal = round(psutil.disk_usage('C:\\').total / pow(10, 9), 2)
+        discoLivre = round(psutil.disk_usage('C:\\').free / pow(10, 9), 2)
+        porcentagemCPU = (psutil.cpu_percent(interval = 1))
+        usoRAM = round(psutil.virtual_memory().used / pow(10, 9), 2)
+        porcentagemRAM = psutil.virtual_memory().percent
+        print("\nPorcentagem de uso da CPU: {}%\n\nUso de memória RAM: {}GB\nPorcentagem RAM: {}%\n\nTotal disco: {}\nDisco livre: {}".format(porcentagemCPU, usoRAM, porcentagemRAM, discoTotal, discoLivre))
+        if (inserir):
+            sql = "INSERT INTO DadoComputador VALUES (default, default, %s, %s, %s, %s, %s, %s)"
+            val = (porcentagemCPU, porcentagemRAM, discoTotal, discoLivre,  usoRAM, idMaquina)
+            cursor.execute(sql, val)
+            mydb.commit()
+            print(cursor.rowcount, "record inserted.")
+        if (porcentagemRAM >= 90):
+            print("A RAM está com uso excessivo!")
+        if (porcentagemCPU >= 70):
+            print("A CPU esta com uso excessivo!")
+        if (limiteBoolean == 's'):
             limite = limite - 1;
-            time.sleep(tempo)
+        time.sleep(tempo)
+    print("Sistema finalizado")
