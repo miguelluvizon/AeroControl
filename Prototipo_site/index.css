@@ -3,6 +3,24 @@
     src: url(kollektif/Kollektif.ttf);
 }
 
+a {
+    text-decoration: none;
+    color: white;
+}
+
+a:visited {
+    text-decoration: none;
+    color: white;
+}
+
+a:hover {
+    color: rgb(167, 154, 192);
+}
+
+li:hover {
+    transform: scale(1.1);
+}
+
 @media (max-width: 480px) {
     /*Tamanho celular*/
 
@@ -720,6 +738,12 @@
         height: 100%;
     }
 
+
+.botao{
+    text-decoration: none;
+    color: aliceblue;
+    
+}
 
 
 }
