@@ -38,9 +38,9 @@ else:
         porcentagemCPU = (psutil.cpu_percent(interval = 1))
         usoRAM = round(psutil.virtual_memory().used / pow(10, 9), 2)
         porcentagemRAM = psutil.virtual_memory().percent
-        print("\nPorcentagem de uso da CPU: {}%\n\nUso de memória RAM: {}GB\nPorcentagem RAM: {}%\n\nTotal disco: {}\nDisco livre: {}".format(porcentagemCPU, usoRAM, porcentagemRAM, discoTotal, discoLivre))
+        print("\nPorcentagem de uso da CPU: {}%\n\nUso de memória RAM: {}GB\nPorcentagem RAM: {}".format(porcentagemCPU, usoRAM, porcentagemRAM))
         if (inserir):
-            sql = "INSERT INTO DadoComputador VALUES (default, default, %s, %s, %s, %s, %s, %s)"
+            sql = "INSERT INTO DadoComputador VALUES (default, default, %s, %s, %s, %s)"
             val = (porcentagemCPU, porcentagemRAM, usoRAM, idMaquina)
             cursor.execute(sql, val)
             mydb.commit()
