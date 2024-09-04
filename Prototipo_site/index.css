@@ -715,5 +715,11 @@ li:hover {
     }
 
 
+.botao{
+    text-decoration: none;
+    color: aliceblue;
+    
+}
+
 
 }
