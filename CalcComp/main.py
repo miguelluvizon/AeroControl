@@ -24,6 +24,7 @@ modo1 = int(input("Bem vindo. Escolha o que deseja fazer:\n 1 - Visualizar dados
 
 if (modo1 == 1):
     # Aqui vai a parte de obter as médias de todas as máquinas
+    print('')
 elif (modo1 == 2):
     if (len(resultado) < 1):
         print("Sua máquina não está no sistema")
@@ -50,10 +51,10 @@ elif (modo1 == 2):
             porcentagemCPU = (psutil.cpu_percent(interval = 1))
             usoRAM = round(psutil.virtual_memory().used / pow(10, 9), 2)
             porcentagemRAM = psutil.virtual_memory().percent
-            print("Porcentagem de uso da CPU: {}%\n\nUso de memória RAM: {}GB\nPorcentagem RAM: {}%\n".format(porcentagemCPU, usoRAM, porcentagemRAM))
+            print("\nPorcentagem de uso da CPU: {}%\n\nUso de memória RAM: {}GB\nPorcentagem RAM: {}%\n\nTotal disco: {}\nDisco livre: {}".format(porcentagemCPU, usoRAM, porcentagemRAM, discoTotal, discoLivre))
             if (modo2 == 3):
                 sql = "INSERT INTO DadoComputador VALUES (default, default, %s, %s, %s, %s, %s, %s)"
-                val = (porcentagemCPU, porcentagemRAM, discoTotal, discoLivre  usoRAM, idMaquina)
+                val = (porcentagemCPU, porcentagemRAM, discoTotal, discoLivre,  usoRAM, idMaquina)
                 cursor.execute(sql, val)
                 mydb.commit()
                 print(cursor.rowcount, "record inserted.")
@@ -62,6 +63,5 @@ elif (modo1 == 2):
                     print("A RAM está com uso excessivo!")
                 if (porcentagemCPU >= 70):
                     print("A CPU esta com uso excessivo!")
-            print(limite)
             limite = limite - 1;
             time.sleep(tempo)
