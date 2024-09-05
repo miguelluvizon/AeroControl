@@ -30,7 +30,7 @@ li:hover {
     }
 
     .img1 {
-        background-image: url(imagens/imagemFundo2.png);
+        background-image: url(imagens/aviaoAero\ \(2\).jpeg);
     }
 
     .img2 {
@@ -45,8 +45,7 @@ li:hover {
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
-        background-image: url(imagens/imagemFundo.jpg);
-
+        background-image: url(imagens/LHR-background.jpeg);
     }
 
     .logo img{
@@ -71,7 +70,8 @@ li:hover {
         background-size: cover;
         position: relative;
         top: -40px;
-        height: 667px;
+        height: 607px;
+        overflow: hidden;
     }
 
     .carousel__item{
@@ -166,10 +166,164 @@ li:hover {
         color: white;
     }
 
-    .footer {
-        background-color: #0f132e;
+    .imagem{
+        display: flex;
+        position: relative;
+        left: 180px;
     }
 
+     .imagem .aviao{
+        display: flex;
+        position: relative;
+        top: -93px;
+        left: 90px;
+    }
+
+    .imagem{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .imagem .aviao{
+        display: flex;
+        position: relative;
+        left: 80px;
+    }
+
+    .caixa .texto{
+        display: flex;
+        position: relative;
+    }
+
+    .legendas{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        position: relative;
+        left: 34px;
+    }
+
+    .palavra{
+        display: flex;
+        position: relative;
+        top: 51px;
+        left: -60px;
+    }
+
+    .legenda{
+        display: flex;
+        font-size: 8px;
+    }
+
+    .textoSolucao{
+        display: flex;
+        color: #e1e1e1;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .iconeSolucao{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .corpoSolucao{
+        display: flex;
+        color: #e1e1e1;
+        flex-direction: column;
+    }
+
+    .texto2{
+        display: flex;
+    justify-content: center;
+    }
+
+    .botaoSolucao{
+        display: flex;
+        justify-content: center;
+    }
+
+    .caixas{
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        left: -10px;
+        top: 10px;
+        justify-content: center;
+    }
+
+    .foto1 img{
+        display: flex;
+        max-width: 100%;
+        height: auto;
+    }
+
+    .particao1{
+        display: flex;
+    }
+
+    .foto2 img{
+        display: flex;
+        max-width: 100%;
+        height: auto;
+    }
+
+    .pagina4{
+        display: flex;
+        flex-direction: column;
+        color: #e1e1e1;
+        justify-content: center;
+    }
+
+    .tituloSobrenos{
+        display: flex;
+        justify-content: center;
+    }
+
+    .textoAviaozinho{
+        display: flex;
+        justify-content: center;
+    }
+
+    .imgTexto img{
+        display: flex;
+        max-width: 100%;
+        height: auto;
+        position: relative;
+        left: -15px;
+    }
+
+    .footer {
+        background-color: #0f132e;
+        justify-content: center;
+    }
+
+    .quadrado{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .contatos{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .re{
+        display: flex;
+        position: relative;
+        left: 70px;
+    }
+
+
+    .imgRede img{
+        display: flex;
+        position: relative;
+        left: 50px;
+    }
 }
 
 
