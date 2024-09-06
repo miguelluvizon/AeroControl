@@ -24,11 +24,12 @@ public class DadosDao {
             System.out.println("Não há dados na tabela");
         } else {
             for (DadosEntity resultados : resultado) {
-                System.out.println("---".repeat(20));
-                System.out.print("  CPU % - " + (resultados.getCpuPorcentagem()));
-                System.out.print(" | RAM % - " + (resultados.getMemoriaPorcentagem()));
-                System.out.print(" | RAM GB - " + (resultados.getMemoriaGB()));
-                System.out.println("\n");
+                System.out.println("---".repeat(16));
+                System.out.println("fkComputador: " + resultados.getFkComputador());
+                System.out.print("CPU - " + (resultados.getCpuPorcentagem()));
+                System.out.print("% | RAM - " + (resultados.getMemoriaPorcentagem()));
+                System.out.print("% & " + (resultados.getMemoriaGB()));
+                System.out.println("GB \n");
             }
         }
     }
@@ -42,10 +43,11 @@ public class DadosDao {
         } else {
             for (DadosEntity resultados : resultado) {
                 System.out.println("---".repeat(16));
-                System.out.print("  CPU % - " + (resultados.getCpuPorcentagem()));
-                System.out.print(" | RAM % - " + (resultados.getMemoriaPorcentagem()));
-                System.out.print(" | RAM GB - " + (resultados.getMemoriaGB()));
-                System.out.println("\n");
+                System.out.println("fkComputador: " + resultados.getFkComputador());
+                System.out.print("CPU - " + (resultados.getCpuPorcentagem()));
+                System.out.print("% | RAM - " + (resultados.getMemoriaPorcentagem()));
+                System.out.print("% & " + (resultados.getMemoriaGB()));
+                System.out.println("GB \n");
             }
         }
     }

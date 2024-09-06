@@ -21,8 +21,7 @@ public class Main {
                 +-------------------------------------------+
                 |                                           |
                 | 1) Mostrar todos os dados                 |
-                | 2) Mostrar média de uma máquina(QUEBRADO) |
-                | 3) Mostar todos dados de uma máquina      |
+                | 2) Mostar todos dados de uma máquina      |
                 |                                           |
                 | 4) Sair                                   |
                 +-------------------------------------------+
@@ -32,11 +31,10 @@ public class Main {
         if (opcao == 1) {
             dadosDao.obterDados();
         } else if (opcao == 2) {
-            mediasDao.obterLista();
-        } else if (opcao == 3) {
             System.out.println("Escolha o ID da máquina que deseja ver: \n");
             Integer id = buscarInt.nextInt();
-            dadosDao.obterDadosPorMaquina(id);
+        } else if (opcao == 3) {
+
         }
 
 
