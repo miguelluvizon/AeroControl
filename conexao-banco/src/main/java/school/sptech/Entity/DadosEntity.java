@@ -8,6 +8,10 @@ public class DadosEntity {
     private Integer memoriaGB;
     private Integer fkComputador;
 
+    private Double avgCpuPorcentagem;
+    private Double avgMemoriaPorcentagem;
+    private Double avgMemoriaGB;
+
     public Integer getIdDado() {
         return idDado;
     }
@@ -56,5 +60,27 @@ public class DadosEntity {
         this.fkComputador = fkComputador;
     }
 
+    public Double getAvgCpuPorcentagem() {
+        return avgCpuPorcentagem;
+    }
 
+    public void setAvgCpuPorcentagem(Double avgCpuPorcentagem) {
+        this.avgCpuPorcentagem = avgCpuPorcentagem;
+    }
+
+    public Double getAvgMemoriaPorcentagem() {
+        return avgMemoriaPorcentagem;
+    }
+
+    public void setAvgMemoriaPorcentagem(Double avgMemoriaPorcentagem) {
+        this.avgMemoriaPorcentagem = avgMemoriaPorcentagem;
+    }
+
+    public Double getAvgMemoriaGB() {
+        return avgMemoriaGB;
+    }
+
+    public void setAvgMemoriaGB(Double avgMemoriaGB) {
+        this.avgMemoriaGB = avgMemoriaGB;
+    }
 }

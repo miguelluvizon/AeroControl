@@ -16,11 +16,18 @@ public class DadosDao {
         this.template = conexao.getConexaoDoBanco();
     }
 
-    public String ObterDados() {
-//        String sqlSelect = "SELECT avg(cpuPorcentagem), avg(memoriaPorcentagem), avg(memoriaGB)" +
-//                "FROM DadoComputador";
-//        Integer resultado = template.query(sqlSelect, new BeanPo);
-//        System.out.println(resultado);
-        return "resultado";
+    public void obterDados() {
+        String sqlSelect = "SELECT avg(cpuPorcentagem), avg(memoriaPorcentagem), avg(memoriaGB) FROM DadoComputador";
+        List<DadosEntity> resultado = template.query(sqlSelect, new BeanPropertyRowMapper<>(DadosEntity.class));
+
+        if (resultado.isEmpty()) {
+            System.out.println("Não há dados na tabela");
+        } else {
+            for (DadosEntity resultados : resultado) {
+                System.out.println("Média %CPU: " + resultados.getAvgCpuPorcentagem());
+                System.out.println("Média %RAM: " + resultados.getAvgMemoriaPorcentagem());
+                System.out.println("Média RAM: " + resultados.getAvgMemoriaGB());
+            }
+        }
     }
 }

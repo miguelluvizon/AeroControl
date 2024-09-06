@@ -26,7 +26,7 @@ public class Main {
         Integer opcao = buscarInt.nextInt();
 
         if (opcao == 1) {
-            System.out.println(dadosDao.ObterDados());
+            dadosDao.obterDados();
         }
 
 
