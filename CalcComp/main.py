@@ -24,14 +24,14 @@ if (len(resultado) < 1):
 else:
     tempo = int(input("Escolha o intervalo de capturas (segundos): \n"))
     limiteBoolean = str(input("Deseja impor um limite no número de capturas? (s/n) \n"))
-    limite = 0;
+    limite = 1;
     if limiteBoolean == 's':
         limite = int(input("Escolha o número de vezes que o sistema deve capturar. \n"))
     inserirBoolean = str(input("Deseja inserir no Banco de Dados? (s/n) \n"))
     inserir = False;    
     if inserirBoolean == 's':
         inserir = True;
-    while (limite >=0):
+    while (limite > 0):
         porcentagemCPU = (psutil.cpu_percent(interval = 1))
         usoRAM = round(psutil.virtual_memory().used / pow(10, 9), 2)
         porcentagemRAM = psutil.virtual_memory().percent
