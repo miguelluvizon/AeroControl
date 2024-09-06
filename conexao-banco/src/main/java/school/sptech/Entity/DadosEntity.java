@@ -55,4 +55,6 @@ public class DadosEntity {
     public void setFkComputador(Integer fkComputador) {
         this.fkComputador = fkComputador;
     }
+
+
 }

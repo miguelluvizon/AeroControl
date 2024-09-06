@@ -3,8 +3,8 @@ USE aeroControl;
 
 Create table Aeroporto (
 idAeroporto int primary key auto_increment,
-nome varchar(50),
-CEP varchar(50),
+nome varchar(40),
+CEP char(9),
 numero int
 );
 
@@ -24,7 +24,7 @@ hostname varchar(45),
 processador varchar(45),
 memoria varchar(5),
 armazenamento varchar(6),
-setor varchar(50),
+setor varchar(45),
 fkAeroporto int,
 constraint foreign key (fkAeroporto) references Aeroporto(idAeroporto)
 );
@@ -34,7 +34,6 @@ idDado int primary key auto_increment,
 horaDado datetime default CURRENT_TIMESTAMP,
 cpuPorcentagem decimal(5,2),
 memoriaPorcentagem decimal(5,2),
-cpuGhz decimal(5,2),
 memoriaGB int,
 fkComputador int,
 constraint foreign key (fkComputador) references Computador(idComputador)

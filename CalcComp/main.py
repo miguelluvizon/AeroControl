@@ -4,7 +4,7 @@ import mysql.connector
 import socket;
 
 # Estabelecendo conexão ao BD
-mydb = mysql.connector.connect(user='inserirNuvem', password='aerocontrol', host='localhost', database='aerocontrol')
+mydb = mysql.connector.connect(user='inserirNuvem', password='aerocontrol', host='10.18.33.33', database='aerocontrol')
 cursor = mydb.cursor()
 
 # Obtendo nome da máquina
