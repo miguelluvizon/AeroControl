@@ -42,10 +42,6 @@ else:
             cursor.execute(sql, val)
             mydb.commit()
             print(cursor.rowcount, "record inserted.")
-        if (porcentagemRAM >= 90):
-            print("A RAM está com uso excessivo!")
-        if (porcentagemCPU >= 70):
-            print("A CPU esta com uso excessivo!")
         if (limiteBoolean == 's'):
             limite = limite - 1;
         time.sleep(tempo)
