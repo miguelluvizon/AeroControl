@@ -18,13 +18,10 @@ resultado = cursor.fetchall();
 
 # Obtendo id da máquina no BD
 idMaquina = resultado[0][0]
-tempo = 10
 
 if (len(resultado) < 1):
     print("Sua máquina não está no sistema")
 else:
-    modo = 0;
-    limite = 1;
     tempo = int(input("Escolha o intervalo de capturas (segundos): \n"))
     limiteBoolean = str(input("Deseja impor um limite no número de capturas? (s/n) \n"))
     limite = 0;
