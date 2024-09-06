@@ -1,6 +1,7 @@
 package school.sptech;
 
 import school.sptech.dao.DadosDao;
+import school.sptech.dao.MediasDao;
 
 import java.util.Scanner;
 
@@ -12,21 +13,30 @@ public class Main {
         Scanner buscarBoolean = new Scanner(System.in);
 
         DadosDao dadosDao = new DadosDao();
+        MediasDao mediasDao = new MediasDao();
+
         System.out.println("""
                 +-------------------------------------------+
                 |    BANCO DE DADOS CONECTADO NO JAVA       |
                 +-------------------------------------------+
                 |                                           |
-                | 1) Mostrar média geral                    |
-                | 2) Mostrar média de uma máquina           |
+                | 1) Mostrar todos os dados                 |
+                | 2) Mostrar média de uma máquina(QUEBRADO) |
+                | 3) Mostar todos dados de uma máquina      |
                 |                                           |
-                | 3) Sair                                   |
+                | 4) Sair                                   |
                 +-------------------------------------------+
                 """);
         Integer opcao = buscarInt.nextInt();
 
         if (opcao == 1) {
             dadosDao.obterDados();
+        } else if (opcao == 2) {
+            mediasDao.obterLista();
+        } else if (opcao == 3) {
+            System.out.println("Escolha o ID da máquina que deseja ver: \n");
+            Integer id = buscarInt.nextInt();
+            dadosDao.obterDadosPorMaquina(id);
         }
 
 

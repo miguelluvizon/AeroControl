@@ -17,16 +17,35 @@ public class DadosDao {
     }
 
     public void obterDados() {
-        String sqlSelect = "SELECT avg(cpuPorcentagem), avg(memoriaPorcentagem), avg(memoriaGB) FROM DadoComputador";
+        String sqlSelect = "SELECT * FROM DadoComputador";
         List<DadosEntity> resultado = template.query(sqlSelect, new BeanPropertyRowMapper<>(DadosEntity.class));
 
         if (resultado.isEmpty()) {
             System.out.println("Não há dados na tabela");
         } else {
             for (DadosEntity resultados : resultado) {
-                System.out.println("Média %CPU: " + resultados.getAvgCpuPorcentagem());
-                System.out.println("Média %RAM: " + resultados.getAvgMemoriaPorcentagem());
-                System.out.println("Média RAM: " + resultados.getAvgMemoriaGB());
+                System.out.println("---".repeat(20));
+                System.out.print("  CPU % - " + (resultados.getCpuPorcentagem()));
+                System.out.print(" | RAM % - " + (resultados.getMemoriaPorcentagem()));
+                System.out.print(" | RAM GB - " + (resultados.getMemoriaGB()));
+                System.out.println("\n");
+            }
+        }
+    }
+
+    public void obterDadosPorMaquina(Integer id) {
+        String sqlSelect = "SELECT * FROM DadoComputador WHERE fkComputador = %d ORDER BY horadado DESC LIMIT 10".formatted(id);
+        List<DadosEntity> resultado = template.query(sqlSelect, new BeanPropertyRowMapper<>(DadosEntity.class));
+
+        if (resultado.isEmpty()) {
+            System.out.println("Não há dados na tabela");
+        } else {
+            for (DadosEntity resultados : resultado) {
+                System.out.println("---".repeat(16));
+                System.out.print("  CPU % - " + (resultados.getCpuPorcentagem()));
+                System.out.print(" | RAM % - " + (resultados.getMemoriaPorcentagem()));
+                System.out.print(" | RAM GB - " + (resultados.getMemoriaGB()));
+                System.out.println("\n");
             }
         }
     }
