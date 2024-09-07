@@ -35,7 +35,7 @@
         </div>
 
 
-        <div class="carousel" >
+        <div class="carousel">
             <div data-js="carousel__item" class="carousel__item">
                 <div class="sobreNos img1">
                     <div class="container">
@@ -68,8 +68,8 @@
                     </div>
                 </div>
             </div>
-
         </div>
+
     </div>
     <div class="sobre" id="solucao">
         <div class="titulo">
@@ -83,6 +83,86 @@
         </div>
 
         <div class="pagina2" id="solucao">
+
+            <div class="carrossel">
+                <div data-js="carrossel__item" class="carrossel__item carrossel__item--visible">
+                    <div class="legendas2">
+                        <div class="legenda2">
+                            <div class="icone2">
+                                <img src="imagens/cyber.png" width="50px">
+                            </div>
+                            <div class="palavra2">
+                                <h2>SEGURANÇA</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="caixas2">
+                        <div class="caixa2">
+                            <div class="textoS">
+                                <p>A segurança cibernética é crucial para proteger a comunicação e o funcionamento dos
+                                    sistemas aeroportuários,
+                                    prevenindo ataques que poderiam comprometer a aviação.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div data-js="carrossel__item" class="carrossel__item">
+                    <div class="legendas2">
+                        <div class="legenda2">
+                            <div class="icone2">
+                                <img src="imagens/analise-de-dados.png" width="50px">
+                            </div>
+                            <div class="palavra2">
+                                <h2>CONTROLE</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="caixas2">
+                        <div class="caixa2">
+                            <div class="textoS">
+                                <p>O monitoramento e a análise contínua de indicadores e incidentes é fundamental para
+                                    manter e aprimorar os mais
+                                    altos padrões de segurança nas operações aeroportuárias.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div data-js="carrossel__item" class="carrossel__item">
+                    <div class="legendas2">
+                        <div class="legenda2">
+                            <div class="icone2">
+                                <img src="imagens/produtividade.png" width="58px">
+                            </div>
+                            <div class="palavra2">
+                                <h2>EFICIÊNCIA</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="caixas2">
+                        <div class="caixa2">
+                            <div class="textoS">
+                                <p>É uma prioridade que nas operações aeroportuárias, sendo responsável por garantir um
+                                    ambiente seguro para todos os
+                                    usuários.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carrossel__actions">
+                    <!-- Botões do Carrossel -->
+                    <button data-js="carrossel__button--prev" aria-label="Slide anterior">
+                        &lt;
+                    </button>
+
+                    <button data-js="carrossel__button--next" aria-label="Próximo slide">
+                        &gt;
+                    </button>
+                </div>
+            </div>
+
             <div class="legendas">
                 <div class="legenda">
                     <div class="icone">
@@ -108,10 +188,9 @@
                     <div class="palavra">
                         <h2>EFICIÊNCIA</h2>
                     </div>
-
                 </div>
-
             </div>
+
             <div class="caixas">
                 <div class="caixa">
                     <div class="texto">
@@ -124,7 +203,6 @@
                         <p>O monitoramento e a análise contínua de indicadores e incidentes é fundamental para manter e
                             aprimorar os mais altos padrões de segurança nas operações aeroportuárias.</p>
                     </div>
-
                 </div>
                 <div class="caixa">
                     <div class="texto">
@@ -132,9 +210,9 @@
                             seguro para todos os usuários.
                         </p>
                     </div>
-
                 </div>
             </div>
+
         </div>
 
     </div>
@@ -154,7 +232,8 @@
                 </div>
                 <div class="corpoSolucao">
                     <div class="texto1">
-                        <p>O sistema AeroControl disponiliza o monitoramento em tempo real do sistema operacional das máquinas do CCO.</p>
+                        <p>O sistema AeroControl disponiliza o monitoramento em tempo real do sistema operacional das
+                            máquinas do CCO.</p>
                     </div>
                     <div class="texto2">
                         <p>Está interessado?</p>
@@ -231,22 +310,22 @@
                             <div class="contatos">
                                 <div class="ref">
                                     <div class="imgRede">
-                                        <img src="imagens/social.png"width="18px" height="18px">
+                                        <img src="imagens/social.png" width="18px" height="18px">
                                     </div>
                                     <div class="rede">
                                         <p>AEROCONTROL</p>
                                     </div>
-                                
+
                                 </div>
                                 <div class="ref">
-                                   
+
                                     <div class="imgRede">
                                         <img src="imagens/instagram (1).png" width="18px" height="18px">
                                     </div>
                                     <div class="rede">
                                         <p>CONTROL_AERO</p>
                                     </div>
-                                
+
                                 </div>
                             </div>
 
@@ -312,4 +391,46 @@
         // Define um temporizador para mudar para o próximo slide após 2 segundos
         setTimeout(showSlides, 3000);
     }
+
+
+
+    const slides2 = document.querySelectorAll('[data-js="carrossel__item"]');
+    const nextButton = document.querySelector('[data-js="carrossel__button--next"]');
+    const prevButton = document.querySelector('[data-js="carrossel__button--prev"]');
+
+    let currentSlideIndex2 = 0;
+
+    nextButton.addEventListener('click', () => {
+        // Verifica se está no último slide
+        if (currentSlideIndex2 === slides2.length - 1) {
+            currentSlideIndex2 = 0; // Volta ao primeiro slide
+        } else {
+            currentSlideIndex2++; // Avança para o próximo slide
+        }
+
+        // Remove a visibilidade de todos os slides2
+        slides2.forEach(slide => {
+            slide.classList.remove('carrossel__item--visible');
+        });
+
+        // Mostra o slide atual
+        slides2[currentSlideIndex2].classList.add('carrossel__item--visible');
+    });
+
+    prevButton.addEventListener('click', () => {
+        // Verifica se está no primeiro slide
+        if (currentSlideIndex2 === 0) {
+            currentSlideIndex2 = slides2.length - 1; // Vai para o último slide
+        } else {
+            currentSlideIndex2--; // Volta para o slide anterior
+        }
+
+        // Remove a visibilidade de todos os slides2
+        slides2.forEach(slide => {
+            slide.classList.remove('carrossel__item--visible');
+        });
+
+        // Mostra o slide atual
+        slides2[currentSlideIndex2].classList.add('carrossel__item--visible');
+    });
 </script>
