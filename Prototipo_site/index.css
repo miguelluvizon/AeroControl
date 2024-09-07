@@ -3,8 +3,6 @@
     src: url(kollektif/Kollektif.ttf);
 }
 
-
-
 a {
     text-decoration: none;
     color: white;
@@ -34,7 +32,7 @@ li:hover {
         margin: 0;
     }
 
-    .carousel__item--visible{
+    .carousel__item--visible {
         display: block;
         width: 100%;
         height: 80%;
@@ -49,7 +47,8 @@ li:hover {
         background-image: url(imagens/Firefly\ torre\ de\ controle\ do\ aeroporto\ de\ noite\ com\ aviao\ 74671.jpg);
         background-size: cover;
         background-position: center;
-        background-repeat: no-repeat;;
+        background-repeat: no-repeat;
+        ;
     }
 
     .img2 {
@@ -64,7 +63,7 @@ li:hover {
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
-        background-image: url(imagens/LHR-background.jpeg);
+        background-image: url(imagens/Firefly\ homem\ trabalhando\ no\ centro\ de\ controle\ operacional\ do\ aeroporto\ de\ noite\ 21396.jpg);
     }
 
     .logo img {
@@ -92,7 +91,7 @@ li:hover {
         position: relative;
     }
 
-    
+
     .carousel .carousel__item--visible {
         display: block;
         animation: fadeVisibility 0.3s;
@@ -191,6 +190,7 @@ li:hover {
 
     /*PÁGINA SOBRE*/
 
+
     .sobre {
         width: 100%;
         height: 100vh;
@@ -200,14 +200,6 @@ li:hover {
         color: #3f2182;
     }
 
-    .solucao {
-        width: 65%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
 
     .pagina2 {
         height: 100%;
@@ -217,14 +209,10 @@ li:hover {
         background-color: white;
         color: #3f2182;
     }
-
-
     h1 {
         margin: 0;
         padding: 0;
-        color: #3f2182;
-        font-size: 1.5em;
-
+        font-size: 1.7em;  /* Define o tamanho de fonte herdado do elemento pai */
     }
 
 
@@ -261,7 +249,8 @@ li:hover {
         transform: rotate(43deg);
         width: 35px;
     }
-    .caixas{
+
+    .caixas {
         display: none;
     }
 
@@ -271,7 +260,7 @@ li:hover {
     }
 
 
-    .legenda2{
+    .legenda2 {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -328,35 +317,35 @@ li:hover {
         display: flex;
         width: 100%;
         height: 100%;
-      }
-   
-      
-      .carrossel .carrossel__item {
+    }
+
+
+    .carrossel .carrossel__item {
         display: none;
-      }
-      
-      .carrossel .carrossel__item--visible {
+    }
+
+    .carrossel .carrossel__item--visible {
         display: block;
         animation: fadeVisibility 0.5s;
-      }
-      
-      .carrossel .carrossel__actions {
+    }
+
+    .carrossel .carrossel__actions {
         display: flex;
         width: 100%;
         justify-content: space-between;
         position: absolute;
         top: 30%;
         transform: translateY(-50%);
-      }
-      
-      .carrossel__item {
+    }
+
+    .carrossel__item {
         width: 900px;
         border-radius: 20px;
         display: flex;
         justify-content: space-between;
-      }
-      
-      .carrossel .carrossel__actions button {
+    }
+
+    .carrossel .carrossel__actions button {
         border-radius: 50px;
         border: 0;
         font-weight: bold;
@@ -366,66 +355,163 @@ li:hover {
         color: #FFF;
         background-color: #141c60b5;
         font-size: 1.2em;
-      }
-      
-      .carrossel .carrossel__actions button[data-js="carrossel__button--prev"] {
+    }
+
+    .carrossel .carrossel__actions button[data-js="carrossel__button--prev"] {
         margin-left: 20px;
-      }
-      
-      .carrossel .carrossel__actions button[data-js="carrossel__button--next"] {
+    }
+
+    .carrossel .carrossel__actions button[data-js="carrossel__button--next"] {
         margin-right: 20px;
-      }
-      
-
-
-  
+    }
 
     /*Página de solução*/
 
+    .pagina3 {
+        height: 200vh;
+        display: flex;
+        flex-direction: column;
+        color: #3f2182;
+        background-color: white;
+       
+    }
+
+    .parte1 {
+        width: 100%;
+        height: 33%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+
+    .solucao {
+        width: 100%;
+        height: 60%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .tituloSolucao {
+        width: 40%;
+        height: 40%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        
+    }
+    
     .textoSolucao {
         display: flex;
-        color: #e1e1e1;
+        color:#3f2182;
         align-items: center;
         justify-content: center;
+        width: 100%;
+        height: 60%;     
     }
 
     .iconeSolucao {
         display: flex;
         align-items: center;
         justify-content: center;
+        width: 100%;
+        height: 60%;   
+    }
+
+    #mao{
+        width: 70px;
     }
 
     .corpoSolucao {
         display: flex;
-        color: #e1e1e1;
+        color:#3f2182;
         flex-direction: column;
-    }
-
-    .texto2 {
-        display: flex;
-        justify-content: center;
+        align-items: center;
+        font-size: 1.5em;
+        width: 100%;
+        height: 60%;
     }
 
     .botaoSolucao {
+        width: 100%;
+        height: 20%;
         display: flex;
         justify-content: center;
     }
 
-
-    .foto1 img {
+    #cadastre {
+        width: 190px;
+        height: 40px;
+        background: linear-gradient(135deg, rgb(19, 7, 46), rgb(63, 33, 130));
+        color: white;
+        font-weight: bold;
+        font-size: 1rem;
+        font-family: Kollektif;
+        margin-bottom: 2%;
+    }
+    .texto1 {
+        width: 80%;
+        height: 70%;
         display: flex;
-        max-width: 100%;
-        height: auto;
+        text-align: center;
+        align-items: center;
+    }
+
+    #dash{
+        width: 300px;
+        height: 260px;
+    }
+    .texto2 {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        height: 30%;
+    }
+
+
+    .foto1 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 50%;
+        z-index: 2;
+ 
+    }
+
+    .parte2 {
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, rgb(19, 7, 46), rgb(63, 33, 130));
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 
     .particao1 {
+        z-index: 1;
+        width: 100%;
+        height: 50%;
         display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+ 
+
+    .foto2 {
+        width: 100%;
+        height: 80%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
-    .foto2 img {
-        display: flex;
-        max-width: 100%;
-        height: auto;
+    #fotoTorre{
+        width: 380px; 
+        height:165px;
     }
 
     .pagina4 {
@@ -869,6 +955,11 @@ li:hover {
         justify-content: center;
     }
 
+    .botaoSolucao {
+        display: flex;
+        justify-content: center;
+    }
+
     #cadastre {
         width: 190px;
         height: 40px;
@@ -883,7 +974,7 @@ li:hover {
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 26%;
+        width: 30%;
         height: 80vh;
         z-index: 2;
     }
@@ -916,7 +1007,10 @@ li:hover {
     .particao2 {
         width: 100%;
         height: 70%;
+      
     }
+
+
 
     .pagina4 {
         width: 100%;
