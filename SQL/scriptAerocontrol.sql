@@ -11,6 +11,7 @@ numero int
 Create table Usuario (
 idUsuario int primary key auto_increment,
 nome varchar(40),
+dataNasc DATE,
 cpf char(11),
 senha varchar(30),
 cargo varchar(40),

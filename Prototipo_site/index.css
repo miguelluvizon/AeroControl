@@ -553,15 +553,15 @@ li:hover {
     .caixaTexto2 {
         display: flex;
         justify-content: center;
-        align-items: center;      /* Centraliza verticalmente o texto */
+        align-items: center;     
         width: 50%;
-        height: 100% ;            /* Ajusta a altura automaticamente */
+        height: 100% ;         
         font-size: 1em;
         text-align: center;
     }
     
     .textoAviaozinho2 {
-        width: 93%;           
+        width: 95%;           
         font-size: 1.4em;
         text-align: center;
         z-index: 1;     
