@@ -596,8 +596,13 @@ li:hover {
         align-items: center;
     }
 
+    #computadores{
+        width: 305px;
+        height: 270px
+    }
+
     .footer {
-        background-color: #0f132e;
+        background-color: white;
         justify-content: center;
     }
 
@@ -606,30 +611,45 @@ li:hover {
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        color: #3f2182;
     }
 
     .contatos {
         display: flex;
         flex-direction: column;
         justify-content: center;
+      
     }
 
     .re {
         display: flex;
-        position: relative;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        flex-direction: row;
     }
 
+    
+    .redes {
+        width: 60%;
+        height: 30%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-bottom: 1px solid #3f2182;
+        font-weight: 600;
+        font-size: 0.8rem;
+        ;
+    }
 
     .imgRede img {
         display: flex;
         position: relative;
         left: 50px;
     }
-
-    #computadores{
-        width: 305px;
-        height: 270px
-    }
+    
+   
 }
 
 
@@ -1062,7 +1082,7 @@ li:hover {
     }
 
     .foto2 {
-        width: 65%;
+        width: 58%;
         height: 100%;
         display: flex;
         align-items: center;
