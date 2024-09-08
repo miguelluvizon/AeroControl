@@ -24,8 +24,13 @@ body {
 }
 
 .title {
-    font-size: 30px;
+    width: 100%;
+    height: 20%;
+    font-size: 29px;
     font-weight: bold;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
 }
 
 input {
@@ -34,7 +39,20 @@ input {
     height: 30px;
     padding: 5px;
     border-radius: 15px;
-    width: 50%;
+    width: 82%;
+}
+
+input::placeholder {
+    font-family: Kollektif;
+    color: rgb(100, 96, 96);
+    font-size: 16px;
+    opacity: 1.5; 
+}
+
+input[type="date"] {
+    color: rgb(100, 96, 96);
+    font-size: 16px;
+    opacity: 1.5;
 }
 
 button {
@@ -47,9 +65,9 @@ button {
     font-weight: bold;
 }
 
-.link {
-    color: lightblue;
+.caixinha{
     text-decoration: underline;
+    display: inline;
 }
 
 .main {
@@ -99,7 +117,8 @@ button {
 }
 
 /* Celular */
-@media screen and (min-width: 320px) and (max-width: 480px) {
+/* Celulares */
+@media screen and (max-width: 480px) {
     .logo {
         width: 100%;
         display: flex;
@@ -111,117 +130,145 @@ button {
     .imgLogo {
         width: 50%;
     }
+
+    .title {
+        font-size: 20px;
+        font-weight: bold;
+        text-align: center;
+    }
     
     .box {
         background-color: white;
         width: 80%;
-        height: 80%;
+        height: fit-content;
+        padding: 10px;
         display: flex;
         flex-direction: column;
         align-items: center;
         text-align: center;
         justify-content: space-around;
-        border-radius: 10%;
+        border-radius: 10px;
+    }
+
+    input {
+        width: 60%;
+        height: 20px;
+        font-size: 14px;
+        margin-bottom: 3%;
+    }
+
+    button {
+        width: 100%;
+        font-size: 18px;
+        padding: 10px;
+    }
+    
+    .ladoEsquerdo, .ladoDireito {
+        width: 100%;
+    }
+    
+    .caixinha {
+        font-size: 12px;
     }
 }
 
+
 /* tablets */
+/* Tablets */
 @media screen and (min-width: 481px) and (max-width: 768px) {
     .logo {
         width: 100%;
         display: flex;
         align-items: center;
         justify-content: center;
-        height: 15vh;
+        height: 20vh;
     }
     
     .imgLogo {
         width: 40%;
     }
+
+    .title {
+        font-size: 28px;
+    }
     
     .box {
         background-color: white;
-        width: 60%;
-        height: 80%;
+        width: 80%;
+        height: fit-content;
+        padding: 30px;
         display: flex;
         flex-direction: column;
         align-items: center;
         text-align: center;
         justify-content: space-around;
-        border-radius: 10%;
+        border-radius: 10px;
+    }
+
+    input {
+        width: 90%;
+        height: 50px;
+        font-size: 18px;
+    }
+
+    button {
+        width: 90%;
+        font-size: 20px;
+        padding: 10px;
+    }
+    
+    .ladoEsquerdo, .ladoDireito {
+        width: 90%;
     }
 }
+
 
 /* Laptops */
 @media screen and (min-width: 769px) and (max-width: 1200px) {
+    .logo {
+        width: 100%;
+        height: 15vh;
+    }
+    
+    .imgLogo {
+        width: 20%;
+    }
+
+    .title {
+        font-size: 30px;
+    }
+    
     .box {
         background-color: white;
-        width: 40%;
-        height: 80%;
+        width: 50%;
+        height: 70%;
+        padding: 40px;
         display: flex;
         flex-direction: column;
         align-items: center;
         text-align: center;
         justify-content: space-around;
-        border-radius: 10%;
+        border-radius: 15px;
     }
 
-    /* telas largas e altas */
-    @media screen and (min-height: 800px) {
-        .box {
-            background-color: white;
-            width: 80%;
-            height: 80%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            justify-content: space-around;
-            border-radius: 10%;
-        }
+    input {
+        width: 85%;
+        height: 50px;
+        font-size: 20px;
+    }
 
-        .logo {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 15vh;
-        }
-        
-        .imgLogo {
-            width: 30%;
-        }
+    button {
+        width: 50%;
+        font-size: 22px;
+        padding: 15px;
+    }
 
-        .title {
-            font-size: 40px;
-            font-weight: bold;
-        }
-        
-        input {
-            background-color: #ededed;
-            border: none;
-            height: 60px;
-            padding: 5px;
-            border-radius: 15px;
-            width: 50%;
-            font-size: 30px;
-        }
-        
-        button {
-            background-color: #40169f;
-            color: white;
-            padding: 5px;
-            border-radius: 15px;
-            width: 50%;
-            font-size: 30px;
-            font-weight: bold;
-        }
-        
-        .redirectCadastro {
-            font-size: 30px;
-        }
+    .ladoEsquerdo, .ladoDireito {
+        width: 45%;
     }
 }
+
+
 
 /* Telas maiores */
 @media screen and (min-width: 1201px) {
@@ -247,6 +294,60 @@ button {
         text-align: center;
         justify-content: space-around;
         border-radius: 10%;
+    }
+
+    .formularioC{
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        flex-direction: row;
+        width: 90%;
+        height: 65%;
+    }
+    
+    .formularioC2{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 90%;
+        height: 40%;
+    }
+
+
+    .ladoEsquerdo{
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        flex-direction: column;
+        width: 45%;
+        height: 85%;
+    }
+
+    .ladoDireito{
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        flex-direction: column;
+        width: 45%;
+        height: 85%;
+    }
+
+    .caixinha{
+        color: black;
+        text-decoration: none;
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+        align-items: center;
+        width: 100%;
+    }
+
+    .pergunta{
+        width: 25%;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
     }
 }
 

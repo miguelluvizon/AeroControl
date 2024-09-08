@@ -41,10 +41,19 @@ input {
     width: 50%;
 }
 
+input::placeholder {
+    color: rgb(100, 96, 96);
+    font-size: 16px;
+    opacity: 1.5; 
+}
+
 button {
     background-color: #40169f;
+    display: flex;
+    justify-self: center;
+    align-items: center;
     color: white;
-    padding: 5px;
+    padding: 20px;
     border-radius: 15px;
     width: 100%;
     font-size: 20px;
@@ -54,12 +63,9 @@ button {
 }
 
 input {
-    border-radius: 30px;
+    border-radius: 35px;
 }
 
-input::placeholder {
-    padding-left: 10px;
-}
 
 button {
     border-radius: 30px;
@@ -70,9 +76,6 @@ button:hover {
     cursor: pointer;
 }
 
-input::placeholder {
-    margin-left: 20px;
-}
 
 .link {
     color: lightblue;
@@ -98,125 +101,102 @@ input::placeholder {
     border-radius: 10%;
 }
 
-/* Telas extremamente pequenas */
+/* Telas extremamente pequenas - smartphones menores (até 320px) */
 @media screen and (max-width: 320px) {
-
-    button {
-        background-color: #40169f;
-        color: white;
-        padding: 5px;
+    .box {
+        width: 95%;
+        height: fit-content;
+        padding: 20px;
         border-radius: 15px;
-        width: 100%;
-        font-size: 20px;
-        font-weight: bold;
-        border: none;
-        height: 38px;
+    }
+    
+    .imgLogo {
+        width: 50%;
     }
 
+    .entradas {
+        height: auto;
+    }
+
+    input {
+        width: 90%;
+        font-size: 16px;
+        padding: 10px;
+    }
+
+    button {
+        font-size: 18px;
+        padding: 12px;
+        width: 90%;
+        height: 45px;
+    }
+}
+
+/* Celular (entre 320px e 480px) */
+@media screen and (min-width: 321px) and (max-width: 480px) {
     .logo {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
         height: 20vh;
     }
     
     .imgLogo {
-        width: 50%;
+        width: 45%;
     }
-
+    
     .box {
-        background-color: white;
-        width: 90%;
+        width: 60%;
         height: fit-content;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        justify-content: space-around;
-        border-radius: 10px;
+        padding: 40px;
+        border-radius: 20px;
     }
+
+    input {
+        width: 85%;
+        font-size: 15px;
+        padding: 10px;
+        margin-bottom: 4%;
+    }
+
+    button {
+        width: 100%;
+        font-size: 18px;
+        padding: 12px;
+        border-radius: 12px;
+    }
+    
+
     .entradas {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-around;
-        height: 50px;
+        height: auto;
         width: 100%;
     }
 }
 
-/* Celular */
-@media screen and (min-width: 320px) and (max-width: 480px) {
-    .logo {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 15vh;
-    }
-    
-    .imgLogo {
-        width: 50%;
-    }
-    
-    .box {
-        background-color: white;
-        width: 80%;
-        height: 80%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        justify-content: space-around;
-        border-radius: 10%;
-    }
-
-    .entradas {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-around;
-        height: 45%;
-        width: 100%;
-    }
-}
-
-/* tablets */
+/* Tablets (481px a 768px) */
 @media screen and (min-width: 481px) and (max-width: 768px) {
     .logo {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
         height: 15vh;
     }
     
     .imgLogo {
-        width: 30%;
+        width: 40%;
     }
     
     .box {
-        background-color: white;
-        width: 60%;
-        height: 80%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        justify-content: space-around;
-        border-radius: 10%;
+        width: 70%;
+        height: fit-content;
+        border-radius: 30px;
     }
 
-    .entradas {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-around;
-        height: 45%;
-        width: 100%;
+    input {
+        width: 75%;
+        font-size: 16px;
+    }
+
+    button {
+        font-size: 22px;
+        padding: 15px;
     }
 }
+
 
 /* Laptops */
 @media screen and (min-width: 769px) and (max-width: 1200px) {
@@ -285,7 +265,7 @@ input::placeholder {
         button {
             background-color: #40169f;
             color: white;
-            padding: 5px;
+            padding: 30px;
             border-radius: 15px;
             width: 100%;
             font-size: 30px;

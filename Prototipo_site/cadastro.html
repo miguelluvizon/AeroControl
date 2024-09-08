@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
@@ -7,25 +8,46 @@
     <title>AeroControl - Cadastro</title>
     <link rel="stylesheet" href="cadastro.css">
 </head>
+
 <body>
-    <a href="index.html"><div class="logo"><img src="imagens/logoAerocontrol.png" class="imgLogo"></div></a>
+    <a href="index.html">
+        <div class="logo"><img src="imagens/logoAerocontrol.png" class="imgLogo"></div>
+    </a>
     <div class="main">
         <div class="box">
-            <div class="title">CADASTRO</div>
-            <div> 
-                <input type="text" placeholder="NOME">
-                <input type="text" placeholder="SOBRENOME">
+            <div class="title">
+                <p>CADASTRO</p>
             </div>
-            <div>
-                <input type="text" placeholder="ENDEREÇO DE EMAIL">
-            </div>  
-            <div>
-                <input type="text" placeholder="NOME DE USUÁRIO">
-                <input type="text" placeholder="SENHA">
+            <div class="formularioC">
+                <div class="ladoEsquerdo">
+                    <input type="text" placeholder="Nome">
+                    <input type="text" placeholder="Email">
+                    <input type="date" placeholder="Data de nascimento">
+
+                </div>
+                <div class="ladoDireito">
+                    <input type="text" placeholder="CPF">
+                    <input type="text" placeholder="Cargo">
+                    <input type="text" placeholder="Aeroporto">
+
+                </div>
+
             </div>
-            <button>Cadastrar</button>
-            <div class="redirectCadastro">Já tem uma conta?<div class="link"><a href="login.html">Faça Login!</a></div></div>
+            <div class="formularioC2">
+                <button>Cadastrar</button>
+
+
+                <div class="caixinha">
+                    <div class="pergunta">
+                        <p>Já tem uma conta? </p>
+                         <a href="login.html">Faça Login!</a>
+                    </div>
+                </div>
+
+
+            </div>
+
         </div>
-    </div>
 </body>
+
 </html>
