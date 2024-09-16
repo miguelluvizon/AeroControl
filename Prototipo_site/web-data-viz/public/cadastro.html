@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
@@ -9,48 +9,65 @@
     <link rel="stylesheet" href="css/cadastro.css">
 </head>
 
-<body>
+<body <!--onload="plotarSelect()"--> </body>
     <a href="index.html">
-        <div class="logo"><img src="imagens/logoAerocontrol.png" class="imgLogo"></div>
+        <div class="logo">
+            <img src="imagens/logoAerocontrol.png" class="imgLogo">
+        </div>
     </a>
+
     <div class="main">
         <div class="box">
+
             <div class="title">
                 <p>CADASTRO</p>
             </div>
+
             <div class="formularioC">
                 <div class="ladoEsquerdo">
                     <input type="text" placeholder="Nome" id="ipt_nome" required>
+
                     <div class="error-message" id="errorNome" style="display:none; color: red;">Campo obrigatório</div>
+
                     <input type="email" placeholder="email@email.com" id="ipt_email" required>
-                    <div class="error-message" id="errorEmail" style="display:none; color: red; justify-content: start;">Campo obrigatório</div>
+
+                    <div class="error-message" id="errorEmail"
+                        style="display:none; color: red; justify-content: start;">Campo obrigatório</div>
+
                     <div class="input-container">
                         <input type="password" id="ipt_senha" placeholder="Senha" required>
                         <!-- <img id="toggleSenha" onclick="toggleSenha()" src="imagens/olho.png" class="eye-icon" alt="Toggle Senha"> -->
-                        <div class="error-message" id="errorSenha" style="display:none; color: red;">Campo obrigatório</div>
+                        <div class="error-message" id="errorSenha" style="display:none; color: red;">Campo obrigatório
+                        </div>
 
                     </div>
                 </div>
-                <div class="ladoDireito">    
+
+                <div class="ladoDireito">
                     <input type="text" placeholder="CPF" id="ipt_cpf">
-                    <div class="error-message" id="errorCpf" style="display:none; color: red;">Campo obrigatório</div>
-                    <!-- <select name="cargo" id="select_cargo" required>
+
+                    <!-- <div class="error-message" id="errorCpf" style="display:none; color: red;">Campo obrigatório</div>
+
+                    <select id="select_cargo" required>
                         <option value="0">Selecione o cargo</option>
                     </select>
+
+                    <div id="select_aeroporto"></div>
+
                     <div class="error-message" id="errorCargo" style="display:none; color: red;">Campo obrigatório</div>
-                    <select name="aeroporto" id="select_aeroporto" required>
-                        <option value="0">Selecione o aeroporto</option>
-                    </select>
-                    <div class="error-message" id="errorAeroporto" style="display:none; color: red;">Campo obrigatório</div> -->
+
+                    <div class="error-message" id="errorAeroporto" style="display:none; color: red;">Campo obrigatório
+                    </div> -->
                 </div>
             </div>
+
             <div class="formularioC2">
                 <button onclick="cadastrar()">Cadastrar</button>
 
                 <div class="caixinha">
                     <div class="pergunta">
                         <p>Já tem uma conta? </p>
-                         <a href="login.html">Faça Login!</a>
+                        <a href="login.html">Faça Login!</a>
                     </div>
                 </div>
 
@@ -62,7 +79,18 @@
 </html>
 
 <script>
-     function toggleSenha() {
+    function plotarSelect() {
+        var opcao = ``;
+        var nome = ``;
+        
+        for (contagem = 1; contagem <= 3; contagem++) {
+            opcao += `<option value="${contagem}">${nome}</option>`
+        }
+
+        select_aeroporto.innerHTML = `<select id="select_aeroporto" required>${opcao}</select>`
+    }
+
+    function toggleSenha() {
         const senhaInput = document.getElementById('ipt_senha');
         const tipoAtual = senhaInput.getAttribute('type');
         const eyeIcon = document.getElementById('toggleSenha');
@@ -92,10 +120,10 @@
 
     function mascaraCPF(campo) {
         const valor = campo.value.replace(/\D/g, '');
-        if(valor.length <= 11){
-        campo.value = valor.replace(/(\d{3})(\d)/, '$1.$2')
-                           .replace(/(\d{3})(\d)/, '$1.$2')
-                           .replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+        if (valor.length <= 11) {
+            campo.value = valor.replace(/(\d{3})(\d)/, '$1.$2')
+                .replace(/(\d{3})(\d)/, '$1.$2')
+                .replace(/(\d{3})(\d{1,2})$/, '$1-$2');
         } else {
             campo.value = valor.substring(0, 11);
         }
@@ -108,41 +136,41 @@
         cpf = ipt_cpf.value;
 
         fetch("/usuarios/cadastrar", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({
-				// crie um atributo que recebe o valor recuperado aqui
-				// Agora vá para o arquivo routes/usuario.js
-				nomeServer: nome,
-				emailServer: email,
-				senhaServer: senha,
-				cpfServer: cpf
-			}),
-		})
-			.then(function (resposta) {
-				console.log("resposta: ", resposta);
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                nomeServer: nome,
+                emailServer: email,
+                senhaServer: senha,
+                cpfServer: cpf
+            }),
+        })
+            .then(function (resposta) {
+                console.log("resposta: ", resposta);
 
-				if (resposta.ok) {
-					// cardErro.style.display = "block";
-                    
-					setTimeout(() => {
-						window.location = "login.html";
-					}, "2000");
+                if (resposta.ok) {
+                    // cardErro.style.display = "block";
 
-					limparFormulario();
-					// finalizarAguardar();
-				} else {
-					throw "Houve um erro ao tentar realizar o cadastro!";
-				}
-			})
-			.catch(function (resposta) {
-				console.log(`#ERRO: ${resposta}`);
-				
-			});
+                    setTimeout(() => {
+                        window.location = "login.html";
+                    }, "2000");
 
-		return false;
-	}
-    
+                    limparFormulario();
+                    // finalizarAguardar();
+                } else {
+                    throw "Houve um erro ao tentar realizar o cadastro!";
+                }
+            })
+            .catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+
+            });
+
+        return false;
+    }
+
 </script>
