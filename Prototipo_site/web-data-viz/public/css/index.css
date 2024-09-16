@@ -44,7 +44,7 @@ li:hover {
     }
 
     .img1 {
-        background-image: url(/Prototipo_site/web-data-viz/public/imagens/);
+        background-image: url(../imagens/Firefly\ dentro\ da\ torre\ de\ controle\ do\ aeroporto\ com\ uma\ pessoa\ de\ noite\ 24943.jpg);
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -52,7 +52,7 @@ li:hover {
     }
 
     .img2 {
-        background-image: url(/Prototipo_site/web-data-viz/public/imagens/torrejpg.jpg);
+        background-image: url(../imagens/torrejpg.jpg);
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -63,7 +63,7 @@ li:hover {
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
-        background-image: url(imagens/Firefly\ homem\ trabalhando\ no\ centro\ de\ controle\ operacional\ do\ aeroporto\ de\ noite\ 21396.jpg);
+        background-image: url(../imagens/Firefly\ homem\ trabalhando\ no\ centro\ de\ controle\ operacional\ do\ aeroporto\ de\ noite\ 21396.jpg);
     }
 
     .logo img {
@@ -467,7 +467,7 @@ li:hover {
     }
 
     #dash{
-        margin-top: 10%;
+        margin-top: 30%;
         width: 300px;
         height: 260px;
     }
@@ -519,8 +519,7 @@ li:hover {
     }
 
     #fotoTorre{
-        width: 374px; 
-        height:152px;
+        width: 100%;
     }
 
  /*Página sobre*/
@@ -561,7 +560,7 @@ li:hover {
 
     .caixaTexto{
         padding-right: 10%;
-        padding-top: 10%;
+        padding-top: 20%;
     }
     
     .caixaTexto2 {
