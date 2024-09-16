@@ -265,6 +265,7 @@ li:hover {
         align-items: center;
         justify-content: center;
         height: 8vh;
+        margin-bottom: 15px;
     }
 
     .icone2 {
@@ -298,7 +299,7 @@ li:hover {
         align-items: center;
         background: linear-gradient(135deg, rgb(19, 7, 46), rgb(63, 33, 130));
         width: 65%;
-        height: 65%;
+        height: fit-content;
         border-radius: 20px;
         box-shadow: 9px 0px 19px rgba(0, 0, 0, 0.7);
         color: #e1e1e1;
@@ -523,6 +524,7 @@ li:hover {
         flex-direction: column;
         color: #e1e1e1;
         justify-content: center;
+        margin-top: 40px;
     }
 
     .tituloSobrenos {
@@ -566,6 +568,7 @@ li:hover {
         text-align: center;
         z-index: 1;     
         font-weight: 400;
+        margin-top: 10%;
     }
     
     .aviaozinho2 {
@@ -641,6 +644,10 @@ li:hover {
         font-weight: 600;
         font-size: 0.8rem;
         ;
+    }
+
+    .imgRede{
+        margin-top: 10%;
     }
 
     .imgRede img {
