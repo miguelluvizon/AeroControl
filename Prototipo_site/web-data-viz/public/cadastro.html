@@ -6,7 +6,7 @@
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>AeroControl - Cadastro</title>
-    <link rel="stylesheet" href="cadastro.css">
+    <link rel="stylesheet" href="css/cadastro.css">
 </head>
 
 <body>
@@ -20,32 +20,32 @@
             </div>
             <div class="formularioC">
                 <div class="ladoEsquerdo">
-                    <input type="text" placeholder="Nome" required>
+                    <input type="text" placeholder="Nome" id="ipt_nome" required>
                     <div class="error-message" id="errorNome" style="display:none; color: red;">Campo obrigatório</div>
-                    <input type="email" placeholder="email@email.com" required>
+                    <input type="email" placeholder="email@email.com" id="ipt_email" required>
                     <div class="error-message" id="errorEmail" style="display:none; color: red; justify-content: start;">Campo obrigatório</div>
                     <div class="input-container">
-                        <input type="password" id="senha" placeholder="Senha" required>
-                        <img id="toggleSenha" onclick="toggleSenha()" src="imagens/olho.png" class="eye-icon" alt="Toggle Senha">
+                        <input type="password" id="ipt_senha" placeholder="Senha" required>
+                        <!-- <img id="toggleSenha" onclick="toggleSenha()" src="imagens/olho.png" class="eye-icon" alt="Toggle Senha"> -->
                         <div class="error-message" id="errorSenha" style="display:none; color: red;">Campo obrigatório</div>
 
                     </div>
                 </div>
                 <div class="ladoDireito">    
-                    <input type="text" placeholder="CPF" required oninput="mascaraCPF(this)">
+                    <input type="text" placeholder="CPF" id="ipt_cpf">
                     <div class="error-message" id="errorCpf" style="display:none; color: red;">Campo obrigatório</div>
-                    <select name="cargo" id="select_cargo" required>
+                    <!-- <select name="cargo" id="select_cargo" required>
                         <option value="0">Selecione o cargo</option>
                     </select>
                     <div class="error-message" id="errorCargo" style="display:none; color: red;">Campo obrigatório</div>
                     <select name="aeroporto" id="select_aeroporto" required>
                         <option value="0">Selecione o aeroporto</option>
                     </select>
-                    <div class="error-message" id="errorAeroporto" style="display:none; color: red;">Campo obrigatório</div>
+                    <div class="error-message" id="errorAeroporto" style="display:none; color: red;">Campo obrigatório</div> -->
                 </div>
             </div>
             <div class="formularioC2">
-                <button onclick="validarFormulario()">Cadastrar</button>
+                <button onclick="cadastrar()">Cadastrar</button>
 
                 <div class="caixinha">
                     <div class="pergunta">
@@ -62,8 +62,8 @@
 </html>
 
 <script>
-    function toggleSenha() {
-        const senhaInput = document.getElementById('senha');
+     function toggleSenha() {
+        const senhaInput = document.getElementById('ipt_senha');
         const tipoAtual = senhaInput.getAttribute('type');
         const eyeIcon = document.getElementById('toggleSenha');
 
@@ -76,10 +76,8 @@
         const campos = [
             { id: 'errorNome', input: document.querySelector('input[placeholder="Nome"]') },
             { id: 'errorEmail', input: document.querySelector('input[placeholder="email@email.com"]') },
-            { id: 'errorSenha', input: document.getElementById('senha') },
-            { id: 'errorCpf', input: document.querySelector('input[placeholder="CPF"]') },
-            { id: 'errorCargo', input: document.querySelector('input[placeholder="Cargo"]') },
-            { id: 'errorAeroporto', input: document.querySelector('input[placeholder="Aeroporto"]') }
+            { id: 'errorSenha', input: document.getElementById('ipt_senha') },
+            { id: 'errorCpf', input: document.querySelector('input[placeholder="CPF"]') }
         ];
 
         campos.forEach(campo => {
@@ -102,4 +100,49 @@
             campo.value = valor.substring(0, 11);
         }
     }
+
+    function cadastrar() {
+        nome = ipt_nome.value;
+        email = ipt_email.value;
+        senha = ipt_senha.value;
+        cpf = ipt_cpf.value;
+
+        fetch("/usuarios/cadastrar", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				// crie um atributo que recebe o valor recuperado aqui
+				// Agora vá para o arquivo routes/usuario.js
+				nomeServer: nome,
+				emailServer: email,
+				senhaServer: senha,
+				cpfServer: cpf
+			}),
+		})
+			.then(function (resposta) {
+				console.log("resposta: ", resposta);
+
+				if (resposta.ok) {
+					// cardErro.style.display = "block";
+                    
+					setTimeout(() => {
+						window.location = "login.html";
+					}, "2000");
+
+					limparFormulario();
+					// finalizarAguardar();
+				} else {
+					throw "Houve um erro ao tentar realizar o cadastro!";
+				}
+			})
+			.catch(function (resposta) {
+				console.log(`#ERRO: ${resposta}`);
+				
+			});
+
+		return false;
+	}
+    
 </script>
