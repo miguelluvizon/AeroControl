@@ -1,3 +1,4 @@
+DROP database aeroControl;
 CREATE DATABASE IF NOT EXISTS aeroControl;
 USE aeroControl;
 
@@ -39,9 +40,6 @@ memoriaGB int,
 fkComputador int,
 constraint foreign key (fkComputador) references Computador(idComputador)
 );
-
-CREATE USER 'inserirNuvem'@'localhost' IDENTIFIED BY 'aerocontrol';
-GRANT ALL PRIVILEGES ON aerocontrol.* TO 'inserirNuvem'@'localhost'; 
 
 INSERT INTO Aeroporto VALUES
 	(1, 'Congonhas', '3641-001', 1);

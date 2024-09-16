@@ -7,7 +7,7 @@ import time
 # cursor = mydb.cursor()
 
 def monitorar():
-    idMaquina = 4;
+    idMaquina = 4
     usoCPU = round(psutil.cpu_freq(percpu=False).current / pow(10, 3), 2)
     porcentagemCPU = (psutil.cpu_percent(interval = 1))
     usoRAM = round(psutil.virtual_memory().used / pow(10, 9), 2)
