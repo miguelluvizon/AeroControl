@@ -12,9 +12,9 @@ numero int
 Create table Usuario (
 idUsuario int primary key auto_increment,
 nome varchar(40),
-dataNasc DATE,
-cpf char(11),
+email varchar(40),
 senha varchar(30),
+cpf char(11),
 cargo varchar(40),
 fkAeroporto int,
 constraint foreign key (fkAeroporto) references Aeroporto(idAeroporto)
