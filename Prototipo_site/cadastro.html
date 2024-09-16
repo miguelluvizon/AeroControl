@@ -20,22 +20,32 @@
             </div>
             <div class="formularioC">
                 <div class="ladoEsquerdo">
-                    <input type="text" placeholder="Nome">
-                    <input type="text" placeholder="Email">
-                    <input type="date" placeholder="Data de nascimento">
+                    <input type="text" placeholder="Nome" required>
+                    <div class="error-message" id="errorNome" style="display:none; color: red;">Campo obrigatório</div>
+                    <input type="email" placeholder="email@email.com" required>
+                    <div class="error-message" id="errorEmail" style="display:none; color: red; justify-content: start;">Campo obrigatório</div>
+                    <div class="input-container">
+                        <input type="password" id="senha" placeholder="Senha" required>
+                        <img id="toggleSenha" onclick="toggleSenha()" src="imagens/olho.png" class="eye-icon" alt="Toggle Senha">
+                        <div class="error-message" id="errorSenha" style="display:none; color: red;">Campo obrigatório</div>
 
+                    </div>
                 </div>
-                <div class="ladoDireito">
-                    <input type="text" placeholder="CPF">
-                    <input type="text" placeholder="Cargo">
-                    <input type="text" placeholder="Aeroporto">
-
+                <div class="ladoDireito">    
+                    <input type="text" placeholder="CPF" required oninput="mascaraCPF(this)">
+                    <div class="error-message" id="errorCpf" style="display:none; color: red;">Campo obrigatório</div>
+                    <select name="cargo" id="select_cargo" required>
+                        <option value="0">Selecione o cargo</option>
+                    </select>
+                    <div class="error-message" id="errorCargo" style="display:none; color: red;">Campo obrigatório</div>
+                    <select name="aeroporto" id="select_aeroporto" required>
+                        <option value="0">Selecione o aeroporto</option>
+                    </select>
+                    <div class="error-message" id="errorAeroporto" style="display:none; color: red;">Campo obrigatório</div>
                 </div>
-
             </div>
             <div class="formularioC2">
-                <button>Cadastrar</button>
-
+                <button onclick="validarFormulario()">Cadastrar</button>
 
                 <div class="caixinha">
                     <div class="pergunta">
@@ -44,10 +54,52 @@
                     </div>
                 </div>
 
-
             </div>
 
         </div>
 </body>
 
 </html>
+
+<script>
+    function toggleSenha() {
+        const senhaInput = document.getElementById('senha');
+        const tipoAtual = senhaInput.getAttribute('type');
+        const eyeIcon = document.getElementById('toggleSenha');
+
+        senhaInput.setAttribute('type', tipoAtual === 'password' ? 'text' : 'password');
+
+        eyeIcon.src = tipoAtual === 'password' ? 'imagens/visivel.png' : 'imagens/olho.png'; // Ícones atualizados
+    }
+
+    function validarFormulario() {
+        const campos = [
+            { id: 'errorNome', input: document.querySelector('input[placeholder="Nome"]') },
+            { id: 'errorEmail', input: document.querySelector('input[placeholder="email@email.com"]') },
+            { id: 'errorSenha', input: document.getElementById('senha') },
+            { id: 'errorCpf', input: document.querySelector('input[placeholder="CPF"]') },
+            { id: 'errorCargo', input: document.querySelector('input[placeholder="Cargo"]') },
+            { id: 'errorAeroporto', input: document.querySelector('input[placeholder="Aeroporto"]') }
+        ];
+
+        campos.forEach(campo => {
+            const errorDiv = document.getElementById(campo.id);
+            if (!campo.input.value) {
+                errorDiv.style.display = 'block';
+            } else {
+                errorDiv.style.display = 'none';
+            }
+        });
+    }
+
+    function mascaraCPF(campo) {
+        const valor = campo.value.replace(/\D/g, '');
+        if(valor.length <= 11){
+        campo.value = valor.replace(/(\d{3})(\d)/, '$1.$2')
+                           .replace(/(\d{3})(\d)/, '$1.$2')
+                           .replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+        } else {
+            campo.value = valor.substring(0, 11);
+        }
+    }
+</script>

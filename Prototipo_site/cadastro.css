@@ -42,6 +42,22 @@ input {
     width: 82%;
 }
 
+select {
+    background-color: #ededed;
+    border: none;
+    height: 40px;
+    padding: 5px;
+    border-radius: 15px;
+    width: 86%;
+}
+
+select::placeholder {
+    font-family: Kollektif;
+    color: rgb(100, 96, 96);
+    font-size: 16px;
+    opacity: 1.5;
+}
+
 input::placeholder {
     font-family: Kollektif;
     color: rgb(100, 96, 96);
@@ -349,5 +365,20 @@ button {
         align-items: center;
         flex-direction: row;
     }
+}
+
+.input-container {
+    position: relative;
+    width: 100%;
+}
+
+.eye-icon {
+    position: absolute;
+    right: 25px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
 }
 
