@@ -24,4 +24,16 @@ function cadastrar(razaoSocial, cnpj) {
   return database.executar(instrucaoSql);
 }
 
-module.exports = { buscarPorCnpj, buscarPorId, cadastrar, listar };
+function getEmpresas() {
+  var instrucaoSql = `
+  SELECT idAeroporto, nome FROM Aeroporto ORDER BY nome;`;
+  console.log("Executando a instrução SQL: \n" + instrucaoSql);
+  return database.executar(instrucaoSql);
+}
+
+module.exports = {buscarPorCnpj,
+  buscarPorId,
+  cadastrar,
+  listar,
+  getEmpresas
+};
