@@ -3,6 +3,17 @@ import time
 import mysql.connector
 import socket
 
+# Para esse import, primeiro foi feito um "py -m pip install jira" para instalar a biblioteca
+from jira import JIRA
+
+# Aqui são as config do jira
+jira_url = ""
+email = ""
+api_token = ""
+
+# Aqui é feita a autenticação
+jira = JIRA(basic_auth=(email,api_token),server=jira_url)
+
 # Estabelecendo conexão ao BD
 mydb = mysql.connector.connect(
     user='inserirNuvem', 
