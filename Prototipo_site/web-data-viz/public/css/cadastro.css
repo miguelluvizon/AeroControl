@@ -37,18 +37,18 @@ input {
     background-color: #ededed;
     border: none;
     height: 30px;
-    padding: 5px;
     border-radius: 15px;
     width: 82%;
+    text-align: center;
 }
 
 select {
     background-color: #ededed;
     border: none;
-    height: 40px;
-    padding: 5px;
+    height: 30px;
     border-radius: 15px;
-    width: 86%;
+    width: 82%;
+    text-align: center;
 }
 
 select::placeholder {
@@ -56,6 +56,7 @@ select::placeholder {
     color: rgb(100, 96, 96);
     font-size: 16px;
     opacity: 1.5;
+    text-align: center;
 }
 
 input::placeholder {
@@ -316,9 +317,9 @@ button {
         display: flex;
         justify-content: center;
         align-items: flex-start;
-        flex-direction: row;
+        flex-direction: column ;
         width: 90%;
-        height: 65%;
+        height: 120%;
     }
     
     .formularioC2{
@@ -332,21 +333,21 @@ button {
 
 
     .ladoEsquerdo{
+        width: 100%;
+        height: 100%;
         display: flex;
         justify-content: space-evenly;
         align-items: center;
         flex-direction: column;
-        width: 45%;
-        height: 85%;
     }
 
     .ladoDireito{
+        width: 100%;
+        height: 100%;
         display: flex;
         justify-content: space-evenly;
         align-items: center;
         flex-direction: column;
-        width: 45%;
-        height: 85%;
     }
 
     .caixinha{
@@ -360,7 +361,6 @@ button {
     }
 
     .pergunta{
-        width: 25%;
         justify-content: center;
         align-items: center;
         flex-direction: row;

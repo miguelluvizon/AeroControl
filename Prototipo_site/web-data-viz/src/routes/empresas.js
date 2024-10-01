@@ -20,4 +20,8 @@ router.get("/listar", function (req, res) {
   empresaController.listar(req, res);
 });
 
+router.post("/getEmpresas", function (req, res) {
+  empresaController.getEmpresas(req, res);
+})
+
 module.exports = router;

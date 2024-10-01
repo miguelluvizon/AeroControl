@@ -2,9 +2,12 @@ import psutil
 import time
 import csv
 import datetime as dt
+import boto3
 import os
 
 bucket_nome = 's3-raw.aerocontrol-lab'
+
+s3 = boto3.client('s3')
 
 def criar_csv():
     print("teste")
@@ -51,8 +54,7 @@ def monitorar():
             print(f"Arquivo CSV {nome_arquivo} criado.")
             
             try:
-                comando_s3 = f'aws s3 cp {nome_arquivo} s3://{bucket_nome}/raw_data/{data_atual}.csv'
-                os.system(comando_s3)
+                s3.upload_file(nome_arquivo, bucket_nome, f'raw_data/{data_atual}.csv')
                 print(f"Arquivo {nome_arquivo} enviado para o bucket {bucket_nome}.")
             except Exception as e:
                 print(f"Erro ao enviar o arquivo para o S3: {str(e)}")

@@ -39,9 +39,19 @@ function cadastrar(req, res) {
   });
 }
 
+function getEmpresas(req, res) {
+  empresaModel.getEmpresas()
+  .then(function (resposta) {
+      if(resposta.length >= 1) {
+          res.status(200).json(resposta);
+      }
+  });
+}
+
 module.exports = {
   buscarPorCnpj,
   buscarPorId,
   cadastrar,
   listar,
+  getEmpresas
 };

@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="css/cadastro.css">
 </head>
 
-<body <!--onload="plotarSelect()"--> </body>
+<body> 
     <a href="index.html">
         <div class="logo">
             <img src="imagens/logoAerocontrol.png" class="imgLogo">
@@ -41,23 +41,22 @@
                         </div>
 
                     </div>
-                </div>
-
-                <div class="ladoDireito">
                     <input type="text" placeholder="CPF" id="ipt_cpf">
-
-                    <!-- <div class="error-message" id="errorCpf" style="display:none; color: red;">Campo obrigatório</div>
+                    <div class="error-message" id="errorCpf" style="display:none; color: red;">Campo obrigatório</div>
 
                     <select id="select_cargo" required>
-                        <option value="0">Selecione o cargo</option>
+                        <option value="#" selected disabled>Selecione o cargo</option>
+                        <option>Suporte de T.I.</option>
+                        <option>Analista de Dados</option>
                     </select>
-
-                    <div id="select_aeroporto"></div>
-
                     <div class="error-message" id="errorCargo" style="display:none; color: red;">Campo obrigatório</div>
 
+                    <div id="select_aeroporto">
+                        <select id="select_empresa" required>
+                            <option value="#" selected disabled>Empresa</option>
+                        </select>
+                    </div>
                     <div class="error-message" id="errorAeroporto" style="display:none; color: red;">Campo obrigatório
-                    </div> -->
                 </div>
             </div>
 
@@ -79,18 +78,9 @@
 </html>
 
 <script>
-    function plotarSelect() {
-        var opcao = ``;
-        var nome = ``;
-        
-        for (contagem = 1; contagem <= 3; contagem++) {
-            opcao += `<option value="${contagem}">${nome}</option>`
-        }
+    getEmpresas();
 
-        select_aeroporto.innerHTML = `<select id="select_aeroporto" required>${opcao}</select>`
-    }
-
-    function toggleSenha() {
+       function toggleSenha() {
         const senhaInput = document.getElementById('ipt_senha');
         const tipoAtual = senhaInput.getAttribute('type');
         const eyeIcon = document.getElementById('toggleSenha');
@@ -134,6 +124,8 @@
         email = ipt_email.value;
         senha = ipt_senha.value;
         cpf = ipt_cpf.value;
+        cargo = select_cargo.value;
+        empresa = select_empresa.value;
 
         fetch("/usuarios/cadastrar", {
             method: "POST",
@@ -146,7 +138,9 @@
                 nomeServer: nome,
                 emailServer: email,
                 senhaServer: senha,
-                cpfServer: cpf
+                cpfServer: cpf,
+                cargoServer: cargo,
+                empresaServer: empresa
             }),
         })
             .then(function (resposta) {
@@ -169,6 +163,45 @@
                 console.log(`#ERRO: ${resposta}`);
 
             });
+
+        return false;
+    }
+
+    function getEmpresas() {
+        fetch("../empresas/getEmpresas", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+
+            }),
+        })
+        .then(function (resposta) {
+            console.log("resposta:", resposta);
+
+            if (resposta.ok) {
+                resposta.json()
+                .then(function (resultado) {
+                    console.log(resultado)
+
+                    var opcoes = ``
+                    for(var index = 0; index < resultado.length; index++) {
+                        opcoes += `<option value="${resultado[index].idAeroporto}">${resultado[index].nome}</option>
+                        `;
+                    }
+                    select_empresa.innerHTML = `<select id="select_empresa" required>
+                        <option value="#" selected disabled>Selecione sua empresa</option>
+                        ${opcoes}
+                        </select>`
+                })
+            } else {
+                throw "Houve um erro ao tentar criar o select";
+            }
+        })
+        .catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+        });
 
         return false;
     }
