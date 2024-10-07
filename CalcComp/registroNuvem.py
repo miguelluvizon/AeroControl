@@ -16,12 +16,10 @@ def criar_json_se_nao_existir(nome_arquivo,dados_iniciais):
 
 
 def carregar_json(nome_arquivo):
-    if not os.path.exists(nome_arquivo):
+    if os.path.exists(nome_arquivo):
         with open(nome_arquivo, 'r') as file:
-            json.load(file)
-    else:
-        temp = []
-        return temp
+            return json.load(file)
+    return []
 
 def criar_csv_se_nao_existir(nome_arquivo):
     if not os.path.exists(nome_arquivo):
@@ -40,8 +38,8 @@ def monitorar():
     data_atual = dt.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
     nome_arquivo = f'./raw_data_{data_atual}.csv'
     nome_arquivo_json = "dados.json"
-    criar_csv_se_nao_existir(nome_arquivo)
     criar_json_se_nao_existir(nome_arquivo_json, [])
+    criar_csv_se_nao_existir(nome_arquivo)
 
     while True:
         passou += 1
@@ -53,7 +51,8 @@ def monitorar():
         data = {
             'cpu': porcentagemCPU,
             'memroia RAM Bytes' : usoRAM,
-            'memoria RAM (%)': porcentagemRAM
+            'memoria RAM (%)': porcentagemRAM,
+            'timestamp': dt.datetime.now().isoformat()
         }
 
         dados = [porcentagemCPU, usoRAM, porcentagemRAM]
