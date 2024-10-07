@@ -13,14 +13,14 @@ idUsuario int primary key auto_increment,
 nome varchar(100),
 email varchar(320),
 senha varchar(30),
-cpf char(11),
+cpf char(11) unique,
 cargo varchar(17),
 fkAeroporto int,
 constraint foreign key (fkAeroporto) references Aeroporto(idAeroporto)
 );
 
 Create table Computador (
-idComputador int primary key,
+idComputador int primary key auto_increment,
 hostname varchar(100),
 processador varchar(100),
 memoria decimal(5,2),
@@ -52,13 +52,13 @@ INSERT INTO Usuario VALUES
 	(default , 'Murilo Martinez' , 'murilo@gmail.com' , 'murilo123' , '25107632415' , 'Analista de Dados' , 2);
 
 INSERT INTO Computador VALUES
-	(default, 'Comp1Com', 'i5-9300', '8GB', 'Comunicação com Pilotos', 1),
-	(default, 'Comp2Desp', 'i5-9300', '8GB', 'Despache', 3),
-	(default, 'Comp2Desp', 'i5-9300', '8GB', 'Despache', 3),
-	(default, 'Comp1Com', 'i5-9300', '16GB', 'Comunicação com Pilotos', 3),
-	(default, 'Comp1Com', 'i5-9300', '16GB', 'Comunicação com Pilotos', 2),
-	(default, 'Comp2Com', 'i5-9300', '8GB', 'Comunicação com Pilotos', 1),
-	(default, 'Comp2Com', 'i5-9300', '16GB', 'Comunicação com Pilotos', 2);
+	(default, 'Comp1Com', 'i5-9300', '8', 'Comunicação com Pilotos', 1),
+	(default, 'Comp2Desp', 'i5-9300', '8', 'Despache', 3),
+	(default, 'Comp2Desp', 'i5-9300', '8', 'Despache', 3),
+	(default, 'Comp1Com', 'i5-9300', '16', 'Comunicação com Pilotos', 3),
+	(default, 'Comp1Com', 'i5-9300', '16', 'Comunicação com Pilotos', 2),
+	(default, 'Comp2Com', 'i5-9300', '8', 'Comunicação com Pilotos', 1),
+	(default, 'Comp2Com', 'i5-9300', '16', 'Comunicação com Pilotos', 2);
     
 	SELECT * FROM Aeroporto;    
 	SELECT * FROM Usuario;  
