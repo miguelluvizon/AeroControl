@@ -1,4 +1,4 @@
-package school.sptech.leituraescrita;
+package school.sptech;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -17,7 +17,7 @@ public class LeituraDados {
     // BufferedInputStream: leitura de dados em memória usando buffer
     public static void main(String[] args) {
         try {
-            InputStream inputStream = new FileInputStream("arquivo.Json");
+            InputStream inputStream = new FileInputStream(".Json");
 
             // BufferedReader é uma classe que ajuda a ler arquivos de texto.
             // Ele usa um buffer para armazenar os dados antes de lê-los do arquivo.
