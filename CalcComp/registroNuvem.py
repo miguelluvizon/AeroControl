@@ -75,7 +75,7 @@ def monitorar():
 
             try:
                 s3.upload_file(nome_arquivo, bucket_nome, f'raw_data/{data_atual}.csv')
-                s3.upload_file(nome_arquivo_json, bucket_nome, f'raw_data/{nome_arquivo_json}.json')
+                s3.upload_file(nome_arquivo_json, bucket_nome, f'raw_data/{nome_arquivo_json}')
                 print(f"Arquivo {nome_arquivo} enviado para o bucket {bucket_nome}.")
             except Exception as e:
                 print(f"Erro ao enviar o arquivo para o S3: {str(e)}")
