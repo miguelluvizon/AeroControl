@@ -65,12 +65,19 @@
                 console.log(resposta);
 
                 resposta.json().then(json => {
-                    console.log(json);
-                    console.log(JSON.stringify(json));
-                    sessionStorage.CPF_USUARIO = json.Cpf;
-                    sessionStorage.NOME_USUARIO = json.nome;
-                    sessionStorage.ID_USUARIO = json.idUsuario;
-                    window.location = "index.html";
+                    const login = json[0]
+                    sessionStorage.CPF = login.cpf;
+                    sessionStorage.NOME_USUARIO = login.nome;
+                    sessionStorage.EMAIL = login.email;
+                    sessionStorage.ID_USUARIO = login.idUsuario;
+                    sessionStorage.CARGO = login.cargo;
+
+
+                    if(sessionStorage.CARGO == "Analista de Dados"){
+                        window.location = "dashboard_analista.html";
+                    } else {
+                        window.location = "dashboard_suporte.html";
+                    }
 
                 });
 
