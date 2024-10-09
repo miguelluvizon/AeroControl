@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AeroControl - Geral</title>
+    <link rel="stylesheet" href="css/style-analista.css" />
+  </head>
+  <body>
+    <div class="container">
+      <aside class="sidebar">
+        <div class="logo">
+          <img src="img/Group 27.png" alt="AeroControl Logo" />
+          <h1 class="logo-text">AeroControl</h1>
+        </div>
+        <div class="cloud">
+          <img src="img/Group 1.png" alt="" />
+          <span class="cloud-text">Analista de Dados</span>
+        </div>
+        <nav class="sidebar-nav">
+          <a class="sidebar-btn" href="dashboard-analista.html">GERAL</a>
+          <a class="sidebar-btn" href="dashboard-analista-historico.html">HISTÓRICO</a>
+          <a class="sidebar-btn" href="dashboard-analista.html">SAIR</a>
+        </nav>
+      </aside>
+
+      <main class="main-content">
+        <section class="metrics-section">
+          <h1 class="section-title">Métricas</h1>
+
+          <div class="general-data">
+            <h2>Dados Gerais</h2>
+            <div class="status-overview">
+              <div class="status-box alert">
+                <h3>Em Alerta</h3>
+                <p>3</p>
+                <br />
+                <p style="font-size: 16px">>= 80%</p>
+              </div>
+              <div class="status-box attention">
+                <h3 style="color: black">Em Atenção</h3>
+                <p>7</p>
+                <br />
+                <p style="font-size: 14px">>= 60% e < 80%</p>
+              </div>
+              <div class="status-box stable">
+                <h3>Estável</h3>
+                <p>30</p>
+                <br />
+                <p style="font-size: 16px">< 60%</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="chart-section">
+            <h2 style="font-size: 30px">
+              Dados Semanais das Máquinas que estão em Alerta
+            </h2>
+            <div class="filter">
+              <label for="sector-select" style="color: white">Setor</label>
+              <select id="sector-select">
+                <option>Torre de Controle</option>
+                <option>Despache de Voo</option>
+                <option>Centro de Meteorologia</option>
+              </select>
+            </div>
+
+            <div style="display: flex; flex-direction: row; width: 50%">
+              <canvas id="cpuChart"></canvas>
+              <canvas id="ramChart"></canvas>
+            </div>
+          </div>
+
+          <div class="comparison-section">
+            <h2
+              style="text-align: center; font-size: 40px; margin-bottom: 5rem"
+            >
+              Comparações
+            </h2>
+            <div class="comparison-charts">
+              <h3
+                style="
+                  text-align: center;
+                  font-size: 25px;
+                  text-decoration: underline;
+                "
+              >
+                Comparação Mensal de Problemas
+              </h3>
+              <canvas id="sectorChart"></canvas>
+            </div>
+          </div>
+          <div class="comparison-section" style="margin-top: 4rem;">
+            <div class="comparison-section">
+              <h3
+                style="
+                  text-align: center;
+                  font-size: 25px;
+                  text-decoration: underline;
+                "
+              >
+                Comparação Semanal de Componentes das Máquinas
+              </h3>
+              <div class="filter">
+                <label for="sector-select" style="color: white">Setor</label>
+                <select id="sector-select">
+                  <option>Torre de Controle</option>
+                  <option>Despache de Voo</option>
+                  <option>Centro de Meteorologia</option>
+                </select>
+              </div>
+              <canvas id="componentsChart"></canvas>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>

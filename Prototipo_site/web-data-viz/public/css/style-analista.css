@@ -1,0 +1,206 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 200px;
+    background-color: #FFFF;
+    color: white;
+    padding: 20px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.logo {
+    display: flex;
+    align-items: center; 
+    gap: 10px;
+    padding: 10px 0;
+}
+
+.logo img {
+    width: 100px;
+    height: auto;
+}
+
+.logo-text {
+    position: relative;
+    top: 23%;
+    right: 50%;
+    font-size: 24px;
+    color: #3B1690;
+}
+
+.cloud {
+    position: relative;
+    width: 100%;
+    text-align: center;
+}
+
+.cloud img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.cloud-text {
+    position: absolute;
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    color: #4a178e; 
+    font-size: 18px; 
+    font-weight: bold;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-btn {
+    background-color: #4a178e;
+    border: none;
+    color: white;
+    padding: 15px;
+    margin-bottom: 40px;
+    cursor: pointer;
+    font-size: 18px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.sidebar-btn:hover {
+    background-color: #5c1baf;
+}
+
+.main-content {
+    padding: 20px;
+    flex-grow: 1;
+    background-color: #e5e5e5;
+}
+
+.metrics-section {
+    margin: 0 auto;
+    width: 95%;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.5em;
+    color: #4b2a7b;
+}
+
+.general-data {
+    background-color: #3e1668;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+
+.general-data h2 {
+    color: white;
+    font-size: 1.8em;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.status-overview {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.status-box {
+    text-align: center;
+    width: 150px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.status-box h3 {
+    margin: 0;
+    color: white;
+}
+
+.status-box p {
+    font-size: 2em;
+}
+
+.status-box.alert {
+    background-color: red;
+    color: white;
+}
+
+.status-box.attention {
+    background-color: yellow;
+    color: black;
+}
+
+.status-box.stable {
+    background-color: green;
+    color: white;
+}
+
+.chart-section {
+    background-color: #3e1668;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.chart-section h2 {
+    color: white;
+    margin-bottom: 20px;
+}
+
+canvas {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.comparison-section {
+    background-color: #3e1668;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.comparison-section h2, .comparison-section h3 {
+    color: white;
+}
+
+.filter {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.filter select {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.comparison-charts {
+    display: flex;
+    flex-direction: column;
+}
+
+.comparison-charts canvas {
+    margin-top: 20px;
+}

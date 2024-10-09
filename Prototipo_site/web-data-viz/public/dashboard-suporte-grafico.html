@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AeroControl - Gráficos</title>
+    <link rel="stylesheet" href="css/style-suporte.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="logo">
+                <img src="img/Group 27.png" alt="Logo">
+                <h1 class="logo-text">AeroControl</h1>
+            </div>
+            <div class="cloud">
+                <img src="img/Group 1.png" alt="">
+                <span class="cloud-text">Suporte de TI</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a class="sidebar-btn" href="dashboard-suporte.html">PAINEL</a>
+                <a class="sidebar-btn" href="dashboard-suporte-grafico.html">GRÁFICOS</a>
+                <a class="sidebar-btn" href="dashboard-suporte-cadastro.html">CADASTRO</a>
+                <a class="sidebar-btn" href="dashboard-suporte-cadastro.html">SAIR</a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <h1>Análise individual de máquinas</h1>
+
+            <div class="filter-container filter-container-grafico">
+                <label for="filter">Setor</label>
+                <div class="custom-select custom-select-grafico">
+                    <select id="setor-select setor-select-grafico">
+                        <option value="meteorologia">Centro de Meteorologia</option>
+                        <option value="despache">Despache Operacional</option>
+                        <option value="coordenador">Coordenador de Voos</option>
+                    </select>
+                    <span class="arrow">&#9662;</span>
+                </div>
+
+                <label for="machine machine-grafico">Máquina</label>
+                <div class="custom-select custom-select-grafico">
+                    <select id="machine-select machine-select-grafico">
+                        <option value="CMM01">CMM01</option>
+                        <option value="CMM02">CMM02</option>
+                    </select>
+                    <span class="arrow">&#9662;</span>
+                </div>
+            </div>
+
+            <div class="chart-container" style="position: relative; height: 75vh; width: 100%; color: white;">
+                <canvas id="usageChart"></canvas>
+            </div>            
+        </main>
+    </div>
+
+    <script>
+        const ctx = document.getElementById('usageChart').getContext('2d');
+        const usageChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: Array.from({ length: 24 }, (_, i) => i),
+                datasets: [
+                    {
+                        label: 'CPU',
+                        borderColor: '#f54291',
+                        backgroundColor: '#f54291',
+                        fill: false,
+                        data: [60, 50, 70, 65, 85, 90, 95, 60, 70, 40, 50, 35, 75, 80, 85, 90, 95, 50, 60, 70, 80, 90, 100, 80],
+                    },
+                    {
+                        label: 'Memória',
+                        borderColor: '#42f554',
+                        backgroundColor: '#42f554',
+                        fill: false,
+                        data: [30, 40, 50, 55, 60, 65, 70, 40, 45, 55, 65, 50, 55, 60, 70, 75, 80, 85, 50, 60, 70, 85, 75, 65],
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        display: true,
+                        title: {
+                            display: true,
+                            text: 'Horas',
+                            color: 'white'
+                        },
+                        ticks: {
+                            color: 'white'
+                        }
+                    },
+                    y: {
+                        display: true,
+                        title: {
+                            display: true,
+                            text: 'Porcentagem (%)',
+                            color: 'white'
+                        },
+                        beginAtZero: true,
+                        max: 100,
+                        ticks: {
+                            color: 'white'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                        labels: {
+                            color: 'white'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

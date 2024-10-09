@@ -1,0 +1,397 @@
+/* SIM, EU TENHO COSTUME DE COLOCAR AS VARIAVEIS EM INGLÊS, TMJ */
+
+/* JÁ CORINGUEI KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 200px;
+    background-color: #FFFF;
+    color: white;
+    padding: 20px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.logo {
+    display: flex;
+    align-items: center; 
+    gap: 10px;
+    padding: 10px 0;
+}
+
+.logo img {
+    width: 100px;
+    height: auto;
+}
+
+.logo-text {
+    position: relative;
+    top: 23%;
+    right: 50%;
+    font-size: 24px;
+    color: #3B1690;
+}
+
+.cloud {
+    position: relative;
+    width: 100%;
+    text-align: center;
+}
+
+.cloud img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.cloud-text {
+    position: absolute;
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    color: #4a178e; 
+    font-size: 18px; 
+    font-weight: bold;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-btn {
+    background-color: #4a178e;
+    border: none;
+    color: white;
+    padding: 15px;
+    margin-bottom: 40px;
+    cursor: pointer;
+    font-size: 18px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.sidebar-btn:hover {
+    background-color: #5c1baf;
+}
+
+.main-content {
+    flex: 1;
+    background-color: #3f2182;
+}
+
+.main-content h1 {
+    color: #4a178e;
+    font-size: 24px;
+    margin-bottom: 20px;
+    width: 100%;
+    height: 12%;
+    padding-top: 30px;
+    text-align: center;
+    background-color: #EDEDED;
+}
+
+.filter-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    color: white;
+    margin-left: 20px;
+}
+
+.filter-container label {
+    font-size: 14px;
+    margin-bottom: 5px;
+    margin-left: 8px;
+}
+
+.custom-select {
+    position: relative;
+    width: 150px;
+}
+
+.custom-select select {
+    appearance: none; 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 100%;
+    padding: 10px;
+    border-radius: 20px;
+    border: none;
+    background-color: white;
+    color: black;
+    font-size: 16px;
+}
+
+.custom-select .arrow {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    font-size: 16px;
+    color: black;
+}
+
+.status-summary {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.status-box {
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 150px;
+    color: white;
+    margin-bottom: 15px;
+}
+
+.status-box h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.status-box p {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.alert {
+    background-color: red;
+}
+
+.warning {
+    background-color: yellow;
+    color: black;
+}
+
+.stable {
+    background-color: green;
+}
+
+.machine-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-left: 20px;
+    margin-right: 10px;
+}
+
+.machine-card {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.machine-info {
+    font-size: 16px;
+    color: #4a178e;
+}
+
+.machine-status {
+    display: flex;
+    gap: 10px;
+}
+
+.cpu, .ram {
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+}
+
+.cpu.alert, .ram.alert {
+    background-color: red;
+}
+
+.cpu.warning, .ram.warning {
+    background-color: yellow;
+    color: black;
+}
+
+.cpu.stable, .ram.stable {
+    background-color: green;
+}
+
+.analyze-btn {
+    background-color: #4a178e;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.analyze-btn:hover {
+    background-color: #5c1baf;
+}
+
+.chart-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.filter-container-grafico {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.custom-select-grafico{
+    width: 250px;
+}
+
+.form-cadastro {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 4rem;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #333;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #5b3eda;
+}
+
+.btn-cadastrar {
+    background-color: #5b3eda;
+    color: white;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.btn-cadastrar:hover {
+    background-color: #6c4fff;
+}
+
+/* Responsividade para dispositivos móveis */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        padding: 10px;
+        text-align: center;
+    }
+
+    .sidebar-btn {
+        width: 100%;
+        text-align: center;
+        font-size: 16px;
+        padding: 10px;
+    }
+
+    .main-content {
+        padding: 20px;
+    }
+
+    .status-summary {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .status-box {
+        width: 80%;
+        margin-bottom: 15px;
+    }
+
+    .machine-list {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .machine-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .machine-status {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .analyze-btn {
+        width: 100%;
+        padding: 10px;
+        text-align: center;
+    }
+}
+
+/* Responsividade para tablets */
+@media (max-width: 1024px) {
+    .machine-list {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar-btn {
+        font-size: 17px;
+    }
+
+    .main-content {
+        padding: 20px;
+    }
+
+    .machine-card {
+        flex-direction: column;
+    }
+
+    .machine-status {
+        flex-direction: column;
+    }
+}

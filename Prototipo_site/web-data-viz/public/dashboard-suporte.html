@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AeroControl - Monitoramento em Tempo Real</title>
+    <link rel="stylesheet" href="css/style-suporte.css">
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="logo">
+                <img src="img/Group 27.png" alt="Logo">
+                <h1 class="logo-text">AeroControl</h1>
+            </div>
+            <div class="cloud">
+                <img src="img/Group 1.png" alt="">
+                <span class="cloud-text">Suporte de TI</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a class="sidebar-btn" href="dashboard-suporte.html">PAINEL</a>
+                <a class="sidebar-btn" href="dashboard-suporte-grafico.html">GRÁFICOS</a>
+                <a class="sidebar-btn" href="dashboard-suporte-cadastro.html">CADASTRO</a>
+                <a class="sidebar-btn" href="dashboard-suporte-cadastro.html">SAIR</a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <h1>Monitoramento em Tempo Real</h1>
+
+            <div class="status-summary">
+                <div class="status-box alert">
+                    <h2>Em Alerta</h2>
+                    <p>1</p>
+                    <br>
+                    <p style="font-size: 16px;">>= 80%</p>
+                </div>
+                <div class="status-box warning">
+                    <h2>Em Atenção</h2>
+                    <p>3</p>
+                    <br>
+                    <p style="font-size: 14px;">>= 60% e < 80%</p>
+                </div>
+                <div class="status-box stable">
+                    <h2>Estável</h2>
+                    <p>0</p>
+                    <br>
+                    <p style="font-size: 16px;">< 60%</p>
+                </div>
+            </div>
+
+            <div class="filter-container">
+                <label for="filter">Filtro</label>
+                <div class="custom-select">
+                    <select id="filter">
+                        <option value="setor">Setor</option>
+                        <option value="despache">Despache Operacional</option>
+                        <option value="coordenador">Coordenador de Voos</option>
+                    </select>
+                    <span class="arrow">&#9662;</span>
+                </div>
+            </div>
+
+            <div class="machine-list">
+                <div class="machine-card">
+                    <div class="machine-info">
+                        <p><strong>Máquina:</strong> PC1000</p>
+                        <p><strong>Setor:</strong> Despache operacional de voo</p>
+                    </div>
+                    <div class="machine-status">
+                        <div class="cpu alert">CPU: 87%</div>
+                        <div class="ram alert">RAM: 82%</div>
+                    </div>
+                    <a class="analyze-btn" href="dashboard-suporte-grafico.html">Analisar</a>
+                </div>
+
+                <div class="machine-card">
+                    <div class="machine-info">
+                        <p><strong>Máquina:</strong> PC2000</p>
+                        <p><strong>Setor:</strong> Coordenador de voos</p>
+                    </div>
+                    <div class="machine-status">
+                        <div class="cpu stable">CPU: 24%</div>
+                        <div class="ram warning">RAM: 60%</div>
+                    </div>
+                    <a class="analyze-btn" href="dashboard-suporte-grafico.html">Analisar</a>
+                </div>
+
+                <div class="machine-card">
+                    <div class="machine-info">
+                        <p><strong>Máquina:</strong> PC3000</p>
+                        <p><strong>Setor:</strong> Despache operacional de voo</p>
+                    </div>
+                    <div class="machine-status">
+                        <div class="cpu warning">CPU: 78%</div>
+                        <div class="ram warning">RAM: 75%</div>
+                    </div>
+                    <a class="analyze-btn" href="dashboard-suporte-grafico.html">Analisar</a>
+                </div>
+
+                <div class="machine-card">
+                    <div class="machine-info">
+                        <p><strong>Máquina:</strong> PC4000</p>
+                        <p><strong>Setor:</strong> Coordenador de voos</p>
+                    </div>
+                    <div class="machine-status">
+                        <div class="cpu warning">CPU: 70%</div>
+                        <div class="ram warning">RAM: 60%</div>
+                    </div>
+                    <a class="analyze-btn" href="dashboard-suporte-grafico.html">Analisar</a>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
