@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AeroControl - Gráficos</title>
     <link rel="stylesheet" href="css/style-suporte.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>AeroControl | Gráficos Suporte</title>
 </head>
+
 <body>
     <div class="container">
         <aside class="sidebar">
@@ -22,7 +24,7 @@
                 <a class="sidebar-btn" href="dashboard-suporte.html">PAINEL</a>
                 <a class="sidebar-btn" href="dashboard-suporte-grafico.html">GRÁFICOS</a>
                 <a class="sidebar-btn" href="dashboard-suporte-cadastro.html">CADASTRO</a>
-                <a class="sidebar-btn" href="dashboard-suporte-cadastro.html">SAIR</a>
+                <a class="sidebar-btn" onclick="limparSessao()">SAIR</a>
             </nav>
         </aside>
 
@@ -52,71 +54,77 @@
 
             <div class="chart-container" style="position: relative; height: 75vh; width: 100%; color: white;">
                 <canvas id="usageChart"></canvas>
-            </div>            
+            </div>
         </main>
     </div>
+</body>
 
-    <script>
-        const ctx = document.getElementById('usageChart').getContext('2d');
-        const usageChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: Array.from({ length: 24 }, (_, i) => i),
-                datasets: [
-                    {
-                        label: 'CPU',
-                        borderColor: '#f54291',
-                        backgroundColor: '#f54291',
-                        fill: false,
-                        data: [60, 50, 70, 65, 85, 90, 95, 60, 70, 40, 50, 35, 75, 80, 85, 90, 95, 50, 60, 70, 80, 90, 100, 80],
-                    },
-                    {
-                        label: 'Memória',
-                        borderColor: '#42f554',
-                        backgroundColor: '#42f554',
-                        fill: false,
-                        data: [30, 40, 50, 55, 60, 65, 70, 40, 45, 55, 65, 50, 55, 60, 70, 75, 80, 85, 50, 60, 70, 85, 75, 65],
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                scales: {
-                    x: {
+</html>
+
+<script>
+    const ctx = document.getElementById('usageChart').getContext('2d');
+    const usageChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: Array.from({ length: 24 }, (_, i) => i),
+            datasets: [
+                {
+                    label: 'CPU',
+                    borderColor: '#f54291',
+                    backgroundColor: '#f54291',
+                    fill: false,
+                    data: [60, 50, 70, 65, 85, 90, 95, 60, 70, 40, 50, 35, 75, 80, 85, 90, 95, 50, 60, 70, 80, 90, 100, 80],
+                },
+                {
+                    label: 'Memória',
+                    borderColor: '#42f554',
+                    backgroundColor: '#42f554',
+                    fill: false,
+                    data: [30, 40, 50, 55, 60, 65, 70, 40, 45, 55, 65, 50, 55, 60, 70, 75, 80, 85, 50, 60, 70, 85, 75, 65],
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                x: {
+                    display: true,
+                    title: {
                         display: true,
-                        title: {
-                            display: true,
-                            text: 'Horas',
-                            color: 'white'
-                        },
-                        ticks: {
-                            color: 'white'
-                        }
+                        text: 'Horas',
+                        color: 'white'
                     },
-                    y: {
-                        display: true,
-                        title: {
-                            display: true,
-                            text: 'Porcentagem (%)',
-                            color: 'white'
-                        },
-                        beginAtZero: true,
-                        max: 100,
-                        ticks: {
-                            color: 'white'
-                        }
+                    ticks: {
+                        color: 'white'
                     }
                 },
-                plugins: {
-                    legend: {
+                y: {
+                    display: true,
+                    title: {
                         display: true,
-                        labels: {
-                            color: 'white'
-                        }
+                        text: 'Porcentagem (%)',
+                        color: 'white'
+                    },
+                    beginAtZero: true,
+                    max: 100,
+                    ticks: {
+                        color: 'white'
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    display: true,
+                    labels: {
+                        color: 'white'
                     }
                 }
             }
-        });
-    </script>
-</body>
-</html>
+        }
+    });
+
+    function limparSessao() {
+        sessionStorage.clear();
+        window.location = "index.html";
+    }
+</script>

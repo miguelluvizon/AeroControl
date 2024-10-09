@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro de Máquinas - AeroControl</title>
     <link rel="stylesheet" href="css/style-suporte.css">
+    <title>AeroControl | Cadastro de Máquinas</title>
 </head>
 <body>
     <div class="container">
@@ -21,7 +21,7 @@
                 <a class="sidebar-btn" href="dashboard-suporte.html">PAINEL</a>
                 <a class="sidebar-btn" href="dashboard-suporte-grafico.html">GRÁFICOS</a>
                 <a class="sidebar-btn" href="dashboard-suporte-cadastro.html">CADASTRO</a>
-                <a class="sidebar-btn" href="dashboard-suporte-cadastro.html">SAIR</a>
+                <a class="sidebar-btn" onclick="limparSessao()">SAIR</a>
             </nav>
         </aside>
 
@@ -62,3 +62,10 @@
     </div>
 </body>
 </html>
+
+<script>
+    function limparSessao() {
+    sessionStorage.clear();
+    window.location = "index.html";
+}
+</script>
