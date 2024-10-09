@@ -7,7 +7,7 @@ import boto3
 
 def lambda_handler(event, context):
 
-    api_key = "126051c88027a854c8b0305a2b31849b"
+    api_key = "93dc3c89d3e51791104d1c4ff2885e50"
     cities = ["São Paulo", "Salvador"]
 
     for city in cities:
@@ -48,7 +48,7 @@ def lambda_handler(event, context):
 
         dados = resultado.json()
 
-        transacoes = dados['results']['forecast']['description']
+        transacoes = dados['results']
 
         nome_arquivo = os.path.join(tempfile.gettempdir(), 'clima.json')
 
@@ -64,7 +64,7 @@ def lambda_handler(event, context):
 
             Bucket='s3-raw-aerocontrol',
 
-            Key='climaTempo/clima.json'
+            Key='clima.json'
 
         )
 
