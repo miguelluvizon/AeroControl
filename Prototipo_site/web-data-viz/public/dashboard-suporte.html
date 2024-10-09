@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AeroControl - Monitoramento em Tempo Real</title>
     <link rel="stylesheet" href="css/style-suporte.css">
+    <title>AeroControl | Monitoramento em Tempo Real</title>
 </head>
+
 <body>
     <div class="container">
         <aside class="sidebar">
@@ -21,7 +23,7 @@
                 <a class="sidebar-btn" href="dashboard-suporte.html">PAINEL</a>
                 <a class="sidebar-btn" href="dashboard-suporte-grafico.html">GRÁFICOS</a>
                 <a class="sidebar-btn" href="dashboard-suporte-cadastro.html">CADASTRO</a>
-                <a class="sidebar-btn" href="dashboard-suporte-cadastro.html">SAIR</a>
+                <a class="sidebar-btn" onclick="limparSessao()">SAIR</a>
             </nav>
         </aside>
 
@@ -39,13 +41,14 @@
                     <h2>Em Atenção</h2>
                     <p>3</p>
                     <br>
-                    <p style="font-size: 14px;">>= 60% e < 80%</p>
+                    <p style="font-size: 14px;">>= 60% e 80%</p>
                 </div>
                 <div class="status-box stable">
                     <h2>Estável</h2>
                     <p>0</p>
                     <br>
-                    <p style="font-size: 16px;">< 60%</p>
+                    <p style="font-size: 16px;">
+                        <p> 60%</p>
                 </div>
             </div>
 
@@ -113,4 +116,12 @@
         </main>
     </div>
 </body>
+
 </html>
+
+<script>
+    function limparSessao() {
+        sessionStorage.clear();
+        window.location = "index.html";
+    }
+</script>
