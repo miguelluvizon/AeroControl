@@ -2,15 +2,15 @@ DROP DATABASE IF EXISTS aeroControl;
 CREATE DATABASE aeroControl;
 USE aeroControl;
 
-Create table Aeroporto (
+CREATE TABLE Aeroporto (
 idAeroporto int primary key auto_increment,
-nome varchar(40),
+nomeAeroporto varchar(100),
 CEP char(9)
 );
 
-Create table Usuario (
+CREATE TABLE Usuario (
 idUsuario int primary key auto_increment,
-nome varchar(100),
+nomeUsuario varchar(100),
 email varchar(320),
 senha varchar(30),
 cpf char(11) unique,
@@ -19,17 +19,17 @@ fkAeroporto int,
 constraint foreign key (fkAeroporto) references Aeroporto(idAeroporto)
 );
 
-Create table Computador (
+CREATE TABLE Computador (
 idComputador int primary key auto_increment,
 hostname varchar(100),
 processador varchar(100),
 memoria decimal(5,2),
 setor varchar(100),
 fkAeroporto int,
-constraint foreign key (fkAeroporto) references Aeroporto(idAeroporto)
+constraint foreign key (fkUsuario) references Usuario(idAeroporto)
 );
 
-Create table DadoComputador (
+CREATE TABLE DadoComputador (
 idDado int primary key auto_increment,
 horaDado datetime default CURRENT_TIMESTAMP,
 cpuPorcentagem decimal(5,2),
@@ -60,7 +60,7 @@ INSERT INTO Computador VALUES
 	(default, 'Comp2Com', 'i5-9300', '8', 'Comunicação com Pilotos', 1),
 	(default, 'Comp2Com', 'i5-9300', '16', 'Comunicação com Pilotos', 2);
     
-	SELECT * FROM Aeroporto;    
-	SELECT * FROM Usuario;  
-	SELECT * FROM Computador;
-    SELECT * FROM DadoComputador;
+SELECT * FROM Aeroporto;    
+SELECT * FROM Usuario;  
+SELECT * FROM Computador;
+SELECT * FROM DadoComputador;
