@@ -3,6 +3,8 @@ package school.sptech;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.List;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Stock {
 
@@ -10,7 +12,10 @@ public class Stock {
     private String date;
 
     @JsonProperty("description")
-    private Double description;
+    private String description;
+
+    @JsonProperty("forecast")
+    List<Forecast> forecasts;
 
     public String getDate() {
         return date;
@@ -20,11 +25,11 @@ public class Stock {
         this.date = date;
     }
 
-    public Double getDescription() {
+    public String getDescription() {
         return description;
     }
 
-    public void setDescription(Double description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 }
