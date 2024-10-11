@@ -3,6 +3,7 @@
     src: url(kollektif/Kollektif.ttf);
 }
 
+
 body {
     margin: 0;
     padding: 0;
@@ -38,16 +39,17 @@ input {
     border: none;
     height: 30px;
     border-radius: 15px;
-    width: 82%;
+    width: 60%;
     text-align: center;
 }
+
 
 select {
     background-color: #ededed;
     border: none;
     height: 30px;
     border-radius: 15px;
-    width: 82%;
+    width: 60%;
     text-align: center;
 }
 
@@ -97,7 +99,7 @@ button {
 .box {
     background-color: white;
     width: 25%;
-    height: 80%;
+    height: fit-content;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -168,13 +170,17 @@ button {
     }
 
     input {
-        width: 60%;
-        height: 20px;
+        width: 90%;
         font-size: 14px;
         margin-bottom: 3%;
     }
 
+    select{
+        margin-top: 5%;
+    }
+
     button {
+        margin-top: 5%;
         width: 100%;
         font-size: 18px;
         padding: 10px;
@@ -257,31 +263,62 @@ button {
     
     .box {
         background-color: white;
-        width: 50%;
-        height: 70%;
+        width: 80%;
+        height: fit-content;
         padding: 40px;
         display: flex;
         flex-direction: column;
         align-items: center;
         text-align: center;
         justify-content: space-around;
-        border-radius: 15px;
+    }
+
+    select{
+        width: 40%;
+        font-size: 1.7em;
+        height: fit-content;
+        padding: 2%;
+    }
+
+    .div_select {
+        display: flex;
+        width: 100%;
+        justify-content: space-around;
+    }
+
+    .formularioC2{
+        margin-top: 20px;
     }
 
     input {
-        width: 85%;
-        height: 50px;
-        font-size: 20px;
+        width: 100%;
+        height: 60%;
+        font-size: 50px;
+        margin-bottom: 5%;
+        justify-content: center;
+        border-radius: 50px;
+    }
+
+    input::placeholder{
+        font-size: 60%;
     }
 
     button {
         width: 50%;
-        font-size: 22px;
+        font-size: 30px;
         padding: 15px;
     }
 
-    .ladoEsquerdo, .ladoDireito {
-        width: 45%;
+    .ladoDireito {
+        display: none;
+    }
+
+    .ladoEsquerdo {
+        justify-content: center;
+    }
+
+    .pergunta{
+        font-size: 2em;
     }
 }
 
@@ -298,12 +335,12 @@ button {
     }
     
     .imgLogo {
-        width: 10%;
+        width: 15%;
     }
     
     .box {
         background-color: white;
-        width: 40%;
+        width: 30%;
         height: 80%;
         display: flex;
         flex-direction: column;
@@ -311,13 +348,32 @@ button {
         text-align: center;
         justify-content: space-around;
         border-radius: 10%;
+        padding: 1%;
     }
+
+    .div_select{
+        display: flex;
+        width: 100%;
+    justify-content: space-around;
+    }
+
+    select{
+        width: 40%;
+    }
+
+    
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 
     .formularioC{
         display: flex;
         justify-content: center;
-        align-items: flex-start;
-        flex-direction: column ;
+        align-items: center;
+        flex-direction: column;
         width: 90%;
         height: 120%;
     }

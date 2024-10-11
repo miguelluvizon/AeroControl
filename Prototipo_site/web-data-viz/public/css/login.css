@@ -124,6 +124,11 @@ button:hover {
         padding: 10px;
     }
 
+    input::placeholder{
+        font-size: 100%;
+        text-align: center;
+    }
+
     button {
         font-size: 18px;
         padding: 12px;
@@ -156,12 +161,22 @@ button:hover {
         margin-bottom: 4%;
     }
 
+    input::placeholder{
+        font-size: 100%;
+        text-align: center;
+    }
+
     button {
+        box-shadow: 0.2rem 0.2rem 5px rgba(0, 0, 0, 0.3);
         width: 100%;
         font-size: 18px;
         padding: 12px;
         border-radius: 12px;
     }
+
+    button:active {
+        box-shadow: none;
+      }
     
 
     .entradas {
@@ -184,14 +199,22 @@ button:hover {
         width: 70%;
         height: fit-content;
         border-radius: 30px;
+        padding: 5%;
     }
 
     input {
         width: 75%;
         font-size: 16px;
+        margin-top: 10%;
+    }
+
+    input::placeholder{
+        font-size: 100%;
+        text-align: center;
     }
 
     button {
+        margin-top: 15%;
         font-size: 22px;
         padding: 15px;
     }
@@ -210,6 +233,15 @@ button:hover {
         text-align: center;
         justify-content: space-around;
         border-radius: 10%;
+        padding: 5%;
+    }
+
+    input{
+        width: 100%;
+    }
+
+    input::placeholder{
+        text-align: center;
     }
 
     .entradas {
@@ -233,6 +265,7 @@ button:hover {
             text-align: center;
             justify-content: space-around;
             border-radius: 10%;
+            padding: 10px;
         }
 
         .logo {
@@ -253,24 +286,36 @@ button:hover {
         }
         
         input {
+            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
             background-color: #ededed;
             border: none;
-            height: 60px;
-            padding: 5px;
+            height: fit-content;
+            padding: 3%;
             border-radius: 15px;
-            width: 50%;
+            width: 60%;
             font-size: 30px;
+        }
+
+        input::placeholder{
+            font-size: 100%;
+            text-align: center;
         }
         
         button {
+            box-shadow: 7px 7px 5px rgba(0, 0, 0, 0.3);
             background-color: #40169f;
             color: white;
             padding: 30px;
             border-radius: 15px;
             width: 100%;
-            font-size: 30px;
+            height: fit-content;
+            font-size: 40px;
             font-weight: bold;
         }
+
+        button:active {
+            box-shadow: none;
+          }
         
         .redirectCadastro {
             font-size: 30px;
@@ -286,6 +331,11 @@ button:hover {
         align-items: center;
         justify-content: center;
         height: 15vh;
+    }
+
+    input::placeholder{
+        font-size: 100%;
+        text-align: center;
     }
     
     .imgLogo {

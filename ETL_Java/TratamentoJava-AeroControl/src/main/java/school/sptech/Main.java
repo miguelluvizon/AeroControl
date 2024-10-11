@@ -4,6 +4,7 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.S3Event;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import org.apache.commons.csv.*;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -32,7 +33,6 @@ public class Main implements RequestHandler<S3Event, String> {
 
             // Conversão do JSON para uma lista de objetos Stock usando o Mapper
             Mapper mapper = new Mapper();
-
             List<Stock> stocks = mapper.map(s3InputStream);
 
             // Geração do arquivo CSV a partir da lista de Stock usando o CsvWriter
