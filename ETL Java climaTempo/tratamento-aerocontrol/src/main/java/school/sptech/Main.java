@@ -33,11 +33,11 @@ public class Main implements RequestHandler<S3Event, String> {
             // Conversão do JSON para uma lista de objetos Stock usando o Mapper
             Mapper mapper = new Mapper();
 
-            List<Stock> stocks = mapper.map(s3InputStream);
+            List<Forecast> forecasts = mapper.map(s3InputStream);
 
             // Geração do arquivo CSV a partir da lista de Stock usando o CsvWriter
             CsvWriter csvWriter = new CsvWriter();
-            ByteArrayOutputStream csvOutputStream = csvWriter.writeCsv(stocks);
+            ByteArrayOutputStream csvOutputStream = csvWriter.writeCsv(forecasts);
 
             // Converte o ByteArrayOutputStream para InputStream para enviar ao bucket de destino
             InputStream csvInputStream = new ByteArrayInputStream(csvOutputStream.toByteArray());

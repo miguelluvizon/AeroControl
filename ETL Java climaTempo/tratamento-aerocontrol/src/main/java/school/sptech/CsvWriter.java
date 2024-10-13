@@ -8,17 +8,17 @@ import java.util.List;
 
 public class CsvWriter {
 
-    public ByteArrayOutputStream writeCsv(List<Stock> stocks) throws IOException {
+    public ByteArrayOutputStream writeCsv(List<Forecast> forecasts) throws IOException {
         // Criar um CSV em memória utilizando ByteArrayOutputStream
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outputStream, StandardCharsets.UTF_8));
         CSVPrinter csvPrinter = new CSVPrinter(writer, CSVFormat.DEFAULT.withHeader("Data", "Descrição"));
 
         // Processar e escrever cada objeto no CSV
-        for (Stock stock : stocks) {
+        for (Forecast forecast : forecasts) {
             csvPrinter.printRecord(
-                    stock.getDate(),
-                    stock.getDescription()
+                    forecast.getDate(),
+                    forecast.getDescription()
             );
         }
 
