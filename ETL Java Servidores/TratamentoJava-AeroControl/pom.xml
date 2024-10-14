@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>school.sptech</groupId>
-    <artifactId>lambda_exemplo</artifactId>
+    <artifactId>TratamentoJava-AeroControl</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
@@ -13,7 +13,6 @@
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
     <dependencies>
 
         <!-- https://mvnrepository.com/artifact/com.amazonaws/aws-lambda-java-core -->
@@ -21,6 +20,12 @@
             <groupId>com.amazonaws</groupId>
             <artifactId>aws-lambda-java-core</artifactId>
             <version>1.2.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>2.15.2</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/com.amazonaws/aws-lambda-java-events -->
@@ -102,6 +107,5 @@
             </plugin>
         </plugins>
     </build>
-
 
 </project>

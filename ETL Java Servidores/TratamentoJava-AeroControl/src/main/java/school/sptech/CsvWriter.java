@@ -12,15 +12,15 @@ public class CsvWriter {
         // Criar um CSV em memória utilizando ByteArrayOutputStream
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outputStream, StandardCharsets.UTF_8));
-        CSVPrinter csvPrinter = new CSVPrinter(writer, CSVFormat.DEFAULT.withHeader("ID", "Porcentagem de RAM", "RAM em GB", "Porcentagem de CPU"));
+        CSVPrinter csvPrinter = new CSVPrinter(writer, CSVFormat.DEFAULT.withHeader("Porcentagem de  Memória RAM", "Memória RAM em GB", "Porcentagem de CPU", "Data e Hora"));
 
         // Processar e escrever cada objeto no CSV
         for (Stock stock : stocks) {
             csvPrinter.printRecord(
-                    stock.getId(),
                     stock.getRamPorcentagem(),
-                    stock.getRamBytes(),
-                    stock.getCpuPorcentagem()
+                    stock.getRamBytesInGB(),
+                    stock.getCpuPorcentagem(),
+                    stock.getFormattedTimestamp()
             );
         }
 

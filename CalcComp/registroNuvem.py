@@ -49,10 +49,10 @@ def monitorar():
         porcentagemRAM = psutil.virtual_memory().percent
 
         data = {
-            'cpu': porcentagemCPU,
-            'memroia RAM Bytes' : usoRAM,
-            'memoria RAM (%)': porcentagemRAM,
-            'timestamp': dt.datetime.now().isoformat()
+            'cpu':porcentagemCPU,
+            'memoriaByte':usoRAM,
+            'memoriaPorcent':porcentagemRAM,
+            'timestamp':dt.datetime.now().isoformat()
         }
 
         dados = [porcentagemCPU, usoRAM, porcentagemRAM]
