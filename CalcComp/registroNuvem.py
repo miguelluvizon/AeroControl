@@ -36,7 +36,7 @@ def monitorar():
     total_dados = 0
 
     data_atual = dt.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-    nome_arquivo = f'./raw_data_{data_atual}.csv'
+    nome_arquivo = f'{data_atual}.csv'
     nome_arquivo_json = "dados.json"
     criar_json_se_nao_existir(nome_arquivo_json, [])
     criar_csv_se_nao_existir(nome_arquivo)
@@ -74,8 +74,8 @@ def monitorar():
             passou = 0
 
             try:
-                s3.upload_file(nome_arquivo, bucket_nome, f'raw_data/{data_atual}.csv')
-                s3.upload_file(nome_arquivo_json, bucket_nome, f'raw_data/{nome_arquivo_json}')
+                s3.upload_file(nome_arquivo, bucket_nome, f'{data_atual}.csv')
+                s3.upload_file(nome_arquivo_json, bucket_nome, f'{nome_arquivo_json}')
                 print(f"Arquivo {nome_arquivo} enviado para o bucket {bucket_nome}.")
             except Exception as e:
                 print(f"Erro ao enviar o arquivo para o S3: {str(e)}")

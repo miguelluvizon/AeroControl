@@ -12,7 +12,7 @@ public class CsvWriter {
         // Criar um CSV em memória utilizando ByteArrayOutputStream
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outputStream, StandardCharsets.UTF_8));
-        CSVPrinter csvPrinter = new CSVPrinter(writer, CSVFormat.DEFAULT.withHeader("ID", "Porcentagem de RAM", "RAM em bytes", "Porcentagem de CPU"));
+        CSVPrinter csvPrinter = new CSVPrinter(writer, CSVFormat.DEFAULT.withHeader("ID", "Porcentagem de RAM", "RAM em GB", "Porcentagem de CPU"));
 
         // Processar e escrever cada objeto no CSV
         for (Stock stock : stocks) {

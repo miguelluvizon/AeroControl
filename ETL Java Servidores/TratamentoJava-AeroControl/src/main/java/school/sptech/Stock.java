@@ -6,22 +6,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Stock {
 
-    @JsonProperty("ID")
-    private String id;
-
-    @JsonProperty("ramPorcentagem")
+    @JsonProperty("memoria RAM (%)  ")
     private Double ramPorcentagem;
 
-    @JsonProperty("ramBytes")
+    @JsonProperty("memroia RAM Bytes")
     private double ramBytes;
 
-    @JsonProperty("cpuPorcentagem")
+    @JsonProperty("cpu")
     private Double cpuPorcentagem;
 
     // Getters e setters
-    public String getId() { return id; }
-    public void setId(String id) { this.id = id; }
-
     public Double getRamPorcentagem() { return ramPorcentagem; }
     public void setRamPorcentagem(Double ramPorcentagem) { this.ramPorcentagem = ramPorcentagem; }
 
