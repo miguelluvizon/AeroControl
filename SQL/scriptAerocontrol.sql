@@ -3,7 +3,6 @@ CREATE DATABASE IF NOT EXISTS aeroControl;
 USE aeroControl;
 
 CREATE TABLE Aeroporto (
-<<<<<<< HEAD
 cnpj char(14) primary key,
 nomeAeroporto varchar(14),
 codigoIATA char(3),
@@ -13,92 +12,50 @@ cep char(9)
 
 CREATE TABLE Usuario (
 cpf char(11) primary key,
-=======
-idAeroporto int primary key auto_increment,
-<<<<<<< HEAD
-nome varchar(40),
-CEP char(9),
-numero int
-=======
-nomeAeroporto varchar(100),
-CEP char(9)
->>>>>>> a00c04ebede9955785d93c0e9697a22100c7d99b
-);
-
-CREATE TABLE Usuario (
-idUsuario int primary key auto_increment,
-<<<<<<< HEAD
-nome varchar(40),
-dataNasc DATE,
-cpf char(11),
-=======
->>>>>>> a10d91ab6dca5821860c379a88076dee9f9c0ec1
-nomeUsuario varchar(100),
+nomeUsuario varchar(40),
 email varchar(320),
->>>>>>> a00c04ebede9955785d93c0e9697a22100c7d99b
 senha varchar(30),
-<<<<<<< HEAD
 cargo varchar(17),
-fkAeroporto char(14)
+fkAeroporto char(14),
+constraint fkAeroportoUsuario foreign key (fkAeroporto) references Aeroporto(cnpj)
 );
 
 CREATE TABLE Setor(
-idSetor int,
+idSetor int primary key auto_increment,
+nomeSetor varchar(100),
 fkAeroporto char(14),
-primary key (idSetor, fkAeroporto),
-
-nomeSetor varchar(100)
-=======
-cargo varchar(40),
-fkAeroporto int,
-constraint foreign key (fkAeroporto) references Aeroporto(idAeroporto)
->>>>>>> a10d91ab6dca5821860c379a88076dee9f9c0ec1
+constraint foreign key (fkAeroporto) references Aeroporto(cnpj)
 );
 
-<<<<<<< HEAD
-Create table Computador (
-idComputador int primary key,
-hostname varchar(45),
-processador varchar(45),
-memoria varchar(5),
-armazenamento varchar(6),
-setor varchar(45),
-=======
-CREATE TABLE Computador (
-idComputador int auto_increment,
-fkAeroporto char(14),
-fkSetor int,
-primary key(idComputador, fkAeroporto, fkSetor),
 
+CREATE TABLE Computador (
+idComputador int primary key auto_increment,
 hostname varchar(100),
 processador varchar(100),
-<<<<<<< HEAD
-ramMax decimal(5 , 2),
-fkUsuario char(11)
+ramMax varchar(100),
+fkUsuario char(11),
+fkAeroporto char(14),
+fkSetor int,
+constraint fkUsuarioComputador foreign key (fkUsuario) references Usuario(cpf),
+constraint fkAeroportoComputador foreign key (fkAeroporto) references Aeroporto(cnpj),
+constraint fkSetorComputador foreign key (fkSetor) references Setor(idSetor)
 );
 
 CREATE TABLE DadoComputador (
-idDado int,
-idComputador int,
-fkAeroporto char(14),
-fkSetor int,
-primary key(idDado, idComputador, fkAeroporto, fkSetor),
-
-horaDado datetime default current_timestamp,
-cpuPorcentagem decimal(5 , 2),
-ramPorcentagem decimal(5 , 2),
-ramBytes decimal(5 , 2)
+idDado int primary key auto_increment,
+horaDado datetime default CURRENT_TIMESTAMP,
+cpuPorcentagem decimal(5,2),
+memoriaPorcentagem decimal(5,2),
+memoriaGB decimal(5,2),
+fkComputador int,
+constraint fkDadoComputador foreign key (fkComputador) references Computador(idComputador)
 );
 
 CREATE TABLE Alerta (
-idAlerta int auto_increment,
-idDado int,
-idComputador int,
-fkAeroporto char(14),
-fkSetor int,
-primary key(idAlerta, idDado, idComputador, fkAeroporto, fkSetor),
-
-dataAlerta datetime default current_timestamp
+idAlerta int primary key auto_increment,
+dataAlerta datetime default current_timestamp,
+fkDadoComputador int,
+constraint fkAlertaDado foreign key (fkDadoComputador) references DadoComputador (idDado)
 );
 
 INSERT INTO Aeroporto VALUES
@@ -164,23 +121,6 @@ SELECT * FROM Usuario;
 SELECT * FROM Computador;
 SELECT * FROM DadoComputador;
 SELECT * FROM Alerta;
-=======
-memoria decimal(5,2),
-setor varchar(100),
->>>>>>> a00c04ebede9955785d93c0e9697a22100c7d99b
-fkAeroporto int,
-constraint foreign key (fkUsuario) references Usuario(idAeroporto)
-);
-
-CREATE TABLE DadoComputador (
-idDado int primary key auto_increment,
-horaDado datetime default CURRENT_TIMESTAMP,
-cpuPorcentagem decimal(5,2),
-memoriaPorcentagem decimal(5,2),
-memoriaGB int,
-fkComputador int,
-constraint foreign key (fkComputador) references Computador(idComputador)
-);
 
 INSERT INTO Aeroporto VALUES
 	(1, 'Congonhas', '3641-001', 1);
@@ -188,16 +128,13 @@ INSERT INTO Aeroporto VALUES
 INSERT INTO Computador VALUES
 	(2, 'nb-martinez', 'i5-1334', '16GB', '1TB', 'Comunicação com Pilotos', 1);
     
-<<<<<<< HEAD
-    SELECT * FROM DadoComputador;
+SELECT * FROM DadoComputador;
     
 SELECT * FROM Aeroporto;
 
 SELECT * FROM usuario;
-=======
 SELECT * FROM Aeroporto;    
 SELECT * FROM Usuario;  
 SELECT * FROM Computador;
 SELECT * FROM DadoComputador;
->>>>>>> a00c04ebede9955785d93c0e9697a22100c7d99b
->>>>>>> a10d91ab6dca5821860c379a88076dee9f9c0ec1
+
