@@ -13,9 +13,9 @@ from jira import JIRA
 # Estabelecendo conexão ao BD
 mydb = mysql.connector.connect(
     user='root', 
-    password='Mig01qn89!', 
+    password='urubu100', 
     host='localhost',
-    database='teste',
+    database='aeroControl',
     port = "3306"
 )
 

@@ -7,7 +7,7 @@ function buscarPorId(id) {
 }
 
 function listar() {
-  var instrucaoSql = `SELECT idEmpresa, nome_empresa FROM empresa`;
+  var instrucaoSql = `SELECT cnpj, nomeAeroporto FROM Aeroporto`;
 
   return database.executar(instrucaoSql);
 }
@@ -19,14 +19,14 @@ function buscarPorCnpj(cnpj) {
 }
 
 function cadastrar(razaoSocial, cnpj) {
-  var instrucaoSql = `INSERT INTO empresa (razao_social, cnpj) VALUES ('${razaoSocial}', '${cnpj}')`;
+  var instrucaoSql = `INSERT INTO Aeroporto (razao_social, cnpj) VALUES ('${razaoSocial}', '${cnpj}')`;
 
   return database.executar(instrucaoSql);
 }
 
 function getEmpresas() {
   var instrucaoSql = `
-  SELECT idAeroporto, nome FROM Aeroporto ORDER BY nome;`;
+  SELECT cnpj, nomeAeroporto FROM Aeroporto ORDER BY nomeAeroporto;`;
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
 }
