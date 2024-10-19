@@ -187,7 +187,7 @@
 
                     var opcoes = ``
                     for(var index = 0; index < resultado.length; index++) {
-                        opcoes += `<option value="${resultado[index].idAeroporto}">${resultado[index].nome}</option>
+                        opcoes += `<option value="${resultado[index].cnpj}">${resultado[index].nomeAeroporto}</option>
                         `;
                     }
                     select_empresa.innerHTML = `<select id="select_empresa" required>
