@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Detalhes de Máquina | AeroControl</title>
+    <link rel="stylesheet" href="detalhes.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+
+  <body>
+    <div class="tela">
+      <aside class="barraLateral">
+        <img src="Protótipo Dashboard.png" alt="" />
+        <a class="botao" href="../arthur/">PAINEL</a>
+        <a class="botao" href="../dashboard-suporte-cadastro.html">CADASTRO</a>
+        <a class="botao" onclick="limparSessao()">SAIR</a>
+      </aside>
+
+      <main class="conteudo">
+        <h1>DETALHES DA MÁQUINA</h1>
+
+        <div class="divGrafico">
+          <canvas id="usageChart" class="grafico"></canvas>
+        </div>
+
+        <div class="inferior">
+          <div class="informacoes">
+            <span><b>CPU:</b> %</span>
+            <p>Processador:</p>
+          </div>
+
+          <div class="informacoes">
+            <span><b>RAM:</b> %</span>
+            <p>Usando MB de MB</p>
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>
+
+<script>
+  const ctx = document.getElementById("usageChart").getContext("2d");
+  const usageChart = new Chart(ctx, {
+    type: "line",
+    data: {
+      labels: Array.from({ length: 24 }, (_, i) => i),
+      datasets: [
+        {
+          label: "CPU",
+          borderColor: "#3F2182",
+          backgroundColor: "#3F2182",
+          fill: false,
+          data: [
+            60, 50, 70, 65, 85, 90, 95, 60, 70, 40, 50, 35, 75, 80, 85, 90, 95,
+            50, 60, 70, 80, 90, 100, 80,
+          ],
+        },
+        {
+          label: "Memória",
+          borderColor: "#7C1E6A",
+          backgroundColor: "#7C1E6A",
+          fill: false,
+          data: [
+            30, 40, 50, 55, 60, 65, 70, 40, 45, 55, 65, 50, 55, 60, 70, 75, 80,
+            85, 50, 60, 70, 85, 75, 65,
+          ],
+        },
+      ],
+    },
+    options: {
+      scales: {
+        x: {
+          grid: {
+            display: false
+          },
+          display: true,
+          title: {
+            display: true,
+            text: "Horário do registro",
+            color: "black",
+          },
+          ticks: {
+            color: "black",
+          },
+        },
+        y: {
+          grid: {
+            color: "#A8A8A8"
+          },
+          display: true,
+          title: {
+            text: "Porcentagem de uso do componente",
+            color: "black",
+          },
+          min: 0,
+          max: 100,
+          ticks: {
+            stepSize: 20,
+            color: "black"
+          },
+        },
+      },
+      plugins: {
+        legend: {
+          display: true,
+          labels: {
+            color: "black",
+          },
+        },
+      },
+    },
+  });
+
+  function limparSessao() {
+    sessionStorage.clear();
+    window.location = "../index.html";
+  }
+</script>
