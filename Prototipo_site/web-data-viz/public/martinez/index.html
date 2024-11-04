@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AeroControl - Comparação de Alertas - Murilo Martinez</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <img src="img/Protótipo Dashboard.png" alt="">
+            <button class="sidebar-btn">RESUMO</button>
+            <button class="sidebar-btn">COMPARAR</button>
+            <button class="sidebar-btn">SAIR</button>
+        </aside>
+        <main class="main-content">
+            <h1>COMPARAÇÃO DE ALERTAS ENTRE SETORES</h1>
+            <div class="chart-container">
+                <h2>QUANTIDADE DE ALERTAS POR MÊS EM CADA SETOR</h2>
+                <canvas id="alertChart"></canvas>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
