@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AeroControl - Ranking semanal de alertas - Miguel Luvizon</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <img src="img/Protótipo Dashboard.png" alt="">
+            <button class="sidebar-btn">RESUMO</button>
+            <button class="sidebar-btn">COMPARAR</button>
+            <button class="sidebar-btn">SAIR</button>
+        </aside>
+        <main class="main-content">
+            <h1>DETALHES DO SETOR</h1>
+            <div class="escolhaSetor">
+                <h2>MÉDIA DOS COMPONENTES DAS MÁQUINAS MAIS CRÍTICAS NA SEMANA</h2>
+                <span>Setor:</span>
+                <select id="Setor">
+                    <option value="0">selecione um setor</option>
+                    <option value="1">Torre de controle</option>
+                    <option value="2">Despache de voo</option>
+                    <option value="3">Centro de meteorologia</option>
+                </select>
+            <div class="graficos">
+                <div class="chart-container">
+                    <h2>USO DA CPU</h2>
+                    <canvas id="alertChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h2>USO DA RAM</h2>
+                    <canvas id="alertChart2"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
