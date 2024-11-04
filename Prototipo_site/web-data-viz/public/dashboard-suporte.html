@@ -12,16 +12,10 @@
     <div class="container">
         <aside class="sidebar">
             <div class="logo">
-                <!-- <img src="img/Group 27.png" alt="Logo">
-                <h1 class="logo-text">AeroControl</h1> -->
-            </div>
-            <div class="cloud">
-                <img src="img/Group 1.png" alt="">
-                <span class="cloud-text">Suporte de TI</span>
+                <img src="imagens/logoAerocontrol2.png" alt="Logo">
             </div>
             <nav class="sidebar-nav">
                 <a class="sidebar-btn" href="dashboard-suporte.html">PAINEL</a>
-                <a class="sidebar-btn" href="dashboard-suporte-grafico.html">GRÁFICOS</a>
                 <a class="sidebar-btn" href="dashboard-suporte-cadastro.html">CADASTRO</a>
                 <a class="sidebar-btn" onclick="limparSessao()">SAIR</a>
             </nav>
@@ -32,39 +26,56 @@
 
             <div class="status-summary">
                 <div class="status-box alert">
-                    <h2>Em Alerta</h2>
-                    <p>1</p>
-                    <br>
-                    <p style="font-size: 16px;">>= 80%</p>
+                    <div class="numero-card"><p>1</p></div>
+                    <div class="texto-box"><h2>Alerta</h2>
+                    <p>Algum componente excedeu 80% de uso</p></div>
                 </div>
                 <div class="status-box warning">
-                    <h2>Em Atenção</h2>
-                    <p>3</p>
-                    <br>
-                    <p style="font-size: 14px;">>= 50% e < 80%</p>
+                    <div class="numero-card"><p>3</p></div>
+                    <div class="texto-box"><h2>Atenção</h2>
+                    <p>Algum componente está entre 50% e 80% de uso</p></div>
                 </div>
                 <div class="status-box stable">
-                    <h2>Estável</h2>
-                    <p>0</p>
-                    <br>
-                    <p style="font-size: 16px;">
-                        <p> < 50%</p>
+                    <div class="numero-card"><p>0</p></div>
+                    <div class="texto-box"><h2>Estável</h2>
+                    <p>
+                        <p>Uso de ambos os componentes abaixo do 50%</p></div>
                 </div>
             </div>
 
-            <div class="filter-container">
-                <label for="filter">Filtro</label>
-                <div class="custom-select">
-                    <select id="filter">
-                        <option value="setor">Setor</option>
-                        <option value="despache">Despache Operacional</option>
-                        <option value="coordenador">Coordenador de Voos</option>
-                    </select>
-                    <span class="arrow">&#9662;</span>
+            <DIV class="grupo_maquinas_filtro">
+                <div class="filter-container">
+                    <label for="filter">Filtro</label>
+                    <div class="inputs">
+                    <div class="custom-select">
+                        <select id="filter">
+                            <option value="setor">Setor</option>
+                            <option value="despache">Despache Operacional</option>
+                            <option value="coordenador">Coordenador de Voos</option>
+                        </select>
+                        <span class="arrow">&#9662;</span>
+                    </div>
+    
+                    <div id="div_check" onclick="ativarCheck()" itemid="div_custom_check" class="custom_check">
+                        <input id="checkDash" type="checkbox"> Visualizar de forma gráfica
+    
+                    </div>
                 </div>
-            </div>
+                </div>
 
             <div class="machine-list">
+                <div class="machine-card">
+                    <div class="machine-info">
+                        <p><strong>Máquina:</strong> PC4000</p>
+                        <p><strong>Setor:</strong> Coordenador de voos</p>
+                    </div>
+                    <div class="machine-status">
+                        <div class="cpu warning">CPU: 70%</div>
+                        <div class="ram warning">RAM: 60%</div>
+                    </div>
+                    <a class="analyze-btn" href="dashboard-suporte-grafico.html">Analisar</a>
+                </div>
+                
                 <div class="machine-card">
                     <div class="machine-info">
                         <p><strong>Máquina:</strong> PC1000</p>
@@ -82,13 +93,15 @@
                         <p><strong>Máquina:</strong> PC2000</p>
                         <p><strong>Setor:</strong> Coordenador de voos</p>
                     </div>
+                    <div id="grafico1">
+                        <canvas style="display: none;" id="usageChart"></canvas>
+                    </div>
                     <div class="machine-status">
                         <div class="cpu stable">CPU: 24%</div>
                         <div class="ram warning">RAM: 60%</div>
                     </div>
                     <a class="analyze-btn" href="dashboard-suporte-grafico.html">Analisar</a>
                 </div>
-
                 <div class="machine-card">
                     <div class="machine-info">
                         <p><strong>Máquina:</strong> PC3000</p>
@@ -100,19 +113,9 @@
                     </div>
                     <a class="analyze-btn" href="dashboard-suporte-grafico.html">Analisar</a>
                 </div>
-
-                <div class="machine-card">
-                    <div class="machine-info">
-                        <p><strong>Máquina:</strong> PC4000</p>
-                        <p><strong>Setor:</strong> Coordenador de voos</p>
-                    </div>
-                    <div class="machine-status">
-                        <div class="cpu warning">CPU: 70%</div>
-                        <div class="ram warning">RAM: 60%</div>
-                    </div>
-                    <a class="analyze-btn" href="dashboard-suporte-grafico.html">Analisar</a>
                 </div>
             </div>
+        </DIV>
         </main>
     </div>
 </body>
@@ -120,6 +123,75 @@
 </html>
 
 <script>
+    
+const ctx = document.getElementById('usageChart').getContext('2d');
+    const usageChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: Array.from({ length: 24 }, (_, i) => i),
+            datasets: [
+                {
+                    label: 'CPU',
+                    borderColor: '#f54291',
+                    backgroundColor: '#f54291',
+                    fill: false,
+                    data: [60, 50, 70, 65, 85, 90, 95, 60, 70, 40, 50, 35, 75, 80, 85, 90, 95, 50, 60, 70, 80, 90, 100, 80],
+                },
+                {
+                    label: 'Memória',
+                    borderColor: '#42f554',
+                    backgroundColor: '#42f554',
+                    fill: false,
+                    data: [30, 40, 50, 55, 60, 65, 70, 40, 45, 55, 65, 50, 55, 60, 70, 75, 80, 85, 50, 60, 70, 85, 75, 65],
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                x: {
+                    display: true,
+                    title: {
+                        display: true,
+                        text: 'Horas',
+                        color: 'white'
+                    },
+                    ticks: {
+                        color: 'white'
+                    }
+                },
+                y: {
+                    display: true,
+                    title: {
+                        display: true,
+                        text: 'Porcentagem (%)',
+                        color: 'white'
+                    },
+                    beginAtZero: true,
+                    max: 100,
+                    ticks: {
+                        color: 'white'
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    display: true,
+                    labels: {
+                        color: 'white'
+                    }
+                }
+            }
+        }
+    });
+
+
+
+    function ativarCheck(){
+        const checkbox = document.getElementById("checkDash");
+      checkbox.checked = !checkbox.checked;
+    }
+
     function limparSessao() {
         sessionStorage.clear();
         window.location = "index.html";
