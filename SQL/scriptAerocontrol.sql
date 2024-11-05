@@ -1,4 +1,3 @@
-DROP database aeroControl;
 CREATE DATABASE IF NOT EXISTS aeroControl;
 USE aeroControl;
 
