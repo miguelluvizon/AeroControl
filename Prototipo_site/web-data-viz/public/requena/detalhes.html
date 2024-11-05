@@ -1,43 +1,52 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Detalhes de Máquina | AeroControl</title>
-    <link rel="stylesheet" href="detalhes.css" />
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  </head>
 
-  <body>
-    <div class="tela">
-      <aside class="barraLateral">
-        <img src="Protótipo Dashboard.png" alt="" />
-        <a class="botao" href="../arthur/">PAINEL</a>
-        <a class="botao" href="../dashboard-suporte-cadastro.html">CADASTRO</a>
-        <a class="botao" onclick="limparSessao()">SAIR</a>
-      </aside>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Detalhes de Máquina | AeroControl</title>
+  <link rel="stylesheet" href="detalhes.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
 
-      <main class="conteudo">
-        <h1>DETALHES DA MÁQUINA</h1>
+<body>
+  <div class="tela">
+    <aside class="barraLateral">
+      <img src="Protótipo Dashboard.png" alt="" />
+      <a class="botao" href="../arthur/">PAINEL</a>
+      <a class="botao" href="../dashboard-suporte-cadastro.html">CADASTRO</a>
+      <a class="botao" onclick="limparSessao()">SAIR</a>
+    </aside>
 
+    <main class="principal">
+      <h1>DETALHES DA MÁQUINA</h1>
+
+      <div class="conteudo">
         <div class="divGrafico">
           <canvas id="usageChart" class="grafico"></canvas>
         </div>
 
-        <div class="inferior">
+        <div class="lateral">
           <div class="informacoes">
-            <span><b>CPU:</b> %</span>
-            <p>Processador:</p>
+            <span><b>CPU:</b> 80%</span>
+            <p>Processador:  i9-14900K </p>
           </div>
 
           <div class="informacoes">
-            <span><b>RAM:</b> %</span>
-            <p>Usando MB de MB</p>
+            <span><b>RAM:</b> 65%</span>
+            <p>Usando 9.4MB de 16MB</p>
+          </div>
+
+          <div class="informacoes">
+            <span><b>ALERTAS</b></span>
+            <p>4 alertas na última hora</p>
           </div>
         </div>
-      </main>
-    </div>
-  </body>
+      </div>
+    </main>
+  </div>
+</body>
+
 </html>
 
 <script>
@@ -75,7 +84,7 @@
           grid: {
             display: false
           },
-          display: true,
+          display: false,
           title: {
             display: true,
             text: "Horário do registro",

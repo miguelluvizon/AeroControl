@@ -47,14 +47,14 @@ body {
   background-color: #472c72;
 }
 
-.conteudo {
+.principal {
   display: flex;
   flex-direction: column;
   width: 100%;
   background-color: #fff;
 }
 
-.conteudo h1 {
+.principal h1 {
   font-size: 40px;
   padding: 10px;
   text-align: center;
@@ -62,36 +62,41 @@ body {
   color: #5c3c92;
 }
 
+.conteudo {
+  height: 100%;
+  margin-top: 40px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
 .divGrafico {
-  margin: 50px;
+  height: 90%;
+  width: 60%;
   padding: 10px;
+  padding-bottom: 0px;
+  padding-top: 25px;
   border-radius: 15px;
   background-color: #e0e0e0;
-  text-align: center;
-  width: 92%;
-  height: 45%;
 }
 
 .grafico {
-  padding: 20px;
+  padding: 0px;
 }
 
-canvas{
-  height: 100% !important;
-  width: 100% !important;
-}
 
-.inferior{
+.lateral{
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 90%;
 }
 
 .informacoes {
   background-color: #D9D9D9;
   color: black;
   border-radius: 15px;
-  width: 500px;
+  width: 100%;
   padding-top: 5px;
 }
 
