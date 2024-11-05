@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style-suporte.css">
+    <link rel="stylesheet" href="arthur/style-suporte-arthur.css">
     <title>AeroControl | Monitoramento em Tempo Real</title>
 </head>
 
@@ -12,14 +12,17 @@
     <div class="container">
         <aside class="sidebar">
             <div class="logo">
-                <img src="imagens/logoAerocontrol2.png" alt="Logo">
+                <img src="martinez\img\Protótipo_Dashboard-removebg-preview.png" alt="Logo">
             </div>
+            <div class="persona">Técnico de TI</div>
             <nav class="sidebar-nav">
                 <a class="sidebar-btn" href="dashboard-suporte.html">PAINEL</a>
                 <a class="sidebar-btn" href="dashboard-suporte-cadastro.html">CADASTRO</a>
                 <a class="sidebar-btn" onclick="limparSessao()">SAIR</a>
             </nav>
         </aside>
+
+        <div class="side-bar-escondida"></div>
 
         <main class="main-content">
             <h1>Monitoramento em Tempo Real</h1>
@@ -64,55 +67,93 @@
                 </div>
 
             <div class="machine-list">
+                
                 <div class="machine-card">
+                    <div class="infos">
                     <div class="machine-info">
                         <p><strong>Máquina:</strong> PC4000</p>
                         <p><strong>Setor:</strong> Coordenador de voos</p>
                     </div>
                     <div class="machine-status">
-                        <div class="cpu warning">CPU: 70%</div>
-                        <div class="ram warning">RAM: 60%</div>
+                        <div id="maquina-indicador1" class="machine-indicator warning"></div>
                     </div>
                     <a class="analyze-btn" href="dashboard-suporte-grafico.html">Analisar</a>
                 </div>
+                <div id="grafico1">
+                    <canvas style="display: none;" id="usageChart"></canvas>
+                </div>
+                </div>
                 
                 <div class="machine-card">
+                    <div class="infos">
                     <div class="machine-info">
                         <p><strong>Máquina:</strong> PC1000</p>
                         <p><strong>Setor:</strong> Despache operacional de voo</p>
                     </div>
                     <div class="machine-status">
-                        <div class="cpu alert">CPU: 87%</div>
-                        <div class="ram alert">RAM: 82%</div>
+                        <div id="maquina-indicador2" class="machine-indicator alert"></div>
                     </div>
                     <a class="analyze-btn" href="dashboard-suporte-grafico.html">Analisar</a>
-                </div>
-
+            </div>
+</div>
+                
                 <div class="machine-card">
+                    <div class="infos">
                     <div class="machine-info">
                         <p><strong>Máquina:</strong> PC2000</p>
                         <p><strong>Setor:</strong> Coordenador de voos</p>
                     </div>
-                    <div id="grafico1">
-                        <canvas style="display: none;" id="usageChart"></canvas>
-                    </div>
+                    
                     <div class="machine-status">
-                        <div class="cpu stable">CPU: 24%</div>
-                        <div class="ram warning">RAM: 60%</div>
+                        <div id="maquina-indicador3" class="machine-indicator stable"></div>
                     </div>
                     <a class="analyze-btn" href="dashboard-suporte-grafico.html">Analisar</a>
+                
                 </div>
+                <div id="grafico1">
+                    <canvas style="display: none;" id="usageChart"></canvas>
+                </div>
+            </div>
+
                 <div class="machine-card">
+                    <div class="infos">
                     <div class="machine-info">
                         <p><strong>Máquina:</strong> PC3000</p>
                         <p><strong>Setor:</strong> Despache operacional de voo</p>
                     </div>
                     <div class="machine-status">
-                        <div class="cpu warning">CPU: 78%</div>
-                        <div class="ram warning">RAM: 75%</div>
-                    </div>
-                    <a class="analyze-btn" href="dashboard-suporte-grafico.html">Analisar</a>
+                        <div id="maquina-indicador4" class="machine-indicator warning"></div>
                 </div>
+            <a class="analyze-btn" href="dashboard-suporte-grafico.html">Analisar</a>
+        </div>     
+        <div id="grafico1">
+            <canvas style="display: none;" id="usageChart"></canvas>
+        </div>
+    </div>
+            </div>
+                </div>
+
+                <div class="avisos-jira-div">
+                    <table border="1">
+                        <tr>
+                            <th>Nome</th>
+                            <th>Idade</th>
+                            <th>Profissão</th>
+                        </tr>
+                        <tr>
+                            <td>Ted</td>
+                            <td>22</td>
+                            <td>Estudante</td>
+                        </tr>
+                        <tr>
+                            <td>Ralf</td>
+                            <td>26</td>
+                            <td>Designer</td>
+                        </tr>
+                    </table>
+
+                </div>
+                
                 </div>
             </div>
         </DIV>

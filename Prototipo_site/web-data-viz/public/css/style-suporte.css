@@ -73,6 +73,11 @@ body {
     width: 100%;
 }
 
+.persona{
+    color: #3B1690;
+    font-weight: bold;
+}
+
 .sidebar-nav {
     display: flex;
     justify-content: space-around;

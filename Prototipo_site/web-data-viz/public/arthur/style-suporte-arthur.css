@@ -18,25 +18,13 @@ body {
     min-height: 100vh;
 }
 
-.sidebar {
-    border-right: 0.5rem solid;
-    border-right-color: #5c1baf;
-    width: 20%;
-    background-color: #FFFF;
-    color: white;
-    padding: 20px;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
 
 
 .logo {
-    display: flex;
-    align-items: center; 
-    justify-content: center;
-    padding: 10px 0;
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 40px;
+    text-align: center;
 }
 
 .logo img {
@@ -57,11 +45,6 @@ body {
     text-align: center;
 }
 
-.cloud img {
-    width: 100%;
-    height: auto;
-    display: block;
-}
 
 .cloud-text {
     position: absolute;
@@ -73,6 +56,31 @@ body {
     width: 100%;
 }
 
+
+.sidebar {
+    z-index: 1;
+    position: fixed;
+    height: 100%;
+    width: 14%;
+    background-color: #ffff;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-right: 7px solid #3f2182;
+    padding: 1.5rem;
+}
+
+.side-bar-escondida{
+    width: 14%;
+}
+
+.persona{
+    font-size: 120%;
+    color: #3B1690;
+    font-weight: bold;
+}
+
 .sidebar-nav {
     display: flex;
     justify-content: space-around;
@@ -81,18 +89,22 @@ body {
 }
 
 .sidebar-btn {
-    background-color: #4a178e;
-    border: none;
-    color: white;
-    padding: 15px;
-    cursor: pointer;
-    font-size: 18px;
-    text-align: center;
     text-decoration: none;
+    text-align: center;
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    background-color: #5c3c92;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
 }
 
+
 .sidebar-btn:hover {
-    background-color: #5c1baf;
+    background-color: #472c72;
 }
 
 .main-content {
@@ -197,10 +209,12 @@ body {
 
 .status-box p {
     font-size: 100%;
+    text-align: left;
 }
 
 .texto-box{
-    margin-left: 3%;
+    margin-left: 5%;
+    text-align: left;
 }
 
 .numero-card {
@@ -210,7 +224,7 @@ body {
     color: #fff;
     border-radius: 100%;
     padding: 10%;
-    height: 50%;
+    height: 60%;
     width: 50%;
     font-size: 2em;
     font-weight: bold;
@@ -231,6 +245,7 @@ body {
 
 .warning .numero-card{
     background-color: yellow;
+    color: #000;
 }
 
 /* .stable {
@@ -274,6 +289,14 @@ color: black;
     align-items: center;
 }
 
+.infos{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .machine-info {
     font-size: 16px;
     color: #4a178e;
@@ -282,6 +305,13 @@ color: black;
 .machine-status {
     display: flex;
     gap: 10px;
+}
+
+.machine-indicator{
+    border-radius: 100%;
+    background-color: #8f8f8f;
+    height: 70px;
+    width: 70px;
 }
 
 .cpu, .ram {
@@ -305,6 +335,7 @@ color: black;
 }
 
 .analyze-btn {
+    text-decoration: none;
     background-color: #4a178e;
     border: none;
     color: white;
@@ -330,6 +361,18 @@ color: black;
     align-items: center;
     gap: 20px;
 }
+
+
+.avisos-jira-div{
+    margin-top: 20px;
+    background-color: #e2ceff;
+    margin-left: 20px;
+    margin-right: 10px;
+    border-radius: 5px;
+    padding: 1%;
+    border-radius: 5px;
+    }
+
 
 .custom-select-grafico{
     width: 250px;
@@ -382,6 +425,10 @@ color: black;
 
 .btn-cadastrar:hover {
     background-color: #6c4fff;
+}
+
+.avisos-jira-div{
+    background-color: #e2ceff;
 }
 
 /* Responsividade para dispositivos móveis */
