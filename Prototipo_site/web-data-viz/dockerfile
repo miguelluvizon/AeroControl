@@ -1,9 +1,9 @@
-FROM node:lts-bookworm AS dependencia
+FROM node:lts-bookworm as dependencia
 WORKDIR /
-COPY package.json .
+COPY package.json package-lock.json ./
 RUN npm install
 
-FROM node:lts-alpine3.20 as deploy
+FROM node:lts-alpine as deploy
 WORKDIR /
 COPY --from=dependencia ./node_modules ./node_modules
 COPY . .
