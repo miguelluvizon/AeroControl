@@ -6,7 +6,6 @@
 
 body {
     font-family: Arial, sans-serif;
-    height: 100vh;
     background-color: #f4f4f4;
 }
 
@@ -98,8 +97,9 @@ body {
     margin-left: 55px;
     background-color: #d9d9d9;
     width: 90%;
+    height: 130vh;
     border-radius: 15px;
-    text-align: center ;
+    text-align: center;
     
 }
 
@@ -117,4 +117,62 @@ body {
 .escolhaSetor h2 {
     margin-bottom: 30px;
     color:#3f2182;
+}
+
+.cards {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.cardMedio {
+    background-color: #5c3c92;
+    color: white;
+    width: 450px;
+    height: 100px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.cardMedio span {
+    color: white;
+}
+.cardMedio h2 {
+    color: white;
+    font-size: 30px;
+}
+
+.sessaoAlerta {
+    margin-top: 20px;
+    background-color: #3f2182;
+    width: 90%;
+    margin-left: 50px;
+    height: 160px;
+    border-radius: 40px;
+    justify-content: center;
+}
+
+.sessaoAlerta h1 {
+    background-color: #3f2182;
+    font-size: 30px;
+    color: white;
+}
+
+.paiAlertas {
+    display: flex;
+    justify-content: space-evenly;
+    height: 200px;
+}
+
+.cardAlerta {
+    border: 3px solid black;
+    background-color:#f0ecec;
+    width: 250px;
+    height: 130px;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+.cardAlerta span {
+    color: black;
 }

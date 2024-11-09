@@ -2,7 +2,7 @@ const ctx = document.getElementById('alertChart').getContext('2d');
 const alertChart = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: ['maquina 1', 'maquina 2', 'maquina 3', 'maquina 4', 'maquina 5'],
+        labels: ['M1', 'M2', 'M3', 'M4', 'M5'],
         datasets: [
             {
                 label: 'Torre de Controle',
@@ -37,7 +37,7 @@ const ctx2 = document.getElementById('alertChart2').getContext('2d');
 const alertChart2 = new Chart(ctx2, {
     type: 'bar',
     data: {
-        labels: ['maquina 1', 'maquina 2', 'maquina 3', 'maquina 4', 'maquina 5'],
+        labels: ['M1', 'M2', 'M3', 'M4', 'M5'],
         datasets: [
             {
                 label: 'Torre de Controle',
