@@ -1,10 +1,12 @@
 // Essa é a ideia de pegar os dados do json do bucket
 
 async function fetchdata() {
-    const responsive = await fetch("https://trusted-aerocontrol.amazonaws.com/dados.json")
+    const responsive = await fetch("https://s3-raw-aerocontrol.s3.us-east-1.amazonaws.com/dados.json")  
     const data = await responsive.json()
     return data
 }
+
+console.log(fetchdata())
 
 
 const ctx = document.getElementById('alertChart').getContext('2d');
