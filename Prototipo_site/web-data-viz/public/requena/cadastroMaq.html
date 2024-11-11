@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="cadastroMaq.css">
+    <title>AeroControl | Cadastro de Máquina</title>
+</head>
+
+<body>
+    <div class="tela">
+        <aside class="barraLateral">
+            <img src="Protótipo Dashboard.png" alt="" />
+            <a class="botao" href="../arthur/">PAINEL</a>
+            <a class="botao" href="cadastroMaq.html">CADASTRO</a>
+            <a class="botao" onclick="limparSessao()">SAIR</a>
+        </aside>
+
+        <main class="principal">
+            <h1>CADASTRAR MÁQUINA</h1>
+
+            <div class="cadastro">
+                <div class="campo">
+                    <label>Nome da Máquina</label>
+                    <input type="text" placeholder="Nome da Máquina" id="inputNome">
+                </div>
+
+                <div class="campo">
+                    <label>Total RAM (Em GB)</label>
+                    <input type="number" min="4" placeholder="Memória RAM em GB" id="inputRAM">
+                </div>
+
+                <div class="campo">
+                    <label>Processador</label>
+                    <input type="text" placeholder="Modelo do processador" id="inputProcessador">
+                </div>
+
+                <div class="campo">
+                    <label>Setor</label>
+                    <select id="selectSetor"></select>
+                </div>
+
+                <button onclick="cadastrar()">CADASTRAR</button>
+            </div>
+
+
+        </main>
+    </div>
+
+</body>
+
+</html>
+
+<script>
+    function limparSessao() {
+        sessionStorage.clear();
+        window.location = "index.html";
+    }
+</script>

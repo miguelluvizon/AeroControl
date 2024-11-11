@@ -62,56 +62,54 @@ body {
   color: #5c3c92;
 }
 
-.conteudo {
-  height: 100%;
-  margin-top: 40px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-}
-
-.divGrafico {
-  height: 90%;
-  width: 60%;
-  padding: 10px;
-  padding-bottom: 0px;
-  padding-top: 25px;
-  border-radius: 15px;
-  background-color: #e0e0e0;
-}
-
-.grafico {
-  padding: 0px;
-}
-
-
-.lateral{
+.cadastro {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 90%;
-}
-
-.informacoes {
-  background-color: #D9D9D9;
-  color: black;
+  background-color: #e0e0e0;
+  margin: 20px;
+  margin-left: 70px;
+  margin-right: 70px;
+  padding: 20px;
+  height: 100%;
   border-radius: 15px;
+}
+
+.campo{
+  display: flex;
+  flex-direction: column;
+}
+
+label{
+  margin: 0px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+input{
+  border-radius: 5px;
+  border: 2px solid gray;
   width: 100%;
-  padding-top: 5px;
+  padding: 7px;
+  font-size: 17px;
 }
 
-.informacoes span{
-  color: black;
-  text-align: left;
-  font-size: 50px;
-  margin: 10px;
+select{
+  border-radius: 5px;
+  border: 2px solid gray;
+  background-color: white;
+  width: 100%;
+  padding: 7px;
+  font-size: 17px;
 }
 
-.informacoes p{
-  color: black;
-  text-align: left;
-  font-size: 27px;
-  margin: 10px;
+button{
+  align-self: center;
+  border-radius: 5px;
+  border: none;
+  color: white;
+  background-color: #5c3c92;
+  width: 15%;
+  padding: 10px;
+  font-size: 17px;
 }
-
-/* TELA DE CADASTRO DE MÁQUINA */
