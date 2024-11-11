@@ -30,6 +30,7 @@ body {
     border-right: 7px solid #3f2182;
     padding: 1.5rem;
     padding-top: 2rem;
+    /* position: fixed;  NÃO ESQUECER!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
 }
 
 .logo {
@@ -77,7 +78,42 @@ body {
     text-align: center;
 }
 
+.chart-container .chart-maquina {
+    margin: 2rem;
+    padding: 15px;
+}
+
+.chart-maquina canvas {
+   height: 250px;
+}
+
 .chart-container h2 {
     color: #5c3c92;
     margin-bottom: 20px;
+}
+
+.chart-setor{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 1rem;
+
+    margin-bottom: 3rem;
+}
+
+.chart-setor p {
+    font-size: 16px;
+}
+
+.setor_grafico {
+    width: 20%;
+    padding: 6px;
+    font-size: 14px;
+    border-radius: 5px;
+}
+
+
+.container-comparacao-setor{
+    display: flex;
 }
