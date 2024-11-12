@@ -15,4 +15,4 @@ services:
       - rede-compose
 networks:
   rede-compose:
-    driver: brigde
+    driver: bridge
