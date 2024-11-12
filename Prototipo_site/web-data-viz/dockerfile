@@ -1,11 +1,11 @@
-FROM node:lts-bookworm as dependencia
+FROM node:lts-alpine as dependencia
 WORKDIR /
 COPY package.json package-lock.json ./
 RUN npm install
 
 FROM node:lts-alpine as deploy
 WORKDIR /
-COPY --from=dependencia ./node_modules ./node_modules
+COPY --from=dependencia /node_modules /node_modules
 COPY . .
 EXPOSE 3333
-CMD [ "node" , "app.js" ]
+CMD ["node", "app.js"]
