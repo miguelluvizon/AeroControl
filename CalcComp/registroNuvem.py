@@ -7,6 +7,11 @@ import os
 import json
 import mysql.connector
 from jira import JIRA
+import socket
+
+# Função para obter o hostname
+def obter_hostname():
+    return socket.gethostname()
 
 # Configurações do banco de dados
 mydb = mysql.connector.connect(
@@ -34,21 +39,21 @@ def conectar():
     jira = JIRA(basic_auth=(email, api_token), server=jira_url)
     return jira
 
-def cpuAlerta(jira, porcentagemCPU, maquina):
+def cpuAlerta(jira, porcentagemCPU, hostname):
     info_alerta_cpu = {
         'project': {'key': chave_projeto},
-        'summary': f'Alerta: CPU da {maquina} acima do limite ({porcentagemCPU}%)',
-        'description': f'O uso da CPU da máquina {maquina} ultrapassou o limite de {cpu_limite}%. Atualmente está em {porcentagemCPU}%.',
+        'summary': f'Alerta: CPU da máquina {hostname} acima do limite ({porcentagemCPU}%)',
+        'description': f'O uso da CPU da máquina {hostname} ultrapassou o limite de {cpu_limite}%. Atualmente está em {porcentagemCPU}%.',
         'issuetype': {'name': 'Task'},
     }
     novo_alerta_cpu = jira.create_issue(fields=info_alerta_cpu)
     print(f'Alerta criado: {jira_url}/browse/{novo_alerta_cpu.key}')
 
-def porcentagemRamAlerta(jira, porcentagemRAM, maquina):
+def porcentagemRamAlerta(jira, porcentagemRAM, hostname):
     info_alerta_porcentagemRam = {
         'project': {'key': chave_projeto},
-        'summary': f'Alerta: RAM da {maquina} acima do limite ({porcentagemRAM}%)',
-        'description': f'O uso de RAM da máquina {maquina} ultrapassou o limite de {porcentagemRAM_limite}%. Atualmente está em {porcentagemRAM}%.',
+        'summary': f'Alerta: RAM da máquina {hostname} acima do limite ({porcentagemRAM}%)',
+        'description': f'O uso de RAM da máquina {hostname} ultrapassou o limite de {porcentagemRAM_limite}%. Atualmente está em {porcentagemRAM}%.',
         'issuetype': {'name': 'Task'},
     }
     novo_alerta_porcentagemRam = jira.create_issue(fields=info_alerta_porcentagemRam)
@@ -72,7 +77,7 @@ def criar_csv_se_nao_existir(nome_arquivo):
     if not os.path.exists(nome_arquivo):
         with open(nome_arquivo, 'w', newline='') as csvfile:
             writer = csv.writer(csvfile, delimiter=',')
-            writer.writerow(['Máquina', 'Porcentagem CPU', 'Uso RAM (Bytes)', 'Porcentagem RAM'])
+            writer.writerow(['Hostname', 'Porcentagem CPU', 'Uso RAM (Bytes)', 'Porcentagem RAM'])
 
 tempo = int(input("Você deseja monitorar em quanto tempo (em segundos)? "))
 dados_por_ciclo = 10
@@ -81,6 +86,9 @@ max_dados = 5000
 def monitorar():
     passou = 0
     total_dados = 0
+
+    # Identificador único da máquina
+    hostname = obter_hostname()
 
     data_atual = dt.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
     nome_arquivo = f'{data_atual}.csv'
@@ -93,37 +101,34 @@ def monitorar():
     while True:
         passou += 1
 
-        # Nome da máquina (ajuste para o nome ou ID de cada máquina)
-        maquina = "PC1000"  # Substitua pelo nome ou ID correto de cada máquina
-
         porcentagemCPU = psutil.cpu_percent()
         usoRAM = round(psutil.virtual_memory().used)
         porcentagemRAM = psutil.virtual_memory().percent
 
         data = {
-            'maquina': maquina,
+            'hostname': hostname,
             'cpu': porcentagemCPU,
             'memoriaByte': usoRAM,
             'memoriaPorcent': porcentagemRAM,
             'timestamp': dt.datetime.now().isoformat()
         }
 
-        dados = [maquina, porcentagemCPU, usoRAM, porcentagemRAM]
-        print(f"{maquina} - CPU: {porcentagemCPU}% | RAM: {usoRAM} Bytes ({porcentagemRAM}%) | Ciclo: {passou}")
+        dados = [hostname, porcentagemCPU, usoRAM, porcentagemRAM]
+        print(f"{hostname} - CPU: {porcentagemCPU}% | RAM: {usoRAM} Bytes ({porcentagemRAM}%) | Ciclo: {passou}")
 
         # Gravação em tempo real no banco de dados
-        sql = "INSERT INTO monitoramento (maquina, cpu, memoria_byte, memoria_porcent, default) VALUES (%s, %s, %s, %s, %s)"
-        cursor.execute(sql, (maquina, porcentagemCPU, usoRAM, porcentagemRAM))
+        sql = "INSERT INTO monitoramento (hostname, cpu, memoria_byte, memoria_porcent, timestamp) VALUES (%s, %s, %s, %s, %s)"
+        cursor.execute(sql, (hostname, porcentagemCPU, usoRAM, porcentagemRAM, data['timestamp']))
         mydb.commit()
 
         if porcentagemCPU > cpu_limite:
-            cpuAlerta(jira, porcentagemCPU, maquina)
-            cursor.execute("INSERT INTO alerta VALUES (default, %s, default)", (f"CPU {maquina}",))
+            cpuAlerta(jira, porcentagemCPU, hostname)
+            cursor.execute("INSERT INTO alerta VALUES (default, %s, default)", (f"CPU {hostname}",))
             mydb.commit()
 
         if porcentagemRAM > porcentagemRAM_limite:
-            porcentagemRamAlerta(jira, porcentagemRAM, maquina)
-            cursor.execute("INSERT INTO alerta VALUES (default, %s, default)", (f"RAM {maquina}",))
+            porcentagemRamAlerta(jira, porcentagemRAM, hostname)
+            cursor.execute("INSERT INTO alerta VALUES (default, %s, default)", (f"RAM {hostname}",))
             mydb.commit()
 
         dados_json = carregar_json(nome_arquivo_json)
