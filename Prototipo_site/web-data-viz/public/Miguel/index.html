@@ -7,6 +7,7 @@
     <title>AeroControl - Ranking semanal de alertas - Miguel Luvizon</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 
 <body>
@@ -17,56 +18,312 @@
             <button class="sidebar-btn">COMPARAR</button>
             <button class="sidebar-btn">SAIR</button>
         </aside>
+
+        <div class="side-bar-escondida"></div>
+
         <main class="main-content">
-            <h1>DETALHES DO SETOR</h1>
-            <div class="escolhaSetor">
-                <h2>MÉDIA DOS COMPONENTES DAS MÁQUINAS MAIS CRÍTICAS NA SEMANA</h2>
-                <!-- <span>Setor:</span>
-                <select id="Setor">
-                    <option value="0">selecione um setor</option>
-                    <option value="1">Torre de controle</option>
-                    <option value="2">Despache de voo</option>
-                    <option value="3">Centro de meteorologia</option>
-                </select> -->
-                <span>total de máquinas: xxx</span>
+
+            <div class="header">
+                <span>DETALHES DO SETOR: xxxx</span>
+                <div>
+                    <span>Total de máquinas: 100</span>
+                </div>
+                <div>
+                    <span>Escolha algum componente:</span>
+                    <select id="Setor">
+                        <option value="1">CPU</option>
+                        <option value="2">RAM</option>
+                    </select>
+                </div>
+            </div>
+            <div class="header-escondida"></div>
+
+            <!-- Div de escolha para CPU -->
+            <div class="escolhaSetor" id="CPU" style="display: block;">
+                <h2>SITUAÇÃO DA CPU DAS MÁQUINAS AO LONGO DA SEMANA</h2>
+                <div class="cards">
+                    <div class="cardMedio">
+                        <span>Total de alertas <br>(todas as maquinas)</span>
+                        <p>120</p>
+                        <div class="concerto">
+                            <div class="duvida">
+                                ?
+                                <span class="textoDuvida">Aqui é mostrado os alertas de todas as máquinas</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cardMedio">
+                        <span>Alertas das máquinas mais críticas</span>
+                        <p>80</p>
+                        <div class="concerto">
+                            <div class="duvida">
+                                ?
+                                <span class="textoDuvida">Aqui é mostrado a soma total da quantidade de alertas das máquinas do ranking</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cardMedio">
+                        <span>Média de uso da CPU (todas as maquinas)</span>
+                        <p>56%</p>
+                        <div class="concerto">
+                            <div class="duvida">
+                                ?
+                                <span class="textoDuvida">Para esse calculo, primeiro é feita a média de uso da CPU de cada máquina do sistema, para depois fazer a média dessas médias para chegar no resultado</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cardMedio">
+                        <span>Média das máquinas mais críticas</span>
+                        <p>88%</p>
+                        <div class="concerto">
+                            <div class="duvida">
+                                ?
+                                <span class="textoDuvida">Aqui é feita a média apenas das máquinas que estão em estado crítico (CPU>=80%)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="divisoria">
+                    <h1>Rankings das top 10 máquinas</h1>
+                </div>
+
                 <div class="graficos">
                     <div class="chart-container">
-                        <h2>USO DA CPU</h2>
+                        <h2>Que dispararam mais alertas <br> (entraram em estado crítico)</h2>
                         <canvas id="alertChart"></canvas>
                     </div>
+
                     <div class="chart-container">
-                        <h2>USO DA RAM</h2>
+                        <h2>Com a média de uso da CPU muito acima da média geral(representação de outliers) </h2>
                         <canvas id="alertChart2"></canvas>
                     </div>
                 </div>
+            </div>
+
+            <!-- Div de escolha para RAM -->
+            <div class="escolhaSetor" id="RAM" style="display: none;">
+                <h2>SITUAÇÃO DA RAM DAS MÁQUINAS AO LONGO DA SEMANA</h2>
                 <div class="cards">
                     <div class="cardMedio">
-                        <span>Média do uso da CPU das maquinas:</span>
-                        <h2>xxx</h2>
+                        <span>Total de alertas <br>(todas as maquinas)</span>
+                        <p>120</p>
+                        <div class="concerto">
+                            <div class="duvida">
+                                ?
+                                <span class="textoDuvida">Aqui é mostrado os alertas de todas as máquinas</span>
+                            </div>
+                        </div>
                     </div>
                     <div class="cardMedio">
-                        <span>Média do uso da RAM das maquinas:</span>
-                        <h2>xxx</h2>
+                        <span>Alertas das máquinas mais críticas</span>
+                        <p>80</p>
+                        <div class="concerto">
+                            <div class="duvida">
+                                ?
+                                <span class="textoDuvida">Aqui é mostrado a soma total da quantidade de alertas das máquinas do ranking</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cardMedio">
+                        <span>Média de uso da RAM (todas as maquinas)</span>
+                        <p>56%</p>
+                        <div class="concerto">
+                            <div class="duvida">
+                                ?
+                                <span class="textoDuvida">Para esse calculo, primeiro é feita a média de uso da RAM de cada máquina do sistema, para depois fazer a média dessas médias para chegar no resultado</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cardMedio">
+                        <span>Média das máquinas mais críticas</span>
+                        <p>88%</p>
+                        <div class="concerto">
+                            <div class="duvida">
+                                ?
+                                <span class="textoDuvida">Aqui é feita a média apenas das máquinas que estão em estado crítico (RAM>=80%)</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="sessaoAlerta">
-                    <h1>Quantidade de alertas disparados por essas máquinas:</h1>
-                    <div class="paiAlertas">
-                        <div class="cardAlerta">
-                            <h2>Alertas da CPU:</h2>
-                            <span>xxx</span>
-                        </div>
-                        <div class="cardAlerta">
-                            <h2>Alertas da RAM:</h2>
-                            <span>xxx</span>
-                        </div>
+                <div class="divisoria">
+                    <h1>Gráficos</h1>
+                </div>
+
+                <div class="graficos">
+                    <div class="chart-container">
+                        <h2>Quantidade de vezes que uma máquina entrou em estado crítico (RAM):</h2>
+                        <canvas id="alertChart3"></canvas>
+                    </div>
+
+                    <div class="chart-container">
+                        <h2>Máquinas com uso da RAM muito acima da média (outliers) </h2>
+                        <canvas id="alertChart4"></canvas>
                     </div>
                 </div>
             </div>
+        </main>
     </div>
-    </main>
-    </div>
-    <script src="script.js"></script>
 </body>
 
 </html>
+
+<script>
+    const ctx = document.getElementById('alertChart').getContext('2d');
+    const alertChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['M1', 'M2', 'M3', 'M4', 'M5', 'M6', 'M7', 'M8', 'M9', 'M10'],
+            datasets: [
+                {
+                    label: 'Torre de Controle',
+                    data: [20, 15, 100, 30, 40, 80, 95, 100, 60, 70],
+                    backgroundColor: '#472c72',
+                    pointBackgroundColor: '#2c1153',
+                    pointRadius: 5
+                },
+            ]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        stepSize: 5
+                    }
+                }
+            }
+        }
+    });
+
+    const ctx2 = document.getElementById('alertChart2').getContext('2d');
+    const alertChart2 = new Chart(ctx2, {
+        type: 'bar',
+        data: {
+            labels: ['M1', 'M2', 'M3', 'M4', 'M5', 'M6', 'M7', 'M8', 'M9', 'M10'],
+            datasets: [
+                {
+                    label: 'Torre de Controle',
+                    data: [100, 75, 30, 50, 60, 90, 93, 88, 99, 100],
+                    backgroundColor: '#472c72',
+                    pointBackgroundColor: '#2c1153',
+                    pointRadius: 5
+                },
+            ]
+        },
+        options: {
+            indexAxis: 'y',
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        stepSize: 5
+                    }
+                }
+            }
+        }
+    });
+
+    const ctx3 = document.getElementById('alertChart3').getContext('2d');
+    const alertChart3 = new Chart(ctx3, {
+        type: 'bar',
+        data: {
+            labels: ['M1', 'M2', 'M3', 'M4', 'M5', 'M6', 'M7', 'M8', 'M9', 'M10'],
+            datasets: [
+                {
+                    label: 'Torre de Controle',
+                    data: [20, 15, 100, 30, 40, 80, 95, 100, 60, 70],
+                    backgroundColor: '#472c72',
+                    pointBackgroundColor: '#2c1153',
+                    pointRadius: 5
+                },
+            ]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        stepSize: 5
+                    }
+                }
+            }
+        }
+    });
+
+    const ctx4 = document.getElementById('alertChart4').getContext('2d');
+    const alertChart4 = new Chart(ctx4, {
+        type: 'bar',
+        data: {
+            labels: ['M1', 'M2', 'M3', 'M4', 'M5', 'M6', 'M7', 'M8', 'M9', 'M10'],
+            datasets: [
+                {
+                    label: 'Torre de Controle',
+                    data: [100, 75, 30, 50, 60, 90, 93, 88, 99, 100],
+                    backgroundColor: '#472c72',
+                    pointBackgroundColor: '#2c1153',
+                    pointRadius: 5
+                },
+            ]
+        },
+        options: {
+            indexAxis: 'y',
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        stepSize: 5
+                    }
+                }
+            }
+        }
+    });
+
+    // Obtendo os elementos do DOM
+    const setor = document.getElementById("Setor");
+
+    // Função para trocar o display das divs
+    function trocarConteudo() {
+        const valorSelecionado = setor.value;
+
+        // Exibir a div correspondente e ocultar a outra
+        if (valorSelecionado === "1") {
+            CPU.style.display = "block";
+            RAM.style.display = "none";
+        } else if (valorSelecionado === "2") {
+            CPU.style.display = "none";
+            RAM.style.display = "block";
+        }
+    }
+
+    // Adicionando evento ao select
+    setor.addEventListener("change", trocarConteudo);
+
+    // Chamar a função inicialmente para configurar o display das divs
+    trocarConteudo();
+
+
+</script>

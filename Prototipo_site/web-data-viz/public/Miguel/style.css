@@ -19,6 +19,9 @@ body {
 }
 
 .sidebar {
+    height: 100%;
+    z-index: 1;
+    position: fixed;
     width: 200px;
     background-color: #ffff;
     color: white;
@@ -30,6 +33,15 @@ body {
     border-right: 7px solid #3f2182;
     padding: 1.5rem;
     padding-top: 2rem;
+}
+
+.side-bar-escondida{
+    width: 200px;
+}
+
+
+.header-escondida {
+    height: 65px;
 }
 
 .logo {
@@ -60,18 +72,26 @@ body {
     background-color: #fff;
 }
 
-.main-content h1 {
-    font-size: 1.5em;
-    text-align: center;
-    color: #3f2182;
+.header {
+    display: flex;
+    width: 85%;
+    justify-content: space-around;
+    background-color: #3f2182;
+    color: white;
+    padding: 15px;
     margin-bottom: 20px;
-    background-color: #d9d9d9;
-    padding: 20px;
+    position: fixed;
+    z-index: 1;
+}
+
+.header span {
+    font-size: 20px;
+    font-weight: bold;
 }
 
 .chart-container {
     width: 37vw;
-    height: 47vh;
+    height: 55vh;
     background-color: #f0ecec;
     margin: 1rem;
     padding: 5px 10px;
@@ -86,32 +106,29 @@ body {
 
 .graficos {
     display: flex;
-    flex-direction: row;
-    width: 100%;
-    border-radius: 15px;
+    justify-content: space-between;
 }
 
 .escolhaSetor {
-    margin-top: 50px;
-    padding: 10px;
-    margin-left: 55px;
+    padding: 10px 0px;
+    margin-left: 30px;
     background-color: #d9d9d9;
-    width: 90%;
-    height: 130vh;
+    width: 95%;
+    height: 110vh;
     border-radius: 15px;
     text-align: center;
-    
+}
+
+.divisoria {
+    color: white;
+    margin-top: 30px;
+    background-color: #3f2182;
 }
 
 .escolhaSetor span {
     font-size: 20px;
     font-weight: bold;
     color:#3f2182;
-}
-
-.escolhaSetor select {
-    border-radius: 20px;
-    height: 30px;
 }
 
 .escolhaSetor h2 {
@@ -122,22 +139,65 @@ body {
 .cards {
     display: flex;
     justify-content: space-around;
-    margin-top: 20px;
 }
 
 .cardMedio {
     background-color: #5c3c92;
     color: white;
-    width: 450px;
-    height: 100px;
+    width: 240px;
+    height: 120px;
     padding: 10px;
     border-radius: 10px;
+    border: 1px solid black;
 }
+
+.duvida {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: #33013a;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.concerto {
+    flex-direction: column;
+    align-items: end;
+    display: flex;
+    width: 100%;
+}
+
+.duvida:hover .textoDuvida {
+    visibility: visible;
+    opacity: 1;
+}
+
+.textoDuvida {
+    visibility: hidden;
+    width: 200px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 8px;
+    position: absolute;
+    top: 15px;
+    right: 0;
+    opacity: 0;
+    transition: opacity 0.4s;
+}
+
+
 
 .cardMedio span {
     color: white;
 }
-.cardMedio h2 {
+.cardMedio p {
     color: white;
     font-size: 30px;
 }
@@ -147,9 +207,7 @@ body {
     background-color: #3f2182;
     width: 90%;
     margin-left: 50px;
-    height: 160px;
     border-radius: 40px;
-    justify-content: center;
 }
 
 .sessaoAlerta h1 {
@@ -161,7 +219,6 @@ body {
 .paiAlertas {
     display: flex;
     justify-content: space-evenly;
-    height: 200px;
 }
 
 .cardAlerta {
