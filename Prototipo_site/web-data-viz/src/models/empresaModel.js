@@ -31,9 +31,17 @@ function getEmpresas() {
   return database.executar(instrucaoSql);
 }
 
+function getSetor() {
+  var instrucaoSql = `
+  SELECT nomeSetor FROM Setor ORDER BY nomeSetor;`;
+  console.log("Executando a instrução SQL: \n" + instrucaoSql);
+  return database.executar(instrucaoSql);
+}
+
 module.exports = {buscarPorCnpj,
   buscarPorId,
   cadastrar,
   listar,
-  getEmpresas
+  getEmpresas,
+  getSetor
 };

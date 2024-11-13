@@ -48,10 +48,20 @@ function getEmpresas(req, res) {
   });
 }
 
+function getSetor(req, res) {
+  empresaModel.getSetor()
+  .then(function (resposta) {
+      if(resposta.length >= 1) {
+          res.status(200).json(resposta);
+      }
+  });
+}
+
 module.exports = {
   buscarPorCnpj,
   buscarPorId,
   cadastrar,
   listar,
-  getEmpresas
+  getEmpresas,
+  getSetor
 };

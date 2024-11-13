@@ -8,7 +8,7 @@
     <title>AeroControl | Cadastro de Máquina</title>
 </head>
 
-<body>
+<body onload="getSetor()">
     <div class="tela">
         <aside class="barraLateral">
             <img src="Protótipo Dashboard.png" alt="" />
@@ -23,7 +23,7 @@
             <div class="cadastro">
                 <div class="campo">
                     <label>Nome da Máquina</label>
-                    <input type="text" placeholder="Nome da Máquina" id="inputNome">
+                    <input type="text" placeholder="Hostname da Máquina" id="inputNome">
                 </div>
 
                 <div class="campo">
@@ -55,6 +55,46 @@
 <script>
     function limparSessao() {
         sessionStorage.clear();
-        window.location = "index.html";
+        window.location = "../index.html";
     }
+
+    function getSetor() {
+        fetch("../../empresa/getsetor", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+
+            }),
+        })
+        .then(function (resposta) {
+            console.log("resposta:", resposta);
+
+            if (resposta.ok) {
+                resposta.json()
+                .then(function (resultado) {
+                    console.log(resultado)
+
+                    var opcoes = ``
+                    for(var index = 0; index < resultado.length; index++) {
+                        opcoes += `<option value="${resultado[index].cnpj}">${resultado[index].nomeAeroporto}</option>
+                        `;
+                    }
+                    select_empresa.innerHTML = `<select id="select_empresa" required>
+                        <option value="#" selected disabled>Selecione sua empresa</option>
+                        ${opcoes}
+                        </select>`
+                })
+            } else {
+                throw "Houve um erro ao tentar criar o select";
+            }
+        })
+        .catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+        });
+
+        return false;
+    }
+
 </script>
