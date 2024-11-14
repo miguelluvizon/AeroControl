@@ -1,9 +1,10 @@
-CREATE DATABASE IF NOT EXISTS aeroControl;
+DROP DATABASE IF EXISTS aeroControl;
+CREATE DATABASE aeroControl;
 USE aeroControl;
 
 CREATE TABLE Aeroporto (
 cnpj char(14) primary key,
-nomeAeroporto varchar(14),
+nomeAeroporto varchar(100),
 codigoIATA char(3),
 codigoICAO char(4),
 cep char(9)
@@ -11,7 +12,7 @@ cep char(9)
 
 CREATE TABLE Usuario (
 cpf char(11) primary key,
-nomeUsuario varchar(40),
+nomeUsuario varchar(100),
 email varchar(320),
 senha varchar(30),
 cargo varchar(17),
@@ -21,22 +22,24 @@ constraint fkAeroportoUsuario foreign key (fkAeroporto) references Aeroporto(cnp
 
 CREATE TABLE Setor(
 idSetor int primary key auto_increment,
-nomeSetor varchar(100),
-fkAeroporto char(14),
-constraint foreign key (fkAeroporto) references Aeroporto(cnpj)
+nomeSetor varchar(100)
 );
 
+CREATE TABLE SetorAeroporto (
+fkAeroporto char(14),
+fkSetor int,
+constraint fkAeroportoSetor foreign key (fkAeroporto) references Aeroporto(cnpj),
+constraint fkSetorAeroporto foreign key (fkSetor) references Setor(idSetor)
+);
 
 CREATE TABLE Computador (
 idComputador int primary key auto_increment,
-hostname varchar(100),
+hostname varchar(5),
 processador varchar(100),
-ramMax varchar(100),
+ramMax decimal(5 , 2),
 fkUsuario char(11),
-fkAeroporto char(14),
 fkSetor int,
 constraint fkUsuarioComputador foreign key (fkUsuario) references Usuario(cpf),
-constraint fkAeroportoComputador foreign key (fkAeroporto) references Aeroporto(cnpj),
 constraint fkSetorComputador foreign key (fkSetor) references Setor(idSetor)
 );
 
@@ -70,18 +73,12 @@ INSERT INTO Usuario VALUES
 	('25107632415' , 'Murilo Martinez' , 'murilo@gmail.com' , 'murilo123', 'Analista de Dados' , '43210987654321');
 
 INSERT INTO Setor VALUES
-	(1, 'Despache de Voo','11223344556677'),
-	(2, 'Despache de Voo','43210987654321'),
-	(3, 'Torre de Controle', '11223344556677'),
-	(4, 'Despache de Voo', '12345678901234'),
-	(5, 'Torre de Controle', '12345678901234'),
-	(6, 'Centro de Meteorologia', '43210987654321'),
-	(7, 'Centro de Meteorologia', '11223344556677'),
-	(8, 'Torre de Controle', '43210987654321'),
-	(9, 'Centro de Meteorologia', '12345678901234');
+	(1, 'Despache de Voo'),
+	(2, 'Torre de Controle'),
+	(3, 'Centro de Meteorologia');
 
 INSERT INTO Computador VALUES
-	(1, 'C1DP', 'i3', '8' ,'12345678901','11223344556677', 1);
+	(1, 'C1DP', 'i3', '8' ,'12345678901', 1);
     
 SELECT * FROM Aeroporto;
 SELECT * FROM Setor;    
