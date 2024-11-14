@@ -77,14 +77,24 @@ INSERT INTO Setor VALUES
 	(2, 'Torre de Controle'),
 	(3, 'Centro de Meteorologia');
 
+INSERT INTO SetorAeroporto VALUES
+	('12345678901234', 1),
+	('12345678901234', 2),
+	('12345678901234', 3),
+	('43210987654321', 1),
+	('43210987654321', 2),
+	('43210987654321', 3),
+	('11223344556677', 1),
+	('11223344556677', 2),
+	('11223344556677', 3);
+    
 INSERT INTO Computador VALUES
 	(1, 'C1DP', 'i3', '8' ,'12345678901', 1);
     
 SELECT * FROM Aeroporto;
 SELECT * FROM Setor;    
+SELECT * FROM SetorAeroporto;
 SELECT * FROM Usuario;  
 SELECT * FROM Computador;
 SELECT * FROM DadoComputador;
 SELECT * FROM Alerta;
-
-SELECT cnpj, nomeAeroporto FROM Aeroporto ORDER BY nomeAeroporto;
