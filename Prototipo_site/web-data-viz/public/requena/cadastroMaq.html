@@ -38,10 +38,13 @@
 
                 <div class="campo">
                     <label>Setor</label>
-                    <select id="selectSetor"></select>
+                    <select id="selectSetor">
+                    </select>
                 </div>
 
-                <button onclick="cadastrar()">CADASTRAR</button>
+                <div id="botaoMensagem" class="botaoMensagem">
+                    <button onclick="cadastrar()">CADASTRAR</button>
+                </div>
             </div>
 
 
@@ -53,13 +56,66 @@
 </html>
 
 <script>
+    const selectElement = document.getElementById('selectSetor');
+
+    selectElement.addEventListener('change', function () {
+        // Adiciona a classe "selected" somente após a seleção de uma opção válida
+        if (this.value) {
+            this.classList.add('selected');
+        }
+    });
+
     function limparSessao() {
         sessionStorage.clear();
         window.location = "../index.html";
     }
 
+    function cadastrar() {
+        hostname = inputNome.value;
+        ramTotal = inputRAM.value;
+        processador = inputProcessador.value;
+        setor = selectSetor.value;
+        usuario = sessionStorage.CPF
+
+        fetch("/suporte/cadastrar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                hostnameServer: hostname,
+                ramTotalServer: ramTotal,
+                processadorServer: processador,
+                setorServer: setor,
+                usuarioServer: usuario
+            }),
+        })
+            .then(function (resposta) {
+                console.log("resposta: ", resposta);
+
+                if (resposta.ok) {
+
+                    botaoMensagem.innerHTML = `<span class="mensagem">Cadastro realizado com sucesso!</span>`
+
+                    setTimeout(() => {
+                        window.location = "cadastroMaq.html";
+                    }, "2000");
+
+                    limparFormulario();
+                } else {
+                    throw "Houve um erro ao tentar realizar o cadastro!";
+                }
+            })
+            .catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+
+            });
+
+        return false;
+    }
+
     function getSetor() {
-        fetch("../../empresa/getsetor", {
+        fetch("../suporte/getSetor", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -68,31 +124,31 @@
 
             }),
         })
-        .then(function (resposta) {
-            console.log("resposta:", resposta);
+            .then(function (resposta) {
+                console.log("resposta:", resposta);
 
-            if (resposta.ok) {
-                resposta.json()
-                .then(function (resultado) {
-                    console.log(resultado)
+                if (resposta.ok) {
+                    resposta.json()
+                        .then(function (resultado) {
+                            console.log(resultado)
 
-                    var opcoes = ``
-                    for(var index = 0; index < resultado.length; index++) {
-                        opcoes += `<option value="${resultado[index].cnpj}">${resultado[index].nomeAeroporto}</option>
+                            var opcoes = ``
+                            for (var index = 0; index < resultado.length; index++) {
+                                opcoes += `<option value="${resultado[index].idSetor}">${resultado[index].nomeSetor}</option>
                         `;
-                    }
-                    select_empresa.innerHTML = `<select id="select_empresa" required>
-                        <option value="#" selected disabled>Selecione sua empresa</option>
+                            }
+                            selectSetor.innerHTML = `<select id="selectSetor" required>
+                        <option value="#" selected disabled>Setor onde a máquina opera</option>
                         ${opcoes}
                         </select>`
-                })
-            } else {
-                throw "Houve um erro ao tentar criar o select";
-            }
-        })
-        .catch(function (resposta) {
-            console.log(`#ERRO: ${resposta}`);
-        });
+                        })
+                } else {
+                    throw "Houve um erro ao tentar criar o select";
+                }
+            })
+            .catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+            });
 
         return false;
     }

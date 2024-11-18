@@ -36,9 +36,9 @@ chave_projeto = "KAN"
 api_token = ""
 
 # Limites para alertas
-cpu_limite = 1
-usoRAM_limite = 1
-porcentagemRAM_limite = 1
+cpu_limite = 50
+usoRAM_limite = 50
+porcentagemRAM_limite = 50
 
 # Conectar ao Jira
 def conectar():
@@ -93,6 +93,7 @@ def transformar_byte_em_GB(bytes):
     return bytes / (1024 * 1024 * 1024)
 
 def monitorar():
+    status = ''
     passou = 0
     total_dados = 0
 
@@ -131,13 +132,27 @@ def monitorar():
         mydb.commit()
 
         if porcentagemCPU > cpu_limite:
+
+            if porcentagemCPU >= 50 or porcentagemCPU < 80:
+                status = 'atenção'
+            
+            if porcentagemCPU >= 80:
+                status = 'alerta'
+
             cpuAlerta(jira, porcentagemCPU, idPc)
-            cursor.execute("INSERT INTO Alerta VALUES (default, default, %s)", (idPc,))
+            cursor.execute("INSERT INTO Alerta VALUES (default, default, %s, %s)", (idPc,status))
             mydb.commit()
 
         if porcentagemRAM > porcentagemRAM_limite:
+
+            if porcentagemRAM >= 50 or porcentagemRAM < 80:
+                status = 'atenção'
+            
+            if porcentagemRAM >= 80:
+                status = 'alerta'
+
             porcentagemRamAlerta(jira, porcentagemRAM, idPc)
-            cursor.execute("INSERT INTO Alerta VALUES (default, default, %s)", (idPc,))
+            cursor.execute("INSERT INTO Alerta VALUES (default, default, %s, %s)", (idPc,status))
             mydb.commit()
 
         # dados_json = carregar_json(nome_arquivo_json)

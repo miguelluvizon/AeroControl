@@ -27,9 +27,9 @@ nomeSetor varchar(100)
 
 CREATE TABLE SetorAeroporto (
 fkAeroporto char(14),
-fkSetor int,
+fkSetorId int,
 constraint fkAeroportoSetor foreign key (fkAeroporto) references Aeroporto(cnpj),
-constraint fkSetorAeroporto foreign key (fkSetor) references Setor(idSetor)
+constraint fkSetorAeroporto foreign key (fkSetorId) references Setor(idSetor)
 );
 
 CREATE TABLE Computador (
@@ -42,8 +42,6 @@ fkSetor int,
 constraint fkUsuarioComputador foreign key (fkUsuario) references Usuario(cpf),
 constraint fkSetorComputador foreign key (fkSetor) references Setor(idSetor)
 );
-
-insert into Computador values (1, 'nb-martinez', 'i5-10', '16', '25107632415', 1);
 
 CREATE TABLE DadoComputador (
 idDado int primary key auto_increment,
@@ -59,7 +57,8 @@ CREATE TABLE Alerta (
 idAlerta int primary key auto_increment,
 dataAlerta datetime default current_timestamp,
 fkDadoComputador int,
-constraint fkAlertaDado foreign key (fkDadoComputador) references DadoComputador (idDado)
+constraint fkAlertaDado foreign key (fkDadoComputador) references DadoComputador (idDado),
+tipo varchar(50)
 );
 
 INSERT INTO Aeroporto VALUES
@@ -100,3 +99,7 @@ SELECT * FROM Usuario;
 SELECT * FROM Computador;
 SELECT * FROM DadoComputador;
 SELECT * FROM Alerta;
+
+insert into Computador values (2, 'nb-martinez', 'i5-10', '16', '25107632415', 1);
+
+SELECT idComputador FROM Computador WHERE hostname = 'nb-martinez';

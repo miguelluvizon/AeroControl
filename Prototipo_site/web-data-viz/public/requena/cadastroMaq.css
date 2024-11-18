@@ -101,6 +101,26 @@ select{
   width: 100%;
   padding: 7px;
   font-size: 17px;
+  color: #898989;
+}
+
+option{
+  color: black;
+}
+
+select.selected{
+  color: black;
+}
+
+.botaoMensagem{
+  display: flex;
+  justify-content: center;
+}
+
+.mensagem{
+  color: #3f2182;
+  font-size: 25px;
+  font-weight: bold;
 }
 
 button{
