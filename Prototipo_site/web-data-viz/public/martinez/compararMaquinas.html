@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AeroControl - Comparação de Máquinas - Murilo Martinez</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <img src="img/Protótipo Dashboard.png" alt="Logo da Empresa">
+            <button class="sidebar-btn">RESUMO</button>
+            <button class="sidebar-btn">COMPARAR</button>
+            <button class="sidebar-btn">SAIR</button>
+        </aside>
+        <main class="main-content">
+            <h1>COMPARAÇÃO DE MÁQUINAS POR SETOR</h1>
+
+            <a href="index.html" class="button btn2">&larr; Comparar Setor</a>
+            
+            <div class="chart-container">
+                <h2>MÉDIA DE CPU E MEMÓRIA RAM UTILIZADAS NA SEMANA</h2>
+                <div class="chart-maquina">
+                    <p>Setor</p>
+                    <select id="setor" class="setor_grafico">
+                        <option value="">Selecione o Setor</option>
+                        <option value="1">Torre de Controle</option>
+                        <option value="2">Despache de Voo</option>
+                        <option value="3">Centro de Meteorologia</option>
+                    </select>
+                </div>
+                <canvas id="alertChart-maquina" class="chart-graficoM"></canvas>
+            </div>
+        </main>
+    </div>
+    <script src="js/compararMaquina.js"></script>
+</body>
+
+</html>

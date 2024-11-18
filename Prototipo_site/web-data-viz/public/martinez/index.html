@@ -20,6 +20,20 @@
         <main class="main-content">
             <h1>COMPARAÇÃO DE ALERTAS ENTRE SETORES</h1>
 
+            <div style="display: flex; gap: 4rem; justify-content: center;">
+                <div class="kpi-alertas">
+                    <p>Quantidades de Alertas no Mês</p>
+                    <span>120</span>
+                </div>
+
+                <div class="kpi-alertas">
+                    <p>Total de Alertas por setor <p style="color: red;">SETOR</p></p>
+                    <span>120</span>
+                </div>
+            </div>
+
+            <a href="compararMaquinas.html" class="button btn1">Comparar Máquinas &rarr;</a>
+
             <div style="display: flex;">
                 <div class="chart-container">
                     <h2>QUANTIDADE DE ALERTAS POR MÊS EM CADA SETOR</h2>
@@ -40,25 +54,9 @@
                     <canvas id="alertChart-eleMesmo"></canvas>
                 </div>
             </div>
-
-            <h1>COMPARAÇÃO DE MÁQUINAS POR SETOR</h1>
-
-            <div class="chart-container chart-maquina">
-                <h2>MÉDIA DE CPU E MEMÓRIA RAM UTILIZADAS NA SEMANA</h2>
-                <div class="chart-setor">
-                    <p>Setor</p>
-                    <select id="setor" class="setor_grafico">
-                        <option value="">Selecione o Setor</option>
-                        <option value="1">Torre de Controle</option>
-                        <option value="2">Despache de Voo</option>
-                        <option value="3">Centro de Meteorologia</option>
-                    </select>
-                </div>
-                <canvas id="alertChart-maquina"></canvas>
-            </div>
         </main>
     </div>
-    <script src="script.js"></script>
+    <script src="js/script.js"></script>
 </body>
 
 </html>
