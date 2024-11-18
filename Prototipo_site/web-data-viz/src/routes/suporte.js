@@ -16,4 +16,8 @@ router.post("/getSetor", function (req, res) {
   suporteController.getSetor(req, res);
 })
 
+router.post("/getInformacoes", function (req, res) {
+  suporteController.getInformacoes(req, res);
+})
+
 module.exports = router;

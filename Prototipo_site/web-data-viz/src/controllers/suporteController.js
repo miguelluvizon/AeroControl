@@ -55,8 +55,18 @@ function getSetor(req, res) {
   });
 }
 
+function getInformacoes(req, res) {
+  suporteModel.getInformacoes()
+  .then(function (resposta) {
+      if(resposta.length >= 1) {
+          res.status(200).json(resposta);
+      }
+  });
+}
+
 module.exports = {
   plotar,
   cadastrar,
-  getSetor
+  getSetor,
+  getInformacoes
 }

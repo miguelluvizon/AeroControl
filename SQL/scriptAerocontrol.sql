@@ -92,6 +92,9 @@ INSERT INTO SetorAeroporto VALUES
 INSERT INTO Computador VALUES
 	(1, 'C1DP', 'i3', '8' ,'12345678901', 1);
     
+INSERT INTO Alerta VALUES
+(default, "2024-01-01 23:45:32", 4, "alerta");
+    
 SELECT * FROM Aeroporto;
 SELECT * FROM Setor;    
 SELECT * FROM SetorAeroporto;
@@ -105,3 +108,21 @@ insert into Computador values (3, "ACER_ASPIRE",'i3-10', '8', '64281964382', 2);
 
 SELECT idComputador FROM Computador WHERE hostname = 'nb-martinez';
 
+
+SELECT hostname, 
+ramMax,
+cpuPorcentagem,
+memoriaPorcentagem,
+(SELECT count(*) FROM Alerta 
+JOIN DadoComputador 
+ON fkDadoComputador = idDado 
+JOIN Computador 
+ON fkComputador = idComputador 
+WHERE idComputador = 1) as alertas 
+FROM Computador
+JOIN DadoComputador
+ON fkComputador = idComputador
+LEFT JOIN Alerta
+ON fkDadoComputador = idDado
+WHERE idDado = (SELECT max(idDado) FROM DadoComputador JOIN Computador ON idComputador = fkComputador WHERE idComputador = 1)
+GROUP BY hostname, ramMax, cpuPorcentagem, memoriaPorcentagem;

@@ -32,12 +32,12 @@
             <p>Processador: i9-14900K </p>
           </div>
 
-          <div class="informacoes">
+          <div class="informacoes" id="ram">
             <span><b>RAM:</b> 65%</span>
             <p>Usando 9.4MB de 16MB</p>
           </div>
 
-          <div class="informacoes">
+          <div class="informacoes" id="alerta">
             <span><b>ALERTAS</b></span>
             <p>4 alertas na última hora</p>
           </div>
@@ -127,7 +127,41 @@
     window.location = "../index.html";
   }
 
-  function informacoes(){
-    
+  function informacoes() {
+    fetch("../suporte/getInformacoes", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta:", resposta);
+
+        if (resposta.ok) {
+          resposta.json()
+            .then(function (resultado) {
+              console.log(resultado)
+
+              cpu.innerHTML = `<span><b>CPU:</b> ${resultado[0].cpuPorcentagem}%</span>
+            <p>Processador: ${resultado[0].processador} </p>`
+
+              ram.innerHTML = `<span><b>RAM:</b> ${resultado[0].memoriaPorcentagem}%</span>
+            <p>Usando ${resultado[0].memoriaGB}GB de ${resultado[0].ramMax}GB</p>`
+
+              alerta.innerHTML = `<span><b>${resultado[0].alertas} ALERTAS</b></span>
+            <p>Na última hora</p>`
+            })
+        } else {
+          throw "Houve um erro ao tentar criar o select";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+
+    return false;
   }
 </script>
