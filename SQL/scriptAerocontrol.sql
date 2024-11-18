@@ -34,7 +34,7 @@ constraint fkSetorAeroporto foreign key (fkSetor) references Setor(idSetor)
 
 CREATE TABLE Computador (
 idComputador int primary key auto_increment,
-hostname varchar(5),
+hostname varchar(255),
 processador varchar(100),
 ramMax decimal(5 , 2),
 fkUsuario char(11),
