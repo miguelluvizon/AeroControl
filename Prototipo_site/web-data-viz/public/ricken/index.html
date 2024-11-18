@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AeroControl - Resumo semanal - Ricken Scharlack</title>
     <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
@@ -22,36 +23,38 @@
 
             <div class="painel">
 
-                <div class="alertas">
-                    <div class="corAlerta" style="background-color: red; color: white;">
-                        <h2>4</h2>
-                    </div>
-                    <div class="descricao">
-                        <h1>ALERTA</h1>
-                        <p>Algum componente excedeu 80% de uso nesta semana</p>
-                    </div>
+                <div class="configGraficos">
+                    <canvas id="grafico"></canvas>
                 </div>
 
-                <div class="alertas">
-                    <div class="corAlerta" style="background-color: yellow; color: black;">
-                        <h2>12</h2>
+                <div class="painel2">
+                    <div class="alertas" style="border: 3px solid #c02f1b; box-shadow: 1px 1px 8px #c02f1b;">
+                        <div class="corAlerta" style="background-color: #c02f1b; color: white;">
+                        </div>
+                        <div class="descricao">
+                            <h1>ALERTA</h1>
+                            <p>CPU ou RAM excedeu 80% de uso</p>
+                        </div>
                     </div>
-                    <div class="descricao">
-                        <h1>ATENÇÃO</h1>
-                        <p>Algum componente esteve entre 50% e 80% de uso nesta semana</p>
+
+                    <div class="alertas" style="border: 3px solid #EFCA08; box-shadow: 1px 1px 8px #EFCA08;">
+                        <div class="corAlerta" style="background-color: #EFCA08; color: black;">
+                        </div>
+                        <div class="descricao">
+                            <h1>ATENÇÃO</h1>
+                            <p>O uso de CPU ou RAM esteve entre 50% e 80%</p>
+                        </div>
+                    </div>
+
+                    <div class="alertas" style="border: 3px solid #0f520c; box-shadow: 1px 1px 8px #0f520c;">
+                        <div class="corAlerta" style="background-color: #0f520c; color: white;">
+                        </div>
+                        <div class="descricao">
+                            <h1>ESTÁVEL</h1>
+                            <p>O uso de CPU ou RAM esteve abaixo do 50%</p>
+                        </div>
                     </div>
                 </div>
-
-                <div class="alertas">
-                    <div class="corAlerta" style="background-color: green; color: white;">
-                        <h2>7</h2>
-                    </div>
-                    <div class="descricao">
-                        <h1>ESTÁVEL</h1>
-                        <p>Uso de ambos os componentes esteve abaixo do 50% nesta semana</p>
-                    </div>
-                </div>
-
             </div>
 
             <div class="chart-container">
@@ -94,7 +97,7 @@
 
                     <div class="torre">
                         <div class="setor">
-                            <p>Setor:  Torre de controle</p> <br>
+                            <p>Setor: Torre de controle</p> <br>
                             <p>Máquinas: 17</p>
                         </div>
                         <div class="maisDetalhes">
@@ -160,3 +163,40 @@
 </body>
 
 </html>
+
+<script>
+
+    const data = {
+        labels: ['Alerta', 'Atenção', 'Estável'],
+        datasets: [
+            {
+                label: 'Máquinas',
+                data: [4, 12, 7],
+                backgroundColor: ['#c02f1b', '#EFCA08', '#0f520c'],
+            }
+        ]
+    };
+
+    const config = {
+        type: 'pie',
+        data: data,
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'Maquinas que ficaram:'
+                }
+            }
+        },
+    };
+
+    let myChart = new Chart(
+        document.getElementById('grafico'),
+        config
+    );
+
+</script>
