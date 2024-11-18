@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AeroControl - Resumo semanal - Ricken Scharlack</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <img src="img/Protótipo Dashboard.png" alt="">
+            <button class="sidebar-btn">RESUMO</button>
+            <button class="sidebar-btn">COMPARAR</button>
+            <button class="sidebar-btn">SAIR</button>
+        </aside>
+        <main class="main-content">
+            <h1>PAINEL DE RESUMO SEMANAL</h1>
+
+            <div class="painel">
+
+                <div class="alertas">
+                    <div class="corAlerta" style="background-color: red; color: white;">
+                        <h2>4</h2>
+                    </div>
+                    <div class="descricao">
+                        <h1>ALERTA</h1>
+                        <p>Algum componente excedeu 80% de uso nesta semana</p>
+                    </div>
+                </div>
+
+                <div class="alertas">
+                    <div class="corAlerta" style="background-color: yellow; color: black;">
+                        <h2>12</h2>
+                    </div>
+                    <div class="descricao">
+                        <h1>ATENÇÃO</h1>
+                        <p>Algum componente esteve entre 50% e 80% de uso nesta semana</p>
+                    </div>
+                </div>
+
+                <div class="alertas">
+                    <div class="corAlerta" style="background-color: green; color: white;">
+                        <h2>7</h2>
+                    </div>
+                    <div class="descricao">
+                        <h1>ESTÁVEL</h1>
+                        <p>Uso de ambos os componentes esteve abaixo do 50% nesta semana</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="chart-container">
+                <div class="titulo">
+                    <h2>SETORES</h2>
+                </div>
+
+                <div class="alertChart">
+
+                    <div class="despache">
+                        <div class="setor">
+                            <p>Setor: Despache de voo</p> <br>
+                            <p>Máquinas: 17</p>
+                        </div>
+                        <div class="maisDetalhes">
+                            <button>Mais <br> Detalhes</button>
+                        </div>
+                        <div class="conteudo">
+                            <p>Máquinas ao <br> longo da semana:</p>
+                        </div>
+                        <div class="metricas">
+                            <div class="alertasDesc">
+                                <div class="corAlertaDesc" style="background-color: red; color: white;">
+                                    <h2>4</h2>
+                                </div>
+
+                            </div>
+                            <div class="alertasDesc">
+                                <div class="corAlertaDesc" style="background-color: yellow; color: black;">
+                                    <h2>12</h2>
+                                </div>
+                            </div>
+                            <div class="alertasDesc">
+                                <div class="corAlertaDesc" style="background-color: green; color: white;">
+                                    <h2>7</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="torre">
+                        <div class="setor">
+                            <p>Setor:  Torre de controle</p> <br>
+                            <p>Máquinas: 17</p>
+                        </div>
+                        <div class="maisDetalhes">
+                            <button>Mais <br> Detalhes</button>
+                        </div>
+                        <div class="conteudo">
+                            <p>Máquinas ao <br> longo da semana:</p>
+                        </div>
+                        <div class="metricas">
+                            <div class="alertasDesc">
+                                <div class="corAlertaDesc" style="background-color: red; color: white;">
+                                    <h2>4</h2>
+                                </div>
+
+                            </div>
+                            <div class="alertasDesc">
+                                <div class="corAlertaDesc" style="background-color: yellow; color: black;">
+                                    <h2>12</h2>
+                                </div>
+                            </div>
+                            <div class="alertasDesc">
+                                <div class="corAlertaDesc" style="background-color: green; color: white;">
+                                    <h2>7</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="meteorologia">
+                        <div class="setor">
+                            <p>Setor: Centro de meteorologia </p> <br>
+                            <p>Máquinas: 17</p>
+                        </div>
+                        <div class="maisDetalhes" style="margin-left: -1.6rem;">
+                            <button>Mais <br> Detalhes</button>
+                        </div>
+                        <div class="conteudo">
+                            <p>Máquinas ao <br> longo da semana:</p>
+                        </div>
+                        <div class="metricas">
+                            <div class="alertasDesc">
+                                <div class="corAlertaDesc" style="background-color: red; color: white;">
+                                    <h2>4</h2>
+                                </div>
+
+                            </div>
+                            <div class="alertasDesc">
+                                <div class="corAlertaDesc" style="background-color: yellow; color: black;">
+                                    <h2>12</h2>
+                                </div>
+                            </div>
+                            <div class="alertasDesc">
+                                <div class="corAlertaDesc" style="background-color: green; color: white;">
+                                    <h2>7</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>

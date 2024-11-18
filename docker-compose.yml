@@ -1,6 +1,6 @@
 services:
   site:
-    image: murilomartinez/aerocontrol:node
+    image: rickensptech/rickenaerocontrol:node
     ports:
       - "3333:3333"
     networks:
@@ -8,7 +8,7 @@ services:
     depends_on:
       - db
   db:
-    image: murilomartinez/aerocontrol:mysql
+    image: rickensptech/rickenaerocontrol:mysql
     ports:
       - "3306:3306"
     networks:
