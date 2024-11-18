@@ -43,6 +43,8 @@ constraint fkUsuarioComputador foreign key (fkUsuario) references Usuario(cpf),
 constraint fkSetorComputador foreign key (fkSetor) references Setor(idSetor)
 );
 
+insert into Computador values (1, 'nb-martinez', 'i5-10', '16', '25107632415', 1);
+
 CREATE TABLE DadoComputador (
 idDado int primary key auto_increment,
 horaDado datetime default CURRENT_TIMESTAMP,
