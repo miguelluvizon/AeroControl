@@ -7,15 +7,14 @@
     <title>AeroControl - Ranking semanal de alertas - Miguel Luvizon</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 
-<body>
+<body onload="puxarTotalMaquinas(), puxarAlertas()">
     <div class="container">
         <aside class="sidebar">
             <img src="img/Protótipo Dashboard.png" alt="">
             <button class="sidebar-btn">RESUMO</button>
-            <button class="sidebar-btn">COMPARAR</button>
+            <button class="sidebar-btn"><a href="./../martinez/index.html">COMPARAR</a></button>
             <button class="sidebar-btn">SAIR</button>
         </aside>
 
@@ -26,11 +25,11 @@
             <div class="header">
                 <span>DETALHES DO SETOR: xxxx</span>
                 <div>
-                    <span>Total de máquinas: 100</span>
+                    <span>Total de máquinas: <span id="totalMaquinas">x</span></span>
                 </div>
                 <div>
                     <span>Escolha algum componente:</span>
-                    <select id="Setor">
+                    <select id="Comp">
                         <option value="1">CPU</option>
                         <option value="2">RAM</option>
                     </select>
@@ -44,7 +43,7 @@
                 <div class="cards">
                     <div class="cardMedio">
                         <span>Total de alertas <br>(todas as maquinas)</span>
-                        <p>120</p>
+                        <p id="alertasTotal">x</p>
                         <div class="concerto">
                             <div class="duvida">
                                 ?
@@ -72,7 +71,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="cardMedio">
+                    <!-- <div class="cardMedio">
                         <span>Média das máquinas mais críticas</span>
                         <p>88%</p>
                         <div class="concerto">
@@ -81,7 +80,7 @@
                                 <span class="textoDuvida">Aqui é feita a média apenas das máquinas que estão em estado crítico (CPU>=80%)</span>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="divisoria">
                     <h1>Rankings das top 10 máquinas</h1>
@@ -134,7 +133,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="cardMedio">
+                    <!-- <div class="cardMedio">
                         <span>Média das máquinas mais críticas</span>
                         <p>88%</p>
                         <div class="concerto">
@@ -143,7 +142,7 @@
                                 <span class="textoDuvida">Aqui é feita a média apenas das máquinas que estão em estado crítico (RAM>=80%)</span>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="divisoria">
                     <h1>Gráficos</h1>
@@ -167,163 +166,4 @@
 
 </html>
 
-<script>
-    const ctx = document.getElementById('alertChart').getContext('2d');
-    const alertChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['M1', 'M2', 'M3', 'M4', 'M5', 'M6', 'M7', 'M8', 'M9', 'M10'],
-            datasets: [
-                {
-                    label: 'Torre de Controle',
-                    data: [20, 15, 100, 30, 40, 80, 95, 100, 60, 70],
-                    backgroundColor: '#472c72',
-                    pointBackgroundColor: '#2c1153',
-                    pointRadius: 5
-                },
-            ]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    display: false
-                }
-            },
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    ticks: {
-                        stepSize: 5
-                    }
-                }
-            }
-        }
-    });
-
-    const ctx2 = document.getElementById('alertChart2').getContext('2d');
-    const alertChart2 = new Chart(ctx2, {
-        type: 'bar',
-        data: {
-            labels: ['M1', 'M2', 'M3', 'M4', 'M5', 'M6', 'M7', 'M8', 'M9', 'M10'],
-            datasets: [
-                {
-                    label: 'Torre de Controle',
-                    data: [100, 75, 30, 50, 60, 90, 93, 88, 99, 100],
-                    backgroundColor: '#472c72',
-                    pointBackgroundColor: '#2c1153',
-                    pointRadius: 5
-                },
-            ]
-        },
-        options: {
-            indexAxis: 'y',
-            responsive: true,
-            plugins: {
-                legend: {
-                    display: false
-                }
-            },
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    ticks: {
-                        stepSize: 5
-                    }
-                }
-            }
-        }
-    });
-
-    const ctx3 = document.getElementById('alertChart3').getContext('2d');
-    const alertChart3 = new Chart(ctx3, {
-        type: 'bar',
-        data: {
-            labels: ['M1', 'M2', 'M3', 'M4', 'M5', 'M6', 'M7', 'M8', 'M9', 'M10'],
-            datasets: [
-                {
-                    label: 'Torre de Controle',
-                    data: [20, 15, 100, 30, 40, 80, 95, 100, 60, 70],
-                    backgroundColor: '#472c72',
-                    pointBackgroundColor: '#2c1153',
-                    pointRadius: 5
-                },
-            ]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    display: false
-                }
-            },
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    ticks: {
-                        stepSize: 5
-                    }
-                }
-            }
-        }
-    });
-
-    const ctx4 = document.getElementById('alertChart4').getContext('2d');
-    const alertChart4 = new Chart(ctx4, {
-        type: 'bar',
-        data: {
-            labels: ['M1', 'M2', 'M3', 'M4', 'M5', 'M6', 'M7', 'M8', 'M9', 'M10'],
-            datasets: [
-                {
-                    label: 'Torre de Controle',
-                    data: [100, 75, 30, 50, 60, 90, 93, 88, 99, 100],
-                    backgroundColor: '#472c72',
-                    pointBackgroundColor: '#2c1153',
-                    pointRadius: 5
-                },
-            ]
-        },
-        options: {
-            indexAxis: 'y',
-            responsive: true,
-            plugins: {
-                legend: {
-                    display: false
-                }
-            },
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    ticks: {
-                        stepSize: 5
-                    }
-                }
-            }
-        }
-    });
-
-    // Obtendo os elementos do DOM
-    const setor = document.getElementById("Setor");
-
-    // Função para trocar o display das divs
-    function trocarConteudo() {
-        const valorSelecionado = setor.value;
-
-        // Exibir a div correspondente e ocultar a outra
-        if (valorSelecionado === "1") {
-            CPU.style.display = "block";
-            RAM.style.display = "none";
-        } else if (valorSelecionado === "2") {
-            CPU.style.display = "none";
-            RAM.style.display = "block";
-        }
-    }
-
-    // Adicionando evento ao select
-    setor.addEventListener("change", trocarConteudo);
-
-    // Chamar a função inicialmente para configurar o display das divs
-    trocarConteudo();
-
-
-</script>
+<script src="script.js"></script>

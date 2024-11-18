@@ -31,11 +31,34 @@ function getEmpresas() {
   return database.executar(instrucaoSql);
 }
 
+function puxarAlertas() {
+  var instrucaoSql = `
+  select count(*) as total_linhas from Alerta
+	  JOIN DadoComputador ON fkDadoComputador = idDado
+    JOIN Computador ON fkComputador = idComputador
+    JOIN Setor ON fkSetor = idSetor
+    JOIN SetorAeroporto ON fkSetorId = idSetor
+    WHERE fkAeroporto = "11223344556677" AND idSetor = 1;`;
+  console.log("Executando a instrução SQL: \n" + instrucaoSql);
+  return database.executar(instrucaoSql);
+}
+
+function puxarTotalMaquinas() {
+  var instrucaoSql = `
+  SELECT COUNT(*) AS total_maquinas FROM Computador 
+  JOIN Setor ON fkSetor = idSetor
+  WHERE fkSetor = 1;`;
+  console.log("Executando a instrução SQL: \n" + instrucaoSql);
+  return database.executar(instrucaoSql);
+}
+
 
 
 module.exports = {buscarPorCnpj,
   buscarPorId,
   cadastrar,
   listar,
-  getEmpresas
+  getEmpresas,
+  puxarAlertas,
+  puxarTotalMaquinas
 };

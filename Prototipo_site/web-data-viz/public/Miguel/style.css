@@ -63,6 +63,11 @@ body {
     font-size: 1em;
 }
 
+.sidebar-btn a {
+    text-decoration: none;
+    color: white;
+}
+
 .sidebar-btn:hover {
     background-color: #472c72;
 }
