@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="arthur/style-suporte-arthur.css">
+    <link rel="stylesheet" href="style-suporte-arthur.css">
     <title>AeroControl | Monitoramento em Tempo Real</title>
 </head>
 
@@ -12,7 +12,7 @@
     <div class="container">
         <aside class="sidebar">
             <div class="logo">
-                <img src="martinez\img\Protótipo_Dashboard-removebg-preview.png" alt="Logo">
+                <img src="../martinez\img\Protótipo_Dashboard-removebg-preview.png" alt="Logo">
             </div>
             <div class="persona">Técnico de TI</div>
             <nav class="sidebar-nav">
@@ -47,6 +47,7 @@
             </div>
 
             <DIV class="grupo_maquinas_filtro">
+                <div class="btn_troca"><div class="btn_visu_maquinas">Visualisar maquinhas</div><div class="btn_info_avisos">Informações de avisos</div></div>
                 <div class="filter-container">
                     <label for="filter">Filtro</label>
                     <div class="inputs">
@@ -57,11 +58,6 @@
                             <option value="coordenador">Coordenador de Voos</option>
                         </select>
                         <span class="arrow">&#9662;</span>
-                    </div>
-    
-                    <div id="div_check" onclick="ativarCheck()" itemid="div_custom_check" class="custom_check">
-                        <input id="checkDash" type="checkbox"> Visualizar de forma gráfica
-    
                     </div>
                 </div>
                 </div>
@@ -133,27 +129,38 @@
             </div>
                 </div>
 
+                <div class="div-alertas">
+                <div class="avisos-gerais">
+                        <div class="card-avisos"><h2>Ultima máquina com aviso</h2>
+                        <div class="numero-maquina">02</div></div>
+                        <div class="card-avisos"> <h2>Maquina com mais avisos semanais</h2>
+                         <div class="numero-maquina">04</div></div>
+                    </div>
                 <div class="avisos-jira-div">
-                    <table border="1">
+                    
+                    <table class="tabela-jira">
                         <tr>
-                            <th>Nome</th>
-                            <th>Idade</th>
-                            <th>Profissão</th>
+                            <th>ID</th>
+                            <th>Data</th>
+                            <th>Descrição</th>
+                            <th>Máquina</th>
                         </tr>
                         <tr>
-                            <td>Ted</td>
-                            <td>22</td>
-                            <td>Estudante</td>
+                            <td>1</td>
+                            <td>22/10/2024</td>
+                            <td>Alerta de RAM</td>
+                            <td>PC100</td>
                         </tr>
                         <tr>
-                            <td>Ralf</td>
-                            <td>26</td>
-                            <td>Designer</td>
+                            <td>2</td>
+                            <td>22/10/2024</td>
+                            <td>Alerta de CPU</td>
+                            <td>PC400</td>
                         </tr>
                     </table>
 
                 </div>
-                
+                </div>
                 </div>
             </div>
         </DIV>
@@ -165,67 +172,6 @@
 
 <script>
     
-const ctx = document.getElementById('usageChart').getContext('2d');
-    const usageChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: Array.from({ length: 24 }, (_, i) => i),
-            datasets: [
-                {
-                    label: 'CPU',
-                    borderColor: '#f54291',
-                    backgroundColor: '#f54291',
-                    fill: false,
-                    data: [60, 50, 70, 65, 85, 90, 95, 60, 70, 40, 50, 35, 75, 80, 85, 90, 95, 50, 60, 70, 80, 90, 100, 80],
-                },
-                {
-                    label: 'Memória',
-                    borderColor: '#42f554',
-                    backgroundColor: '#42f554',
-                    fill: false,
-                    data: [30, 40, 50, 55, 60, 65, 70, 40, 45, 55, 65, 50, 55, 60, 70, 75, 80, 85, 50, 60, 70, 85, 75, 65],
-                }
-            ]
-        },
-        options: {
-            responsive: true,
-            scales: {
-                x: {
-                    display: true,
-                    title: {
-                        display: true,
-                        text: 'Horas',
-                        color: 'white'
-                    },
-                    ticks: {
-                        color: 'white'
-                    }
-                },
-                y: {
-                    display: true,
-                    title: {
-                        display: true,
-                        text: 'Porcentagem (%)',
-                        color: 'white'
-                    },
-                    beginAtZero: true,
-                    max: 100,
-                    ticks: {
-                        color: 'white'
-                    }
-                }
-            },
-            plugins: {
-                legend: {
-                    display: true,
-                    labels: {
-                        color: 'white'
-                    }
-                }
-            }
-        }
-    });
-
 
 
     function ativarCheck(){
