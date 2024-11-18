@@ -24,8 +24,4 @@ router.post("/getEmpresas", function (req, res) {
   empresaController.getEmpresas(req, res);
 })
 
-router.post("/getSetor", function (req, res) {
-  empresaController.getSetor(req, res);
-})
-
 module.exports = router;
