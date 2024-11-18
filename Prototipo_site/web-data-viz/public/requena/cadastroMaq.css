@@ -115,12 +115,15 @@ select.selected{
 .botaoMensagem{
   display: flex;
   justify-content: center;
+<<<<<<< HEAD
 }
 
 .mensagem{
   color: #3f2182;
   font-size: 25px;
   font-weight: bold;
+=======
+>>>>>>> 74e2e16906f6cd0eaedd1271f0c8e3f7359c919f
 }
 
 button{
