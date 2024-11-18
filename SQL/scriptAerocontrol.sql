@@ -101,5 +101,7 @@ SELECT * FROM DadoComputador;
 SELECT * FROM Alerta;
 
 insert into Computador values (2, 'nb-martinez', 'i5-10', '16', '25107632415', 1);
+insert into Computador values (3, "ACER_ASPIRE",'i3-10', '8', '64281964382', 2);
 
 SELECT idComputador FROM Computador WHERE hostname = 'nb-martinez';
+
