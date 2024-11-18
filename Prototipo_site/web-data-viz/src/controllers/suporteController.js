@@ -1,4 +1,5 @@
 var suporteModel = require("../models/suporteModel");
+const { get } = require("../routes/empresas");
 
 function plotar(req, res) {
   suporteModel.plotar().then(function(resultado){
@@ -10,20 +11,52 @@ function plotar(req, res) {
 }
 
 function cadastrar(req, res) {
-  var nome = req.body.nome;
+  // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
+  var hostname = req.body.hostnameServer;
+  var ramTotal = req.body.ramTotalServer;
+  var processador = req.body.processadorServer;
+  var setor = req.body.setorServer;
+  var usuario = req.body.usuarioServer;
 
-  if (nome == undefined) {
-      res.status(400).send("Seu nome está undefined!");
+  if (hostname == undefined) {
+      res.status(400).send("Seu hostname está undefined!");
+  } else if (ramTotal == undefined) {
+      res.status(400).send("Sua ram está undefined!");
+  } else if (processador == undefined) {
+      res.status(400).send("Seu processador está undefined!");
+  } else if (setor == undefined) {
+      res.status(400).send("Seu setor está undefined!");
+  } else {
+
+      suporteModel.cadastrar(hostname, ramTotal, processador, usuario, setor)
+          .then(
+              function (resultado) {
+                  res.json(resultado);
+              }
+          ).catch(
+              function (erro) {
+                  console.log(erro);
+                  console.log(
+                      "\nHouve um erro ao realizar o cadastro! Erro: ",
+                      erro.sqlMessage
+                  );
+                  res.status(500).json(erro.sqlMessage);
+              }
+          );
   }
+}
 
-  suporteModel.cadastrar(nome).then(function(resposta){
-      res.status(200).send("suporte criado com sucesso");
-  }).catch(function(erro){
-      res.status(500).json(erro.sqlMessage);
-  })
+function getSetor(req, res) {
+  suporteModel.getSetor()
+  .then(function (resposta) {
+      if(resposta.length >= 1) {
+          res.status(200).json(resposta);
+      }
+  });
 }
 
 module.exports = {
   plotar,
-  cadastrar
+  cadastrar,
+  getSetor
 }
