@@ -48,7 +48,7 @@ function getEmpresas(req, res) {
   });
 }
 
-function puxarAlertas (req, res) {
+function puxarAlertas (req, res) { // rota luvizones
   console.log("puxando total de alertas")
   empresaModel.puxarAlertas()
   .then(function (resposta) {
@@ -65,7 +65,25 @@ function puxarAlertas (req, res) {
   });
 }
 
-function puxarTotalMaquinas(req, res) {
+function puxarTotalMaquinas(req, res) { // rota luvizones
+  console.log("puxando total de maquinas")
+  empresaModel.puxarTotalMaquinas()
+  .then(function (resposta) {
+      if(resposta.length > 0) {
+          res.status(200).json(resposta);
+      
+      } else {
+        res.status(204).send("nenhum resultado encontrado")
+      }
+
+  }).catch(function (erro) {
+    console.log(erro);
+    console.log("houve um erro ao buscar resultados", erro.sqlMessage);
+    res.status(500).json(erro.sqlMessage)
+  });
+}
+
+function puxarMediaTotal(req, res) { // rota luvizones
   console.log("puxando total de maquinas")
   empresaModel.puxarTotalMaquinas()
   .then(function (resposta) {
@@ -89,6 +107,7 @@ module.exports = {
   cadastrar,
   listar,
   getEmpresas,
-  puxarAlertas,
-  puxarTotalMaquinas
+  puxarAlertas, // rota luvizones
+  puxarTotalMaquinas, // rota luvizones
+  puxarMediaTotal // rota luvizones
 };

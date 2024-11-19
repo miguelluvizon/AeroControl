@@ -24,12 +24,16 @@ router.post("/getEmpresas", function (req, res) {
   empresaController.getEmpresas(req, res);
 })
 
-router.get("/puxarAlertas", function (req, res) {
+router.get("/puxarAlertas", function (req, res) { // rota luvizones
   empresaController.puxarAlertas(req, res);
 })
 
-router.get("/puxarTotalMaquinas", function (req, res) {
+router.get("/puxarTotalMaquinas", function (req, res) { // rota luvizones
   empresaController.puxarTotalMaquinas(req, res);
+})
+
+router.get("/puxarMediaTotal", function (req, res) { // rota luvizones
+  empresaController.puxarMediaTotal(req, res);
 })
 
 module.exports = router;

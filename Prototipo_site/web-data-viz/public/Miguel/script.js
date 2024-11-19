@@ -159,41 +159,16 @@ function puxarAlertas() {
     fetch("../empresas/puxarAlertas", {
         method: "GET",
     })
-    .then(function (resposta) {
-        console.log("resposta:", resposta);
-
-        if (resposta.ok) {
-            resposta.json()
-            .then(function (resposta) {
-                console.log(resposta)
-
-               alertasTotal.innerHTML = `${resposta[0].total_linhas}`
-            })
-        } else {
-            throw "Houve ao puxar qtd";
-        }
-    })
-    .catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
-    });
-
-    return false;
-}
-
-function puxarTotalMaquinas() {
-        fetch("../empresas/puxarTotalMaquinas", {
-            method: "GET",
-        })
         .then(function (resposta) {
             console.log("resposta:", resposta);
 
             if (resposta.ok) {
                 resposta.json()
-                .then(function (resposta) {
-                    console.log(resposta)
+                    .then(function (resposta) {
+                        console.log(resposta)
 
-                   totalMaquinas.innerHTML = `${resposta[0].total_maquinas}`
-                })
+                        alertasTotal.innerHTML = `${resposta[0].total_linhas}`
+                    })
             } else {
                 throw "Houve ao puxar qtd";
             }
@@ -202,5 +177,55 @@ function puxarTotalMaquinas() {
             console.log(`#ERRO: ${resposta}`);
         });
 
-        return false;
-    }
+    return false;
+}
+
+function puxarTotalMaquinas() {
+    fetch("../empresas/puxarTotalMaquinas", {
+        method: "GET",
+    })
+        .then(function (resposta) {
+            console.log("resposta:", resposta);
+
+            if (resposta.ok) {
+                resposta.json()
+                    .then(function (resposta) {
+                        console.log(resposta)
+
+                        totalMaquinas.innerHTML = `${resposta[0].total_maquinas}`
+                    })
+            } else {
+                throw "Houve ao puxar qtd";
+            }
+        })
+        .catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+        });
+
+    return false;
+}
+
+function puxarMediaTotal() {
+    fetch("../empresas/puxarMediaTotal", {
+        method: "GET",
+    })
+        .then(function (resposta) {
+            console.log("resposta:", resposta);
+
+            if (resposta.ok) {
+                resposta.json()
+                    .then(function (resposta) {
+                        console.log(resposta)
+
+                        mediaTotal.innerHTML = `${resposta[0].xxx}`
+                    })
+            } else {
+                throw "Houve ao puxar a média";
+            }
+        })
+        .catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+        });
+
+    return false;
+}

@@ -9,7 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
-<body onload="puxarTotalMaquinas(), puxarAlertas()">
+<body onload="puxarTotalMaquinas(), puxarAlertas(), puxarMediaTotal()">
     <div class="container">
         <aside class="sidebar">
             <img src="img/Protótipo Dashboard.png" alt="">
@@ -57,30 +57,24 @@
                         <div class="concerto">
                             <div class="duvida">
                                 ?
-                                <span class="textoDuvida">Aqui é mostrado a soma total da quantidade de alertas das máquinas do ranking</span>
+                                <span class="textoDuvida">Aqui é mostrado a soma total da quantidade de alertas das
+                                    máquinas do ranking</span>
                             </div>
                         </div>
                     </div>
                     <div class="cardMedio">
                         <span>Média de uso da CPU (todas as maquinas)</span>
-                        <p>56%</p>
+                        <p id="mediaTotal">x</p>
                         <div class="concerto">
                             <div class="duvida">
                                 ?
-                                <span class="textoDuvida">Para esse calculo, primeiro é feita a média de uso da CPU de cada máquina do sistema, para depois fazer a média dessas médias para chegar no resultado</span>
+                                <span class="textoDuvida">Para esse calculo, primeiro é feita a média de uso da CPU de
+                                    cada máquina do sistema, para depois fazer a média dessas médias para chegar no
+                                    resultado</span>
                             </div>
                         </div>
                     </div>
-                    <!-- <div class="cardMedio">
-                        <span>Média das máquinas mais críticas</span>
-                        <p>88%</p>
-                        <div class="concerto">
-                            <div class="duvida">
-                                ?
-                                <span class="textoDuvida">Aqui é feita a média apenas das máquinas que estão em estado crítico (CPU>=80%)</span>
-                            </div>
-                        </div>
-                    </div> -->
+
                 </div>
                 <div class="divisoria">
                     <h1>Rankings das top 10 máquinas</h1>
@@ -119,7 +113,8 @@
                         <div class="concerto">
                             <div class="duvida">
                                 ?
-                                <span class="textoDuvida">Aqui é mostrado a soma total da quantidade de alertas das máquinas do ranking</span>
+                                <span class="textoDuvida">Aqui é mostrado a soma total da quantidade de alertas das
+                                    máquinas do ranking</span>
                             </div>
                         </div>
                     </div>
@@ -129,7 +124,9 @@
                         <div class="concerto">
                             <div class="duvida">
                                 ?
-                                <span class="textoDuvida">Para esse calculo, primeiro é feita a média de uso da RAM de cada máquina do sistema, para depois fazer a média dessas médias para chegar no resultado</span>
+                                <span class="textoDuvida">Para esse calculo, primeiro é feita a média de uso da RAM de
+                                    cada máquina do sistema, para depois fazer a média dessas médias para chegar no
+                                    resultado</span>
                             </div>
                         </div>
                     </div>

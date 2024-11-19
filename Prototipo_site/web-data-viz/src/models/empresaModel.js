@@ -31,7 +31,7 @@ function getEmpresas() {
   return database.executar(instrucaoSql);
 }
 
-function puxarAlertas() {
+function puxarAlertas() { // rota luvizones
   var instrucaoSql = `
   select count(*) as total_linhas from Alerta
 	  JOIN DadoComputador ON fkDadoComputador = idDado
@@ -43,7 +43,7 @@ function puxarAlertas() {
   return database.executar(instrucaoSql);
 }
 
-function puxarTotalMaquinas() {
+function puxarTotalMaquinas() { // rota luvizones
   var instrucaoSql = `
   SELECT COUNT(*) AS total_maquinas FROM Computador 
   JOIN Setor ON fkSetor = idSetor
@@ -54,7 +54,8 @@ function puxarTotalMaquinas() {
 
 
 
-module.exports = {buscarPorCnpj,
+module.exports = {
+  buscarPorCnpj,
   buscarPorId,
   cadastrar,
   listar,
