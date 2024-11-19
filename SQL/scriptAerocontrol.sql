@@ -108,21 +108,10 @@ insert into Computador values (3, "ACER_ASPIRE",'i3-10', '8', '64281964382', 2);
 
 SELECT idComputador FROM Computador WHERE hostname = 'nb-martinez';
 
-
-SELECT hostname, 
-ramMax,
-cpuPorcentagem,
-memoriaPorcentagem,
-(SELECT count(*) FROM Alerta 
-JOIN DadoComputador 
-ON fkDadoComputador = idDado 
-JOIN Computador 
-ON fkComputador = idComputador 
-WHERE idComputador = 1) as alertas 
-FROM Computador
-JOIN DadoComputador
-ON fkComputador = idComputador
-LEFT JOIN Alerta
-ON fkDadoComputador = idDado
-WHERE idDado = (SELECT max(idDado) FROM DadoComputador JOIN Computador ON idComputador = fkComputador WHERE idComputador = 1)
-GROUP BY hostname, ramMax, cpuPorcentagem, memoriaPorcentagem;
+-- SELECT DO REQUENA
+SELECT horaDado, cpuPorcentagem, memoriaPorcentagem FROM DadoComputador
+JOIN Computador
+ON idComputador = fkComputador
+WHERE idComputador = 1
+ORDER BY idDado DESC
+LIMIT 25;
