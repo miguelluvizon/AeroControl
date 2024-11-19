@@ -39,11 +39,6 @@ body {
     width: 200px;
 }
 
-
-.header-escondida {
-    height: 65px;
-}
-
 .logo {
     font-size: 1.5em;
     font-weight: bold;
@@ -81,7 +76,7 @@ body {
     display: flex;
     width: 85%;
     justify-content: space-around;
-    background-color: #3f2182;
+    background-color: #472c72;
     color: white;
     padding: 15px;
     margin-bottom: 20px;
@@ -94,6 +89,11 @@ body {
     font-weight: bold;
 }
 
+.header select {
+    border-radius: 10px;
+    font-size: 17px;
+}
+
 .chart-container {
     width: 37vw;
     height: 55vh;
@@ -102,11 +102,14 @@ body {
     padding: 5px 10px;
     border-radius: 20px;
     text-align: center;
+    border: 2px solid #472c72;
 }
 
-.chart-container h2 {
+.chart-container p {
     color: #3f2182;
-    margin-bottom: 20px;
+    font-size: 25px;
+    margin-bottom: 15px;
+    font-weight: bold;
 }
 
 .graficos {
@@ -119,15 +122,16 @@ body {
     margin-left: 30px;
     background-color: #d9d9d9;
     width: 95%;
-    height: 110vh;
+    height: 99vh;
     border-radius: 15px;
     text-align: center;
 }
 
 .divisoria {
-    color: white;
-    margin-top: 30px;
-    background-color: #3f2182;
+    color: #3f2182;
+    margin-top: 18px;
+    border-bottom: 2px solid #3f2182;
+    border-top: 2px solid #3f2182;
 }
 
 .escolhaSetor span {
@@ -147,13 +151,21 @@ body {
 }
 
 .cardMedio {
-    background-color: #5c3c92;
-    color: white;
     width: 240px;
     height: 120px;
     padding: 10px;
-    border-radius: 10px;
-    border: 1px solid black;
+    border-radius: 5px;
+    border: 2px solid #5c3c92;
+    background-color: #f0ecec;
+}
+
+.cardMedio span {
+    color: #5c3c92;
+}
+
+.cardMedio p {
+    color: #5c3c92;
+    font-size: 30px;
 }
 
 .duvida {
@@ -168,6 +180,10 @@ body {
     align-items: center;
     cursor: pointer;
     font-weight: bold;
+}
+
+.duvida span {
+    color: white;
 }
 
 .concerto {
@@ -195,16 +211,6 @@ body {
     right: 0;
     opacity: 0;
     transition: opacity 0.4s;
-}
-
-
-
-.cardMedio span {
-    color: white;
-}
-.cardMedio p {
-    color: white;
-    font-size: 30px;
 }
 
 .sessaoAlerta {
