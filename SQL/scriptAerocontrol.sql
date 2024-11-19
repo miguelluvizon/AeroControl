@@ -115,3 +115,118 @@ ON idComputador = fkComputador
 WHERE idComputador = 1
 ORDER BY idDado DESC
 LIMIT 25;
+
+-- SELECT DO MARTINEZ
+
+-- SELECT PARA FAZER A COMPARAÇÃO ENTRE OS SETORES
+SELECT 
+    s.nomeSetor AS setor,
+    SUM(CASE WHEN DAY(a.dataAlerta) <= 7 THEN 1 ELSE 0 END) AS semana_1,
+    SUM(CASE WHEN DAY(a.dataAlerta) BETWEEN 8 AND 14 THEN 1 ELSE 0 END) AS semana_2,
+    SUM(CASE WHEN DAY(a.dataAlerta) BETWEEN 15 AND 21 THEN 1 ELSE 0 END) AS semana_3,
+    SUM(CASE WHEN DAY(a.dataAlerta) >= 22 THEN 1 ELSE 0 END) AS semana_4
+FROM 
+    Alerta a
+JOIN 
+    DadoComputador dc ON a.fkDadoComputador = dc.idDado
+JOIN 
+    Computador c ON dc.fkComputador = c.idComputador
+JOIN 
+    Setor s ON c.fkSetor = s.idSetor
+WHERE 
+    MONTH(a.dataAlerta) = MONTH(CURRENT_DATE())
+    AND YEAR(a.dataAlerta) = YEAR(CURRENT_DATE())
+GROUP BY 
+    s.nomeSetor
+ORDER BY 
+    s.nomeSetor;
+    
+ -- SELECT PARA COMPARAR O SETOR COM ELE MESMO   
+    
+SELECT 
+    s.nomeSetor AS setor,
+    SUM(CASE WHEN DAY(a.dataAlerta) <= 7 THEN 1 ELSE 0 END) AS semana_1,
+    SUM(CASE WHEN DAY(a.dataAlerta) BETWEEN 8 AND 14 THEN 1 ELSE 0 END) AS semana_2,
+    SUM(CASE WHEN DAY(a.dataAlerta) BETWEEN 15 AND 21 THEN 1 ELSE 0 END) AS semana_3,
+    SUM(CASE WHEN DAY(a.dataAlerta) >= 22 THEN 1 ELSE 0 END) AS semana_4
+FROM 
+    Alerta a
+JOIN 
+    DadoComputador dc ON a.fkDadoComputador = dc.idDado
+JOIN 
+    Computador c ON dc.fkComputador = c.idComputador
+JOIN 
+    Setor s ON c.fkSetor = s.idSetor
+WHERE 
+    MONTH(a.dataAlerta) = MONTH(CURRENT_DATE())
+    AND YEAR(a.dataAlerta) = YEAR(CURRENT_DATE())
+    AND s.idSetor = 2
+GROUP BY 
+    s.nomeSetor
+ORDER BY 
+    s.nomeSetor;
+
+-- SELECT PARA PEGAR A MÉDIA DE CPU E RAM NA SEMANA ATUAL
+
+SELECT 
+    s.nomeSetor AS setor,
+    c.hostname AS computador,
+    AVG(dc.cpuPorcentagem) AS media_cpu,
+    AVG(dc.memoriaPorcentagem) AS media_memoria
+FROM 
+    DadoComputador dc
+JOIN 
+    Computador c ON dc.fkComputador = c.idComputador
+JOIN 
+    Setor s ON c.fkSetor = s.idSetor
+WHERE 
+    YEAR(dc.horaDado) = YEAR(CURRENT_DATE())  
+    AND WEEK(dc.horaDado, 1) = WEEK(CURRENT_DATE(), 1)  
+    AND s.idSetor = 2
+GROUP BY 
+    s.nomeSetor, c.hostname
+ORDER BY 
+    c.hostname;
+
+-- SELECT PARA PEGAR A MÉDIA DE CPU E RAM DA SEMANA ATUAL MAS SE NÃO TIVER ELE PEGA DE DATAS ANTERIORES
+SELECT 
+    s.nomeSetor AS setor,
+    c.hostname AS computador,
+    AVG(dc.cpuPorcentagem) AS media_cpu,
+    AVG(dc.memoriaPorcentagem) AS media_memoria
+FROM 
+    DadoComputador dc
+JOIN 
+    Computador c ON dc.fkComputador = c.idComputador
+JOIN 
+    Setor s ON c.fkSetor = s.idSetor
+WHERE 
+    s.idSetor = 2
+    AND dc.horaDado > NOW() - INTERVAL 30 DAY  -- Ajustando para os últimos 30 dias
+GROUP BY 
+    s.nomeSetor, c.hostname
+ORDER BY 
+    c.hostname;
+
+
+-- SELECT PARA VER A QUANTIDADE DE ALERTAS
+SELECT count(idAlerta) FROM Alerta;
+
+-- SELECT PARA VER A QUANTIDADE DE ALERTAS POR SETOR
+SELECT 
+    s.nomeSetor AS setor,
+    COUNT(a.idAlerta) AS quantidade_alertas
+FROM 
+    Alerta a
+JOIN 
+    DadoComputador dc ON a.fkDadoComputador = dc.idDado
+JOIN 
+    Computador c ON dc.fkComputador = c.idComputador
+JOIN 
+    Setor s ON c.fkSetor = s.idSetor
+WHERE 
+    s.idSetor = 1
+GROUP BY 
+    s.nomeSetor
+ORDER BY 
+    s.nomeSetor;
