@@ -9,7 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
-<body>
+<body onload="exibirTotalAlertas(); exbirGraficoComparacaoSetores();">
     <div class="container">
         <aside class="sidebar">
             <img src="img/Protótipo Dashboard.png" alt="Logo da Empresa">
@@ -23,12 +23,14 @@
             <div style="display: flex; gap: 4rem; justify-content: center;">
                 <div class="kpi-alertas">
                     <p>Quantidades de Alertas no Mês</p>
-                    <span>120</span>
+                    <span id="quantidadeDeAlertas"></span>
                 </div>
 
                 <div class="kpi-alertas">
-                    <p>Total de Alertas por setor <p style="color: red;">SETOR</p></p>
-                    <span>120</span>
+                    <p>Total de Alertas por setor
+                    <p style="color: red;" id="qtdAlertasNome">SETOR</p>
+                    </p>
+                    <span id="quantidadeDeAlertasSetor"></span>
                 </div>
             </div>
 
@@ -41,14 +43,16 @@
                 </div>
 
                 <div class="chart-container">
-                    <h2>QUANTIDADE DE ALERTAS POR MÊS DO SETOR: <span style="color: red;" id="setorNome">SETOR</span></h2>
+                    <h2>QUANTIDADE DE ALERTAS POR MÊS DO SETOR: <span style="color: red;" id="setorNome">SETOR</span>
+                    </h2>
                     <div class="chart-setor">
                         <p>Setor</p>
-                        <select id="setor2" class="setor_grafico">
+                        <select id="setor" class="setor_grafico"
+                            onchange="exibirTotalAlertasPorSetor(); exbirGraficoComparacaoEleMesmo();">
                             <option value="">Selecione o Setor</option>
-                            <option value="4">Torre de Controle</option>
-                            <option value="5">Despache de Voo</option>
-                            <option value="6">Centro de Meteorologia</option>
+                            <option value="1">Despache de Voo</option>
+                            <option value="2">Torre de Controle</option>
+                            <option value="3">Centro de Meteorologia</option>
                         </select>
                     </div>
                     <canvas id="alertChart-eleMesmo"></canvas>
@@ -56,7 +60,281 @@
             </div>
         </main>
     </div>
-    <script src="js/script.js"></script>
 </body>
 
 </html>
+
+<script>
+    function exibirTotalAlertas() {
+        fetch('/comparacao/alertas')
+            .then(response => response.json())
+            .then(data => {
+                console.log(data[0].qtdAlertas)
+                const qtdAlertas = document.getElementById("quantidadeDeAlertas");
+                qtdAlertas.innerText = `${data[0].qtdAlertas}`;
+            })
+            .catch(error => console.error('Erro ao buscar os alertas:', error));
+    }
+
+    function exibirTotalAlertasPorSetor() {
+        const fkSetor = document.getElementById("setor").value
+
+        fetch(`/comparacao/alertasSetor/${fkSetor}`)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data[0])
+                const alertasSetor = document.getElementById("quantidadeDeAlertasSetor")
+                alertasSetor.innerHTML = `${data[0].quantidade_alertas}`
+
+                const nomeSetor = document.getElementById("setorNome")
+                nomeSetor.innerHTML = `${data[0].setor}`
+
+                const nomeSetorAlertas = document.getElementById("qtdAlertasNome")
+                nomeSetorAlertas.innerHTML = `${data[0].setor}`
+            })
+            .catch(error => console.error('Erro ao buscar os alertas:', error));
+    }
+
+    let alertChartEleMesmo;
+
+    function exbirGraficoComparacaoEleMesmo() {
+        const fkSetorGrafico = document.getElementById("setor").value;
+
+        if (alertChartEleMesmo) {
+            alertChartEleMesmo.destroy();
+        }
+
+        fetch(`/comparacao/graficoSetor/${fkSetorGrafico}`)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+
+                const ctx2 = document.getElementById('alertChart-eleMesmo').getContext('2d');
+                alertChartEleMesmo = new Chart(ctx2, {
+                    type: 'line',
+                    data: {
+                        labels: ['Semana 1', 'Semana 2', 'Semana 3', 'Semana 4'],
+                        datasets: [{
+                            label: 'Alertas',
+                            data: [data[0].semana_1, data[0].semana_2, data[0].semana_3, data[0].semana_4],
+                            borderColor: '#a340d6',
+                            fill: false,
+                            tension: 0.1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                display: true,
+                                labels: {
+                                    color: 'black'
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    stepSize: 5
+                                }
+                            }
+                        }
+                    }
+                });
+            })
+            .catch(error => console.error('Erro ao buscar os alertas para exibir no gráfico', error));
+    }
+
+    let alertChartComparativo
+
+    function exbirGraficoComparacaoSetores() {
+        fetch(`/comparacao/graficosSetores`)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+
+                if (alertChartComparativo) {
+                    alertChartComparativo.destroy();
+                }
+
+                const setores = data.map(item => item.setor);
+                const semana_1 = data.map(item => item.semana_1);
+                const semana_2 = data.map(item => item.semana_2);
+                const semana_3 = data.map(item => item.semana_3);
+                const semana_4 = data.map(item => item.semana_4);
+
+                const ctx = document.getElementById('alertChart').getContext('2d');
+                alertChartComparativo = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Semana 1', 'Semana 2', 'Semana 3', 'Semana 4'],
+                        datasets: setores.map((setor, index) => ({
+                            label: setor,
+                            data: [
+                                semana_1[index],
+                                semana_2[index],
+                                semana_3[index],
+                                semana_4[index]
+                            ],
+                            backgroundColor: getColor(index),
+                        }))
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                display: true,
+                                labels: {
+                                    color: 'black'
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    stepSize: 5
+                                }
+                            }
+                        }
+                    }
+                });
+            })
+            .catch(error => console.error('Erro ao buscar os alertas para o gráfico comparativo', error));
+    }
+
+    function getColor(index) {
+    const colors = [
+        '#ff6347',
+        '#ffcc00'
+    ];
+    return colors[index % colors.length];
+}
+
+    // const ctx = document.getElementById('alertChart').getContext('2d');
+    // const alertChart = new Chart(ctx, {
+    //     type: 'bar',
+    //     data: {
+    //         labels: ['Semana 1', 'Semana 2', 'Semana 3', 'Semana 4'],
+    //         datasets: [
+    //             {
+    //                 label: 'Torre de Controle',
+    //                 data: [20, 15, 10, 5],
+    //                 backgroundColor: '#2c1153'
+    //             },
+    //             {
+    //                 label: 'Despache de Voo',
+    //                 data: [10, 12, 8, 2],
+    //                 backgroundColor: '#ff66cc'
+    //             },
+    //             {
+    //                 label: 'Centro de Meteorologia',
+    //                 data: [5, 10, 15, 20],
+    //                 backgroundColor: '#b266ff'
+    //             }
+    //         ]
+    //     },
+    //     options: {
+    //         responsive: true,
+    //         maintainAspectRatio: true,
+    //         plugins: {
+    //             legend: {
+    //                 display: true,
+    //                 labels: {
+    //                     color: 'black'
+    //                 }
+    //             }
+    //         },
+    //         scales: {
+    //             y: {
+    //                 beginAtZero: true,
+    //                 ticks: {
+    //                     stepSize: 0
+    //                 },
+    //             }
+    //         }
+    //     }
+    // });
+
+
+    // const ctx2 = document.getElementById('alertChart-eleMesmo').getContext('2d');
+    // const alertCharteleMesmo = new Chart(ctx2, {
+    //     type: 'line',
+    //     data: {
+    //         labels: ['Semana 1', 'Semana 2', 'Semana 3', 'Semana 4'],
+    //         datasets: [
+    //             {
+    //                 label: '',
+    //                 data: [],
+    //                 borderColor: '#a340d6',
+    //                 fill: false,
+    //                 tension: 0.1
+    //             }
+    //         ]
+    //     },
+    //     options: {
+    //         responsive: true,
+    //         plugins: {
+    //             legend: {
+    //                 display: true,
+    //                 labels: {
+    //                     color: 'black'
+    //                 }
+    //             }
+    //         },
+    //         scales: {
+    //             y: {
+    //                 beginAtZero: true,
+    //                 ticks: {
+    //                     stepSize: 5
+    //                 }
+    //             }
+    //         }
+    //     }
+    // });
+
+    // document.getElementById("setor2").addEventListener('change', function (event) {
+    //     const setorSelecionado = event.target.value
+    //     atualizarGraficoSetor(setorSelecionado)
+    // })
+
+
+    // function atualizarGrafico(setor) {
+    //     const maquinasFiltradas = dadosMaquinas.filter(maquina => maquina.setor === setor)
+
+    //     const labels = maquinasFiltradas.map(maquina => maquina.maquina)
+    //     const usoCPU = maquinasFiltradas.map(maquina => maquina.usoCPU)
+    //     const usoRAM = maquinasFiltradas.map(maquina => maquina.usoRAM)
+
+    //     componentsChart.data.labels = labels
+    //     componentsChart.data.datasets[0].data = usoCPU
+    //     componentsChart.data.datasets[1].data = usoRAM
+
+    //     componentsChart.update()
+    // }
+
+    // function atualizarGraficoSetor(setor) {
+    //     const setorNome = document.getElementById("setorNome")
+    //     let data = [];
+    //     let label = "";
+
+    //     if (setor === "4") {
+    //         label = "Torre de Controle";
+    //         data = [20, 15, 10, 5];
+    //         setorNome.textContent = "Torre de Controle"
+    //     } else if (setor === "5") {
+    //         label = "Despache de Voo";
+    //         data = [10, 12, 8, 2];
+    //         setorNome.textContent = "Despache de Voo"
+    //     } else if (setor === "6") {
+    //         label = "Centro de Meteorologia";
+    //         data = [5, 10, 15, 20];
+    //         setorNome.textContent = "Centro de Meteorologia"
+    //     }
+
+    //     alertCharteleMesmo.data.datasets[0].label = label;
+    //     alertCharteleMesmo.data.datasets[0].data = data;
+    //     alertCharteleMesmo.update();
+    // }
+</script>
