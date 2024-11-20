@@ -46,9 +46,45 @@
                 </div>
             </div>
 
-            <DIV class="grupo_maquinas_filtro">
-                <div class="btn_troca"><div class="btn_visu_maquinas">Visualisar maquinhas</div><div class="btn_info_avisos">Informações de avisos</div></div>
-                <div class="filter-container">
+            <DIV class="grupo-indicadores">
+
+                <div class="btn_troca"><div id="btn_visu_maquina" onclick="slct_visu_maquina()" class="btn_visu_maquinas">Visualisar maquinhas</div><div id="btn_info_avisos" onclick="slct_visu_avisos()" class="btn_info_avisos">Informações de avisos</div></div>
+
+                <div id="div-alertas" class="div-alertas">
+                    <div class="avisos-gerais">
+                            <div class="card-avisos"><h2>Ultima máquina com aviso</h2>
+                            <div class="numero-maquina">02</div></div>
+                            <div class="card-avisos"> <h2>Maquina com mais avisos semanais</h2>
+                             <div class="numero-maquina">04</div></div>
+                        </div>
+                    <div class="avisos-jira-div">
+                        
+                        <table class="tabela-jira">
+                            <tr>
+                                <th>ID</th>
+                                <th>Data</th>
+                                <th>Descrição</th>
+                                <th>Máquina</th>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>22/10/2024</td>
+                                <td>Alerta de RAM</td>
+                                <td>PC100</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>22/10/2024</td>
+                                <td>Alerta de CPU</td>
+                                <td>PC400</td>
+                            </tr>
+                        </table>
+    
+                    </div>
+                    </div>
+
+                    <div id="info-machines" class="info-machines">
+                <div id="filter-container" class="filter-container">
                     <label for="filter">Filtro</label>
                     <div class="inputs">
                     <div class="custom-select">
@@ -62,7 +98,7 @@
                 </div>
                 </div>
 
-            <div class="machine-list">
+            <div id="machine-list" class="machine-list">
                 
                 <div class="machine-card">
                     <div class="infos">
@@ -121,45 +157,10 @@
                         <div id="maquina-indicador4" class="machine-indicator warning"></div>
                 </div>
             <a class="analyze-btn" href="dashboard-suporte-grafico.html">Analisar</a>
-        </div>     
-        <div id="grafico1">
-            <canvas style="display: none;" id="usageChart"></canvas>
-        </div>
+        </div>    
+    </div>
     </div>
             </div>
-                </div>
-
-                <div class="div-alertas">
-                <div class="avisos-gerais">
-                        <div class="card-avisos"><h2>Ultima máquina com aviso</h2>
-                        <div class="numero-maquina">02</div></div>
-                        <div class="card-avisos"> <h2>Maquina com mais avisos semanais</h2>
-                         <div class="numero-maquina">04</div></div>
-                    </div>
-                <div class="avisos-jira-div">
-                    
-                    <table class="tabela-jira">
-                        <tr>
-                            <th>ID</th>
-                            <th>Data</th>
-                            <th>Descrição</th>
-                            <th>Máquina</th>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>22/10/2024</td>
-                            <td>Alerta de RAM</td>
-                            <td>PC100</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>22/10/2024</td>
-                            <td>Alerta de CPU</td>
-                            <td>PC400</td>
-                        </tr>
-                    </table>
-
-                </div>
                 </div>
                 </div>
             </div>
@@ -172,7 +173,39 @@
 
 <script>
     
+    function slct_visu_maquina(){
+        const btn_visualizacao = document.getElementById("btn_visu_maquina");
+        const btn_desselect = document.getElementById("btn_info_avisos");
+        const div_selecionada = document.getElementById("info-machines");
+        const div_desselecionada = document.getElementById("div-alertas");
 
+        div_desselecionada.style.display = "none"
+        div_selecionada.style.display = "flex"
+
+        btn_visualizacao.style.backgroundColor = "#ece0ff"
+        btn_visualizacao.style.color = "#000000"
+
+        btn_desselect.style.backgroundColor = "#4a178e"
+        btn_desselect.style.color = "#FFFFFF"
+
+
+    }
+
+    function slct_visu_avisos(){
+        const btn_visualizacao = document.getElementById("btn_info_avisos");
+        const btn_desselect = document.getElementById("btn_visu_maquina");
+        const div_selecionada = document.getElementById("div-alertas");
+        const div_desselecionada = document.getElementById("info-machines");
+
+        div_desselecionada.style.display = "none"
+        div_selecionada.style.display = "flex"
+
+        btn_visualizacao.style.backgroundColor = "#ece0ff"
+        btn_visualizacao.style.color = "#000000"
+
+        btn_desselect.style.backgroundColor = "#4a178e"
+        btn_desselect.style.color = "#FFFFFF"
+    }
 
     function ativarCheck(){
         const checkbox = document.getElementById("checkDash");

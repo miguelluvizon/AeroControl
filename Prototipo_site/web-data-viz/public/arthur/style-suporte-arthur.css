@@ -117,7 +117,7 @@ body {
     font-size: 24px;
     margin-bottom: 20px;
     width: 100%;
-    height: 8%;
+    height: 90px;
     padding-top: 30px;
     text-align: center;
     background-color: #e2ceff;
@@ -129,13 +129,18 @@ body {
     margin-bottom: 20px;
     color: white;
     margin-left: 20px;
-    margin-top: 2%;
+    margin-top: 1%;
 }
 
 .filter-container label {
     font-size: 14px;
     margin-bottom: 5px;
     margin-left: 8px;
+}
+
+.info-machines{
+    display: flex;
+    flex-direction: column;
 }
 
 .custom-select {
@@ -266,7 +271,17 @@ padding: 1%;
 border-radius: 5px;
 }
 
-.grupo_maquinas_filtro label{
+.grupo-indicadores{
+    background-color: #e2ceff;
+margin-left: 20px;
+margin-right: 10px;
+border-radius: 5px;
+padding: 1%;
+border-radius: 5px;
+margin-bottom: 5%;
+}
+
+.grupo-indicadores label{
 color: black;
 }
 
@@ -364,6 +379,8 @@ color: black;
 }
 
 
+
+
 .avisos-jira-div{
     margin-top: 20px;
     background-color: #e2ceff;
@@ -372,7 +389,6 @@ color: black;
     border-radius: 5px;
     padding: 1%;
     border-radius: 5px;
-    margin-bottom: 10%;
     }
 
 /* .tabela-jira{
@@ -406,24 +422,35 @@ th {
 }
 
 .btn_info_avisos{
-    border-width: 1px 1px 1px 0;
-    border-color: #333;
+    border-top: 1px solid;
+    border-right: 1px solid;
+    border-bottom: 1px solid;
+    border-color: #4a178e;
     padding: 1%;
     border-radius: 0px 20px 20px 0px;
-    background-color: #b98bff;
+    background-color: #4a178e;
+    color: #ffffff;
     width: fit-content;
+    cursor: pointer;
 }
+
 
 .btn_visu_maquinas{
-    border-width: 1px 1px 1px 0;
-    border-color: #333;
+    border-top: 1px solid;
+    border-left: 1px solid;
+    border-bottom: 1px solid;
+    border-color: #4a178e;
     padding: 1%;
     border-radius: 20px 0px 0px 20px;
-    background-color: #b98bff;
+    background-color: #ece0ff;
+    color: #000000;
     width: fit-content;
+    cursor: pointer;
 }
 
+
 .btn_troca{
+    margin-top: 2%;
     display: flex;
     flex-direction: row;
     width: 100%;
@@ -445,7 +472,7 @@ th {
     align-items: center;
     text-align: center;
     border-radius: 8px;
-    background-color: #e2ceff;
+    background-color: #c8a1ff;
     padding: 2%;
 }
 
@@ -518,8 +545,10 @@ th {
 }
 
 .div-alertas{
-    margin-bottom: 5%;
+    display: none;
+    flex-direction: column;
 }
+
 
 .avisos-jira-div{
     background-color: #e2ceff;
