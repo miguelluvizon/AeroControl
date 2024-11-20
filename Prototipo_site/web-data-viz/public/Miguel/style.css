@@ -74,14 +74,12 @@ body {
 
 .header {
     display: flex;
-    width: 85%;
+    width: 100%;
     justify-content: space-around;
     background-color: #472c72;
     color: white;
     padding: 15px;
-    margin-bottom: 20px;
-    position: fixed;
-    z-index: 1;
+    
 }
 
 .header span {
@@ -122,16 +120,15 @@ body {
     margin-left: 30px;
     background-color: #d9d9d9;
     width: 95%;
-    height: 99vh;
-    border-radius: 15px;
+    height: 90.9vh;
     text-align: center;
 }
 
 .divisoria {
     color: #3f2182;
-    margin-top: 18px;
     border-bottom: 2px solid #3f2182;
     border-top: 2px solid #3f2182;
+    margin-bottom: 20px;
 }
 
 .escolhaSetor span {
@@ -160,11 +157,11 @@ body {
 }
 
 .cardMedio span {
-    color: #5c3c92;
+    color: #472c72;
 }
 
 .cardMedio p {
-    color: #5c3c92;
+    color: #472c72;
     font-size: 30px;
 }
 

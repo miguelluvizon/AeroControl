@@ -39,7 +39,9 @@
 
             <!-- Div de escolha para CPU -->
             <div class="escolhaSetor" id="CPU" style="display: block;">
-                <h2>SITUAÇÃO DA CPU DAS MÁQUINAS AO LONGO DA SEMANA</h2>
+                <div class="divisoria">
+                    <h1>Situação da CPU ao longo da semana</h1>
+                </div>
                 <div class="cards">
                     <div class="cardMedio">
                         <span>Total de alertas <br>(todas as maquinas)</span>
@@ -47,18 +49,18 @@
                         <div class="concerto">
                             <div class="duvida">
                                 ?
-                                <span class="textoDuvida">Aqui é mostrado os alertas de todas as máquinas</span>
+                                <span class="textoDuvida">Aqui é mostrado os alertas de todas as máquinas do setor</span>
                             </div>
                         </div>
                     </div>
                     <div class="cardMedio">
-                        <span>Alertas das máquinas mais críticas</span>
+                        <span>Total de alertas das máquinas críticas </span>
                         <p>80</p>
                         <div class="concerto">
                             <div class="duvida">
                                 ?
                                 <span class="textoDuvida">Aqui é mostrado a soma total da quantidade de alertas das
-                                    máquinas do ranking</span>
+                                    máquinas do ranking, que se classificam como "críticas" </span>
                             </div>
                         </div>
                     </div>
@@ -76,13 +78,11 @@
                     </div>
 
                 </div>
-                <div class="divisoria">
-                    <h1>Gráficos</h1>
-                </div>
+                
 
                 <div class="graficos">
                     <div class="chart-container">
-                        <p>Ranking das máquinas que dispararam mais alertas</p>
+                        <p>Ranking das máquinas que dispararam mais alertas (maquinas criticas)</p>
                         <canvas id="alertChart"></canvas>
                     </div>
 
@@ -95,7 +95,9 @@
 
             <!-- Div de escolha para RAM -->
             <div class="escolhaSetor" id="RAM" style="display: none;">
-                <h2>SITUAÇÃO DA RAM DAS MÁQUINAS AO LONGO DA SEMANA</h2>
+                <div class="divisoria">
+                    <h1>Situação da RAM ao longo da semana</h1>
+                </div>
                 <div class="cards">
                     <div class="cardMedio">
                         <span>Total de alertas <br>(todas as maquinas)</span>
@@ -131,9 +133,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="divisoria">
-                    <h1>Gráficos</h1>
-                </div>
+                
 
                 <div class="graficos">
                     <div class="chart-container">
