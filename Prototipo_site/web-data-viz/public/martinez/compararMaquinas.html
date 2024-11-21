@@ -18,12 +18,12 @@
             <button class="sidebar-btn">SAIR</button>
         </aside>
         <main class="main-content">
-            <h1>COMPARAÇÃO DE MÁQUINAS POR SETOR</h1>
+            <h1>COMPARAÇÃO SEMANAL DE MÁQUINAS POR SETOR</h1>
 
             <a href="index.html" class="button btn2">&larr; Comparar Setor</a>
 
             <div class="chart-container">
-                <h2>MÉDIA DE CPU E MEMÓRIA RAM UTILIZADAS NA SEMANA</h2>
+                <h2>MÉDIA DE UTILIZAÇÃO DE CPU E MEMÓRIA RAM (%)</h2>
                 <div class="chart-maquina">
                     <p>Setor</p>
                     <select id="setor" class="setor_grafico" onchange="graficoComparacaoMaquina();">
@@ -33,7 +33,7 @@
                         <option value="3">Centro de Meteorologia</option>
                     </select>
                 </div>
-                <canvas id="alertChart-maquina" class="chart-graficoM"></canvas>
+                <canvas id="alertChart-maquina" class="chart-graficoM" width="1000" height="400"></canvas>
             </div>
         </main>
     </div>
@@ -62,22 +62,22 @@
 
                 const ctx = document.getElementById('alertChart-maquina').getContext('2d');
                 alertChartComparativo = new Chart(ctx, {
-                    type: 'line',
+                    type: 'bar',
                     data: {
                         labels: maquinas,
                         datasets: [
                             {
                                 label: 'Média de CPU (%)',
                                 data: cpu,
-                                backgroundColor: 'rgba(54, 162, 235, 0.6)',
-                                borderColor: 'rgba(54, 162, 235, 1)',
+                                backgroundColor: '#6a4c93',
+                                borderColor: '#6a4c93',
                                 borderWidth: 1
                             },
                             {
                                 label: 'Média de RAM (%)',
                                 data: ram,
-                                backgroundColor: 'rgba(255, 99, 132, 0.6)',
-                                borderColor: 'rgba(255, 99, 132, 1)',
+                                backgroundColor: '#1982c4',
+                                borderColor: '#1982c4',
                                 borderWidth: 1
                             }
                         ]

@@ -18,11 +18,11 @@
             <button class="sidebar-btn">SAIR</button>
         </aside>
         <main class="main-content">
-            <h1>COMPARAÇÃO DE ALERTAS ENTRE SETORES</h1>
+            <h1>COMPARAÇÃO MENSAL DE ALERTAS ENTRE SETORES: <span id="mes" style="text-decoration: underline;"></span></h1>
 
             <div style="display: flex; gap: 4rem; justify-content: center;">
                 <div class="kpi-alertas">
-                    <p>Quantidades de Alertas no Mês</p>
+                    <p>Quantidades de Alertas</p>
                     <span id="quantidadeDeAlertas"></span>
                 </div>
 
@@ -36,14 +36,14 @@
 
             <a href="compararMaquinas.html" class="button btn1">Comparar Máquinas &rarr;</a>
 
-            <div style="display: flex;">
+            <div style="display: flex; justify-content: space-around; align-items: center; gap: 20px;">
                 <div class="chart-container">
-                    <h2>QUANTIDADE DE ALERTAS POR MÊS EM CADA SETOR</h2>
+                    <h2>QUANTIDADE DE ALERTAS EM CADA SETOR</h2>
                     <canvas id="alertChart"></canvas>
                 </div>
 
                 <div class="chart-container">
-                    <h2>QUANTIDADE DE ALERTAS POR MÊS DO SETOR: <span style="color: red;" id="setorNome">SETOR</span>
+                    <h2>QUANTIDADE DE ALERTAS DO SETOR: <span style="color: red;" id="setorNome">SETOR</span>
                     </h2>
                     <div class="chart-setor">
                         <p>Setor</p>
@@ -55,7 +55,7 @@
                             <option value="3">Centro de Meteorologia</option>
                         </select>
                     </div>
-                    <canvas id="alertChart-eleMesmo"></canvas>
+                    <canvas id="alertChart-eleMesmo" width="500" height="250" style="max-width: 100%; max-height: 100%;display: block ;margin: 0 auto;"></canvas>
                 </div>
             </div>
         </main>
@@ -65,6 +65,9 @@
 </html>
 
 <script>
+    const mesAtualNome = new Date().toLocaleString('pt-BR', { month: 'long' });
+    mes.innerHTML = mesAtualNome.toLocaleUpperCase()
+
     function exibirTotalAlertas() {
         fetch('/comparacao/alertas')
             .then(response => response.json())
@@ -205,12 +208,13 @@
     }
 
     function getColor(index) {
-    const colors = [
-        '#ff6347',
-        '#ffcc00'
-    ];
-    return colors[index % colors.length];
-}
+        const colors = [
+            '#231942',
+            '#5e548e',
+            '#9f86c0'
+        ];
+        return colors[index % colors.length];
+    }
 
     // const ctx = document.getElementById('alertChart').getContext('2d');
     // const alertChart = new Chart(ctx, {
