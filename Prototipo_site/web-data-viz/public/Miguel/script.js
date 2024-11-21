@@ -1,35 +1,4 @@
-const ctx = document.getElementById('alertChart').getContext('2d');
-const alertChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ['M1', 'M2', 'M3', 'M4', 'M5', 'M6', 'M7', 'M8', 'M9', 'M10'],
-        datasets: [
-            {
-                label: 'Torre de Controle',
-                data: [20, 15, 100, 30, 40, 80, 95, 100, 60, 70],
-                backgroundColor: '#472c72',
-                pointBackgroundColor: '#2c1153',
-                pointRadius: 5
-            },
-        ]
-    },
-    options: {
-        responsive: true,
-        plugins: {
-            legend: {
-                display: false
-            }
-        },
-        scales: {
-            y: {
-                beginAtZero: true,
-                ticks: {
-                    stepSize: 5
-                }
-            }
-        }
-    }
-});
+
 
 const ctx2 = document.getElementById('alertChart2').getContext('2d');
 const alertChart2 = new Chart(ctx2, {
@@ -229,3 +198,52 @@ function puxarMediaTotal() {
 
     return false;
 }
+
+let graficoAlertas
+
+function rankearAlertasTotais() {
+    fetch("../empresas/rankearAlertasTotais")
+    .then(response => response.json())
+    .then(data => {
+        console.log(data)
+
+        const maquinas = data.map(item => item.Maquina);
+        const qtd_alertas = data.map(item => item.total_alertas);
+        
+        const ctx = document.getElementById('alertChart').getContext('2d');
+        graficoAlertas = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: maquinas,
+                datasets: [
+                    {
+                        label: 'Torre de Controle',
+                        data: qtd_alertas,
+                        backgroundColor: '#472c72',
+                        pointBackgroundColor: '#2c1153',
+                        pointRadius: 5
+                    },
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 5
+                        }
+                    }
+                }
+            }
+        });
+    })
+    .catch(error => console.error('Erro ao plotar gráfico', error));
+}
+
+

@@ -36,4 +36,8 @@ router.get("/puxarMediaTotal", function (req, res) { // rota luvizones
   empresaController.puxarMediaTotal(req, res);
 })
 
+router.get("/rankearAlertasTotais", function (req, res) { // rota luvizones
+  empresaController.rankearAlertasTotais(req, res);
+})
+
 module.exports = router;

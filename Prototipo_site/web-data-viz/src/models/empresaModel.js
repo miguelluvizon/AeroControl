@@ -76,13 +76,35 @@ FROM (
   return database.executar(instrucaoSql);
 }
 
+function rankearAlertasTotais() { // rota luvizones
+  var instrucaoSql = `
+  SELECT 
+    c.idComputador,
+    c.hostname as Maquina,
+    COUNT(a.idAlerta) AS total_alertas
+FROM 
+    Alerta a
+JOIN 
+    DadoComputador d ON a.fkDadoComputador = d.idDado
+JOIN 
+    Computador c ON d.fkComputador = c.idComputador
+GROUP BY 
+    c.idComputador, c.hostname
+ORDER BY 
+    total_alertas ASC
+LIMIT 10;`;
+  console.log("Executando a instrução SQL: \n" + instrucaoSql);
+  return database.executar(instrucaoSql);
+}
+
 module.exports = {
   buscarPorCnpj,
   buscarPorId,
   cadastrar,
   listar,
   getEmpresas,
-  puxarAlertas,
-  puxarTotalMaquinas,
-  puxarMediaTotal
+  puxarAlertas, // rota luvizones
+  puxarTotalMaquinas, // rota luvizones
+  puxarMediaTotal, // rota luvizones
+  rankearAlertasTotais // rota luvizones
 };
