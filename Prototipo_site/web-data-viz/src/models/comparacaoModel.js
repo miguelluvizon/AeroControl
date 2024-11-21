@@ -85,9 +85,36 @@ function exibirGraficoSetores(){
     return database.executar(instrucao)
 }
 
+function graficoComparacaoCPueRam(setor){
+    const instrucao = `
+        SELECT 
+            s.nomeSetor AS setor,
+            c.hostname AS computador,
+            AVG(dc.cpuPorcentagem) AS media_cpu,
+            AVG(dc.memoriaPorcentagem) AS media_memoria
+        FROM 
+            DadoComputador dc
+        JOIN 
+            Computador c ON dc.fkComputador = c.idComputador
+        JOIN 
+            Setor s ON c.fkSetor = s.idSetor
+        WHERE 
+            YEAR(dc.horaDado) = YEAR(CURRENT_DATE())  
+            AND WEEK(dc.horaDado, 1) = WEEK(CURRENT_DATE(), 1)  
+        AND s.idSetor = ${setor}
+        GROUP BY 
+            s.nomeSetor, c.hostname
+        ORDER BY 
+            c.hostname;
+    `
+
+    return database.executar(instrucao)
+}
+
 module.exports = {
     totalAlertas,
     totalAletasSetor,
     exibirGraficoEleMesmo,
-    exibirGraficoSetores
+    exibirGraficoSetores,
+    graficoComparacaoCPueRam
 }

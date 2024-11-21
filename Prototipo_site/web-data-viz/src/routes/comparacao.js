@@ -19,4 +19,8 @@ router.get('/graficosSetores', function(req, res){
     comparacaoController.exibirGraficoSetores(req,res)
 })
 
+router.get('/compararCPUeRAM/:setor', function(req,res){
+    comparacaoController.graficoComparacaoCPueRam(req,res)
+})
+
 module.exports = router

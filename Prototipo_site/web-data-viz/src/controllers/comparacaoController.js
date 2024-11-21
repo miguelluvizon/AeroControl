@@ -40,9 +40,22 @@ function exibirGraficoSetores(req,res){
         })
 }
 
+function graficoComparacaoCPueRam(req, res){
+    const { setor } = req.params
+
+    comparacaoModel.graficoComparacaoCPueRam(setor)
+    .then(result => res.status(200).json(result))
+    .catch(e => {
+        console.error("Erro ao obter as médias da semana do setor" + e.sqlMessage)
+        res.status(500).json(sqlMessage)
+    })
+
+}
+
 module.exports = {
     totalAlertas,
     totalAlertasSetor,
     exibirGraficoEleMesmo,
-    exibirGraficoSetores
+    exibirGraficoSetores,
+    graficoComparacaoCPueRam
 }
