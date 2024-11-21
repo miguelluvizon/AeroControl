@@ -217,7 +217,7 @@ function puxarMediaTotal() {
                     .then(function (resposta) {
                         console.log(resposta)
 
-                        mediaTotal.innerHTML = `${resposta[0].xxx}`
+                        mediaTotal.innerHTML = `${resposta[0].mediaTotal_CPU}`
                     })
             } else {
                 throw "Houve ao puxar a média";

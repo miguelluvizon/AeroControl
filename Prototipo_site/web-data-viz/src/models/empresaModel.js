@@ -52,7 +52,29 @@ function puxarTotalMaquinas() { // rota luvizones
   return database.executar(instrucaoSql);
 }
 
-
+function puxarTotalMaquinas() { // rota luvizones
+  var instrucaoSql = `
+  SELECT
+    ROUND(AVG(media_uso_cpu),1) AS mediaTotal_CPU,
+    ROUND(AVG(media_uso_ram),1) AS mediaTotal_RAM
+FROM (
+    SELECT 
+        AVG(cpuPorcentagem) AS media_uso_cpu,
+        AVG(memoriaPorcentagem) AS media_uso_ram
+    FROM 
+        Computador
+    JOIN 
+        DadoComputador ON fkComputador = idComputador
+	JOIN 
+		Setor on fkSetor = idSetor
+    WHERE 
+        idSetor = 1
+    GROUP BY 
+        idComputador
+) AS mediasTotais;`;
+  console.log("Executando a instrução SQL: \n" + instrucaoSql);
+  return database.executar(instrucaoSql);
+}
 
 module.exports = {
   buscarPorCnpj,
