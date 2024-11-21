@@ -160,7 +160,7 @@ JOIN
 WHERE 
     MONTH(a.dataAlerta) = MONTH(CURRENT_DATE())
     AND YEAR(a.dataAlerta) = YEAR(CURRENT_DATE())
-    AND s.idSetor = 2
+    AND s.idSetor = 1
 GROUP BY 
     s.nomeSetor
 ORDER BY 

@@ -777,3 +777,34 @@ INSERT INTO DadoComputador VALUES (default,'2024-10-21 12:01:00', 1.0, 24.7, 0.7
 INSERT INTO DadoComputador VALUES (default,'2024-10-21 12:01:00', 0.5, 24.7, 0.7, 3);
 INSERT INTO DadoComputador VALUES (default,'2024-10-21 12:01:00', 0.5, 24.7, 0.7, 1);
 INSERT INTO DadoComputador VALUES (default,'2024-10-21 12:01:00', 1.0, 24.7, 0.7, 2);
+
+
+INSERT INTO DadoComputador (horaDado, cpuPorcentagem, memoriaPorcentagem, memoriaGB, fkComputador)
+SELECT 
+    DATE_ADD(CURDATE(), INTERVAL -num DAY) AS horaDado,
+    ROUND(RAND() * 100, 2) AS cpuPorcentagem, -- Uso de CPU entre 0 e 100%
+    ROUND(RAND() * 100, 2) AS memoriaPorcentagem, -- Uso de memória entre 0 e 100%
+    ROUND(16 * (RAND()), 2) AS memoriaGB, -- Simula memória usada para um total de 16GB
+    1 AS fkComputador
+FROM 
+    (SELECT units.num + tens.num * 10 AS num 
+     FROM (SELECT 0 AS num UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9) units
+     CROSS JOIN (SELECT 0 AS num UNION SELECT 1 UNION SELECT 2 UNION SELECT 3) tens) numbers
+WHERE 
+    DATE_ADD(CURDATE(), INTERVAL -num DAY) >= DATE_SUB(CURDATE(), INTERVAL WEEKDAY(CURDATE()) DAY) -- Início da semana
+    AND DATE_ADD(CURDATE(), INTERVAL -num DAY) <= CURDATE(); -- Fim da semana (hoje)
+
+INSERT INTO DadoComputador (horaDado, cpuPorcentagem, memoriaPorcentagem, memoriaGB, fkComputador)
+SELECT 
+    DATE_ADD(CURDATE(), INTERVAL -num DAY) AS horaDado,
+    ROUND(RAND() * 100, 2) AS cpuPorcentagem, -- Uso de CPU entre 0 e 100%
+    ROUND(RAND() * 100, 2) AS memoriaPorcentagem, -- Uso de memória entre 0 e 100%
+    ROUND(8 * (RAND()), 2) AS memoriaGB, -- Simula memória usada para um total de 8GB
+    3 AS fkComputador
+FROM 
+    (SELECT units.num + tens.num * 10 AS num 
+     FROM (SELECT 0 AS num UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9) units
+     CROSS JOIN (SELECT 0 AS num UNION SELECT 1 UNION SELECT 2 UNION SELECT 3) tens) numbers
+WHERE 
+    DATE_ADD(CURDATE(), INTERVAL -num DAY) >= DATE_SUB(CURDATE(), INTERVAL WEEKDAY(CURDATE()) DAY) -- Início da semana
+    AND DATE_ADD(CURDATE(), INTERVAL -num DAY) <= CURDATE(); -- Fim da semana (hoje)
