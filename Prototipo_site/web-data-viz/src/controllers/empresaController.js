@@ -84,8 +84,8 @@ function puxarTotalMaquinas(req, res) { // rota luvizones
 }
 
 function puxarMediaTotal(req, res) { // rota luvizones
-  console.log("puxando total de maquinas")
-  empresaModel.puxarTotalMaquinas()
+  console.log("puxando média das médias das máquinas")
+  empresaModel.puxarMediaTotal()
   .then(function (resposta) {
       if(resposta.length > 0) {
           res.status(200).json(resposta);

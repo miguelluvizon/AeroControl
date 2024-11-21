@@ -52,7 +52,7 @@ function puxarTotalMaquinas() { // rota luvizones
   return database.executar(instrucaoSql);
 }
 
-function puxarTotalMaquinas() { // rota luvizones
+function puxarMediaTotal() { // rota luvizones
   var instrucaoSql = `
   SELECT
     ROUND(AVG(media_uso_cpu),1) AS mediaTotal_CPU,
@@ -83,5 +83,6 @@ module.exports = {
   listar,
   getEmpresas,
   puxarAlertas,
-  puxarTotalMaquinas
+  puxarTotalMaquinas,
+  puxarMediaTotal
 };
