@@ -1,9 +1,8 @@
 var suporteModel = require("../models/suporteModel");
 const { get } = require("../routes/empresas");
 
-function plotar(req, res) {
-  suporteModel.plotar().then(function(resultado){
-      // precisamos informar que o resultado voltará para o front-end como uma resposta em json
+function getDados(req, res) {
+  suporteModel.getDados().then(function(resultado){
       res.status(200).json(resultado);
   }).catch(function(erro){
       res.status(500).json(erro.sqlMessage);
@@ -65,7 +64,7 @@ function getInformacoes(req, res) {
 }
 
 module.exports = {
-  plotar,
+  getDados,
   cadastrar,
   getSetor,
   getInformacoes
