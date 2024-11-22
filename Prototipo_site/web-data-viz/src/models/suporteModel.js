@@ -1,18 +1,19 @@
-var database = require("../database/config")
+var database = require("../database/config");
 
-function plotar() {
+function getDados() {
   var instrucao = `
-      SELECT cpuPorcentagem , memoriaPorcentagem, memoriaGB FROM Usuario
-	      JOIN Computador ON fkUsuario = cpf
-        JOIN DadoComputador ON fkComputador = idComputador
-      WHERE cpf = ${sessionStorage.CPF};
+      SELECT horaDado, cpuPorcentagem, memoriaPorcentagem FROM DadoComputador
+JOIN Computador
+ON idComputador = fkComputador
+WHERE idComputador = 1
+ORDER BY idDado DESC
+LIMIT 25;
   `;
   console.log("Executando a instrução SQL: \n" + instrucao);
   return database.executar(instrucao);
 }
 
 function cadastrar(hostname, ramTotal, processador, usuario, setor) {
-
   var instrucaoSql = `
       INSERT INTO Computador (hostname, processador, ramMax, fkUsuario, fkSetor) VALUES
         ("${hostname}", "${processador}", ${ramTotal}, ${usuario}, ${setor})
@@ -56,7 +57,7 @@ GROUP BY hostname, ramMax, processador, cpuPorcentagem, memoriaPorcentagem, memo
 
 module.exports = {
   cadastrar,
-  plotar,
+  getDados,
   getSetor,
-  getInformacoes
+  getInformacoes,
 };

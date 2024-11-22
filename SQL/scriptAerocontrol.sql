@@ -91,10 +91,7 @@ INSERT INTO SetorAeroporto VALUES
     
 INSERT INTO Computador VALUES
 	(1, 'C1DP', 'i3', '8' ,'12345678901', 1);
-    
-INSERT INTO Alerta VALUES
-(default, "2024-01-01 23:45:32", 4, "alerta");
-    
+        
 SELECT * FROM Aeroporto;
 SELECT * FROM Setor;    
 SELECT * FROM SetorAeroporto;
