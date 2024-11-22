@@ -20,6 +20,15 @@ function totalAlertasSetor(req, res) {
         })
 }
 
+function totalAlertasPredict(req, res){
+    comparacaoModel.totalAlertasPredict()
+    .then(result => res.status(200).json(result))
+    .catch(e => {
+        console.error("Erro ao obter o total de alertas no setor" + e.sqlMessage)
+        res.status(500).json(sqlMessage)
+    })
+}
+
 function exibirGraficoEleMesmo(req, res) {
     const { fkSetorGrafico } = req.params
 
@@ -55,6 +64,7 @@ function graficoComparacaoCPueRam(req, res){
 module.exports = {
     totalAlertas,
     totalAlertasSetor,
+    totalAlertasPredict,
     exibirGraficoEleMesmo,
     exibirGraficoSetores,
     graficoComparacaoCPueRam

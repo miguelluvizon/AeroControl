@@ -29,6 +29,28 @@ function totalAletasSetor(setor) {
     return database.executar(instrucao)
 }
 
+function totalAlertasPredict() {
+    const instrucao = `
+        SELECT 
+            s.nomeSetor AS setor,
+            COUNT(a.idAlerta) AS quantidade_alertas
+        FROM 
+            Alerta a
+        JOIN 
+            DadoComputador dc ON a.fkDadoComputador = dc.idDado
+        JOIN 
+            Computador c ON dc.fkComputador = c.idComputador
+        JOIN 
+            Setor s ON c.fkSetor = s.idSetor
+        GROUP BY 
+            s.nomeSetor
+        ORDER BY 
+            s.nomeSetor;
+    `
+
+    return database.executar(instrucao)
+}
+
 function exibirGraficoEleMesmo(setor){
     const instrucao = `
         SELECT 
@@ -114,6 +136,7 @@ function graficoComparacaoCPueRam(setor){
 module.exports = {
     totalAlertas,
     totalAletasSetor,
+    totalAlertasPredict,
     exibirGraficoEleMesmo,
     exibirGraficoSetores,
     graficoComparacaoCPueRam

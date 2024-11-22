@@ -23,4 +23,8 @@ router.get('/compararCPUeRAM/:setor', function(req,res){
     comparacaoController.graficoComparacaoCPueRam(req,res)
 })
 
+router.get('/predict', function(req, res){
+    comparacaoController.totalAlertasPredict(req,res)
+})
+
 module.exports = router

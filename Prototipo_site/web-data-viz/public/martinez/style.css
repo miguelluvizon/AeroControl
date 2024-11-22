@@ -183,6 +183,12 @@ body {
     padding: .3rem;
 }
 
+.btn3{
+    position: relative;
+    left: 68%;
+    top: 2%;
+}
+
 @media (max-width: 768px) {
     .container-graficos {
         grid-template-columns: 1fr; /* Uma coluna */
