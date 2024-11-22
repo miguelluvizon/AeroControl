@@ -33,12 +33,12 @@ function getEmpresas() {
 
 function puxarAlertas() { // rota luvizones
   var instrucaoSql = `
-  select count(*) as total_linhas from Alerta
-	  JOIN DadoComputador ON fkDadoComputador = idDado
-    JOIN Computador ON fkComputador = idComputador
-    JOIN Setor ON fkSetor = idSetor
-    JOIN SetorAeroporto ON fkSetorId = idSetor
-    WHERE fkAeroporto = "11223344556677" AND idSetor = 1;`;
+  SELECT count(*) AS total_linhas FROM Alerta
+	JOIN DadoComputador ON fkDadoComputador = idDado
+  JOIN Computador ON fkComputador = idComputador
+  JOIN Setor ON fkSetor = idSetor
+  JOIN SetorAeroporto ON fkSetorId = idSetor
+  WHERE fkAeroporto = "11223344556677" AND idSetor = 1 AND origem = "cpu";`;
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
 }
@@ -78,21 +78,15 @@ FROM (
 
 function rankearAlertasTotais() { // rota luvizones
   var instrucaoSql = `
-  SELECT 
-    c.idComputador,
-    c.hostname as Maquina,
-    COUNT(a.idAlerta) AS total_alertas
-FROM 
-    Alerta a
-JOIN 
-    DadoComputador d ON a.fkDadoComputador = d.idDado
-JOIN 
-    Computador c ON d.fkComputador = c.idComputador
-GROUP BY 
-    c.idComputador, c.hostname
-ORDER BY 
-    total_alertas ASC
-LIMIT 10;`;
+  SELECT idComputador, hostname as Maquina, COUNT(a.idAlerta) AS total_alertas FROM Alerta a
+	JOIN DadoComputador ON fkDadoComputador = idDado
+  JOIN Computador ON fkComputador = idComputador
+  JOIN Setor ON fkSetor = idSetor
+  JOIN SetorAeroporto ON fkSetorId = idSetor
+  WHERE fkAeroporto = "11223344556677" AND idSetor = 1 AND origem = "cpu"
+  GROUP BY idComputador, hostname
+  ORDER BY total_alertas ASC
+  LIMIT 10;`;
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
 }
