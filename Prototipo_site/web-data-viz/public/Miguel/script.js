@@ -136,7 +136,8 @@ function puxarAlertas() {
                     .then(function (resposta) {
                         console.log(resposta)
 
-                        alertasTotal.innerHTML = `${resposta[0].total_linhas}`
+                        alertasTotalCPU.innerHTML = `${resposta[0].total_cpu}`
+                        alertasTotalRAM.innerHTML = `${resposta[0].total_ram}`
                     })
             } else {
                 throw "Houve ao puxar qtd";
@@ -211,7 +212,8 @@ function puxarMediaTotal() {
                     .then(function (resposta) {
                         console.log(resposta)
 
-                        mediaTotal.innerHTML = `${resposta[0].mediaTotal_CPU}`
+                        mediaTotalCPU.innerHTML = `${resposta[0].mediaTotal_CPU}`
+                        mediaTotalRAM.innerHTML = `${resposta[0].mediaTotal_RAM}`
                     })
             } else {
                 throw "Houve ao puxar a média";

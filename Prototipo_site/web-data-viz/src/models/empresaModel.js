@@ -33,12 +33,15 @@ function getEmpresas() {
 
 function puxarAlertas() { // rota luvizones
   var instrucaoSql = `
-  SELECT count(*) AS total_linhas FROM Alerta
-	JOIN DadoComputador ON fkDadoComputador = idDado
-  JOIN Computador ON fkComputador = idComputador
-  JOIN Setor ON fkSetor = idSetor
-  JOIN SetorAeroporto ON fkSetorId = idSetor
-  WHERE fkAeroporto = "11223344556677" AND idSetor = 1 AND origem = "cpu";`;
+  SELECT
+  SUM(CASE WHEN origem = 'cpu' THEN 1 ELSE 0 END) AS total_cpu,
+  SUM(CASE WHEN origem = 'ram' THEN 1 ELSE 0 END) AS total_ram
+FROM Alerta
+JOIN DadoComputador ON fkDadoComputador = idDado
+JOIN Computador ON fkComputador = idComputador
+JOIN Setor ON fkSetor = idSetor
+JOIN SetorAeroporto ON fkSetorId = idSetor
+WHERE fkAeroporto = "11223344556677" AND idSetor = 1;`;
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
 }
