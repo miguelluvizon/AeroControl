@@ -162,7 +162,12 @@
     );
 
     ram.innerHTML = `<span><b>RAM:</b> ${resposta[0].memoriaPorcentagem}%</span>
-            <p>Usando ${((resposta[0].memoriaPorcentagem / 100) * (resposta[0].ramMax)).toFixed(2)}GB de ${resposta[0].ramMax}GB</p>`;
+            <p>Usando ${(
+              (resposta[0].memoriaPorcentagem / 100) *
+              resposta[0].ramMax
+            ).toFixed(2)}GB de ${resposta[0].ramMax}GB</p>`;
+
+    setInterval(() => recarregar(), 1000);
   }
 
   function limparSessao() {
@@ -201,4 +206,8 @@
 
     return false;
   }
+
+  function recarregar() {
+    informacoes();
+}
 </script>

@@ -96,7 +96,7 @@ INSERT INTO SetorAeroporto VALUES
 
 SELECT * FROM Computador;
 INSERT INTO Computador VALUES
-	(1, 'C1DP', 'i3', '8' ,'12345678901', 1);
+	(1, 'C1DP', 'i3', '8' ,'12345678901', 1),
 	(2, 'nb-martinez', 'i5-10', '16', '25107632415', 1),
     (3, "ACER_ASPIRE",'i3-10', '8', '64281964382', 2),
     (4, "JUBILEUS",'i3-10', '8', '83526735482', 3);
@@ -106,8 +106,9 @@ SELECT * FROM Setor;
 SELECT * FROM SetorAeroporto;
 SELECT * FROM Usuario;  
 SELECT * FROM Computador;
-    
+SELECT * FROM DadoComputador;
 SELECT * FROM Alerta;
+INSERT INTO Alerta VALUES (default, default, 80, "alerta", "cpu");
 -- SELECT LUVIZONES
 SELECT idComputador, hostname as Maquina, COUNT(a.idAlerta) AS total_alertas FROM Alerta a
 	JOIN DadoComputador ON fkDadoComputador = idDado
@@ -127,6 +128,26 @@ SELECT count(*) AS total_linhas FROM Alerta
     WHERE fkAeroporto = "11223344556677" AND idSetor = 1 AND origem = "cpu";
 -- -----------------------------------------------------------------------------------
 -- SELECT DO REQUENA
+ SELECT hostname,
+ramMax,
+processador,
+cpuPorcentagem,
+memoriaPorcentagem,
+memoriaGB,
+(SELECT count(*) FROM Alerta 
+JOIN DadoComputador 
+ON fkDadoComputador = idDado 
+JOIN Computador 
+ON fkComputador = idComputador 
+WHERE idComputador = 1 AND TIME_TO_SEC(TIMEDIFF(current_timestamp, dataAlerta)) <= 3600) as alertas 
+FROM Computador
+JOIN DadoComputador
+ON fkComputador = idComputador
+LEFT JOIN Alerta
+ON fkDadoComputador = idDado
+WHERE idDado = (SELECT max(idDado) FROM DadoComputador JOIN Computador ON idComputador = fkComputador WHERE idComputador = 1)
+GROUP BY hostname, ramMax, processador, cpuPorcentagem, memoriaPorcentagem, memoriaGB;
+
 SELECT horaDado, cpuPorcentagem, memoriaPorcentagem FROM DadoComputador
 JOIN Computador
 ON idComputador = fkComputador

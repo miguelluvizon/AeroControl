@@ -31,7 +31,7 @@ function getSetor() {
 
 function getInformacoes() {
   var instrucaoSql = `
-  SELECT hostname,
+ SELECT hostname,
 ramMax,
 processador,
 cpuPorcentagem,
@@ -42,7 +42,7 @@ JOIN DadoComputador
 ON fkDadoComputador = idDado 
 JOIN Computador 
 ON fkComputador = idComputador 
-WHERE idComputador = 1 AND TIME_TO_SEC(TIMEDIFF(curtime(), time(dataAlerta))) <= 3600) as alertas 
+WHERE idComputador = 1 AND TIME_TO_SEC(TIMEDIFF(current_timestamp, dataAlerta)) <= 3600) as alertas 
 FROM Computador
 JOIN DadoComputador
 ON fkComputador = idComputador
