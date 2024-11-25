@@ -68,42 +68,45 @@
   function plotar(resposta) {
     console.log("Iniciando plotagem do gráfico");
     console.log("=============================");
-    console.log("Estes dados foram recebidos pela função getDados() e passados para a função plotar():");
+    console.log(
+      "Estes dados foram recebidos pela função getDados() e passados para a função plotar():"
+    );
     console.log(resposta);
 
     let labels = Array.from({ length: 25 }, (_, i) => i);
 
     let dados = {
       labels: labels,
-        datasets: [
-          {
-            label: "CPU",
-            borderColor: "#3F2182",
-            backgroundColor: "#3F2182",
-            fill: false,
-            data: [],
-          },
-          {
-            label: "Memória",
-            borderColor: "#7C1E6A",
-            backgroundColor: "#7C1E6A",
-            fill: false,
-            data: [],
-          }]
-      };
+      datasets: [
+        {
+          label: "CPU",
+          borderColor: "#3F2182",
+          backgroundColor: "#3F2182",
+          fill: false,
+          data: [],
+        },
+        {
+          label: "Memória",
+          borderColor: "#7C1E6A",
+          backgroundColor: "#7C1E6A",
+          fill: false,
+          data: [],
+        },
+      ],
+    };
 
-    for(i = 0; i < resposta.length; i++){
+    for (i = 0; i < resposta.length; i++) {
       var registro = resposta[i];
       dados.datasets[0].data.push(registro.cpuPorcentagem);
       dados.datasets[1].data.push(registro.memoriaPorcentagem);
     }
 
     console.log("=============================");
-    console.log("O gráfico será plotado com os respectivos valores:")
-    console.log("labels:")
-    console.log(labels)
-    console.log("dados:")
-    console.log(dados.datasets)
+    console.log("O gráfico será plotado com os respectivos valores:");
+    console.log("labels:");
+    console.log(labels);
+    console.log("dados:");
+    console.log(dados.datasets);
     console.log("=============================");
 
     const config = {
@@ -158,6 +161,8 @@
       config
     );
 
+    ram.innerHTML = `<span><b>RAM:</b> ${resposta[0].memoriaPorcentagem}%</span>
+            <p>Usando ${((resposta[0].memoriaPorcentagem / 100) * (resposta[0].ramMax)).toFixed(2)}GB de ${resposta[0].ramMax}GB</p>`;
   }
 
   function limparSessao() {
@@ -182,9 +187,6 @@
 
             cpu.innerHTML = `<span><b>CPU:</b> ${resultado[0].cpuPorcentagem}%</span>
             <p>Processador: ${resultado[0].processador} </p>`;
-
-            ram.innerHTML = `<span><b>RAM:</b> ${resultado[0].memoriaPorcentagem}%</span>
-            <p>Usando ${resultado[0].memoriaGB}GB de ${resultado[0].ramMax}GB</p>`;
 
             alerta.innerHTML = `<span><b>${resultado[0].alertas} ALERTAS</b></span>
             <p>Na última hora</p>`;

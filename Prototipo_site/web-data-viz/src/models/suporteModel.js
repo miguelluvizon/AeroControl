@@ -2,7 +2,7 @@ var database = require("../database/config");
 
 function getDados() {
   var instrucao = `
-      SELECT horaDado, cpuPorcentagem, memoriaPorcentagem FROM DadoComputador
+      SELECT ramMax, horaDado, cpuPorcentagem, memoriaPorcentagem FROM DadoComputador
 JOIN Computador
 ON idComputador = fkComputador
 WHERE idComputador = 1
@@ -42,7 +42,7 @@ JOIN DadoComputador
 ON fkDadoComputador = idDado 
 JOIN Computador 
 ON fkComputador = idComputador 
-WHERE idComputador = 1) as alertas 
+WHERE idComputador = 1 AND TIME_TO_SEC(TIMEDIFF(curtime(), time(dataAlerta))) <= 3600) as alertas 
 FROM Computador
 JOIN DadoComputador
 ON fkComputador = idComputador

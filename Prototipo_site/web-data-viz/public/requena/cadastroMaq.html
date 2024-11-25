@@ -1,156 +1,195 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="cadastroMaq.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="cadastroMaq.css" />
     <title>AeroControl | Cadastro de Máquina</title>
-</head>
+  </head>
 
-<body onload="getSetor()">
+  <body onload="getSetor()">
     <div class="tela">
-        <aside class="barraLateral">
-            <img src="Protótipo Dashboard.png" alt="" />
-            <a class="botao" href="../arthur/dashboard-suporte.html">PAINEL</a>
-            <a class="botao" href="cadastroMaq.html">CADASTRO</a>
-            <a class="botao" onclick="limparSessao()">SAIR</a>
-        </aside>
+      <aside class="barraLateral">
+        <img src="Protótipo Dashboard.png" alt="" />
+        <a class="botao" href="../arthur/dashboard-suporte.html">PAINEL</a>
+        <a class="botao" href="cadastroMaq.html">CADASTRO</a>
+        <a class="botao" onclick="limparSessao()">SAIR</a>
+      </aside>
 
-        <main class="principal">
-            <h1>CADASTRAR MÁQUINA</h1>
+      <main class="principal">
+        <h1>CADASTRAR MÁQUINA</h1>
 
-            <div class="cadastro">
-                <div class="campo">
-                    <label>Nome da Máquina</label>
-                    <input type="text" placeholder="Hostname da Máquina" id="inputNome">
-                </div>
+        <div class="cadastro">
+          <div class="campo">
+            <label>Nome da Máquina</label>
+            <input
+              type="text"
+              placeholder="Hostname da Máquina"
+              id="inputNome"
+            />
+            <span id="mensagemNome"></span>
+          </div>
 
-                <div class="campo">
-                    <label>Total RAM (Em GB)</label>
-                    <input type="number" min="4" placeholder="Memória RAM em GB" id="inputRAM">
-                </div>
+          <div class="campo">
+            <label>Total RAM (Em GB)</label>
+            <input
+              type="number"
+              min="4"
+              placeholder="Memória RAM em GB"
+              id="inputRAM"
+            />
+            <span id="mensagemRam"></span>
+          </div>
 
-                <div class="campo">
-                    <label>Processador</label>
-                    <input type="text" placeholder="Modelo do processador" id="inputProcessador">
-                </div>
+          <div class="campo">
+            <label>Processador</label>
+            <input
+              type="text"
+              placeholder="Modelo do processador"
+              id="inputProcessador"
+            />
+            <span id="mensagemProcessador"></span>
+          </div>
 
-                <div class="campo">
-                    <label>Setor</label>
-                    <select id="selectSetor">
-                    </select>
-                </div>
+          <div class="campo">
+            <label>Setor</label>
+            <select id="selectSetor">
+              <span id="mensagemSetor"></span>
+            </select>
+          </div>
 
-                <div id="botaoMensagem" class="botaoMensagem">
-                    <button onclick="cadastrar()">CADASTRAR</button>
-                </div>
-            </div>
-
-
-        </main>
+          <div id="botaoMensagem" class="botaoMensagem">
+            <button onclick="cadastrar()">CADASTRAR</button>
+          </div>
+        </div>
+      </main>
     </div>
-
-</body>
-
+  </body>
 </html>
 
 <script>
-    const selectElement = document.getElementById('selectSetor');
+  const selectElement = document.getElementById("selectSetor");
 
-    selectElement.addEventListener('change', function () {
-        // Adiciona a classe "selected" somente após a seleção de uma opção válida
-        if (this.value) {
-            this.classList.add('selected');
-        }
-    });
+  selectElement.addEventListener("change", function () {
+    // Adiciona a classe "selected" somente após a seleção de uma opção válida
+    if (this.value) {
+      this.classList.add("selected");
+    }
+  });
 
-    function limparSessao() {
-        sessionStorage.clear();
-        window.location = "../index.html";
+  function limparSessao() {
+    sessionStorage.clear();
+    window.location = "../index.html";
+  }
+
+  function cadastrar() {
+    var hostname = inputNome.value;
+    var ramTotal = inputRAM.value;
+    var processador = inputProcessador.value;
+    var setor = selectSetor.value;
+    var usuario = sessionStorage.CPF;
+    var preenchidos = 0;
+
+    if (hostname.length >= 1) {
+      preenchidos++;
+    } else {
+      mensagemNome.innerHTML = `Adicione o hostname da máquina`;
     }
 
-    function cadastrar() {
-        hostname = inputNome.value;
-        ramTotal = inputRAM.value;
-        processador = inputProcessador.value;
-        setor = selectSetor.value;
-        usuario = sessionStorage.CPF
-
-        fetch("/suporte/cadastrar", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                hostnameServer: hostname,
-                ramTotalServer: ramTotal,
-                processadorServer: processador,
-                setorServer: setor,
-                usuarioServer: usuario
-            }),
-        })
-            .then(function (resposta) {
-                console.log("resposta: ", resposta);
-
-                if (resposta.ok) {
-
-                    botaoMensagem.innerHTML = `<span class="mensagem">Cadastro realizado com sucesso!</span>`
-
-                    setTimeout(() => {
-                        window.location = "cadastroMaq.html";
-                    }, "2000");
-
-                    limparFormulario();
-                } else {
-                    throw "Houve um erro ao tentar realizar o cadastro!";
-                }
-            })
-            .catch(function (resposta) {
-                console.log(`#ERRO: ${resposta}`);
-
-            });
-
-        return false;
+    if (ramTotal >= 4) {
+      if (ramTotal % 4 == 0) {
+        preenchidos++;
+      } else {
+        mensagemRam.innerHTML = `Memória Inválida`;
+      }
+    } else {
+      mensagemRam.innerHTML = `Memória muito baixa`;
     }
 
-    function getSetor() {
-        fetch("../suporte/getSetor", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
+    if (processador.length >= 1) {
+      preenchidos++;
+    } else {
+      mensagemProcessador.innerHTML = `Adicione um processador`;
+    }
 
-            }),
+    if (selectSetor.value == "#") {
+      preenchidos++;
+    } else {
+      mensagemSetor.innerHTML = `Selecione um setor`;
+    }
+
+    if (preenchidos == 4) {
+      fetch("/suporte/cadastrar", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          hostnameServer: hostname,
+          ramTotalServer: ramTotal,
+          processadorServer: processador,
+          setorServer: setor,
+          usuarioServer: usuario,
+        }),
+      })
+        .then(function (resposta) {
+          console.log("resposta: ", resposta);
+
+          if (resposta.ok) {
+            botaoMensagem.innerHTML = `<span class="mensagem">Cadastro realizado com sucesso!</span>`;
+
+            setTimeout(() => {
+              window.location = "cadastroMaq.html";
+            }, "2000");
+
+            limparFormulario();
+          } else {
+            throw "Houve um erro ao tentar realizar o cadastro!";
+          }
         })
-            .then(function (resposta) {
-                console.log("resposta:", resposta);
+        .catch(function (resposta) {
+          console.log(`#ERRO: ${resposta}`);
+        });
 
-                if (resposta.ok) {
-                    resposta.json()
-                        .then(function (resultado) {
-                            console.log(resultado)
+      return false;
+    } else {
+        console.error("Preenche as coisa parceiro")
+    }
+  }
 
-                            var opcoes = ``
-                            for (var index = 0; index < resultado.length; index++) {
-                                opcoes += `<option value="${resultado[index].idSetor}">${resultado[index].nomeSetor}</option>
+  function getSetor() {
+    fetch("../suporte/getSetor", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({}),
+    })
+      .then(function (resposta) {
+        console.log("resposta:", resposta);
+
+        if (resposta.ok) {
+          resposta.json().then(function (resultado) {
+            console.log(resultado);
+
+            var opcoes = ``;
+            for (var index = 0; index < resultado.length; index++) {
+              opcoes += `<option value="${resultado[index].idSetor}">${resultado[index].nomeSetor}</option>
                         `;
-                            }
-                            selectSetor.innerHTML = `<select id="selectSetor" required>
+            }
+            selectSetor.innerHTML = `<select id="selectSetor">
                         <option value="#" selected disabled>Setor onde a máquina opera</option>
                         ${opcoes}
-                        </select>`
-                        })
-                } else {
-                    throw "Houve um erro ao tentar criar o select";
-                }
-            })
-            .catch(function (resposta) {
-                console.log(`#ERRO: ${resposta}`);
-            });
+                        </select>`;
+          });
+        } else {
+          throw "Houve um erro ao tentar criar o select";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
 
-        return false;
-    }
-
+    return false;
+  }
 </script>
