@@ -2,22 +2,6 @@ DROP DATABASE IF EXISTS aeroControl;
 CREATE DATABASE aeroControl;
 USE aeroControl;
 
-SELECT 
-    c.idComputador,
-    c.hostname as Maquina,
-    COUNT(a.idAlerta) AS total_alertas
-FROM Alerta a
-JOIN DadoComputador d ON a.fkDadoComputador = d.idDado
-JOIN Computador c ON d.fkComputador = c.idComputador
-JOIN Setor ON fkSetor = idSetor
-JOIN SetorAeroporto ON fkSetorId = idSetor
-WHERE idSetor = 1 and origem = "cpu" and fkAeroporto = "11223344556677"
-GROUP BY c.idComputador, c.hostname
-ORDER BY total_alertas ASC
-LIMIT 10;
-
-
-
 CREATE TABLE Aeroporto (
 cnpj char(14) primary key,
 nomeAeroporto varchar(100),
@@ -112,59 +96,18 @@ INSERT INTO SetorAeroporto VALUES
 
 SELECT * FROM Computador;
 INSERT INTO Computador VALUES
-<<<<<<< HEAD
 	(1, 'C1DP', 'i3', '8' ,'12345678901', 1);
+	(2, 'nb-martinez', 'i5-10', '16', '25107632415', 1),
+    (3, "ACER_ASPIRE",'i3-10', '8', '64281964382', 2),
+    (4, "JUBILEUS",'i3-10', '8', '83526735482', 3);
         
 SELECT * FROM Aeroporto;
 SELECT * FROM Setor;    
 SELECT * FROM SetorAeroporto;
 SELECT * FROM Usuario;  
 SELECT * FROM Computador;
-=======
-	(1, 'C1DP', 'i3', '8' ,'12345678901', 1),
-    (2, 'nb-martinez', 'i5-10', '16', '25107632415', 1),
-    (3, "ACER_ASPIRE",'i3-10', '8', '64281964382', 2),
-    (4, "JUBILEUS",'i3-10', '8', '83526735482', 3);
     
 SELECT * FROM Alerta;
-INSERT INTO Alerta VALUES
-(default, default, 1, "alerta", "cpu"),
-(default, default, 2, "alerta", "cpu"),
-(default, default, 3, "alerta", "cpu"),
-(default, default, 4, "alerta", "cpu"),
-(default, default, 5, "alerta", "ram"),
-(default, default, 6, "alerta", "cpu"),
-(default, default, 7, "alerta", "cpu"),
-(default, default, 8, "alerta", "cpu"),
-(default, default, 9, "alerta", "ram"),
-(default, default, 10, "alerta", "cpu"),
-(default, default, 11, "alerta", "cpu"),
-(default, default, 12, "alerta", "cpu"),
-(default, default, 13, "alerta", "cpu"),
-(default, default, 14, "alerta", "cpu"),
-(default, default, 15, "alerta", "ram");
-
->>>>>>> 64b6243c49ccf89ed5111af385746a59c3b6eb93
-SELECT * FROM DadoComputador;
-insert into DadoComputador values
-(default, default, 80.0, 80.0, 10.0, 1),
-(default, default, 80.0, 80.0, 10.0, 1),
-(default, default, 80.0, 80.0, 10.0, 1),
-(default, default, 80.0, 80.0, 10.0, 1),
-(default, default, 80.0, 80.0, 10.0, 1),
-(default, default, 80.0, 80.0, 10.0, 2),
-(default, default, 80.0, 80.0, 10.0, 2),
-(default, default, 80.0, 80.0, 10.0, 2),
-(default, default, 80.0, 80.0, 10.0, 2),
-(default, default, 80.0, 80.0, 10.0, 3),
-(default, default, 80.0, 80.0, 10.0, 3),
-(default, default, 80.0, 80.0, 10.0, 3),
-(default, default, 80.0, 80.0, 10.0, 4),
-(default, default, 80.0, 80.0, 10.0, 4),
-(default, default, 80.0, 80.0, 10.0, 4);
-
-
-
 -- SELECT LUVIZONES
 SELECT idComputador, hostname as Maquina, COUNT(a.idAlerta) AS total_alertas FROM Alerta a
 	JOIN DadoComputador ON fkDadoComputador = idDado
@@ -233,8 +176,8 @@ JOIN
 JOIN 
     Setor s ON c.fkSetor = s.idSetor
 WHERE 
-    MONTH(a.dataAlerta) = MONTH(CURRENT_DATE())
-    AND YEAR(a.dataAlerta) = YEAR(CURRENT_DATE())
+    MONTH(a.dataAlerta) = 11
+    AND YEAR(a.dataAlerta) = 2024
     AND s.idSetor = 1
 GROUP BY 
     s.nomeSetor
@@ -285,7 +228,7 @@ ORDER BY
 
 
 -- SELECT PARA VER A QUANTIDADE DE ALERTAS
-SELECT count(idAlerta) FROM Alerta;
+SELECT count(idAlerta) FROM Alerta WHERE MONTH(dataAlerta) = 11 AND YEAR(dataAlerta) = 2024;
 
 -- SELECT PARA VER A QUANTIDADE DE ALERTAS POR SETOR
 SELECT 
@@ -305,4 +248,3 @@ GROUP BY
     s.nomeSetor
 ORDER BY 
     s.nomeSetor;
-    

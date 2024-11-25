@@ -1,11 +1,11 @@
 var database = require("../database/config")
 
-function totalAlertas() {
-    const instrucao = `SELECT count(idAlerta) as qtdAlertas FROM Alerta;`
+function totalAlertas(mes, ano) {
+    const instrucao = `SELECT count(idAlerta) as qtdAlertas FROM Alerta WHERE MONTH(dataAlerta) = ${mes} AND YEAR(dataAlerta) = ${ano};`
     return database.executar(instrucao)
 }
 
-function totalAletasSetor(setor) {
+function totalAletasSetor(setor, mes, ano) {
     const instrucao = `
         SELECT 
             s.nomeSetor AS setor,
@@ -18,8 +18,10 @@ function totalAletasSetor(setor) {
             Computador c ON dc.fkComputador = c.idComputador
         JOIN 
             Setor s ON c.fkSetor = s.idSetor
-        WHERE 
-            s.idSetor = ${setor}
+        WHERE
+            MONTH(a.dataAlerta) = ${mes} 
+            AND YEAR(a.dataAlerta) = ${ano}
+            AND s.idSetor = ${setor}
         GROUP BY 
             s.nomeSetor
         ORDER BY 
@@ -33,6 +35,7 @@ function totalAlertasPredict() {
     const instrucao = `
         SELECT 
             s.nomeSetor AS setor,
+            MONTH(a.dataAlerta) AS mes,
             COUNT(a.idAlerta) AS quantidade_alertas
         FROM 
             Alerta a
@@ -43,15 +46,15 @@ function totalAlertasPredict() {
         JOIN 
             Setor s ON c.fkSetor = s.idSetor
         GROUP BY 
-            s.nomeSetor
+            s.nomeSetor, MONTH(a.dataAlerta)
         ORDER BY 
-            s.nomeSetor;
+            s.nomeSetor, mes;
     `
 
     return database.executar(instrucao)
 }
 
-function exibirGraficoEleMesmo(setor){
+function exibirGraficoEleMesmo(setor, mes, ano){
     const instrucao = `
         SELECT 
             s.nomeSetor AS setor,
@@ -68,8 +71,8 @@ function exibirGraficoEleMesmo(setor){
         JOIN 
             Setor s ON c.fkSetor = s.idSetor
         WHERE 
-            MONTH(a.dataAlerta) = MONTH(CURRENT_DATE())
-            AND YEAR(a.dataAlerta) = YEAR(CURRENT_DATE())
+            MONTH(a.dataAlerta) = ${mes}
+            AND YEAR(a.dataAlerta) = ${ano}
             AND s.idSetor = ${setor}
         GROUP BY 
             s.nomeSetor
@@ -79,7 +82,7 @@ function exibirGraficoEleMesmo(setor){
     return database.executar(instrucao)
 }
 
-function exibirGraficoSetores(){
+function exibirGraficoSetores(mes, ano){
     const instrucao = `
         SELECT 
             s.nomeSetor AS setor,
@@ -96,8 +99,8 @@ function exibirGraficoSetores(){
         JOIN 
             Setor s ON c.fkSetor = s.idSetor
         WHERE 
-            MONTH(a.dataAlerta) = MONTH(CURRENT_DATE())
-            AND YEAR(a.dataAlerta) = YEAR(CURRENT_DATE())
+            MONTH(a.dataAlerta) = ${mes}
+            AND YEAR(a.dataAlerta) = ${ano}
         GROUP BY 
             s.nomeSetor
         ORDER BY 

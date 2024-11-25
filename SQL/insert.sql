@@ -1,3 +1,17 @@
+INSERT INTO DadoComputador (horaDado, cpuPorcentagem, memoriaPorcentagem, memoriaGB, fkComputador)
+SELECT 
+    DATE_ADD('2024-10-01', INTERVAL num DAY) AS horaDado, -- Gera as datas para o mês de outubro
+    ROUND(RAND() * 100, 2) AS cpuPorcentagem, -- Uso de CPU entre 0 e 100%
+    ROUND(RAND() * 100, 2) AS memoriaPorcentagem, -- Uso de memória entre 0 e 100%
+    ROUND(8 * (RAND()), 2) AS memoriaGB, -- Simula memória usada para um total de 8GB
+    3 AS fkComputador
+FROM 
+    (SELECT units.num + tens.num * 10 AS num 
+     FROM (SELECT 0 AS num UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9) units
+     CROSS JOIN (SELECT 0 AS num UNION SELECT 1 UNION SELECT 2 UNION SELECT 3) tens) numbers
+WHERE 
+    DATE_ADD('2024-10-01', INTERVAL num DAY) <= '2024-10-31'; 
+
 INSERT INTO DadoComputador VALUES (default,'2024-10-19 23:37:00', 1.1, 26.1, 0.7, 2);
 INSERT INTO DadoComputador VALUES (default,'2024-10-19 23:37:00', 1.6, 26.1, 0.7, 1);
 INSERT INTO DadoComputador VALUES (default,'2024-10-19 23:37:00', 0.0, 26.1, 0.7, 3);
@@ -808,3 +822,42 @@ FROM
 WHERE 
     DATE_ADD(CURDATE(), INTERVAL -num DAY) >= DATE_SUB(CURDATE(), INTERVAL WEEKDAY(CURDATE()) DAY) -- Início da semana
     AND DATE_ADD(CURDATE(), INTERVAL -num DAY) <= CURDATE(); -- Fim da semana (hoje)
+    
+    
+INSERT INTO Alerta (dataAlerta, fkDadoComputador, tipo, origem)
+SELECT 
+    DATE_ADD('2024-10-01', INTERVAL num DAY) AS dataAlerta, -- Datas no mês de outubro
+    FLOOR(1 + RAND() * (SELECT COUNT(*) FROM DadoComputador)) AS fkDadoComputador, -- Seleciona um fkDadoComputador aleatório
+    CASE FLOOR(RAND() * 2)
+        WHEN 0 THEN 'alerta'
+        WHEN 1 THEN 'atenção'
+    END AS tipo, -- Tipos de alerta
+    CASE FLOOR(RAND() * 2)
+        WHEN 0 THEN 'cpu'
+        WHEN 1 THEN 'ram'
+    END AS origem -- Origens dos alertas
+FROM 
+    (SELECT units.num + tens.num * 10 AS num 
+     FROM (SELECT 0 AS num UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9) units
+     CROSS JOIN (SELECT 0 AS num UNION SELECT 1 UNION SELECT 2 UNION SELECT 3) tens) numbers
+WHERE 
+    DATE_ADD('2024-10-01', INTERVAL num DAY) <= '2024-10-31'; 
+    
+INSERT INTO Alerta (dataAlerta, fkDadoComputador, tipo, origem)
+SELECT 
+    DATE_ADD('2024-11-01', INTERVAL num DAY) AS dataAlerta, -- Datas no mês de outubro
+    FLOOR(1 + RAND() * (SELECT COUNT(*) FROM DadoComputador)) AS fkDadoComputador, -- Seleciona um fkDadoComputador aleatório
+    CASE FLOOR(RAND() * 2)
+        WHEN 0 THEN 'alerta'
+        WHEN 1 THEN 'atenção'
+    END AS tipo, -- Tipos de alerta
+    CASE FLOOR(RAND() * 2)
+        WHEN 0 THEN 'cpu'
+        WHEN 1 THEN 'ram'
+    END AS origem -- Origens dos alertas
+FROM 
+    (SELECT units.num + tens.num * 10 AS num 
+     FROM (SELECT 0 AS num UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9) units
+     CROSS JOIN (SELECT 0 AS num UNION SELECT 1 UNION SELECT 2 UNION SELECT 3) tens) numbers
+WHERE 
+    DATE_ADD('2024-10-01', INTERVAL num DAY) <= '2024-11-30'; 

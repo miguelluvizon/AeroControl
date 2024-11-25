@@ -9,7 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
-<body onload="exibirTotalAlertas(); exbirGraficoComparacaoSetores();">
+<body onload="exibirTotalAlertas(); exbirGraficoComparacaoSetores(); exibirTotalAlertasPorSetor(); exbirGraficoComparacaoEleMesmo();">
     <div class="container">
         <aside class="sidebar">
             <img src="img/Protótipo Dashboard.png" alt="Logo da Empresa">
@@ -19,6 +19,26 @@
         </aside>
         <main class="main-content">
             <h1>COMPARAÇÃO MENSAL DE ALERTAS ENTRE SETORES: <span id="mes" style="text-decoration: underline;"></span></h1>
+
+            <select id="selectMeses" onchange="exibirTotalAlertas(); exbirGraficoComparacaoSetores(); exibirTotalAlertasPorSetor(); exbirGraficoComparacaoEleMesmo();">
+                <option value="1">Janeiro</option>
+                <option value="2">Fevereiro</option>
+                <option value="3"">Março</option>
+                <option value="4">Abril</option>
+                <option value="5">Maio</option>
+                <option value="6">Junho</option>
+                <option value="7">Julho</option>
+                <option value="8">Agosto</option>
+                <option value="9">Semtembro</option>
+                <option value="10">Outubro</option>
+                <option value="11" selected>Novembro</option>
+                <option value="12">Dezembro</option>
+            </select>
+
+            <select id="selectAno" onload="exibirTotalAlertas(); exbirGraficoComparacaoSetores(); exibirTotalAlertasPorSetor(); exbirGraficoComparacaoEleMesmo();">
+                <option value="2023">2023</option>
+                <option value="2024" selected>2024</option>
+            </select>
 
             <div style="display: flex; gap: 4rem; justify-content: center;">
                 <div class="kpi-alertas">
@@ -49,8 +69,7 @@
                         <p>Setor</p>
                         <select id="setor" class="setor_grafico"
                             onchange="exibirTotalAlertasPorSetor(); exbirGraficoComparacaoEleMesmo();">
-                            <option value="">Selecione o Setor</option>
-                            <option value="1">Despache de Voo</option>
+                            <option value="1" selected>Despache de Voo</option>
                             <option value="2">Torre de Controle</option>
                             <option value="3">Centro de Meteorologia</option>
                         </select>
@@ -69,7 +88,10 @@
     mes.innerHTML = mesAtualNome.toLocaleUpperCase()
 
     function exibirTotalAlertas() {
-        fetch('/comparacao/alertas')
+        const mes = document.getElementById("selectMeses").value
+        const ano = document.getElementById("selectAno").value
+        
+        fetch(`/comparacao/alertas/${mes}/${ano}`)
             .then(response => response.json())
             .then(data => {
                 console.log(data[0].qtdAlertas)
@@ -81,8 +103,10 @@
 
     function exibirTotalAlertasPorSetor() {
         const fkSetor = document.getElementById("setor").value
+        const mes = document.getElementById("selectMeses").value
+        const ano = document.getElementById("selectAno").value
 
-        fetch(`/comparacao/alertasSetor/${fkSetor}`)
+        fetch(`/comparacao/alertasSetor/${fkSetor}/${mes}/${ano}`)
             .then(response => response.json())
             .then(data => {
                 console.log(data[0])
@@ -102,12 +126,14 @@
 
     function exbirGraficoComparacaoEleMesmo() {
         const fkSetorGrafico = document.getElementById("setor").value;
+        const mes = document.getElementById("selectMeses").value
+        const ano = document.getElementById("selectAno").value
 
         if (alertChartEleMesmo) {
             alertChartEleMesmo.destroy();
         }
 
-        fetch(`/comparacao/graficoSetor/${fkSetorGrafico}`)
+        fetch(`/comparacao/graficoSetor/${fkSetorGrafico}/${mes}/${ano}`)
             .then(response => response.json())
             .then(data => {
                 console.log(data);
@@ -121,7 +147,8 @@
                             label: 'Alertas',
                             data: [data[0].semana_1, data[0].semana_2, data[0].semana_3, data[0].semana_4],
                             borderColor: '#a340d6',
-                            fill: false,
+                            fill: true,
+                            backgroundColor: "#a440d680",
                             tension: 0.1
                         }]
                     },
@@ -152,7 +179,10 @@
     let alertChartComparativo
 
     function exbirGraficoComparacaoSetores() {
-        fetch(`/comparacao/graficosSetores`)
+        const mes = document.getElementById("selectMeses").value
+        const ano = document.getElementById("selectAno").value
+
+        fetch(`/comparacao/graficosSetores/${mes}/${ano}`)
             .then(response => response.json())
             .then(data => {
                 console.log(data)
@@ -215,130 +245,4 @@
         ];
         return colors[index % colors.length];
     }
-
-    // const ctx = document.getElementById('alertChart').getContext('2d');
-    // const alertChart = new Chart(ctx, {
-    //     type: 'bar',
-    //     data: {
-    //         labels: ['Semana 1', 'Semana 2', 'Semana 3', 'Semana 4'],
-    //         datasets: [
-    //             {
-    //                 label: 'Torre de Controle',
-    //                 data: [20, 15, 10, 5],
-    //                 backgroundColor: '#2c1153'
-    //             },
-    //             {
-    //                 label: 'Despache de Voo',
-    //                 data: [10, 12, 8, 2],
-    //                 backgroundColor: '#ff66cc'
-    //             },
-    //             {
-    //                 label: 'Centro de Meteorologia',
-    //                 data: [5, 10, 15, 20],
-    //                 backgroundColor: '#b266ff'
-    //             }
-    //         ]
-    //     },
-    //     options: {
-    //         responsive: true,
-    //         maintainAspectRatio: true,
-    //         plugins: {
-    //             legend: {
-    //                 display: true,
-    //                 labels: {
-    //                     color: 'black'
-    //                 }
-    //             }
-    //         },
-    //         scales: {
-    //             y: {
-    //                 beginAtZero: true,
-    //                 ticks: {
-    //                     stepSize: 0
-    //                 },
-    //             }
-    //         }
-    //     }
-    // });
-
-
-    // const ctx2 = document.getElementById('alertChart-eleMesmo').getContext('2d');
-    // const alertCharteleMesmo = new Chart(ctx2, {
-    //     type: 'line',
-    //     data: {
-    //         labels: ['Semana 1', 'Semana 2', 'Semana 3', 'Semana 4'],
-    //         datasets: [
-    //             {
-    //                 label: '',
-    //                 data: [],
-    //                 borderColor: '#a340d6',
-    //                 fill: false,
-    //                 tension: 0.1
-    //             }
-    //         ]
-    //     },
-    //     options: {
-    //         responsive: true,
-    //         plugins: {
-    //             legend: {
-    //                 display: true,
-    //                 labels: {
-    //                     color: 'black'
-    //                 }
-    //             }
-    //         },
-    //         scales: {
-    //             y: {
-    //                 beginAtZero: true,
-    //                 ticks: {
-    //                     stepSize: 5
-    //                 }
-    //             }
-    //         }
-    //     }
-    // });
-
-    // document.getElementById("setor2").addEventListener('change', function (event) {
-    //     const setorSelecionado = event.target.value
-    //     atualizarGraficoSetor(setorSelecionado)
-    // })
-
-
-    // function atualizarGrafico(setor) {
-    //     const maquinasFiltradas = dadosMaquinas.filter(maquina => maquina.setor === setor)
-
-    //     const labels = maquinasFiltradas.map(maquina => maquina.maquina)
-    //     const usoCPU = maquinasFiltradas.map(maquina => maquina.usoCPU)
-    //     const usoRAM = maquinasFiltradas.map(maquina => maquina.usoRAM)
-
-    //     componentsChart.data.labels = labels
-    //     componentsChart.data.datasets[0].data = usoCPU
-    //     componentsChart.data.datasets[1].data = usoRAM
-
-    //     componentsChart.update()
-    // }
-
-    // function atualizarGraficoSetor(setor) {
-    //     const setorNome = document.getElementById("setorNome")
-    //     let data = [];
-    //     let label = "";
-
-    //     if (setor === "4") {
-    //         label = "Torre de Controle";
-    //         data = [20, 15, 10, 5];
-    //         setorNome.textContent = "Torre de Controle"
-    //     } else if (setor === "5") {
-    //         label = "Despache de Voo";
-    //         data = [10, 12, 8, 2];
-    //         setorNome.textContent = "Despache de Voo"
-    //     } else if (setor === "6") {
-    //         label = "Centro de Meteorologia";
-    //         data = [5, 10, 15, 20];
-    //         setorNome.textContent = "Centro de Meteorologia"
-    //     }
-
-    //     alertCharteleMesmo.data.datasets[0].label = label;
-    //     alertCharteleMesmo.data.datasets[0].data = data;
-    //     alertCharteleMesmo.update();
-    // }
 </script>

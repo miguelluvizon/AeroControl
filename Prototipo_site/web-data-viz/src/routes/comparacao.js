@@ -3,19 +3,19 @@ var router = express.Router();
 
 var comparacaoController = require("../controllers/comparacaoController")
 
-router.get('/alertas', function(req, res){
+router.get('/alertas/:mes/:ano', function(req, res){
     comparacaoController.totalAlertas(req,res)
 })
 
-router.get('/alertasSetor/:fkSetor', function(req, res){
+router.get('/alertasSetor/:fkSetor/:mes/:ano', function(req, res){
     comparacaoController.totalAlertasSetor(req,res)
 })
 
-router.get('/graficoSetor/:fkSetorGrafico', function(req, res){
+router.get('/graficoSetor/:fkSetorGrafico/:mes/:ano', function(req, res){
     comparacaoController.exibirGraficoEleMesmo(req,res)
 })
 
-router.get('/graficosSetores', function(req, res){
+router.get('/graficosSetores/:mes/:ano', function(req, res){
     comparacaoController.exibirGraficoSetores(req,res)
 })
 

@@ -9,7 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
-<body>
+<body onload="graficoComparacaoMaquina();">
     <div class="container">
         <aside class="sidebar">
             <img src="img/Protótipo Dashboard.png" alt="Logo da Empresa">
@@ -28,8 +28,7 @@
                 <div class="chart-maquina">
                     <p>Setor</p>
                     <select id="setor" class="setor_grafico" onchange="graficoComparacaoMaquina();">
-                        <option value="">Selecione o Setor</option>
-                        <option value="1">Despache de Voo</option>
+                        <option value="1" selected>Despache de Voo</option>
                         <option value="2">Torre de Controle</option>
                         <option value="3">Centro de Meteorologia</option>
                     </select>

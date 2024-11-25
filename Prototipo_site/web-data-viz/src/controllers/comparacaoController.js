@@ -1,7 +1,9 @@
 var comparacaoModel = require("../models/comparacaoModel.js")
 
 function totalAlertas(req, res) {
-    comparacaoModel.totalAlertas()
+    const { mes, ano } = req.params
+
+    comparacaoModel.totalAlertas(mes, ano)
         .then(result => res.status(200).json(result))
         .catch(e => {
             console.error('Erro ao capturar o total de alertas', e.sqlMessage)
@@ -10,9 +12,9 @@ function totalAlertas(req, res) {
 }
 
 function totalAlertasSetor(req, res) {
-    const { fkSetor } = req.params
+    const { fkSetor, mes, ano } = req.params
 
-    comparacaoModel.totalAletasSetor(fkSetor)
+    comparacaoModel.totalAletasSetor(fkSetor, mes, ano)
         .then(result => res.status(200).json(result))
         .catch(e => {
             console.error("Erro ao obter o total de alertas no setor" + e.sqlMessage)
@@ -30,9 +32,9 @@ function totalAlertasPredict(req, res){
 }
 
 function exibirGraficoEleMesmo(req, res) {
-    const { fkSetorGrafico } = req.params
+    const { fkSetorGrafico, mes, ano } = req.params
 
-    comparacaoModel.exibirGraficoEleMesmo(fkSetorGrafico)
+    comparacaoModel.exibirGraficoEleMesmo(fkSetorGrafico, mes, ano)
         .then(result => res.status(200).json(result))
         .catch(e => {
             console.error("Erro ao obter os alertas da semana do mês do setor" + e.sqlMessage)
@@ -41,7 +43,9 @@ function exibirGraficoEleMesmo(req, res) {
 }
 
 function exibirGraficoSetores(req,res){
-    comparacaoModel.exibirGraficoSetores()
+    const { mes, ano} = req.params
+
+    comparacaoModel.exibirGraficoSetores(mes, ano)
         .then(result => res.status(200).json(result))
         .catch(e => {
             console.error("Erro ao obter os alertas da semana do mês do setor" + e.sqlMessage)
