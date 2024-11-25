@@ -28,6 +28,10 @@ router.get("/puxarAlertas", function (req, res) { // rota luvizones
   empresaController.puxarAlertas(req, res);
 })
 
+router.get("/puxarAlertasCriticos", function (req, res) { // rota luvizones
+  empresaController.puxarAlertasCriticos(req, res);
+})
+
 router.get("/puxarTotalMaquinas", function (req, res) { // rota luvizones
   empresaController.puxarTotalMaquinas(req, res);
 })
@@ -39,5 +43,7 @@ router.get("/puxarMediaTotal", function (req, res) { // rota luvizones
 router.get("/rankearAlertasTotais", function (req, res) { // rota luvizones
   empresaController.rankearAlertasTotais(req, res);
 })
+
+
 
 module.exports = router;
