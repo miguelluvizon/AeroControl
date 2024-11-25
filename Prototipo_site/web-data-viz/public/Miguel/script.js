@@ -149,6 +149,31 @@ function puxarAlertas() {
     return false;
 }
 
+function puxarAlertasCriticos() {
+    fetch("../empresas/puxarAlertasCriticos", {
+        method: "GET",
+    })
+        .then(function (resposta) {
+            console.log("resposta:", resposta);
+
+            if (resposta.ok) {
+                resposta.json()
+                    .then(function (resposta) {
+                        console.log(resposta)
+
+                        alertasTotaisCriticos.innerHTML = `${resposta[0].somaTotal}`
+                    })
+            } else {
+                throw "Houve ao puxar qtd";
+            }
+        })
+        .catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+        });
+
+    return false;
+}
+
 function puxarTotalMaquinas() {
     fetch("../empresas/puxarTotalMaquinas", {
         method: "GET",
