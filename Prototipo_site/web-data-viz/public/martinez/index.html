@@ -9,7 +9,8 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
-<body onload="exibirTotalAlertas(); exbirGraficoComparacaoSetores(); exibirTotalAlertasPorSetor(); exbirGraficoComparacaoEleMesmo();">
+<body
+    onload="exibirTotalAlertas(); exbirGraficoComparacaoSetores(); exibirTotalAlertasPorSetor(); exbirGraficoComparacaoEleMesmo();">
     <div class="container">
         <aside class="sidebar">
             <img src="img/Protótipo Dashboard.png" alt="Logo da Empresa">
@@ -18,9 +19,12 @@
             <button class="sidebar-btn">SAIR</button>
         </aside>
         <main class="main-content">
-            <h1>COMPARAÇÃO MENSAL DE ALERTAS ENTRE SETORES: <span id="mes" style="text-decoration: underline;"></span></h1>
+            <h1>COMPARAÇÃO MENSAL DE ALERTAS ENTRE SETORES: <span id="mes" style="text-decoration: underline;"></span> /
+                <span id="ano" style="text-decoration: underline;"></span>
+            </h1>
 
-            <select id="selectMeses" onchange="exibirTotalAlertas(); exbirGraficoComparacaoSetores(); exibirTotalAlertasPorSetor(); exbirGraficoComparacaoEleMesmo();">
+            <select id="selectMeses"
+                onchange="atualizarMes(); atualizarAno(); exibirTotalAlertas(); exbirGraficoComparacaoSetores(); exibirTotalAlertasPorSetor(); exbirGraficoComparacaoEleMesmo();">
                 <option value="1">Janeiro</option>
                 <option value="2">Fevereiro</option>
                 <option value="3"">Março</option>
@@ -31,18 +35,19 @@
                 <option value="8">Agosto</option>
                 <option value="9">Semtembro</option>
                 <option value="10">Outubro</option>
-                <option value="11" selected>Novembro</option>
+                <option value="11">Novembro</option>
                 <option value="12">Dezembro</option>
             </select>
 
-            <select id="selectAno" onload="exibirTotalAlertas(); exbirGraficoComparacaoSetores(); exibirTotalAlertasPorSetor(); exbirGraficoComparacaoEleMesmo();">
+            <select id="selectAno"
+                onchange="atualizarMes(); atualizarAno(); exibirTotalAlertas(); exbirGraficoComparacaoSetores(); exibirTotalAlertasPorSetor(); exbirGraficoComparacaoEleMesmo();">
                 <option value="2023">2023</option>
-                <option value="2024" selected>2024</option>
+                <option value="2024">2024</option>
             </select>
 
             <div style="display: flex; gap: 4rem; justify-content: center;">
                 <div class="kpi-alertas">
-                    <p>Quantidades de Alertas</p>
+                    <p>Quantidades de Alertas do mês de: <span id="mesAlerta" style="color: red; border: none;"></span></p>
                     <span id="quantidadeDeAlertas"></span>
                 </div>
 
@@ -74,7 +79,8 @@
                             <option value="3">Centro de Meteorologia</option>
                         </select>
                     </div>
-                    <canvas id="alertChart-eleMesmo" width="500" height="250" style="max-width: 100%; max-height: 100%;display: block ;margin: 0 auto;"></canvas>
+                    <canvas id="alertChart-eleMesmo" width="500" height="250"
+                        style="max-width: 100%; max-height: 100%;display: block ;margin: 0 auto;"></canvas>
                 </div>
             </div>
         </main>
@@ -84,13 +90,49 @@
 </html>
 
 <script>
-    const mesAtualNome = new Date().toLocaleString('pt-BR', { month: 'long' });
+    const mesAtualNome = new Date().toLocaleString('pt-BR', { month: 'long' })
     mes.innerHTML = mesAtualNome.toLocaleUpperCase()
+    mesAlerta.innerHTML = mesAtualNome.toLocaleUpperCase()
+
+    const mesAtual = new Date().getMonth() + 1
+    const anoAutal = new Date().getFullYear()
+
+    ano.innerHTML = anoAutal
+
+    document.getElementById("selectMeses").value = mesAtual
+    document.getElementById("selectAno").value = anoAutal
+
+    function atualizarMes() {
+        const selectMeses = document.getElementById("selectMeses");
+        const mesSelecionado = selectMeses.value;
+        const nomeMeses = [
+            "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+            "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+        ];
+
+        const mes = document.getElementById("mes");
+        const mesAlerta = document.getElementById("mesAlerta")
+        
+        mes.innerHTML = nomeMeses[mesSelecionado - 1].toUpperCase()
+        mesAlerta.innerHTML = nomeMeses[mesSelecionado - 1].toLocaleUpperCase()
+    }
+
+    function atualizarAno() {
+        const selectAno = document.getElementById("selectAno")
+        const anoSelecionado = selectAno.value
+        const anos = ["2023", "2024"]
+
+        const ano = document.getElementById("ano")
+
+        if (ano) {
+            ano.innerHTML = anoSelecionado;
+        }
+    }
 
     function exibirTotalAlertas() {
         const mes = document.getElementById("selectMeses").value
         const ano = document.getElementById("selectAno").value
-        
+
         fetch(`/comparacao/alertas/${mes}/${ano}`)
             .then(response => response.json())
             .then(data => {
