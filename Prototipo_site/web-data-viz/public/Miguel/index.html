@@ -9,7 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
-<body onload="puxarTotalMaquinas(), puxarAlertas(),puxarAlertasCriticos(), puxarMediaTotal(), rankearAlertasTotais()">
+<body onload="puxarTotalMaquinas(), puxarAlertas(),puxarAlertasCriticos(), puxarMediaTotal(), rankearAlertasTotais(), rankearMaquinasCriticas()">
     <div class="container">
         <aside class="sidebar">
             <img src="img/Protótipo Dashboard.png" alt="">
@@ -55,7 +55,7 @@
                     </div>
                     <div class="cardMedio">
                         <span>Total de alertas das máquinas críticas </span>
-                        <p id="alertasTotaisCriticos">x</p>
+                        <p id="alertasTotaisCriticosCPU">x</p>
                         <div class="concerto">
                             <div class="duvida">
                                 ?
@@ -111,7 +111,7 @@
                     </div>
                     <div class="cardMedio">
                         <span>Alertas das máquinas mais críticas</span>
-                        <p>80</p>
+                        <p id="alertasTotaisCriticosRAM">x</p>
                         <div class="concerto">
                             <div class="duvida">
                                 ?

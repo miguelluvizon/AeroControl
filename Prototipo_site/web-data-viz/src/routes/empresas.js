@@ -44,6 +44,10 @@ router.get("/rankearAlertasTotais", function (req, res) { // rota luvizones
   empresaController.rankearAlertasTotais(req, res);
 })
 
+router.get("/rankearMaquinasCriticas", function (req, res) { // rota luvizones
+  empresaController.rankearMaquinasCriticas(req, res);
+})
+
 
 
 module.exports = router;

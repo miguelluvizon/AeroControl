@@ -1,39 +1,5 @@
 
 
-const ctx2 = document.getElementById('alertChart2').getContext('2d');
-const alertChart2 = new Chart(ctx2, {
-    type: 'bar',
-    data: {
-        labels: ['M1', 'M2', 'M3', 'M4', 'M5', 'M6', 'M7', 'M8', 'M9', 'M10'],
-        datasets: [
-            {
-                label: 'Torre de Controle',
-                data: [100, 75, 30, 50, 60, 90, 93, 88, 99, 100],
-                backgroundColor: '#472c72',
-                pointBackgroundColor: '#2c1153',
-                pointRadius: 5
-            },
-        ]
-    },
-    options: {
-        indexAxis: 'y',
-        responsive: true,
-        plugins: {
-            legend: {
-                display: false
-            }
-        },
-        scales: {
-            y: {
-                beginAtZero: true,
-                ticks: {
-                    stepSize: 5
-                }
-            }
-        }
-    }
-});
-
 const ctx3 = document.getElementById('alertChart3').getContext('2d');
 const alertChart3 = new Chart(ctx3, {
     type: 'bar',
@@ -162,7 +128,8 @@ function puxarAlertasCriticos() {
                     .then(function (resposta) {
                         console.log(resposta)
 
-                        alertasTotaisCriticos.innerHTML = `${resposta[0].somaTotal}`
+                        alertasTotaisCriticosCPU.innerHTML = `${resposta[0].somaTotalCPU}`
+                        alertasTotaisCriticosRAM.innerHTML = `${resposta[0].somaTotalRAM}`
                     })
             } else {
                 throw "Houve ao puxar qtd";
@@ -253,6 +220,54 @@ function rankearAlertasTotais() {
                 ]
             },
             options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 5
+                        }
+                    }
+                }
+            }
+        });
+    })
+    .catch(error => console.error('Erro ao plotar gráfico', error));
+}
+
+let graficoCritico
+
+function rankearMaquinasCriticas() {
+    fetch("../empresas/rankearMaquinasCriticas")
+    .then(response => response.json())
+    .then(data => {
+        console.log(data)
+
+        const maquinas = data.map(item => item.Maquina);
+        const mediasCriticas = data.map(item => item.mediaCPU);
+        
+        const ctx2 = document.getElementById('alertChart2').getContext('2d');
+        graficoCritico = new Chart(ctx2, {
+            type: 'bar',
+            data: {
+                labels: maquinas,
+                datasets: [
+                    {
+                        label: 'Torre de Controle',
+                        data: mediasCriticas,
+                        backgroundColor: '#472c72',
+                        pointBackgroundColor: '#2c1153',
+                        pointRadius: 5
+                    },
+                ]
+            },
+            options: {
+                indexAxis: 'y',
                 responsive: true,
                 plugins: {
                     legend: {

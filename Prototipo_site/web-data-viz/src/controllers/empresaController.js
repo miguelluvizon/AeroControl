@@ -136,6 +136,24 @@ function rankearAlertasTotais(req, res) { // rota luvizones
   });
 }
 
+function rankearMaquinasCriticas(req, res) { // rota luvizones
+  console.log("plotando gráfico")
+  empresaModel.rankearMaquinasCriticas()
+  .then(function (resposta) {
+      if(resposta.length > 0) {
+          res.status(200).json(resposta);
+      
+      } else {
+        res.status(204).send("nenhum resultado encontrado")
+      }
+
+  }).catch(function (erro) {
+    console.log(erro);
+    console.log("houve um erro ao buscar resultados", erro.sqlMessage);
+    res.status(500).json(erro.sqlMessage)
+  });
+}
+
 module.exports = {
   buscarPorCnpj,
   buscarPorId,
@@ -146,5 +164,6 @@ module.exports = {
   puxarAlertasCriticos, // rota luvizones
   puxarTotalMaquinas, // rota luvizones
   puxarMediaTotal, // rota luvizones
-  rankearAlertasTotais // rota luvizones
+  rankearAlertasTotais, // rota luvizones
+  rankearMaquinasCriticas // rota luvizones
 };
