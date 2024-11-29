@@ -126,7 +126,7 @@ function graficoComparacaoCPueRam(setor){
         WHERE 
             YEAR(dc.horaDado) = YEAR(CURRENT_DATE())  
             AND WEEK(dc.horaDado, 1) = WEEK(CURRENT_DATE(), 1)  
-        AND s.idSetor = ${setor}
+        AND s.idSetor = "${setor}"
         GROUP BY 
             s.nomeSetor, c.hostname
         ORDER BY 

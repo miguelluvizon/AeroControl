@@ -119,8 +119,10 @@ function puxarMediaTotal(req, res) { // rota luvizones
 }
 
 function rankearAlertasTotais(req, res) { // rota luvizones
+  const {componente} = req.params
+
   console.log("plotando gráfico")
-  empresaModel.rankearAlertasTotais()
+  empresaModel.rankearAlertasTotais(componente)
   .then(function (resposta) {
       if(resposta.length > 0) {
           res.status(200).json(resposta);

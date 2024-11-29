@@ -40,7 +40,7 @@ router.get("/puxarMediaTotal", function (req, res) { // rota luvizones
   empresaController.puxarMediaTotal(req, res);
 })
 
-router.get("/rankearAlertasTotais", function (req, res) { // rota luvizones
+router.get("/rankearAlertasTotais/:componente", function (req, res) { // rota luvizones
   empresaController.rankearAlertasTotais(req, res);
 })
 
