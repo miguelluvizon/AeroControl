@@ -10,7 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
-<body>
+<body onload="estadoMaquinas()">
     <div class="container">
         <aside class="sidebar">
             <img src="img/Protótipo Dashboard.png" alt="">
@@ -165,38 +165,44 @@
 </html>
 
 <script>
-
-    const data = {
-        labels: ['Alerta', 'Atenção', 'Estável'],
-        datasets: [
-            {
-                label: 'Máquinas',
-                data: [4, 12, 7],
-                backgroundColor: ['#c02f1b', '#EFCA08', '#0f520c'],
-            }
-        ]
-    };
-
-    const config = {
-        type: 'pie',
-        data: data,
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    position: 'top',
-                },
-                title: {
-                    display: true,
-                    text: 'Maquinas que ficaram:'
+    function plotar(resposta) {
+        const data = {
+            labels: ['Alerta', 'Atenção', 'Estável'],
+            datasets: [
+                {
+                    label: 'Máquinas',
+                    data: [],
+                    backgroundColor: ['#c02f1b', '#EFCA08', '#0f520c'],
                 }
-            }
-        },
-    };
+            ]
+        };
 
-    let myChart = new Chart(
-        document.getElementById('grafico'),
-        config
-    );
+        console.log(resposta)
+        data.datasets[0].data.push(resposta[0].AlertasTotais);
+        data.datasets[0].data.push(resposta[0].AtencaoTotais);
+        data.datasets[0].data.push((resposta[0].DadosTotais) - (resposta[0].AtencaoTotais + resposta[0].AlertasTotais));
 
+
+        const config = {
+            type: 'pie',
+            data: data,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Maquinas que ficaram:'
+                    }
+                }
+            },
+        };
+
+        let myChart = new Chart(
+            document.getElementById('grafico'),
+            config
+        );
+    }
 </script>
