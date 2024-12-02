@@ -33,12 +33,15 @@
 </html>
 
 <script>
-    const calcularPredictPorSetor = (dados) => {
+    function calcularPredictPorSetor(dados){
         if (dados.length < 2) {
             throw new Error('É necessário pelo menos 2 dados para calcular a previsão.');
         }
 
         const n = dados.length;
+
+        // Faça um for para fazer essa soma para calcular a previsão
+        // A fórmula foi encontrada na internet mas adaptei para o projeto =)
 
         let somaX = 0, somaY = 0, somaXY = 0, somaX2 = 0;
 
@@ -71,25 +74,28 @@
     function obterAlertasPorSetor(data, setor) {
         let alertas = [];
 
-        // Filtrar e coletar alertas do setor especificado
+        // Primeiro preciso percorrer o array e filtrar os dados do setor passado no parâmetro
+        // e então criamos um array chamado alertas e setamos o mes e a # de alertas
+        // # = quantidade
+
         for (let i = 0; i < data.length; i++) {
             if (data[i].setor === setor) {
                 alertas.push({ mes: data[i].mes, quantidade: data[i].quantidade_alertas });
             }
         }
 
-        // Ordenar os dados por mês com BubbleSort
+        // Então ordenamos esse array, do menor para o maior com uma função de ordenação
+        // o bubbleSort.
+
         for (let i = 0; i < alertas.length - 1; i++) {
-            for (let j = i + 1; j < alertas.length; j++) {
-                if (alertas[i].mes > alertas[j].mes) {
-                    let temp = alertas[i];
-                    alertas[i] = alertas[j];
-                    alertas[j] = temp;
+            for (let j = 0; j < alertas.length - i - 1; j++) {
+                if (alertas[j].mes > alertas[j + 1].mes) {
+                    [alertas[j], alertas[j + 1]] = [alertas[j + 1], alertas[j]]
                 }
             }
         }
 
-        // Extrair apenas os números de alertas
+        // E para ter só os números fazemos mais uma filtragem para isso, pegando só a quantidade
         let alertasOrdenados = [];
         for (let i = 0; i < alertas.length; i++) {
             alertasOrdenados.push(alertas[i].quantidade);
@@ -104,7 +110,6 @@
             .then(data => {
                 console.log('Dados recebidos:', data);
 
-                // Extrair alertas para os meses de outubro e novembro
                 const alertasSetorA = obterAlertasPorSetor(data, "Despache de Voo")
 
                 const alertasSetorB = obterAlertasPorSetor(data, "Torre de Controle")
@@ -112,7 +117,6 @@
                 console.log('Alertas Despache de Voo:', alertasSetorA);
                 console.log('Alertas Torre de Controle:', alertasSetorB);
 
-                // Calcular previsões
                 const previsoesSetorA = calcularPredictPorSetor(alertasSetorA);
                 const previsoesSetorB = calcularPredictPorSetor(alertasSetorB);
 
@@ -120,6 +124,13 @@
                 console.log('Previsões Torre de Controle:', previsoesSetorB);
 
                 const meses = ["Outubro", "Novembro", "Dezembro", "Janeiro", "Fevereiro"];
+
+                // Depois de pegar as previsões, precisamos criar o alertas com a previsão
+                // Então criamos tanto para o setor A e B
+
+                // Criei a variavel alertasSetorAComPrevisao pois serve para preserver os dados originais
+                // Porque por exemplo, se eu fosse adicionar os dados de janeiro e fevereiro no array original poderia
+                // prejudicar o outro array para possiveis analises.
 
                 let alertasSetorAComPrevisao = [];
                 for (let i = 0; i < alertasSetorA.length; i++) {
