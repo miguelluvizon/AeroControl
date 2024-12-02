@@ -14,16 +14,16 @@
     <div class="container">
         <aside class="sidebar">
             <img src="img/Protótipo Dashboard.png" alt="Logo da Empresa">
-            <button class="sidebar-btn">RESUMO</button>
-            <button class="sidebar-btn">COMPARAR</button>
-            <button class="sidebar-btn">SAIR</button>
+            <a href="../ricken/index.html" class="sidebar-btn">RESUMO</a>
+            <a href="./index.html" class="sidebar-btn">COMPARAR</a>
+            <a class="sidebar-btn">SAIR</a>
         </aside>
         <main class="main-content">
             <h1>COMPARAÇÃO MENSAL DE ALERTAS ENTRE SETORES: <span id="mes" style="text-decoration: underline;"></span> /
                 <span id="ano" style="text-decoration: underline;"></span>
             </h1>
 
-            <select id="selectMeses"
+            <select id="selectMeses" class="select-meses"
                 onchange="atualizarMes(); atualizarAno(); exibirTotalAlertas(); exbirGraficoComparacaoSetores(); exibirTotalAlertasPorSetor(); exbirGraficoComparacaoEleMesmo();">
                 <option value="1">Janeiro</option>
                 <option value="2">Fevereiro</option>
@@ -39,7 +39,7 @@
                 <option value="12">Dezembro</option>
             </select>
 
-            <select id="selectAno"
+            <select id="selectAno" class="select-ano"
                 onchange="atualizarMes(); atualizarAno(); exibirTotalAlertas(); exbirGraficoComparacaoSetores(); exibirTotalAlertasPorSetor(); exbirGraficoComparacaoEleMesmo();">
                 <option value="2023">2023</option>
                 <option value="2024">2024</option>
@@ -61,7 +61,7 @@
 
             <a href="compararMaquinas.html" class="button btn1">Comparar Máquinas &rarr;</a>
 
-            <div style="display: flex; justify-content: space-around; align-items: center; gap: 20px;">
+            <div style="display: flex; justify-content: space-around; align-items: center; gap: 20px; position: relative; bottom: 6%;">
                 <div class="chart-container">
                     <h2>QUANTIDADE DE ALERTAS EM CADA SETOR</h2>
                     <canvas id="alertChart"></canvas>

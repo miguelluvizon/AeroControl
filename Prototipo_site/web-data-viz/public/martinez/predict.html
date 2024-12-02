@@ -40,28 +40,63 @@
 
         const n = dados.length;
 
-        const indices = [...Array(n).keys()];
+        let somaX = 0, somaY = 0, somaXY = 0, somaX2 = 0;
 
-        const somaX = indices.reduce((acc, x) => acc + x, 0);
-        const somaY = dados.reduce((acc, y) => acc + y, 0);
-        const somaXY = indices.reduce((acc, x, i) => acc + x * dados[i], 0);
-        const somaX2 = indices.reduce((acc, x) => acc + x * x, 0);
+        for (let i = 0; i < n; i++) {
+            somaX += i;
+            somaY += dados[i];
+            somaXY += i * dados[i];
+            somaX2 += i * i;
+        }
+
+        /*
+            Inclinação (m): Mede como os dados mudam ao longo do tempo.
+            Intercepto (b): O ponto inicial do gráfico.
+        */
 
         const m = (n * somaXY - somaX * somaY) / (n * somaX2 - somaX * somaX);
         const b = (somaY - m * somaX) / n;
 
-        const dezembro = m * n + b;
-        const janeiro = m * (n + 1) + b;
-        const fevereiro = m * (n + 2) + b;
+        const janeiro = m * n + b;
+        const fevereiro = m * (n + 1) + b;
 
         const previsoes = {
-            dezembro: Math.round(dezembro),
             janeiro: Math.round(janeiro),
             fevereiro: Math.round(fevereiro)
         };
 
         return previsoes;
     };
+
+    function obterAlertasPorSetor(data, setor) {
+        let alertas = [];
+
+        // Filtrar e coletar alertas do setor especificado
+        for (let i = 0; i < data.length; i++) {
+            if (data[i].setor === setor) {
+                alertas.push({ mes: data[i].mes, quantidade: data[i].quantidade_alertas });
+            }
+        }
+
+        // Ordenar os dados por mês com BubbleSort
+        for (let i = 0; i < alertas.length - 1; i++) {
+            for (let j = i + 1; j < alertas.length; j++) {
+                if (alertas[i].mes > alertas[j].mes) {
+                    let temp = alertas[i];
+                    alertas[i] = alertas[j];
+                    alertas[j] = temp;
+                }
+            }
+        }
+
+        // Extrair apenas os números de alertas
+        let alertasOrdenados = [];
+        for (let i = 0; i < alertas.length; i++) {
+            alertasOrdenados.push(alertas[i].quantidade);
+        }
+
+        return alertasOrdenados;
+    }
 
     function predictGrafico() {
         fetch(`/comparacao/predict`)
@@ -70,15 +105,9 @@
                 console.log('Dados recebidos:', data);
 
                 // Extrair alertas para os meses de outubro e novembro
-                const alertasSetorA = data
-                    .filter(item => item.setor === 'Despache de Voo')
-                    .sort((a, b) => a.mes - b.mes)
-                    .map(item => item.quantidade_alertas);
+                const alertasSetorA = obterAlertasPorSetor(data, "Despache de Voo")
 
-                const alertasSetorB = data
-                    .filter(item => item.setor === 'Torre de Controle')
-                    .sort((a, b) => a.mes - b.mes)
-                    .map(item => item.quantidade_alertas);
+                const alertasSetorB = obterAlertasPorSetor(data, "Torre de Controle")
 
                 console.log('Alertas Despache de Voo:', alertasSetorA);
                 console.log('Alertas Torre de Controle:', alertasSetorB);
@@ -91,19 +120,24 @@
                 console.log('Previsões Torre de Controle:', previsoesSetorB);
 
                 const meses = ["Outubro", "Novembro", "Dezembro", "Janeiro", "Fevereiro"];
-                const alertasSetorAComPrevisao = [
-                    ...alertasSetorA,
-                    previsoesSetorA.dezembro,
-                    previsoesSetorA.janeiro,
-                    previsoesSetorA.fevereiro
-                ];
 
-                const alertasSetorBComPrevisao = [
-                    ...alertasSetorB,
-                    previsoesSetorB.dezembro,
-                    previsoesSetorB.janeiro,
-                    previsoesSetorB.fevereiro
-                ];
+                let alertasSetorAComPrevisao = [];
+                for (let i = 0; i < alertasSetorA.length; i++) {
+                    alertasSetorAComPrevisao.push(alertasSetorA[i]);
+                }
+
+                // Adicionar previsões
+                alertasSetorAComPrevisao.push(previsoesSetorA.janeiro);
+                alertasSetorAComPrevisao.push(previsoesSetorA.fevereiro);
+
+                let alertasSetorBComPrevisao = [];
+                for (let i = 0; i < alertasSetorA.length; i++) {
+                    alertasSetorBComPrevisao.push(alertasSetorB[i]);
+                }
+
+                // Adicionar previsões
+                alertasSetorBComPrevisao.push(previsoesSetorB.janeiro);
+                alertasSetorBComPrevisao.push(previsoesSetorB.fevereiro);
 
                 // Criar o gráfico
                 const ctx = document.getElementById('predict-grafico').getContext('2d');
@@ -115,16 +149,12 @@
                             {
                                 label: 'Despache de Voo',
                                 data: alertasSetorAComPrevisao,
-                                backgroundColor: 'rgba(75, 192, 192, 0.6)',
-                                borderColor: 'rgba(75, 192, 192, 1)',
-                                borderWidth: 1
+                                backgroundColor: '#231942'
                             },
                             {
                                 label: 'Torre de Controle',
                                 data: alertasSetorBComPrevisao,
-                                backgroundColor: 'rgba(153, 102, 255, 0.6)',
-                                borderColor: 'rgba(153, 102, 255, 1)',
-                                borderWidth: 1
+                                backgroundColor: '#5e548e'
                             }
                         ]
                     },
