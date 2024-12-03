@@ -11,6 +11,10 @@ router.get("/getDados", function (req, res) {
   suporteController.getDados(req, res);
 });
 
+router.get("/getDadosNovos", function (req, res) {
+  suporteController.getDadosNovos(req, res);
+});
+
 router.post("/getSetor", function (req, res) {
   suporteController.getSetor(req, res);
 })

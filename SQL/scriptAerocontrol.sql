@@ -148,7 +148,7 @@ ON fkDadoComputador = idDado
 WHERE idDado = (SELECT max(idDado) FROM DadoComputador JOIN Computador ON idComputador = fkComputador WHERE idComputador = 1)
 GROUP BY hostname, ramMax, processador, cpuPorcentagem, memoriaPorcentagem, memoriaGB;
 
-SELECT horaDado, cpuPorcentagem, memoriaPorcentagem FROM DadoComputador
+SELECT horaDado, cpuPorcentagem, memoriaPorcentagem, processador FROM DadoComputador
 JOIN Computador
 ON idComputador = fkComputador
 WHERE idComputador = 1
