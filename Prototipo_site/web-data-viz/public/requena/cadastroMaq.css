@@ -82,7 +82,7 @@ body {
 
 label{
   margin: 0px;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   font-weight: bold;
 }
 
@@ -119,8 +119,10 @@ select.selected{
 
 .mensagem{
   color: #3f2182;
-  font-size: 25px;
+  font-size: 15px;
   font-weight: bold;
+  font-style: italic;
+  margin-bottom: 13px;
 }
 
 button{

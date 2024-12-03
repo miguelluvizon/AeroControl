@@ -19,10 +19,11 @@
     </aside>
 
     <main class="principal">
-      <h1>DETALHES DA MÁQUINA</h1>
+      <h1 id="titulo">DETALHES DA MÁQUINA</h1>
 
       <div class="conteudo">
         <div class="divGrafico">
+          <h2 class="tituloGrafico">USO COMPONENTES EM TEMPO REAL</h2>
           <canvas id="usageChart" class="grafico"></canvas>
         </div>
 
@@ -82,14 +83,14 @@
       labels: labels,
       datasets: [
         {
-          label: "CPU",
+          label: "CPU (Em %)",
           borderColor: "#3F2182",
           backgroundColor: "#3F2182",
           fill: false,
           data: [],
         },
         {
-          label: "Memória",
+          label: "Memória (Em %)",
           borderColor: "#7C1E6A",
           backgroundColor: "#7C1E6A",
           fill: false,
@@ -170,7 +171,7 @@
         resposta[resposta.length - 1].ramMax
       ).toFixed(2)}GB de ${resposta[0].ramMax}GB</p>`;
 
-    setInterval(() => novosDados(myChart, dados, labels), 5000);
+    setInterval(() => novosDados(myChart, dados, labels), 1000);
   }
 
   function novosDados(myChart, dados, labels) {
@@ -279,6 +280,9 @@
 
             alerta.innerHTML = `<span><b>${resultado[0].alertas} ALERTAS</b></span>
             <p>Na última hora</p>`;
+
+            titulo.innerHTML = `<h1 id="titulo">DETALHES DA MÁQUINA: ${resultado[0].hostname.toUpperCase()}</h1>`
+
           });
         } else {
           throw "Houve um erro ao tentar criar o select";

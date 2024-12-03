@@ -22,40 +22,27 @@
         <div class="cadastro">
           <div class="campo">
             <label>Nome da Máquina</label>
-            <input
-              type="text"
-              placeholder="Hostname da Máquina"
-              id="inputNome"
-            />
-            <span id="mensagemNome"></span>
+            <input type="text" placeholder="Hostname da Máquina" id="inputNome"/>
+            <span class="mensagem" id="mensagemNome"></span>
           </div>
 
           <div class="campo">
             <label>Total RAM (Em GB)</label>
-            <input
-              type="number"
-              min="4"
-              placeholder="Memória RAM em GB"
-              id="inputRAM"
-            />
-            <span id="mensagemRam"></span>
+            <input type="number" min="4" placeholder="Memória RAM em GB" id="inputRAM"/>
+            <span class="mensagem" id="mensagemRam"></span>
           </div>
 
           <div class="campo">
             <label>Processador</label>
-            <input
-              type="text"
-              placeholder="Modelo do processador"
-              id="inputProcessador"
-            />
-            <span id="mensagemProcessador"></span>
+            <input type="text" placeholder="Modelo do processador" id="inputProcessador"/>
+            <span class="mensagem" id="mensagemProcessador"></span>
           </div>
 
           <div class="campo">
             <label>Setor</label>
             <select id="selectSetor">
-              <span id="mensagemSetor"></span>
             </select>
+            <span class="mensagem" id="mensagemSetor"></span>
           </div>
 
           <div id="botaoMensagem" class="botaoMensagem">
@@ -92,6 +79,7 @@
 
     if (hostname.length >= 1) {
       preenchidos++;
+      mensagemNome.innerHTML = ``;
     } else {
       mensagemNome.innerHTML = `Adicione o hostname da máquina`;
     }
@@ -99,6 +87,7 @@
     if (ramTotal >= 4) {
       if (ramTotal % 4 == 0) {
         preenchidos++;
+        mensagemRam.innerHTML = ``;
       } else {
         mensagemRam.innerHTML = `Memória Inválida`;
       }
@@ -108,12 +97,14 @@
 
     if (processador.length >= 1) {
       preenchidos++;
+      mensagemProcessador.innerHTML = ``;
     } else {
       mensagemProcessador.innerHTML = `Adicione um processador`;
     }
 
-    if (selectSetor.value == "#") {
+    if (selectSetor.value != "#") {
       preenchidos++;
+      mensagemSetor.innerHTML = ``;
     } else {
       mensagemSetor.innerHTML = `Selecione um setor`;
     }
