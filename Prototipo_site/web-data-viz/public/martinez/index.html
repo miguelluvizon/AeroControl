@@ -45,15 +45,16 @@
                 <option value="2024">2024</option>
             </select>
 
-            <div style="display: flex; gap: 4rem; justify-content: center;">
+            <div style="display: flex; gap: 10%; justify-content: center;">
                 <div class="kpi-alertas">
-                    <p>Quantidades de Alertas do mês de: <span id="mesAlerta" style="color: red; border: none;"></span></p>
+                    <p>Quantidades de Alertas do mês de: <br> 
+                    <span id="mesAlerta" style="color: rgb(0, 0, 0); border: none; text-decoration: underline;"></span></p>
                     <span id="quantidadeDeAlertas"></span>
                 </div>
 
-                <div class="kpi-alertas">
-                    <p>Total de Alertas por setor
-                    <p style="color: red;" id="qtdAlertasNome">SETOR</p>
+                <div class="kpi-alertas2">
+                    <p>Total de Alertas por setor  <br>
+                    <span style="color: rgb(0, 0, 0); text-decoration: underline;" id="qtdAlertasNome" class="teste"></span></p>
                     </p>
                     <span id="quantidadeDeAlertasSetor"></span>
                 </div>
@@ -61,14 +62,14 @@
 
             <a href="compararMaquinas.html" class="button btn1">Comparar Máquinas &rarr;</a>
 
-            <div style="display: flex; justify-content: space-around; align-items: center; gap: 20px; position: relative; bottom: 6%;">
+            <div style="display: flex; justify-content: space-around; align-items: center; gap: 0px; position: relative; bottom: 6%;">
                 <div class="chart-container">
                     <h2>QUANTIDADE DE ALERTAS EM CADA SETOR</h2>
                     <canvas id="alertChart"></canvas>
                 </div>
 
-                <div class="chart-container">
-                    <h2>QUANTIDADE DE ALERTAS DO SETOR: <span style="color: red;" id="setorNome">SETOR</span>
+                <div class="chart-container2">
+                    <h2>QUANTIDADE DE ALERTAS DO SETOR: <span style="color: rgb(0, 0, 0);" id="setorNome">SETOR</span>
                     </h2>
                     <div class="chart-setor">
                         <p>Setor</p>

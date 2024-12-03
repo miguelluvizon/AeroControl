@@ -76,10 +76,39 @@ body {
     background-color: #e0e0e0;
     margin: 3rem;
     padding: 15px;
-    border-radius: 8px;
+    border-radius: 3px;
     text-align: center;
+    height: 400px;
+    width: 500px;
 
-    height: 100%;
+}
+
+.chart-container3 {
+    background-color: #e0e0e0;
+    /* display: flex; */
+    position: relative;
+    left: 130px;
+    top: 50px;
+    /* margin: 3rem; */
+    padding: 15px;
+    /* border-radius: 3px; */
+    text-align: center;
+    height: 80%;
+    width: 80%;
+}
+
+.chart-container4 {
+    background-color: #e0e0e0;
+    /* display: flex; */
+    position: relative;
+    left: 130px;
+    top: 50px;
+    /* margin: 3rem; */
+    padding: 15px;
+    /* border-radius: 3px; */
+    text-align: center;
+    height: 70%;
+    width: 80%;
 }
 
 .chart-maquina {
@@ -106,7 +135,7 @@ body {
     text-align: center;
     gap: 1rem;
 
-    margin-bottom: 3rem;
+    margin-bottom: 1rem;
 }
 
 .chart-setor p {
@@ -149,7 +178,7 @@ body {
 
 .btn1 {
     position: relative;
-    top: -12%;
+    top: -24%;
     left: 80%;
 }
 
@@ -159,28 +188,56 @@ body {
     top: 2%;
 }
 
-.kpi-alertas {
-    background-color: #472c72;
-    width: 20%;
-    border-radius: 10px;
-    padding: 1rem;
-    position: relative;
-    left: -3%;
-
+.chart-container2{
+    background-color: #e0e0e0;
+    margin: 3rem;
+    padding: 15px;
+    border-radius: 3px;
     text-align: center;
+    height: 400px;
+    width: 500px;
+    margin-right: 110px;
+
 }
 
-.kpi-alertas p {
-    font-size: 20px;
-    color: white;
+.kpi-alertas {
+    background-color: #e0e0e0;
+    width: 37%;
+    border-radius: 2px;
+    border-left: solid 3px #472c72;
+    padding: 1rem;
+    position: relative;
+    right: 3%;
+    text-align: center;
+    height: 20%;
+    margin-top: 3%;
+}
 
+.kpi-alertas2 {
+    background-color: #e0e0e0;
+    border-left: solid 3px #472c72;
+    width: 37%;
+    border-radius: 2px;
+    padding: 1rem;
+    position: relative;
+    left: -2%;
+    text-align: center;
+    height: 5%;
+    margin-top: 3%;
+}
+
+.kpi-alertas p,
+.kpi-alertas2 p {
+    font-size: 20px;
+    color: #472c72;
     margin-bottom: .9rem;
 }
 
-.kpi-alertas span {
-    color: white;
+.kpi-alertas span,
+.kpi-alertas2 span {
+    color: rgb(0, 0, 0);
     font-weight: bold;
-    border: 2px solid white;
+    /* border: 2px solid white; */
     padding: .3rem;
 }
 
