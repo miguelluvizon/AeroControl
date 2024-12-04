@@ -65,13 +65,12 @@
                 console.log(resposta);
 
                 resposta.json().then(json => {
-                    const login = json[0]
-                    sessionStorage.CPF = login.cpf;
-                    sessionStorage.NOME_USUARIO = login.nome;
-                    sessionStorage.EMAIL = login.email;
-                    sessionStorage.ID_USUARIO = login.idUsuario;
-                    sessionStorage.CARGO = login.cargo;
-
+                    sessionStorage.CPF = json.cpf;
+                    sessionStorage.NOME_USUARIO = json.nomeUsuario;
+                    sessionStorage.EMAIL = json.email;
+                    sessionStorage.ID_USUARIO = json.idUsuario || null;
+                    sessionStorage.CARGO = json.cargo;
+                    sessionStorage.MAQUINAS = JSON.stringify(json.maquinas);
 
                     if(sessionStorage.CARGO == "Analista de Dados"){
                         window.location = "ricken/index.html";

@@ -1,4 +1,4 @@
-var suporteModel = require("../models/suporteArthurModel.js");
+var suporteArthurModel = require("../models/suporteArthurModel.js");
 const { get } = require("../routes/suporteArthur");
 
 function buscarUltimasMedidas(req, res) {
@@ -42,7 +42,24 @@ function buscarMedidasEmTempoReal(req, res) {
     });
 }
 
+function buscarMaquinasPorUsuario(req, res) {
+    var idUsuario = req.params.idUsuario;
+    
+    suporteArthurModel.buscarMaquinasPorUsuario(cpf).then((resultado) => {
+      if (resultado.length > 0) {
+        res.status(200).json(resultado);
+      } else {
+        res.status(204).json([]);
+      }
+    }).catch(function (erro) {
+      console.log(erro);
+      console.log("Houve um erro ao buscar as maquinas: ", erro.sqlMessage);
+      res.status(500).json(erro.sqlMessage);
+    });
+  }
+
 module.exports = {
+    buscarMaquinasPorUsuario,
     buscarUltimasMedidas,
     buscarMedidasEmTempoReal
 

@@ -88,10 +88,11 @@
                     <label for="filter">Filtro</label>
                     <div class="inputs">
                     <div class="custom-select">
-                        <select id="filter">
+                        <select id="filter" onchange="exibirMaquinasDoUsuario()">
                             <option value="setor">Setor</option>
-                            <option value="despache">Despache Operacional</option>
-                            <option value="coordenador">Coordenador de Voos</option>
+                            <option value="1">Despache Operacional</option>
+                            <option value="2">Coordenador de Voos</option>
+                            <option value="3">Centro de Meteorologia</option>
                         </select>
                         <span class="arrow">&#9662;</span>
                     </div>
@@ -100,58 +101,7 @@
 
             <div id="machine-list" class="machine-list">
                 
-                <div class="machine-card">
-                    <div class="infos">
-                    <div class="machine-info">
-                        <p><strong>Máquina:</strong> PC4000</p>
-                        <p><strong>Setor:</strong> Coordenador de voos</p>
-                    </div>
-                    <div class="machine-status">
-                        <div id="maquina-indicador1" class="machine-indicator warning"></div>
-                    </div>
-                    <a class="analyze-btn" href="dashboard-suporte-grafico.html">Analisar</a>
-                </div>
-                </div>
                 
-                <div class="machine-card">
-                    <div class="infos">
-                    <div class="machine-info">
-                        <p><strong>Máquina:</strong> PC1000</p>
-                        <p><strong>Setor:</strong> Despache operacional de voo</p>
-                    </div>
-                    <div class="machine-status">
-                        <div id="maquina-indicador2" class="machine-indicator alert"></div>
-                    </div>
-                    <a class="analyze-btn" href="dashboard-suporte-grafico.html">Analisar</a>
-            </div>
-</div>
-                
-                <div class="machine-card">
-                    <div class="infos">
-                    <div class="machine-info">
-                        <p><strong>Máquina:</strong> PC2000</p>
-                        <p><strong>Setor:</strong> Coordenador de voos</p>
-                    </div>
-                    
-                    <div class="machine-status">
-                        <div id="maquina-indicador3" class="machine-indicator stable"></div>
-                    </div>
-                    <a class="analyze-btn" href="dashboard-suporte-grafico.html">Analisar</a>
-                
-                </div>
-            </div>
-
-                <div class="machine-card">
-                    <div class="infos">
-                    <div class="machine-info">
-                        <p><strong>Máquina:</strong> PC3000</p>
-                        <p><strong>Setor:</strong> Despache operacional de voo</p>
-                    </div>
-                    <div class="machine-status">
-                        <div id="maquina-indicador4" class="machine-indicator warning"></div>
-                </div>
-            <a class="analyze-btn" href="dashboard-suporte-grafico.html">Analisar</a>
-        </div>    
     </div>
     </div>
             </div>
@@ -168,43 +118,7 @@
 
 <script>
 
-var axios = require('axios');
-require('dotenv').config();
-
-const username = process.env.ATLASSIAN_USERNAME
-const password = process.env.ATLASSIAN_API_KEY
-const domain = process.env.DOMAIN
-
-const auth = {
-  username: username,
-  password: password
-};
-
-//Gets all issues in a particular project using the Jira Cloud REST API
-async function getIssues() {
-
-  try {
-
-    const baseUrl = 'https://' + domain + '.atlassian.net';
-
-    const config = {
-      method: 'get',
-      url: baseUrl + '/rest/api/2/search',
-      headers: { 'Content-Type': 'application/json' },
-      auth: auth
-    };
-    const response = await axios.request(config);
-    console.log(response.data)
-    return response.data;
-  } catch (error) {
-    console.log('error: ')
-    console.log(error.response.data.errors)
-  }
-}
-
-module.exports = getIssues;
-
-
+   
     //Seleção do visualizador
     console.log("Script carregado com sucesso!");
     function slct_visu_maquina(){
@@ -242,263 +156,54 @@ module.exports = getIssues;
     }
 
 
-
-    b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
-
-    
-
 function analisar(hostname){
     sessionStorage.setItem('hostname', hostname);
-      window.location.href = `C:\Users\tutu9\Downloads\git_grupal\AeroControl\Prototipo_site\web-data-viz\public\requena\cadastroMaq.html`;
+    window.location.href = "../requena/cadastroMaq.html";
 }
 
 
     let proximaAtualizacao;
 
-    window.onload = obterDados();
-    window.onload = exibirMaquinasDoUsuario();
-
-    function exibirMaquinasDoUsuario() {
-        var maquinas = JSON.parse(sessionStorage.MAQUINAS);
-        var setor = filter.value;
-        maquinas.forEach(item => {
-            if(setor == "despache"){
-                if(item.setor == "Despache Operacional"){
-            document.getElementById("machine-list").innerHTML += `
-                <div class="machine-card">
-                    <div class="infos">
-                    <div class="machine-info">
-                        <p><strong>Máquina:</strong> ${item.hostname}</p>
-                        <p><strong>Setor:</strong> ${item.setor}</p>
-                    </div>
-                    <div class="machine-status">
-                        <div id="maquina-indicador${item.id}" class="machine-indicator warning"></div>
-                    </div>
-                    <a class="analyze-btn" onclick="analisar()">Analisar</a>
-                </div>
-                </div>
-            `}} else if(setor == "coordenador"){
-                if(item.setor == "Coordenador de Voos"){
-            document.getElementById("machine-list").innerHTML += `
-                <div class="machine-card">
-                    <div class="infos">
-                    <div class="machine-info">
-                        <p><strong>Máquina:</strong> ${item.hostname}</p>
-                        <p><strong>Setor:</strong> ${item.setor}</p>
-                    </div>
-                    <div class="machine-status">
-                        <div id="maquina-indicador${item.id}" class="machine-indicator warning"></div>
-                    </div>
-                    <a class="analyze-btn" onclick="analisar()">Analisar</a>
-                </div>
-                </div>
-            ` 
-            } else if (setor == "Setor"){
-                
-            document.getElementById("machine-list").innerHTML += `
-                <div class="machine-card">
-                    <div class="infos">
-                    <div class="machine-info">
-                        <p><strong>Máquina:</strong> ${item.hostname}</p>
-                        <p><strong>Setor:</strong> ${item.setor}</p>
-                    </div>
-                    <div class="machine-status">
-                        <div id="maquina-indicador${item.id}" class="machine-indicator warning"></div>
-                    </div>
-                    <a class="analyze-btn" onclick="analisar()">Analisar</a>
-                </div>
-                </div>
-            ` 
-            }}
-
-            obterDadosMaquina(item.id)
-        });
-
-        if (maquinas.length > 0) {
-            exibirMaquinas(maquinas[0].id)
-        }
-    }
-
-     // O gráfico é construído com três funções:
-    // 1. obterDadosGrafico -> Traz dados do Banco de Dados para montar o gráfico da primeira vez
-    // 2. plotarGrafico -> Monta o gráfico com os dados trazidos e exibe em tela
-    // 3. atualizarGrafico -> Atualiza o gráfico, trazendo novamente dados do Banco
-
-    // Esta função *obterDadosGrafico* busca os últimos dados inseridos em tabela de medidas.
-    // para, quando carregar o gráfico da primeira vez, já trazer com vários dados.
-    // A função *obterDadosGrafico* também invoca a função *plotarGrafico*
-
-    //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
-    //     Para ajustar o "select", ajuste o comando sql em src/models
-    function obterDadosMaquina(idMaquina) {
-
-    alterarTitulo(idMaquina)
-
-    if (proximaAtualizacao != undefined) {
-    clearTimeout(proximaAtualizacao);
-    }
-
-    fetch(`/suporteArthur/ultimas/${idMaquina}`, { cache: 'no-store' }).then(function (response) {
-        if (response.ok) {
-            response.json().then(function (resposta) {
-                console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                resposta.reverse();
-
-                plotarIndicador(resposta, idMaquina);
-            });
-        } else {
-            console.error('Nenhum dado encontrado ou erro na API');
-        }
-    })
-        .catch(function (error) {
-            console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-        });
-    }
-
-     // Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
-    // Configura o gráfico (cores, tipo, etc), materializa-o na página e, 
-    // A função *plotarGrafico* também invoca a função *atualizarGrafico*
-    function plotarIndicador(resposta, idMaquina) {
-
-console.log('iniciando plotagem do indicador...');
-
-console.log('----------------------------------------------')
-        console.log('Estes dados foram recebidos pela funcao "obterDadosMaquina" e passados para "plotarIndicador":')
-        console.log(resposta)
-        
-        // Inserindo valores recebidos em estrutura para plotar o gráfico
-        let registro = resposta[resposta.length - 1];
-        for (i = 0; i < resposta.length; i++) {
-            dados.datasets[0].data.push(registro.cpuPorcentagem);
-            dados.datasets[1].data.push(registro.memoriaPocentagem);
-        }
-
-        console.log('----------------------------------------------')
-        console.log('O gráfico será plotado com os respectivos valores:')
-        console.log('Labels:')
-        console.log(labels)
-        console.log('Dados:')
-        console.log(dados.datasets)
-        console.log('----------------------------------------------')
-
-        //contagem de em alerta, estavel e ateção
-        var maquinasAlerta = 0;
-        var maquinasAtencao = 0;
-        var maquinasEstavel = 0;
+    window.onload = exibirMaquinasDoUsuario;
    
-        // Criando estrutura para plotar gráfico - config
-        // alerta: entre 50 - 80
-        if(registro.cpuPorcentagem >= 80 || registro.memoriaPocentagem >= 80){
-        // Adicionando gráfico criado em div na tela
-            indicador = document.getElementById(`maquina-indicador${idMaquina}`),
-            indicador.style.backgroundColor = 'red'
-            maquinasAlerta += 1;
-        
-        } else if(registro.cpuPorcentagem > 50 || registro.memoriaPocentagem > 50){
+    function exibirMaquinasDoUsuario() {
+        var machineList = document.getElementById("machine-list");
+        machineList.innerHTML = "";
 
-            indicador = document.getElementById(`maquina-indicador${idMaquina}`),
-            indicador.style.backgroundColor = 'yellow'
-            maquinasAtencao += 1;
+        var maquinas = JSON.parse(sessionStorage.MAQUINAS);
         
-        } else if (registro.cpuPorcentagem <= 50 || registro.memoriaPocentagem <= 50){
-            indicador = document.getElementById(`maquina-indicador${idMaquina}`),
-            indicador.style.backgroundColor = 'green'
-            maquinasEstavel += 1;
+        var setor = document.getElementById("filter").value; // Obtém o valor do filtro
+    console.log("filtro selecionado: ", setor);
+
+    maquinas.forEach(item => {
+        if (setor == "setor" || item.fkSetor == setor) {
+            console.log("Exibindo com filtro do setor:", setor);
+            machineList.innerHTML += `
+                <div class="machine-card">
+                    <div class="infos">
+                        <div class="machine-info">
+                            <p><strong>Máquina:</strong> <span id="nomeMaquina">${item.hostname}</span></p>
+                            <p><strong>Setor:</strong> ${item.fkSetor}</p>
+                        </div>
+                        <div class="machine-status">
+                            <div id="maquina-indicador${item.id}" class="machine-indicator warning"></div>
+                        </div>
+                        <a class="analyze-btn" onclick="analisar('${item.hostname}')">Analisar</a>
+                    </div>
+                </div>
+            `;
         }
-        indicador_alerta = document.getElementById(`numero-alerta`),
-        indicador_alerta.innerHTML = maquinasAlerta
-
-        indicador_atencao = document.getElementById(`numero-atencao`),
-        indicador_atencao.innerHTML = maquinasAtencao
-
-        indicador_estavel = document.getElementById(`numero-estavel`),
-        indicador_estavel.innerHTML = maquinasEstavel
-
-        setTimeout(() => atualizarGrafico(idMaquina, dados, indicador), 2000);
-
-        if (!resposta || resposta.length === 0) {
-            console.warn("Nenhum dado encontrado para a máquina.");
-    }
-}
-
-    // Esta função *atualizarGrafico* atualiza o gráfico que foi renderizado na página,
-    // buscando a última medida inserida em tabela contendo as capturas, 
-
-    //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
-    //     Para ajustar o "select", ajuste o comando sql em src/models
-    function atualizarGrafico(idMaquina, dados, indicador) {
-
-fetch(`/medidas/tempo-real/${idMaquina}`, { cache: 'no-store' }).then(function (response) {
-    if (response.ok) {
-
-        response.json().then(function (novoRegistro) {
-            obterdados(idMaquina);
-            // alertar(novoRegistro, idMaquina);
-            console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
-            console.log(`Dados atuais do gráfico:`);
-            console.log(dados);
-
-            let avisoCaptura = document.getElementById(`avisoCaptura${idMaquina}`)
-            avisoCaptura.innerHTML = ""
-
-
-            if (novoRegistro[0].momento_grafico == dados.labels[dados.labels.length - 1]) {
-                console.log("---------------------------------------------------------------")
-                console.log("Como não há dados novos para captura, o gráfico não atualizará.")
-                avisoCaptura.innerHTML = "<i class='fa-solid fa-triangle-exclamation'></i> Foi trazido o dado mais atual capturado pelo sensor. <br> Como não há dados novos a exibir, o gráfico não atualizará."
-                console.log("Horário do novo dado capturado:")
-                console.log(novoRegistro[0].momento_grafico)
-                console.log("Horário do último dado capturado:")
-                console.log(dados.labels[dados.labels.length - 1])
-                console.log("---------------------------------------------------------------")
-            } else {
-                // tirando e colocando valores no gráfico
-                dados.labels.shift(); // apagar o primeiro
-                dados.labels.push(novoRegistro[0].momento_grafico); // incluir um novo momento
-
-                dados.datasets[0].data.shift();  // apagar o primeiro de umidade
-                dados.datasets[0].data.push(novoRegistro[0].cpuPorcentagem); // incluir uma nova medida de umidade
-
-                dados.datasets[1].data.shift();  // apagar o primeiro de temperatura
-                dados.datasets[1].data.push(novoRegistro[0].memoriaPocentagem); // incluir uma nova medida de temperatura
-
-                if(registro.cpuPorcentagem >= 80 || registro.memoriaPocentagem >= 80){
-        // Adicionando gráfico criado em div na tela
-            indicador = document.getElementById(`maquina-indicador${idMaquina}`),
-            indicador.style.backgroundColor = 'red'
-        
-        } else if(registro.cpuPorcentagem > 50 || registro.memoriaPocentagem > 50){
-
-            indicador = document.getElementById(`maquina-indicador${idMaquina}`),
-            indicador.style.backgroundColor = 'yellow'
-        
-        } else if (registro.cpuPorcentagem <= 50 || registro.memoriaPocentagem <= 50){
-            indicador = document.getElementById(`maquina-indicador${idMaquina}`),
-            indicador.style.backgroundColor = 'green'
-        }
-
-                indicador.update();
-            }
-
-            // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-            proximaAtualizacao = setTimeout(() => atualizarGrafico(idMaquina, dados, indicador), 2000);
-        });
-    } else {
-        console.error('Nenhum dado encontrado ou erro na API');
-        // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-        proximaAtualizacao = setTimeout(() => atualizarGrafico(idMaquina, dados, indicador), 2000);
-    }
-})
-    .catch(function (error) {
-        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
     });
 
-}
+            //aqui fica obterDadosMaquina);
 
-    function ativarCheck(){
-        const checkbox = document.getElementById("checkDash");
-      checkbox.checked = !checkbox.checked;
+        // Verifica se nenhuma máquina foi exibida
+    if (machineList.innerHTML === "") {
+        machineList.innerHTML = "<p>Nenhuma máquina encontrada para o filtro selecionado.</p>";
     }
+        
+    }
+
 
     function limparSessao() {
         sessionStorage.clear();

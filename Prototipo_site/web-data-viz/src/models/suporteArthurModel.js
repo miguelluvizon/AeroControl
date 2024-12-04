@@ -1,3 +1,4 @@
+
 var database = require("../database/config");
 
 function buscarUltimasMedidas(idMaquina) {
@@ -35,7 +36,16 @@ ORDER BY cpuPorcentagem;
     return database.executar(instrucaoSql);
 }
 
+function buscarMaquinasPorUsuario(idUsuario) {
+
+    var instrucaoSql = `SELECT * FROM Computador a WHERE fkUsuario = ${idUsuario}`;
+  
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+  }
+
 module.exports = {
+    buscarMaquinasPorUsuario,
     buscarUltimasMedidas,
     buscarMedidasEmTempoReal
 }
