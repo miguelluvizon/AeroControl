@@ -99,6 +99,8 @@ function puxarTotalMaquinas() {
 }
 
 function puxarMediaTotal() {
+    var cardCPU = document.getElementById('cardMediaCPU')
+    var cardRAM = document.getElementById('cardMediaRAM')
     fetch("../empresas/puxarMediaTotal", {
         method: "GET",
     })
@@ -112,6 +114,22 @@ function puxarMediaTotal() {
 
                         mediaTotalCPU.innerHTML = `${resposta[0].mediaTotal_CPU}`
                         mediaTotalRAM.innerHTML = `${resposta[0].mediaTotal_RAM}`
+
+                        if (resposta[0].mediaTotal_CPU >= 80) {
+                            cardCPU.classList.toggle("ativarVermelho");
+                        } else if (resposta[0].mediaTotal_CPU >= 50 && resposta[0].mediaTotal_CPU < 80) {
+                            cardCPU.classList.toggle("ativarAmarelo");
+                        } else if (resposta[0].mediaTotal_CPU >= 0 && resposta[0].mediaTotal_CPU < 50) {
+                            cardCPU.classList.toggle("ativarVerde");
+                        }
+
+                        if (resposta[0].mediaTotal_RAM >= 80) {
+                            cardRAM.classList.toggle("ativarVermelho");
+                        } else if (resposta[0].mediaTotal_RAM >= 50 && resposta[0].mediaTotal_RAM < 80) {
+                            cardRAM.classList.toggle("ativarAmarelo");
+                        } else if (resposta[0].mediaTotal_RAM >= 0 && resposta[0].mediaTotal_RAM < 50) {
+                            cardRAM.classList.toggle("ativarVerde");
+                        }
                     })
             } else {
                 throw "Houve ao puxar a média";
