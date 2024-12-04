@@ -130,10 +130,14 @@ let graficoAlertasRAM
 function rankearAlertasTotais() {
     var componente = document.getElementById('Comp').value
 
-    fetch(`../empresas/rankearAlertasTotais/${componente}`)
+    fetch(`/empresas/rankearAlertasTotais/${componente}`)
         .then(response => response.json())
         .then(data => {
             console.log(data)
+
+            if (graficoAlertasCPU) {
+                graficoAlertasCPU.destroy();
+            }
 
             const maquinas = data.map(item => item.Maquina);
             const qtd_alertas = data.map(item => item.total_alertas);
