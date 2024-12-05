@@ -22,7 +22,21 @@ Comp.addEventListener("change", trocarConteudo);
 trocarConteudo();
 
 function puxarAlertas() {
-    fetch("../empresas/puxarAlertas", {
+    const botaoSelecionado = sessionStorage.getItem("botaoSelecionado");
+    var setor = 0;
+
+    if (botaoSelecionado === "botao1") {
+        setor = 1;
+        setorNome.innerHTML = "Despache de voo"
+    } else if (botaoSelecionado === "botao2") {
+        setor = 2;
+    } else if (botaoSelecionado === "botao3") {
+        setor = 3;
+    }
+
+    console.log(setor)
+
+    fetch(`../empresas/puxarAlertas/${setor}`, {
         method: "GET",
     })
         .then(function (resposta) {

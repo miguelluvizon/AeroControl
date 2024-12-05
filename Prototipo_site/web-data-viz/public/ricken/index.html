@@ -70,7 +70,7 @@
                             <p>Máquinas: 17</p>
                         </div>
                         <div class="maisDetalhes">
-                            <button>Mais <br> Detalhes</button>
+                            <button onclick="redirecionarTela('botao1')">Mais <br> Detalhes</button>
                         </div>
                         <div class="conteudo">
                             <p>Máquinas ao <br> longo da semana:</p>
@@ -88,7 +88,7 @@
                             <p>Máquinas: 17</p>
                         </div>
                         <div class="maisDetalhes">
-                            <button>Mais <br> Detalhes</button>
+                            <button onclick="redirecionarTela('botao2')">Mais <br> Detalhes</button>
                         </div>
                         <div class="conteudo">
                             <p>Máquinas ao <br> longo da semana:</p>
@@ -106,7 +106,7 @@
                             <p>Máquinas: 17</p>
                         </div>
                         <div class="maisDetalhes" style="margin-left: -1.6rem;">
-                            <button>Mais <br> Detalhes</button>
+                            <button onclick="redirecionarTela('botao3')">Mais <br> Detalhes</button>
                         </div>
                         <div class="conteudo">
                             <p>Máquinas ao <br> longo da semana:</p>
@@ -128,6 +128,11 @@
 </html>
 
 <script>
+
+    function redirecionarTela(botao) {
+        sessionStorage.setItem("botaoSelecionado",botao)
+        window.location.href = "../Miguel/index.html";
+    }
 
     function plotar(resposta) {
         const data = {

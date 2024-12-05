@@ -24,7 +24,7 @@ router.post("/getEmpresas", function (req, res) {
   empresaController.getEmpresas(req, res);
 })
 
-router.get("/puxarAlertas", function (req, res) { // rota luvizones
+router.get("/puxarAlertas/:setor", function (req, res) { // rota luvizones
   empresaController.puxarAlertas(req, res);
 })
 

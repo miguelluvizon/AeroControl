@@ -49,8 +49,10 @@ function getEmpresas(req, res) {
 }
 
 function puxarAlertas (req, res) { // rota luvizones
+  const {setor} = req.params
+
   console.log("puxando total de alertas")
-  empresaModel.puxarAlertas()
+  empresaModel.puxarAlertas(setor)
   .then(function (resposta) {
       if(resposta.length > 0) {
           res.status(200).json(resposta);

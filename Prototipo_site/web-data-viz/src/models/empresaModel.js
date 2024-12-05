@@ -31,7 +31,7 @@ function getEmpresas() {
   return database.executar(instrucaoSql);
 }
 
-function puxarAlertas() { // rota luvizones
+function puxarAlertas(setor) { // rota luvizones
   var instrucaoSql = `
   SELECT
   SUM(CASE WHEN origem = 'cpu' THEN 1 ELSE 0 END) AS total_cpu,
@@ -40,7 +40,7 @@ function puxarAlertas() { // rota luvizones
   JOIN DadoComputador ON fkDadoComputador = idDado
   JOIN Computador ON fkComputador = idComputador
   JOIN Setor ON fkSetor = idSetor
-  WHERE idSetor = 1 AND horaDado BETWEEN DATE_SUB(NOW(), INTERVAL 7 DAY) AND NOW();`;
+  WHERE idSetor = ${setor} AND horaDado BETWEEN DATE_SUB(NOW(), INTERVAL 7 DAY) AND NOW();`;
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
 }
