@@ -61,7 +61,7 @@ constraint fkAlertaDado foreign key (fkDadoComputador) references DadoComputador
 tipo varchar(50),
 origem varchar(50)
 );
-drop table webCrawler;
+
 CREATE TABLE webCrawler(
 	id int primary key auto_increment,
     dia varchar(50),
@@ -117,7 +117,7 @@ SELECT * FROM Usuario;
 SELECT * FROM Computador;
 SELECT * FROM DadoComputador;
 SELECT * FROM Alerta;
-INSERT INTO Alerta VALUES (default, default, 80, "alerta", "cpu");
+
 -- SELECT LUVIZONES
 SELECT idComputador, hostname as Maquina, COUNT(a.idAlerta) AS total_alertas FROM Alerta a
 	JOIN DadoComputador ON fkDadoComputador = idDado
