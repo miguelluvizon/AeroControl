@@ -10,7 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
-<body onload="estadoMaquinas(), estadoSetor(), plotarSetor2(), plotarSetor3()">
+<body onload="estadoMaquinas(), estadoSetor()">
     <div class="container">
         <aside class="sidebar">
             <img src="img/Protótipo Dashboard.png" alt="">
@@ -23,7 +23,7 @@
 
             <div class="painel">
 
-                <div class="configGraficos">
+                <div class="configGraficoPizza">
                     <canvas id="grafico"></canvas>
                 </div>
 
@@ -64,60 +64,55 @@
 
                 <div class="alertChart">
 
-                    <div class="despache">
-                        <div class="setor">
-                            <p>Setor: Despache de voo</p> <br>
-                            <p>Máquinas: 17</p>
-                        </div>
-                        <div class="maisDetalhes">
-                            <button onclick="redirecionarTela('botao1')">Mais <br> Detalhes</button>
-                        </div>
+                    <div class="cardSetor">
+                        <p>Setor: Despache de voo</p>
+                        <p id="totalMaquinaSetor1"></p>
+
                         <div class="conteudo">
                             <p>Máquinas ao <br> longo da semana:</p>
                         </div>
                         <div class="metricas">
-                            <div class="configGraficos2">
+                            <div class="configGraficoBarra">
                                 <canvas id="grafico2"></canvas>
                             </div>
                         </div>
+
+                        <button class="maisDetalhes" onclick="redirecionarTela('botao1')">Mais Detalhes</button>
                     </div>
 
-                    <div class="torre">
-                        <div class="setor">
-                            <p>Setor: Torre de controle</p> <br>
-                            <p>Máquinas: 17</p>
-                        </div>
-                        <div class="maisDetalhes">
-                            <button onclick="redirecionarTela('botao2')">Mais <br> Detalhes</button>
-                        </div>
+                    <div class="cardSetor">
+                        <p>Setor: Torre de controle</p>
+                        <p id="TotalMaquinaSetor2"></p>
+
+
                         <div class="conteudo">
                             <p>Máquinas ao <br> longo da semana:</p>
                         </div>
                         <div class="metricas">
-                            <div class="configGraficos3">
+                            <div class="configGraficoBarra">
                                 <canvas id="grafico3"></canvas>
                             </div>
                         </div>
+
+                        <button class="maisDetalhes" onclick="redirecionarTela('botao2')">Mais Detalhes</button>
                     </div>
 
-                    <div class="meteorologia">
-                        <div class="setor">
-                            <p>Setor: Centro de meteorologia </p> <br>
-                            <p>Máquinas: 17</p>
-                        </div>
-                        <div class="maisDetalhes" style="margin-left: -1.6rem;">
-                            <button onclick="redirecionarTela('botao3')">Mais <br> Detalhes</button>
-                        </div>
+                    <div class="cardSetor">
+                        <p>Setor: Centro de meteorologia </p>
+                        <p id="totalMaquinaSetor3"></p>
+
+
                         <div class="conteudo">
                             <p>Máquinas ao <br> longo da semana:</p>
                         </div>
                         <div class="metricas">
 
-                            <div class="configGraficos4">
+                            <div class="configGraficoBarra">
                                 <canvas id="grafico4"></canvas>
                             </div>
-
                         </div>
+
+                        <button class="maisDetalhes" onclick="redirecionarTela('botao3')">Mais Detalhes</button>
                     </div>
                 </div>
             </div>
@@ -130,19 +125,19 @@
 <script>
 
     function redirecionarTela(botao) {
-        sessionStorage.setItem("botaoSelecionado",botao)
+        sessionStorage.setItem("botaoSelecionado", botao)
         window.location.href = "../Miguel/index.html";
     }
 
     function plotar(resposta) {
         const data = {
-            labels: ['Alerta', 'Atenção', 'Estável'],
+            labels: ['Alerta', 'Atenção'],
             datasets: [
                 {
                     label: 'Máquinas',
                     borderColor: ['black'],
                     data: [],
-                    backgroundColor: ['#c02f1b', '#EFCA08', '#0f520c'],
+                    backgroundColor: ['#c02f1b', '#EFCA08'],
                 }
             ]
         };
@@ -150,7 +145,6 @@
         console.log(resposta)
         data.datasets[0].data.push(resposta[0].AlertasTotais);
         data.datasets[0].data.push(resposta[0].AtencaoTotais);
-        data.datasets[0].data.push((resposta[0].DadosTotais) - (resposta[0].AtencaoTotais + resposta[0].AlertasTotais));
 
 
         const config = {
@@ -178,26 +172,28 @@
 
     ///////////////////////////////////////////////////
 
-    function plotarSetor(resposta) {
+    function plotarSetor1(resposta) {
 
         const data = {
-            labels: ['Alerta', 'Atenção', 'Estável'],
+            labels: ['Alerta', 'Atenção'],
             datasets: [
                 {
                     label: ['Máquina'],
-                    data: [20, 22, 31],
+                    data: [],
                     borderColor: ['white'],
-                    backgroundColor: ['#c02f1b', '#EFCA08', '#0f520c'],
+                    backgroundColor: ['#c02f1b', '#EFCA08'],
                 }
             ]
         };
         console.log(resposta)
+        data.datasets[0].data.push(resposta[0].AlertasTotaisSetor1);
+        data.datasets[0].data.push(resposta[0].AtencaoTotaisSetor1);
 
         const config = {
             type: 'bar',
             data: data,
             options: {
-                indexAxis: 'y',
+                indexAxis: 'x',
                 // Elements options apply to all of the options unless overridden in a dataset
                 // In this case, we are setting the border of each horizontal bar to be 2px wide
                 elements: {
@@ -230,23 +226,25 @@
     function plotarSetor2(resposta) {
         // comecoSetor2
         const data2 = {
-            labels: ['Alerta', 'Atenção', 'Estável'],
+            labels: ['Alerta', 'Atenção'],
             datasets: [
                 {
                     label: ['Máquina'],
-                    data: [11, 22, 21],
+                    data: [],
                     borderColor: ['white'],
-                    backgroundColor: ['#c02f1b', '#EFCA08', '#0f520c'],
+                    backgroundColor: ['#c02f1b', '#EFCA08'],
                 }
             ]
         };
         console.log(resposta)
+        data2.datasets[0].data.push(resposta[0].AlertasTotaisSetor2);
+        data2.datasets[0].data.push(resposta[0].AtencaoTotaisSetor2);
 
         const config2 = {
             type: 'bar',
-            data2: data2,
+            data: data2,
             options: {
-                indexAxis: 'y',
+                indexAxis: 'x',
                 // Elements options apply to all of the options unless overridden in a dataset
                 // In this case, we are setting the border of each horizontal bar to be 2px wide
                 elements: {
@@ -275,26 +273,28 @@
         // fimSetor2
     }
 
-    function plotarSetor3(resposta){
+    function plotarSetor3(resposta) {
         // comecoSetor3
         const data3 = {
-            labels: ['Alerta', 'Atenção', 'Estável'],
+            labels: ['Alerta', 'Atenção'],
             datasets: [
                 {
                     label: ['Máquina'],
-                    data: [3, 4, 3],
+                    data: [],
                     borderColor: ['white'],
-                    backgroundColor: ['#c02f1b', '#EFCA08', '#0f520c'],
+                    backgroundColor: ['#c02f1b', '#EFCA08'],
                 }
             ]
         };
         console.log(resposta)
+        data3.datasets[0].data.push(resposta[0].AlertasTotaisSetor3);
+        data3.datasets[0].data.push(resposta[0].AtencaoTotaisSetor3);
 
         const config3 = {
             type: 'bar',
-            data3: data3,
+            data: data3,
             options: {
-                indexAxis: 'y',
+                indexAxis: 'x',
                 // Elements options apply to all of the options unless overridden in a dataset
                 // In this case, we are setting the border of each horizontal bar to be 2px wide
                 elements: {
@@ -316,7 +316,7 @@
             },
         };
 
-        let myChart3 = new Chart(
+        let myChart = new Chart(
             document.getElementById('grafico4'),
             config3
         );

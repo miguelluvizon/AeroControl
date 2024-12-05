@@ -37,9 +37,13 @@ function estadoSetor() {
           console.log(`Dados Recebidos: ${JSON.stringify(resposta)}`);
           resposta.reverse();
 
-          plotarSetor(resposta);
+          plotarSetor1(resposta);
           plotarSetor2(resposta);
           plotarSetor3(resposta);
+
+          totalMaquinaSetor1.innerHTML = `Máquinas: ${resposta[0].DadosTotaisSetor1}`
+          TotalMaquinaSetor2.innerHTML = `Máquinas: ${resposta[0].DadosTotaisSetor2}`
+          totalMaquinaSetor3.innerHTML = `Máquinas: ${resposta[0].DadosTotaisSetor3}`
         });
       } else {
         console.error("Nenhum dado foi econtrado na API.");
