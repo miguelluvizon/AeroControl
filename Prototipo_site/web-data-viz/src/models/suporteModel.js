@@ -13,6 +13,18 @@ LIMIT 25;
   return database.executar(instrucao);
 }
 
+function getDadosNovos() {
+  var instrucao = `SELECT ramMax, horaDado, cpuPorcentagem, memoriaPorcentagem, processador FROM DadoComputador
+JOIN Computador
+ON idComputador = fkComputador
+WHERE idComputador = 1
+ORDER BY idDado DESC
+LIMIT 25;
+  `;
+  console.log("Executando a instrução SQL: \n" + instrucao);
+  return database.executar(instrucao);
+}
+
 function cadastrar(hostname, ramTotal, processador, usuario, setor) {
   var instrucaoSql = `
       INSERT INTO Computador (hostname, processador, ramMax, fkUsuario, fkSetor) VALUES
@@ -58,6 +70,7 @@ GROUP BY hostname, ramMax, processador, cpuPorcentagem, memoriaPorcentagem, memo
 module.exports = {
   cadastrar,
   getDados,
+  getDadosNovos,
   getSetor,
   getInformacoes,
 };

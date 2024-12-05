@@ -40,8 +40,7 @@ function puxarAlertas() { // rota luvizones
   JOIN DadoComputador ON fkDadoComputador = idDado
   JOIN Computador ON fkComputador = idComputador
   JOIN Setor ON fkSetor = idSetor
-  JOIN SetorAeroporto ON fkSetorId = idSetor
-  WHERE fkAeroporto = "11223344556677" AND idSetor = 1;`;
+  WHERE idSetor = 1 AND horaDado BETWEEN DATE_SUB(NOW(), INTERVAL 7 DAY) AND NOW();`;
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
 }
@@ -56,8 +55,7 @@ function puxarAlertasCriticos() { // rota luvizones
 	JOIN DadoComputador ON fkDadoComputador = idDado
 	JOIN Computador ON fkComputador = idComputador
 	JOIN Setor ON fkSetor = idSetor
-	JOIN SetorAeroporto ON fkSetorId = idSetor
-	WHERE fkAeroporto = "11223344556677" AND idSetor = 1
+	WHERE idSetor = 1 AND horaDado BETWEEN DATE_SUB(NOW(), INTERVAL 7 DAY) AND NOW()
 	GROUP BY idComputador, hostname, origem
 	ORDER BY total_alertas ASC
 	LIMIT 10
@@ -85,7 +83,7 @@ function puxarMediaTotal() { // rota luvizones
     JOIN DadoComputador 
     ON fkComputador = idComputador 
     JOIN Setor ON fkSetor = idSetor
-    WHERE idSetor = 1
+    WHERE idSetor = 1 AND horaDado BETWEEN DATE_SUB(NOW(), INTERVAL 7 DAY) AND NOW()
     GROUP BY idComputador
     ) AS mediasTotais;`;
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
@@ -98,8 +96,7 @@ function rankearAlertasTotais(componente) { // rota luvizones
 	JOIN DadoComputador ON fkDadoComputador = idDado
   JOIN Computador ON fkComputador = idComputador
   JOIN Setor ON fkSetor = idSetor
-  JOIN SetorAeroporto ON fkSetorId = idSetor
-  WHERE fkAeroporto = "11223344556677" AND idSetor = 1 AND origem = '${componente}'
+  WHERE idSetor = 1 AND origem = '${componente}' AND horaDado BETWEEN DATE_SUB(NOW(), INTERVAL 7 DAY) AND NOW()
   GROUP BY idComputador, hostname
   ORDER BY total_alertas ASC
   LIMIT 10;`;
@@ -110,8 +107,10 @@ function rankearAlertasTotais(componente) { // rota luvizones
 function rankearMaquinasCriticas() { // rota luvizones
   var instrucaoSql = `
   SELECT idComputador,hostname AS Maquina, ROUND(AVG(cpuPorcentagem),1) AS mediaCPU, ROUND(AVG(memoriaPorcentagem),1) AS mediaRAM
-	FROM Computador JOIN DadoComputador
-	ON idComputador = fkComputador
+	FROM Computador 
+  JOIN DadoComputador ON idComputador = fkComputador
+  JOIN Setor ON fkSetor = idSetor
+  WHERE idSetor = 1 AND horaDado BETWEEN DATE_SUB(NOW(), INTERVAL 7 DAY) AND NOW()
 	GROUP BY idComputador, hostname
 	HAVING AVG(cpuPorcentagem) >= 80 AND AVG(memoriaPorcentagem) >= 80;`;
   console.log("Executando a instrução SQL: \n" + instrucaoSql);

@@ -61,6 +61,15 @@ constraint fkAlertaDado foreign key (fkDadoComputador) references DadoComputador
 tipo varchar(50),
 origem varchar(50)
 );
+drop table webCrawler;
+CREATE TABLE webCrawler(
+	id int primary key auto_increment,
+    dia varchar(50),
+    clima varchar(50)
+);
+
+select * from webCrawler;
+
 
 SELECT * FROM Aeroporto;
 INSERT INTO Aeroporto VALUES
@@ -148,7 +157,7 @@ ON fkDadoComputador = idDado
 WHERE idDado = (SELECT max(idDado) FROM DadoComputador JOIN Computador ON idComputador = fkComputador WHERE idComputador = 1)
 GROUP BY hostname, ramMax, processador, cpuPorcentagem, memoriaPorcentagem, memoriaGB;
 
-SELECT horaDado, cpuPorcentagem, memoriaPorcentagem FROM DadoComputador
+SELECT horaDado, cpuPorcentagem, memoriaPorcentagem, processador FROM DadoComputador
 JOIN Computador
 ON idComputador = fkComputador
 WHERE idComputador = 1
@@ -156,6 +165,13 @@ ORDER BY idDado DESC
 LIMIT 25;
 
 -- SELECT DO MARTINEZ
+
+SELECT clima, COUNT(*) AS frequencia
+FROM webCrawler
+WHERE dia BETWEEN CURDATE() - INTERVAL (DAYOFWEEK(CURDATE()) - 1) DAY
+              AND CURDATE() + INTERVAL (7 - DAYOFWEEK(CURDATE())) DAY
+GROUP BY clima
+ORDER BY frequencia DESC;
 
 -- SELECT PARA FAZER A COMPARAÇÃO ENTRE OS SETORES
 SELECT 

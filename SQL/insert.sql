@@ -861,3 +861,11 @@ FROM
      CROSS JOIN (SELECT 0 AS num UNION SELECT 1 UNION SELECT 2 UNION SELECT 3) tens) numbers
 WHERE 
     DATE_ADD('2024-10-01', INTERVAL num DAY) <= '2024-11-30'; 
+    
+    
+    
+INSERT INTO webCrawler (dia, clima) VALUES ('04/12', 'Chuvas esparsas');
+INSERT INTO webCrawler (dia, clima) VALUES ('05/12', 'Chuvas esparsas');
+INSERT INTO webCrawler (dia, clima) VALUES ('06/12', 'Chuvas esparsas');
+INSERT INTO webCrawler (dia, clima) VALUES ('07/12', 'Chuva');
+INSERT INTO webCrawler (dia, clima) VALUES ('08/12', 'Chuva');

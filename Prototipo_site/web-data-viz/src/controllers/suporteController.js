@@ -9,6 +9,14 @@ function getDados(req, res) {
   })
 }
 
+function getDadosNovos(req, res) {
+    suporteModel.getDadosNovos().then(function(resultado){
+        res.status(200).json(resultado);
+    }).catch(function(erro){
+        res.status(500).json(erro.sqlMessage);
+    })
+  }
+
 function cadastrar(req, res) {
   // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
   var hostname = req.body.hostnameServer;
@@ -65,6 +73,7 @@ function getInformacoes(req, res) {
 
 module.exports = {
   getDados,
+  getDadosNovos,
   cadastrar,
   getSetor,
   getInformacoes

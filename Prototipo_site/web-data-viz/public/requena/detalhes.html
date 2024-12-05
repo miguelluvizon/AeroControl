@@ -1,41 +1,44 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="detalhes.css" />
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <title>Detalhes de Máquina | AeroControl</title>
-  </head>
 
-  <body onload="informacoes(), getDados()">
-    <div class="tela">
-      <aside class="barraLateral">
-        <img src="Protótipo Dashboard.png" alt="" />
-        <a class="botao" href="../arthur/dashboard-suporte.html">PAINEL</a>
-        <a class="botao" href="cadastroMaq.html">CADASTRO</a>
-        <a class="botao" onclick="limparSessao()">SAIR</a>
-      </aside>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="detalhes.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <title>Detalhes de Máquina | AeroControl</title>
+</head>
 
-      <main class="principal">
-        <h1>DETALHES DA MÁQUINA</h1>
+<body onload="informacoes(), getDados()">
+  <div class="tela">
+    <aside class="barraLateral">
+      <img src="Protótipo Dashboard.png" alt="" />
+      <a class="botao" href="../arthur/dashboard-suporte.html">PAINEL</a>
+      <a class="botao" href="cadastroMaq.html">CADASTRO</a>
+      <a class="botao" onclick="limparSessao()">SAIR</a>
+    </aside>
 
-        <div class="conteudo">
-          <div class="divGrafico">
-            <canvas id="usageChart" class="grafico"></canvas>
-          </div>
+    <main class="principal">
+      <h1 id="titulo">DETALHES DA MÁQUINA</h1>
 
-          <div class="lateral">
-            <div class="informacoes" id="cpu"></div>
-
-            <div class="informacoes" id="ram"></div>
-
-            <div class="informacoes" id="alerta"></div>
-          </div>
+      <div class="conteudo">
+        <div class="divGrafico">
+          <h2 class="tituloGrafico">USO COMPONENTES EM TEMPO REAL</h2>
+          <canvas id="usageChart" class="grafico"></canvas>
         </div>
-      </main>
-    </div>
-  </body>
+
+        <div class="lateral">
+          <div class="informacoes" id="cpu"></div>
+
+          <div class="informacoes" id="ram"></div>
+
+          <div class="informacoes" id="alerta"></div>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+
 </html>
 
 <script>
@@ -65,6 +68,7 @@
       });
   }
 
+
   function plotar(resposta) {
     console.log("Iniciando plotagem do gráfico");
     console.log("=============================");
@@ -79,14 +83,14 @@
       labels: labels,
       datasets: [
         {
-          label: "CPU",
+          label: "CPU (Em %)",
           borderColor: "#3F2182",
           backgroundColor: "#3F2182",
           fill: false,
           data: [],
         },
         {
-          label: "Memória",
+          label: "Memória (Em %)",
           borderColor: "#7C1E6A",
           backgroundColor: "#7C1E6A",
           fill: false,
@@ -161,13 +165,94 @@
       config
     );
 
-    ram.innerHTML = `<span><b>RAM:</b> ${resposta[0].memoriaPorcentagem}%</span>
+    ram.innerHTML = `<span><b>RAM:</b> ${resposta[resposta.length - 1].memoriaPorcentagem}%</span>
             <p>Usando ${(
-              (resposta[0].memoriaPorcentagem / 100) *
-              resposta[0].ramMax
-            ).toFixed(2)}GB de ${resposta[0].ramMax}GB</p>`;
+        (resposta[resposta.length - 1].memoriaPorcentagem / 100) *
+        resposta[resposta.length - 1].ramMax
+      ).toFixed(2)}GB de ${resposta[0].ramMax}GB</p>`;
 
-    setInterval(() => recarregar(), 1000);
+    setInterval(() => novosDados(myChart, dados, labels), 1000);
+  }
+
+  function novosDados(myChart, dados, labels) {
+    fetch("../suporte/getDadosNovos", {
+      method: "GET",
+    })
+      .then(function (resposta) {
+        console.log("resposta:", resposta);
+
+        if (resposta.ok) {
+          console.log(resposta);
+          resposta.json().then(function (resposta) {
+            console.log(`Dados Recebidos: ${JSON.stringify(resposta)}`);
+            resposta.reverse();
+
+            atualizar(myChart, dados, labels, resposta);
+          });
+        } else {
+          console.error("Nenhum dado foi econtrado na API.");
+        }
+      })
+      .catch(function (error) {
+        console.error(
+          `Erro na obtenção de dados para gráfico: ${error.message}`
+        );
+      });
+  }
+
+  function atualizar(myChart, dados, labels, resposta) {
+    console.log(
+      "Estes dados foram recebidos pela função getDados() e passados para a função plotar():"
+    );
+    console.log(resposta);
+
+    dados = {
+      labels: labels,
+      datasets: [
+        {
+          label: "CPU",
+          borderColor: "#3F2182",
+          backgroundColor: "#3F2182",
+          fill: false,
+          data: [],
+        },
+        {
+          label: "Memória",
+          borderColor: "#7C1E6A",
+          backgroundColor: "#7C1E6A",
+          fill: false,
+          data: [],
+        },
+      ],
+    };
+
+    myChart.data.datasets[0].data = [];
+    myChart.data.datasets[1].data = [];
+    myChart.data.labels = [];
+
+    for (let i = 0; i < resposta.length; i++) {
+      const registro = resposta[i];
+      myChart.data.datasets[0].data.push(registro.cpuPorcentagem);
+      myChart.data.datasets[1].data.push(registro.memoriaPorcentagem);
+      myChart.data.labels.push(i);
+    }
+
+    console.log("=============================");
+    console.log("O gráfico será plotado com os respectivos valores:");
+    console.log("labels:");
+    console.log("dados:");
+    console.log(dados.datasets);
+
+    myChart.update();
+
+    ram.innerHTML = `<span><b>RAM:</b> ${resposta[resposta.length - 1].memoriaPorcentagem}%</span>
+            <p>Usando ${(
+        (resposta[resposta.length - 1].memoriaPorcentagem / 100) *
+        resposta[resposta.length - 1].ramMax
+      ).toFixed(2)}GB de ${resposta[0].ramMax}GB</p>`;
+
+    informacoes();
+    console.log("Gráfico atualizado com sucesso.");
   }
 
   function limparSessao() {
@@ -195,6 +280,9 @@
 
             alerta.innerHTML = `<span><b>${resultado[0].alertas} ALERTAS</b></span>
             <p>Na última hora</p>`;
+
+            titulo.innerHTML = `<h1 id="titulo">DETALHES DA MÁQUINA: ${resultado[0].hostname.toUpperCase()}</h1>`
+
           });
         } else {
           throw "Houve um erro ao tentar criar o select";
@@ -209,5 +297,5 @@
 
   function recarregar() {
     informacoes();
-}
+  }
 </script>
