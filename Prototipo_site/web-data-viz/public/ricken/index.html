@@ -10,13 +10,13 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
-<body onload="estadoMaquinas()">
+<body onload="estadoMaquinas(), estadoSetor(), plotarSetor2(), plotarSetor3()">
     <div class="container">
         <aside class="sidebar">
             <img src="img/Protótipo Dashboard.png" alt="">
-            <button class="sidebar-btn">RESUMO</button>
-            <button class="sidebar-btn">COMPARAR</button>
-            <button class="sidebar-btn">SAIR</button>
+            <a href="./index.html" class="sidebar-btn">RESUMO</a>
+            <a href="../martinez/index.html" class="sidebar-btn">COMPARAR</a>
+            <a class="sidebar-btn">SAIR</a>
         </aside>
         <main class="main-content">
             <h1>PAINEL DE RESUMO SEMANAL</h1>
@@ -51,7 +51,7 @@
                         </div>
                         <div class="descricao">
                             <h1>ESTÁVEL</h1>
-                            <p>O uso de CPU ou RAM esteve abaixo do 50%</p>
+                            <p>O uso de CPU e RAM esteve abaixo do 50%</p>
                         </div>
                     </div>
                 </div>
@@ -76,21 +76,8 @@
                             <p>Máquinas ao <br> longo da semana:</p>
                         </div>
                         <div class="metricas">
-                            <div class="alertasDesc">
-                                <div class="corAlertaDesc" style="background-color: red; color: white;">
-                                    <h2>4</h2>
-                                </div>
-
-                            </div>
-                            <div class="alertasDesc">
-                                <div class="corAlertaDesc" style="background-color: yellow; color: black;">
-                                    <h2>12</h2>
-                                </div>
-                            </div>
-                            <div class="alertasDesc">
-                                <div class="corAlertaDesc" style="background-color: green; color: white;">
-                                    <h2>7</h2>
-                                </div>
+                            <div class="configGraficos2">
+                                <canvas id="grafico2"></canvas>
                             </div>
                         </div>
                     </div>
@@ -107,21 +94,8 @@
                             <p>Máquinas ao <br> longo da semana:</p>
                         </div>
                         <div class="metricas">
-                            <div class="alertasDesc">
-                                <div class="corAlertaDesc" style="background-color: red; color: white;">
-                                    <h2>4</h2>
-                                </div>
-
-                            </div>
-                            <div class="alertasDesc">
-                                <div class="corAlertaDesc" style="background-color: yellow; color: black;">
-                                    <h2>12</h2>
-                                </div>
-                            </div>
-                            <div class="alertasDesc">
-                                <div class="corAlertaDesc" style="background-color: green; color: white;">
-                                    <h2>7</h2>
-                                </div>
+                            <div class="configGraficos3">
+                                <canvas id="grafico3"></canvas>
                             </div>
                         </div>
                     </div>
@@ -138,22 +112,11 @@
                             <p>Máquinas ao <br> longo da semana:</p>
                         </div>
                         <div class="metricas">
-                            <div class="alertasDesc">
-                                <div class="corAlertaDesc" style="background-color: red; color: white;">
-                                    <h2>4</h2>
-                                </div>
 
+                            <div class="configGraficos4">
+                                <canvas id="grafico4"></canvas>
                             </div>
-                            <div class="alertasDesc">
-                                <div class="corAlertaDesc" style="background-color: yellow; color: black;">
-                                    <h2>12</h2>
-                                </div>
-                            </div>
-                            <div class="alertasDesc">
-                                <div class="corAlertaDesc" style="background-color: green; color: white;">
-                                    <h2>7</h2>
-                                </div>
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -165,12 +128,14 @@
 </html>
 
 <script>
+
     function plotar(resposta) {
         const data = {
             labels: ['Alerta', 'Atenção', 'Estável'],
             datasets: [
                 {
                     label: 'Máquinas',
+                    borderColor: ['black'],
                     data: [],
                     backgroundColor: ['#c02f1b', '#EFCA08', '#0f520c'],
                 }
@@ -205,4 +170,152 @@
             config
         );
     }
+
+    ///////////////////////////////////////////////////
+
+    function plotarSetor(resposta) {
+
+        const data = {
+            labels: ['Alerta', 'Atenção', 'Estável'],
+            datasets: [
+                {
+                    label: ['Máquina'],
+                    data: [20, 22, 31],
+                    borderColor: ['white'],
+                    backgroundColor: ['#c02f1b', '#EFCA08', '#0f520c'],
+                }
+            ]
+        };
+        console.log(resposta)
+
+        const config = {
+            type: 'bar',
+            data: data,
+            options: {
+                indexAxis: 'y',
+                // Elements options apply to all of the options unless overridden in a dataset
+                // In this case, we are setting the border of each horizontal bar to be 2px wide
+                elements: {
+                    bar: {
+                        borderWidth: 2,
+                    }
+                },
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false,
+                        position: '',
+                    },
+                    title: {
+                        display: false,
+                        text: ''
+                    }
+                }
+            },
+        };
+
+        let myChart = new Chart(
+            document.getElementById('grafico2'),
+            config
+        );
+        // fimSetor1
+
+    }
+
+    function plotarSetor2(resposta) {
+        // comecoSetor2
+        const data2 = {
+            labels: ['Alerta', 'Atenção', 'Estável'],
+            datasets: [
+                {
+                    label: ['Máquina'],
+                    data: [11, 22, 21],
+                    borderColor: ['white'],
+                    backgroundColor: ['#c02f1b', '#EFCA08', '#0f520c'],
+                }
+            ]
+        };
+        console.log(resposta)
+
+        const config2 = {
+            type: 'bar',
+            data2: data2,
+            options: {
+                indexAxis: 'y',
+                // Elements options apply to all of the options unless overridden in a dataset
+                // In this case, we are setting the border of each horizontal bar to be 2px wide
+                elements: {
+                    bar: {
+                        borderWidth: 2,
+                    }
+                },
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false,
+                        position: '',
+                    },
+                    title: {
+                        display: false,
+                        text: ''
+                    }
+                }
+            },
+        };
+
+        let myChart2 = new Chart(
+            document.getElementById('grafico3'),
+            config2
+        );
+        // fimSetor2
+    }
+
+    function plotarSetor3(resposta){
+        // comecoSetor3
+        const data3 = {
+            labels: ['Alerta', 'Atenção', 'Estável'],
+            datasets: [
+                {
+                    label: ['Máquina'],
+                    data: [3, 4, 3],
+                    borderColor: ['white'],
+                    backgroundColor: ['#c02f1b', '#EFCA08', '#0f520c'],
+                }
+            ]
+        };
+        console.log(resposta)
+
+        const config3 = {
+            type: 'bar',
+            data3: data3,
+            options: {
+                indexAxis: 'y',
+                // Elements options apply to all of the options unless overridden in a dataset
+                // In this case, we are setting the border of each horizontal bar to be 2px wide
+                elements: {
+                    bar: {
+                        borderWidth: 2,
+                    }
+                },
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false,
+                        position: '',
+                    },
+                    title: {
+                        display: false,
+                        text: ''
+                    }
+                }
+            },
+        };
+
+        let myChart3 = new Chart(
+            document.getElementById('grafico4'),
+            config3
+        );
+
+    }
+
 </script>
