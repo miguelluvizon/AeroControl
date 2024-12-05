@@ -42,6 +42,7 @@
 
 <script>
     function entrar() {
+        // Declaração de variáveis
         var cpf = inputCpf.value;
         var senha = inputSenha.value;
 
@@ -64,12 +65,12 @@
                 console.log(resposta);
 
                 resposta.json().then(json => {
-                    sessionStorage.CPF = json.cpf;
-                    sessionStorage.NOME_USUARIO = json.nomeUsuario;
-                    sessionStorage.EMAIL = json.email;
-                    sessionStorage.ID_USUARIO = json.idUsuario || null;
-                    sessionStorage.CARGO = json.cargo;
-                    sessionStorage.MAQUINAS = JSON.stringify(json.maquinas);
+                    const login = json[0]
+                    sessionStorage.CPF = login.cpf;
+                    sessionStorage.NOME_USUARIO = login.nomeUsuario;
+                    sessionStorage.EMAIL = login.email;
+                    sessionStorage.CARGO = login.cargo;
+
 
                     if(sessionStorage.CARGO == "Analista de Dados"){
                         window.location = "ricken/index.html";

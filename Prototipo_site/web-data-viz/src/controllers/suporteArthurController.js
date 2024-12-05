@@ -2,23 +2,21 @@ var suporteArthurModel = require("../models/suporteArthurModel.js");
 const { get } = require("../routes/suporteArthur");
 
 function buscarUltimasMedidas(req, res) {
-
-    const limite_linhas = 7;
-
     var idMaquina = req.params.idMaquina;
 
-    console.log(`Recuperando as ultimas ${limite_linhas} medidas`);
+    console.log(`Recuperando as ultimas medidas para a máquina: ${idMaquina}`);
 
-    medidaModel.buscarUltimasMedidas(idMaquina, limite_linhas).then(function (resultado) {
+    suporteArthurModel.buscarUltimasMedidas(idMaquina).then(function (resultado) {
+        console.log("Cheguei na rota buscarUltimasMedidas");
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
-            res.status(204).send("Nenhum resultado encontrado!")
+            res.status(204).send("Nenhum dado encontrado!");
         }
     }).catch(function (erro) {
-        console.log(erro);
-        console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
-        res.status(500).json(erro.sqlMessage);
+        console.log("Houve um erro ao buscar as ultimas medidas:", erro.sqlMessage);
+        // Envia o erro com status 500
+        res.status(500).json({ mensagem: "Erro ao acessar os dados da máquina", erro: erro.sqlMessage });
     });
 }
 

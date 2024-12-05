@@ -1,5 +1,5 @@
 var usuarioModel = require("../models/usuarioModel");
-var suporteArthurModel = require("../models/suporteArthurModel.js");
+
 
 function autenticar(req, res) {
     var cpf = req.body.cpfServer;
@@ -19,19 +19,8 @@ function autenticar(req, res) {
 
                     if (resultadoAutenticar.length == 1) {
                         console.log(resultadoAutenticar);
-                        suporteArthurModel.buscarMaquinasPorUsuario(resultadoAutenticar[0].cpf)
-                        .then((resultadoMaquinas) => {
-                            if (resultadoMaquinas.length > 0) {
-                                res.status(200).json({
-                                    id: resultadoAutenticar[0].id,
-                                    email: resultadoAutenticar[0].email,
-                                    nome: resultadoAutenticar[0].nome,
-                                    senha: resultadoAutenticar[0].senha,
-                                    maquinas: resultadoMaquinas
-                                });
-                            }else{
-                                res.status(204).json({ maquinas: [] });
-                            }})} else if (resultadoAutenticar.length == 0) {
+                        res.status(200).json(resultadoAutenticar);
+                    } else if (resultadoAutenticar.length == 0) {
                         res.status(403).send("Cpf e/ou senha inválido(s)");
                     } else {
                         res.status(403).send("Mais de um usuário com o mesmo login e senha!");

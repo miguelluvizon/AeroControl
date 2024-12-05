@@ -20,6 +20,8 @@ var empresasRouter = require("./src/routes/empresas");
 var suporteRouter = require("./src/routes/suporte");
 var comparacaoRouter = require("./src/routes/comparacao");
 var analistaRouter = require("./src/routes/analista");
+var routerSuporteArthur = require("./src/routes/suporteArthur"); 
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -32,6 +34,8 @@ app.use("/empresas", empresasRouter);
 app.use("/suporte", suporteRouter);
 app.use("/comparacao", comparacaoRouter);
 app.use("/analista", analistaRouter);
+app.use("/suporteArthur", routerSuporteArthur); 
+
 
 app.listen(PORTA_APP, function () {
     console.log(`

@@ -3,17 +3,15 @@ var database = require("../database/config");
 
 function buscarUltimasMedidas(idMaquina) {
 
-    var instrucaoSql = `
- SELECT hostname,
+    var instrucaoSql = `select
 cpuPorcentagem,
-memoriaPorcentagem,
-setor
+memoriaPorcentagem
 FROM Computador
 JOIN DadoComputador
 ON fkComputador = ${idMaquina}
 WHERE idComputador = ${idMaquina}
-ORDER BY cpuPorcentagem;
-  `;
+ORDER BY idDado desc
+limit 1;`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -21,16 +19,14 @@ ORDER BY cpuPorcentagem;
 
 function buscarMedidasEmTempoReal(idMaquina) {
 
-    var instrucaoSql = `
- SELECT hostname,
+    var instrucaoSql = ` select
 cpuPorcentagem,
-memoriaPorcentagem,
-WHERE idComputador = ${idMaquina} 
+memoriaPorcentagem
 FROM Computador
 JOIN DadoComputador
 ON fkComputador = ${idMaquina}
-ORDER BY cpuPorcentagem;
-  `;
+WHERE idComputador = ${idMaquina}
+ORDER BY idDado desc;`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
