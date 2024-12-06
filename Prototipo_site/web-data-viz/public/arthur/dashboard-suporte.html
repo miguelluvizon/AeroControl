@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -88,7 +89,7 @@
                     <label for="filter">Filtro</label>
                     <div class="inputs">
                     <div class="custom-select">
-                        <select id="filter">
+                        <select id="filter" onchange="salvarMaquinasNoSessionStorage(idUsuario)">
                             <option value="setor">Setor</option>
                             <option value="1">Despache Operacional</option>
                             <option value="2">Coordenador de Voos</option>
@@ -161,26 +162,55 @@ function analisar(idComputador){
     window.location.href = "../requena/cadastroMaq.html";
 }
 
-    var suporteArthurModel = require("../models/suporteArthurModel.js");
     
     let proximaAtualizacao;
     
-    window.onload = exibirMaquinasDoUsuario;
     
-    const cpf = sessionStorage.CPF;
-    
+    const idUsuario = sessionStorage.CPF;
+    console.log(idUsuario)
+    window.onload = () => {
+    salvarMaquinasNoSessionStorage(idUsuario);
+    setInterval(() => salvarMaquinasNoSessionStorage(idUsuario), 5000);
+};
+
+    function salvarMaquinasNoSessionStorage(idUsuario) {
+        if (proximaAtualizacao != undefined) {
+            clearTimeout(proximaAtualizacao);
+        }
+
+    fetch(`/suporteArthur/maquinas/${idUsuario}`)
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error('Erro ao buscar máquinas.');
+            }
+            return response.json();
+        })
+        .then((maquinas) => {
+            sessionStorage.setItem('MAQUINAS', JSON.stringify(maquinas));
+            console.log('Máquinas salvas no sessionStorage:', maquinas);
+            
+            // proximaAtualizacao = setTimeout(() => salvarMaquinasNoSessionStorage(idUsuario), 5000);
+            exibirMaquinasDoUsuario()
+            // setTimeout(() => exibirMaquinasDoUsuario(), 2000);
+            
+        })
+        .catch((erro) => {
+            console.error('Erro ao salvar máquinas:', erro);
+        });
+}
+
+let maquinasCriticas = 0;
+let maquinasAtencao = 0;
+let maquinasEstaveis = 0;
     function exibirMaquinasDoUsuario() {
-        
-    suporteArthurModel.buscarMaquinasPorUsuario(cpf);
+        if (proximaAtualizacao != undefined) {
+            clearTimeout(proximaAtualizacao);
+        }
         
     maquinasCriticas = 0;
     maquinasAtencao = 0;
     maquinasEstaveis = 0;
-                
-
-        if (proximaAtualizacao != undefined) {
-            clearTimeout(proximaAtualizacao);
-        }
+            
     
         var machineList = document.getElementById("machine-list");
         machineList.innerHTML = "";
@@ -221,8 +251,8 @@ function analisar(idComputador){
     console.log("Máquinas Ordenadas Depois de organizar:", maquinasOrdenadas);
     
     maquinasOrdenadas.forEach((item) => {
-        machineList.innerHTML += `
-            <div class="machine-card">
+        machineList.innerHTML += 
+            `<div class="machine-card">
                 <div class="infos">
                     <div class="machine-info">
                         <p><strong>Máquina:</strong> <span id="nomeMaquina">${item.hostname}</span></p>
@@ -233,11 +263,12 @@ function analisar(idComputador){
                     </div>
                     <a class="analyze-btn" onclick="analisar(${item.idComputador})">Analisar</a>
                 </div>
-            </div>
-        `;
+            </div>`
+        ;
 
         // Atualiza o indicador de status (verde, amarelo ou vermelho)
-        obterDadosMaquina(item.idComputador);
+        plotarIndicador(item, item.idComputador);
+        verificarEstado(item);
     });
 
     console.log("Máquinas Ordenadas:", maquinasOrdenadas);
@@ -251,32 +282,6 @@ function analisar(idComputador){
         
     }
 
-    let maquinasCriticas = 0;
-    let maquinasAtencao = 0;
-    let maquinasEstaveis = 0;
-
-    function obterDadosMaquina(idMaquina) {
-
-fetch(`/suporteArthur/ultimas/${idMaquina}`, { cache: 'no-store' })
-    .then(function (response) {
-
-        if (response.ok) {
-            response.json().then(function (resposta) {
-                console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-    
-                plotarIndicador(resposta[0], idMaquina);  
-                verificarEstado(resposta[0]);
-                
-                
-            });
-        } else {
-            console.error('Nenhum dado encontrado ou erro na API');
-        }
-    })
-    .catch(function (error) {
-        console.error(`Erro na obtenção dos dados p/ máquina: ${error.message}`);
-    });
-}
 
 function verificarEstado(dados) {
     const cpuPorcentagem = dados.cpuPorcentagem;
@@ -290,8 +295,8 @@ function verificarEstado(dados) {
         maquinasEstaveis++;
     }
     
-    setTimeout(() => atualizarIndicadores(), 2000);
-        
+    atualizarIndicadores();
+    // setTimeout(() => atualizarIndicadores(), 3000);
 }
 
 function atualizarIndicadores() {
@@ -302,8 +307,6 @@ function atualizarIndicadores() {
     document.getElementById("numero-alerta").innerText = maquinasCriticas;
     document.getElementById("numero-atencao").innerText = maquinasAtencao;
     document.getElementById("numero-estavel").innerText = maquinasEstaveis;
-
-    proximaAtualizacao = setTimeout(() => exibirMaquinasDoUsuario(), 2000);
     
 }
 

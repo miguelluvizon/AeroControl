@@ -43,7 +43,7 @@ function buscarMedidasEmTempoReal(req, res) {
 function buscarMaquinasPorUsuario(req, res) {
     var idUsuario = req.params.idUsuario;
     
-    suporteArthurModel.buscarMaquinasPorUsuario(cpf).then((resultado) => {
+    suporteArthurModel.buscarMaquinasPorUsuario(idUsuario).then((resultado) => {
       if (resultado.length > 0) {
         res.status(200).json(resultado);
       } else {

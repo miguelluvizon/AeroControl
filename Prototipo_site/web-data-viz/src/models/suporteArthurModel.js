@@ -4,6 +4,7 @@ var database = require("../database/config");
 function buscarUltimasMedidas(idMaquina) {
 
     var instrucaoSql = `select
+computador.*,
 cpuPorcentagem,
 memoriaPorcentagem
 FROM Computador
@@ -33,12 +34,30 @@ ORDER BY idDado desc;`;
 }
 
 function buscarMaquinasPorUsuario(idUsuario) {
+    var instrucaoSql = `
+    SELECT 
+    Computador.*,
+    DadoComputador.cpuPorcentagem,
+    DadoComputador.memoriaPorcentagem
+FROM 
+    Computador
+JOIN 
+    DadoComputador ON Computador.idComputador = DadoComputador.fkComputador
+JOIN
+    Usuario ON Computador.fkUsuario = Usuario.cpf
+WHERE 
+    Usuario.cpf = ${idUsuario}
+    AND DadoComputador.idDado = (
+        SELECT MAX(idDado) 
+        FROM DadoComputador 
+        WHERE fkComputador = Computador.idComputador
+    )
+ORDER BY 
+    Computador.idComputador;`;
 
-    var instrucaoSql = `SELECT * FROM Computador a WHERE fkUsuario = ${idUsuario}`;
-  
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
-  }
+}
 
 module.exports = {
     buscarMaquinasPorUsuario,
