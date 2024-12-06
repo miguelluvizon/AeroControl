@@ -2,7 +2,9 @@ var suporteModel = require("../models/suporteModel");
 const { get } = require("../routes/empresas");
 
 function getDados(req, res) {
-  suporteModel.getDados().then(function(resultado){
+    const { maquina } = req.params
+
+  suporteModel.getDados(maquina).then(function(resultado){
       res.status(200).json(resultado);
   }).catch(function(erro){
       res.status(500).json(erro.sqlMessage);
@@ -10,7 +12,8 @@ function getDados(req, res) {
 }
 
 function getDadosNovos(req, res) {
-    suporteModel.getDadosNovos().then(function(resultado){
+    const { maquina } = req.params
+    suporteModel.getDadosNovos(maquina).then(function(resultado){
         res.status(200).json(resultado);
     }).catch(function(erro){
         res.status(500).json(erro.sqlMessage);
@@ -63,7 +66,8 @@ function getSetor(req, res) {
 }
 
 function getInformacoes(req, res) {
-  suporteModel.getInformacoes()
+    const {maquina} = req.params
+  suporteModel.getInformacoes(maquina)
   .then(function (resposta) {
       if(resposta.length >= 1) {
           res.status(200).json(resposta);

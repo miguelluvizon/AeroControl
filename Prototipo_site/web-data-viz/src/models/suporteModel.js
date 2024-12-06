@@ -1,11 +1,11 @@
 var database = require("../database/config");
 
-function getDados() {
+function getDados(maquina) {
   var instrucao = `
       SELECT ramMax, horaDado, cpuPorcentagem, memoriaPorcentagem FROM DadoComputador
 JOIN Computador
 ON idComputador = fkComputador
-WHERE idComputador = 1
+WHERE idComputador = ${maquina}
 ORDER BY idDado DESC
 LIMIT 25;
   `;
@@ -13,11 +13,11 @@ LIMIT 25;
   return database.executar(instrucao);
 }
 
-function getDadosNovos() {
+function getDadosNovos(maquina) {
   var instrucao = `SELECT ramMax, horaDado, cpuPorcentagem, memoriaPorcentagem, processador FROM DadoComputador
 JOIN Computador
 ON idComputador = fkComputador
-WHERE idComputador = 1
+WHERE idComputador = ${maquina}
 ORDER BY idDado DESC
 LIMIT 25;
   `;
@@ -41,7 +41,7 @@ function getSetor() {
   return database.executar(instrucaoSql);
 }
 
-function getInformacoes() {
+function getInformacoes(maquina) {
   var instrucaoSql = `
  SELECT hostname,
 ramMax,
@@ -54,13 +54,13 @@ JOIN DadoComputador
 ON fkDadoComputador = idDado 
 JOIN Computador 
 ON fkComputador = idComputador 
-WHERE idComputador = 1 AND TIME_TO_SEC(TIMEDIFF(current_timestamp, dataAlerta)) <= 3600) as alertas 
+WHERE idComputador = ${maquina} AND TIME_TO_SEC(TIMEDIFF(current_timestamp, dataAlerta)) <= 3600) as alertas 
 FROM Computador
 JOIN DadoComputador
 ON fkComputador = idComputador
 LEFT JOIN Alerta
 ON fkDadoComputador = idDado
-WHERE idDado = (SELECT max(idDado) FROM DadoComputador JOIN Computador ON idComputador = fkComputador WHERE idComputador = 1)
+WHERE idDado = (SELECT max(idDado) FROM DadoComputador JOIN Computador ON idComputador = fkComputador WHERE idComputador = ${maquina})
 GROUP BY hostname, ramMax, processador, cpuPorcentagem, memoriaPorcentagem, memoriaGB;
   `;
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
