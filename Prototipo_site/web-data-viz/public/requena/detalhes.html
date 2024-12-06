@@ -42,8 +42,10 @@
 </html>
 
 <script>
+  let maquina = sessionStorage.idMaquina
+
   function getDados() {
-    fetch("../suporte/getDados", {
+    fetch(`../suporte/getDados/${maquina}`, {
       method: "GET",
     })
       .then(function (resposta) {
@@ -175,7 +177,7 @@
   }
 
   function novosDados(myChart, dados, labels) {
-    fetch("../suporte/getDadosNovos", {
+    fetch(`../suporte/getDadosNovos/${maquina}`, {
       method: "GET",
     })
       .then(function (resposta) {
@@ -261,7 +263,7 @@
   }
 
   function informacoes() {
-    fetch("../suporte/getInformacoes", {
+    fetch(`../suporte/getInformacoes/${maquina}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
