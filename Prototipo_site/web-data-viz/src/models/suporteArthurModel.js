@@ -34,8 +34,8 @@ ORDER BY idDado desc;`;
 }
 
 function buscarMaquinasPorUsuario(idUsuario) {
-    var instrucaoSql = `
-    SELECT 
+    var instrucaoSql = `    SELECT 
+    Setor.nomeSetor AS setor,
     Computador.*,
     DadoComputador.cpuPorcentagem,
     DadoComputador.memoriaPorcentagem
@@ -43,10 +43,13 @@ FROM
     Computador
 JOIN 
     DadoComputador ON Computador.idComputador = DadoComputador.fkComputador
-JOIN
+JOIN 
+    Setor ON Computador.fkSetor = Setor.idSetor
+JOIN 
     Usuario ON Computador.fkUsuario = Usuario.cpf
 WHERE 
-    DadoComputador.idDado = (
+    Usuario.cpf = ${idUsuario}
+    AND DadoComputador.idDado = (
         SELECT MAX(idDado) 
         FROM DadoComputador 
         WHERE fkComputador = Computador.idComputador
