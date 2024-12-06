@@ -140,7 +140,7 @@ def monitorar():
                 status = 'alerta'
 
             cpuAlerta(jira, porcentagemCPU, idPc)
-            cursor.execute("INSERT INTO Alerta VALUES (default, default, %s, %s,%s)", (idPc,status, porcentagemCPU))
+            cursor.execute("INSERT INTO Alerta VALUES (default, default, %s, %s, 'cpu')", (idPc,status))
             mydb.commit()
 
         if porcentagemRAM > porcentagemRAM_limite:
@@ -152,7 +152,7 @@ def monitorar():
                 status = 'crítico'
 
             porcentagemRamAlerta(jira, porcentagemRAM, idPc)
-            cursor.execute("INSERT INTO Alerta VALUES (default, default, %s, %s, %s)", (idPc,status,porcentagemRAM))
+            cursor.execute("INSERT INTO Alerta VALUES (default, default, %s, %s, 'ram')", (idPc,status))
             mydb.commit()
 
         # dados_json = carregar_json(nome_arquivo_json)
