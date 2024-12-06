@@ -41,9 +41,9 @@ function estadoSetor() {
           plotarSetor2(resposta);
           plotarSetor3(resposta);
 
-          totalMaquinaSetor1.innerHTML = `Máquinas: ${resposta[0].DadosTotaisSetor1}`
-          TotalMaquinaSetor2.innerHTML = `Máquinas: ${resposta[0].DadosTotaisSetor2}`
-          totalMaquinaSetor3.innerHTML = `Máquinas: ${resposta[0].DadosTotaisSetor3}`
+          totalMaquinaSetor1.innerHTML = `Máquinas: ${resposta[0].MaquinasTotaisSetor1}`
+          TotalMaquinaSetor2.innerHTML = `Máquinas: ${resposta[0].MaquinasTotaisSetor2}`
+          totalMaquinaSetor3.innerHTML = `Máquinas: ${resposta[0].MaquinasTotaisSetor3}`
         });
       } else {
         console.error("Nenhum dado foi econtrado na API.");

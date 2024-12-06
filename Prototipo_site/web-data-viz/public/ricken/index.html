@@ -131,7 +131,7 @@
 
     function plotar(resposta) {
         const data = {
-            labels: ['Alerta', 'Atenção'],
+            labels: ['Crítico', 'Atenção'],
             datasets: [
                 {
                     label: 'Máquinas',
@@ -175,7 +175,7 @@
     function plotarSetor1(resposta) {
 
         const data = {
-            labels: ['Alerta', 'Atenção'],
+            labels: ['Crítico', 'Atenção'],
             datasets: [
                 {
                     label: ['Máquina'],
@@ -186,8 +186,8 @@
             ]
         };
         console.log(resposta)
-        data.datasets[0].data.push(resposta[0].AlertasTotaisSetor1);
-        data.datasets[0].data.push(resposta[0].AtencaoTotaisSetor1);
+        data.datasets[0].data.push(resposta[0].CriticoSetor1);
+        data.datasets[0].data.push(resposta[0].AtencaoSetor1);
 
         const config = {
             type: 'bar',
@@ -226,7 +226,7 @@
     function plotarSetor2(resposta) {
         // comecoSetor2
         const data2 = {
-            labels: ['Alerta', 'Atenção'],
+            labels: ['Crítico', 'Atenção'],
             datasets: [
                 {
                     label: ['Máquina'],
@@ -237,8 +237,8 @@
             ]
         };
         console.log(resposta)
-        data2.datasets[0].data.push(resposta[0].AlertasTotaisSetor2);
-        data2.datasets[0].data.push(resposta[0].AtencaoTotaisSetor2);
+        data2.datasets[0].data.push(resposta[0].CriticoSetor2);
+        data2.datasets[0].data.push(resposta[0].AtencaoSetor2);
 
         const config2 = {
             type: 'bar',
@@ -276,7 +276,7 @@
     function plotarSetor3(resposta) {
         // comecoSetor3
         const data3 = {
-            labels: ['Alerta', 'Atenção'],
+            labels: ['Crítico', 'Atenção'],
             datasets: [
                 {
                     label: ['Máquina'],
@@ -287,8 +287,8 @@
             ]
         };
         console.log(resposta)
-        data3.datasets[0].data.push(resposta[0].AlertasTotaisSetor3);
-        data3.datasets[0].data.push(resposta[0].AtencaoTotaisSetor3);
+        data3.datasets[0].data.push(resposta[0].CriticoSetor3);
+        data3.datasets[0].data.push(resposta[0].AtencaoSetor3);
 
         const config3 = {
             type: 'bar',
