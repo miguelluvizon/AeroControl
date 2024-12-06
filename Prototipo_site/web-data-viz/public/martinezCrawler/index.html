@@ -4,78 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AeroControl</title>
+    <title>AeroControl - Previsão do Tempo - Murilo Martinez</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wordcloud2.js/1.1.1/wordcloud2.min.js"></script>
     <link rel="stylesheet" href="styles.css">
-    <style>
-        .content {
-            /* width: 100%;  */
-            /* padding: 20px; */
-            /* margin-left: 200px; */
-            margin-top: 0px;
-        }
-
-        .content h1 {
-            /* color: #4A3B9D; */
-            /* text-align: center; */
-            /* margin-bottom: 100px; */
-            /* background-color: #d9d9d9; */
-            font-size: 1.5em;
-            text-align: center;
-            color: #5c3c92;
-            margin-bottom: 20px;
-            background-color: #d9d9d9;
-            padding: 20px
-        }
-
-        .content-container {
-            display: flex;
-            gap: 20px;
-            margin-top: 100px;
-            padding: 20px;
-        }
-
-        .wordcloud {
-            flex: 2;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            /* border: 1px solid #3f2182; */
-            border-radius: 4px;
-            background-color: #e0e0e0;
-
-        }
-
-        .insights {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .insight-card {
-            background-color: #e0e0e0;
-            padding: 15px;
-            /* border: 1px solid #ccc; */
-            border-radius: 5px;
-        }
-
-        .insight-card h3 {
-            margin-bottom: 10px;
-            color: #4A3B9D;
-        }
-
-        .insight-card p {
-            color: #555;
-        }
-    </style>
 </head>
 
 <body>
 
-    <body onload="graficoComparacaoMaquina();">
+    <body onload="graficoWordCloud(); climaSemana(); informacoesClima();">
         <div class="container">
             <aside class="sidebar">
-                <img src="Protótipo_Dashboard-removebg-preview.png" alt="Logo da Empresa">
+                <img src="../martinez/img/Protótipo_Dashboard-removebg-preview.png" alt="Logo da Empresa">
                 <a href="../ricken/index.html" class="sidebar-btn">RESUMO</a>
                 <a href="./index.html" class="sidebar-btn">COMPARAR</a>
                 <a href="../martinezCrawler/index.html" class="sidebar-btn">PREVISÃO DO TEMPO</a>
@@ -85,18 +24,15 @@
             <div class="content">
                 <h1>PREVISÃO DO TEMPO NAS PRÓXIMAS SEMANAS</h1>
                 <div class="content-container">
-                    <div class="wordcloud">
-                        <p>Wordcloud Placeholder</p>
-                    </div>
+                    <div class="wordcloud" id="word-cloud"></div>
                     <div class="insights">
                         <div class="insight-card">
                             <h3>O clima nessa semana é:</h3>
-                            <p>CHUVA</p>
+                            <p id="clima-semana"></p>
                         </div>
                         <div class="insight-card">
                             <h3>INSIGHTS</h3>
-                            <p>O clima dessa semana é chuvoso, por isso o nível de uso de CPU (%) e Memória RAM (%)
-                                tende a ficar menor, pois quando há chuva a tendência é que não haja muitos voos.</p>
+                            <p id="insights-semana"></p>
                         </div>
                     </div>
                 </div>
@@ -105,3 +41,96 @@
     </body>
 
 </html>
+
+<script>
+
+    function graficoWordCloud() {
+        fetch("/wordcloud/cloudNuvem")
+            .then(response => {
+                console.log("Status:", response.status);
+                console.log("Conteúdo:", response);
+                return response.json();
+            })
+            .then(data => {
+                console.log("Dados do Crawler", data)
+
+                const wordList = data.map(item => [item.palavra, item.frequencia]);
+
+                WordCloud(document.getElementById('word-cloud'), {
+                    list: wordList,
+                    gridSize: Math.round(16 * window.innerWidth / 1024),
+                    weightFactor: 10,
+                    rotateRatio: 0.5,
+                });
+            })
+            .catch(err =>
+                console.error("Erro ao buscar os dados do web crawler", err)
+            )
+    }
+
+    function climaSemana() {
+        fetch("/wordcloud/cloudNuvem")
+            .then(response => {
+                console.log("Status:", response.status);
+                console.log("Conteúdo:", response);
+                return response.json();
+            })
+            .then(data => {
+                console.log("Dados do Crawler Semana", data)
+
+                let palavraMaisFrequente = data[0];
+                for (let i = 1; i < data.length; i++) {
+                    if (data[i].frequencia > palavraMaisFrequente.frequencia) {
+                        palavraMaisFrequente = data[i];
+                    }
+                }
+
+                const climaCard = document.getElementById("clima-semana");
+                climaCard.textContent = palavraMaisFrequente.palavra;
+
+
+            })
+            .catch(err =>
+                console.error("Erro ao buscar os dados do web crawler", err)
+            )
+    }
+
+    function informacoesClima() {
+        fetch("/wordcloud/cloudNuvem")
+            .then(response => {
+                console.log("Status:", response.status);
+                console.log("Conteúdo:", response);
+                return response.json();
+            })
+            .then(data => {
+                console.log("Dados do Crawler Semana", data)
+
+                let palavraMaisFrequente = data[0];
+                for (let i = 1; i < data.length; i++) {
+                    if (data[i].frequencia > palavraMaisFrequente.frequencia) {
+                        palavraMaisFrequente = data[i];
+                    }
+                }
+
+                const climaCard = document.getElementById("insights-semana");
+                
+                if(palavraMaisFrequente == "Chuva"){
+                    climaCard.textContent += "Com a chegada da chuva, o tráfego aéreo tende a reduzir, resultando em menor uso de CPU e RAM nos sistemas operacionais. A equipe técnica pode aproveitar este período de menor carga para realizar ajustes ou manutenções planejadas."
+                } else if(palavraMaisFrequente == "Chuvas esparsas"){
+                    climaCard.textContent += "As chuvas esparsas geram momentos variáveis de tráfego. Embora o impacto na CPU e na RAM seja moderado, é recomendável monitorar os sistemas para antecipar possíveis picos durante períodos de melhoria temporária no clima."
+                } else if(palavraMaisFrequente == "Limpo"){
+                    climaCard.textContent += "Em dias de clima limpo, o tráfego aéreo geralmente aumenta, causando maior demanda de processamento. O uso da CPU e da RAM pode atingir níveis elevados, exigindo atenção da equipe técnica para garantir a estabilidade do sistema."
+                } else if(palavraMaisFrequente == "Tempo Nublado"){
+                    climaCard.textContent += "O tempo nublado apresenta condições moderadas, resultando em um uso intermediário de CPU e RAM. Ainda que a demanda não seja extrema, a equipe deve manter a vigilância para lidar com possíveis alterações climáticas inesperadas."
+                } else if(palavraMaisFrequente == "Parcialmente Nublado"){
+                    climaCard.textContent += "Com o clima parcialmente nublado, a variabilidade nas operações aéreas é maior. Isso pode causar flutuações no uso de CPU e RAM, exigindo monitoramento contínuo para responder a eventuais aumentos na carga do sistema."
+                }
+
+
+            })
+            .catch(err =>
+                console.error("Erro ao buscar os dados do web crawler", err)
+            )
+    }
+
+</script>

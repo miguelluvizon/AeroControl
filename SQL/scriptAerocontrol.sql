@@ -118,6 +118,10 @@ SELECT * FROM Computador;
 SELECT * FROM DadoComputador;
 SELECT * FROM Alerta;
 
+-- 12345678977
+
+delete from Computador where idComputador = 3;
+
 -- SELECT LUVIZONES
 SELECT idComputador, hostname as Maquina, COUNT(a.idAlerta) AS total_alertas FROM Alerta a
 	JOIN DadoComputador ON fkDadoComputador = idDado
