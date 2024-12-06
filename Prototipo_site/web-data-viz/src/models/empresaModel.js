@@ -45,7 +45,7 @@ function puxarAlertas(setor) { // rota luvizones
   return database.executar(instrucaoSql);
 }
 
-function puxarAlertasCriticos() { // rota luvizones
+function puxarAlertasCriticos(setor) { // rota luvizones
   var instrucaoSql = `
   SELECT
 	SUM(CASE WHEN origem = 'cpu' THEN total_alertas ELSE 0 END) AS somaTotalCPU,
@@ -55,7 +55,7 @@ function puxarAlertasCriticos() { // rota luvizones
 	JOIN DadoComputador ON fkDadoComputador = idDado
 	JOIN Computador ON fkComputador = idComputador
 	JOIN Setor ON fkSetor = idSetor
-	WHERE idSetor = 1 AND horaDado BETWEEN DATE_SUB(NOW(), INTERVAL 7 DAY) AND NOW()
+	WHERE idSetor = ${setor} AND horaDado BETWEEN DATE_SUB(NOW(), INTERVAL 7 DAY) AND NOW()
 	GROUP BY idComputador, hostname, origem
 	ORDER BY total_alertas ASC
 	LIMIT 10
@@ -64,16 +64,16 @@ function puxarAlertasCriticos() { // rota luvizones
   return database.executar(instrucaoSql);
 }
 
-function puxarTotalMaquinas() { // rota luvizones
+function puxarTotalMaquinas(setor) { // rota luvizones
   var instrucaoSql = `
   SELECT COUNT(*) AS total_maquinas FROM Computador 
   JOIN Setor ON fkSetor = idSetor
-  WHERE fkSetor = 1;`;
+  WHERE fkSetor = ${setor};`;
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
 }
 
-function puxarMediaTotal() { // rota luvizones
+function puxarMediaTotal(setor) { // rota luvizones
   var instrucaoSql = `
   SELECT
     ROUND(AVG(media_uso_cpu),1) AS mediaTotal_CPU,
@@ -83,20 +83,20 @@ function puxarMediaTotal() { // rota luvizones
     JOIN DadoComputador 
     ON fkComputador = idComputador 
     JOIN Setor ON fkSetor = idSetor
-    WHERE idSetor = 1 AND horaDado BETWEEN DATE_SUB(NOW(), INTERVAL 7 DAY) AND NOW()
+    WHERE idSetor = ${setor} AND horaDado BETWEEN DATE_SUB(NOW(), INTERVAL 7 DAY) AND NOW()
     GROUP BY idComputador
     ) AS mediasTotais;`;
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
 }
 
-function rankearAlertasTotais(componente) { // rota luvizones
+function rankearAlertasTotais(componente, setor) { // rota luvizones
   var instrucaoSql = `
   SELECT idComputador, hostname as Maquina, COUNT(a.idAlerta) AS total_alertas FROM Alerta a
 	JOIN DadoComputador ON fkDadoComputador = idDado
   JOIN Computador ON fkComputador = idComputador
   JOIN Setor ON fkSetor = idSetor
-  WHERE idSetor = 1 AND origem = '${componente}' AND horaDado BETWEEN DATE_SUB(NOW(), INTERVAL 7 DAY) AND NOW()
+  WHERE idSetor = ${setor} AND origem = '${componente}' AND horaDado BETWEEN DATE_SUB(NOW(), INTERVAL 7 DAY) AND NOW()
   GROUP BY idComputador, hostname
   ORDER BY total_alertas ASC
   LIMIT 10;`;
@@ -104,13 +104,13 @@ function rankearAlertasTotais(componente) { // rota luvizones
   return database.executar(instrucaoSql);
 }
 
-function rankearMaquinasCriticas() { // rota luvizones
+function rankearMaquinasCriticas(setor) { // rota luvizones
   var instrucaoSql = `
   SELECT idComputador,hostname AS Maquina, ROUND(AVG(cpuPorcentagem),1) AS mediaCPU, ROUND(AVG(memoriaPorcentagem),1) AS mediaRAM
 	FROM Computador 
   JOIN DadoComputador ON idComputador = fkComputador
   JOIN Setor ON fkSetor = idSetor
-  WHERE idSetor = 1 AND horaDado BETWEEN DATE_SUB(NOW(), INTERVAL 7 DAY) AND NOW()
+  WHERE idSetor = ${setor} AND horaDado BETWEEN DATE_SUB(NOW(), INTERVAL 7 DAY) AND NOW()
 	GROUP BY idComputador, hostname
 	HAVING AVG(cpuPorcentagem) >= 80 AND AVG(memoriaPorcentagem) >= 80;`;
   console.log("Executando a instrução SQL: \n" + instrucaoSql);

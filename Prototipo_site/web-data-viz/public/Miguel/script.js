@@ -30,8 +30,10 @@ function puxarAlertas() {
         setorNome.innerHTML = "Despache de voo"
     } else if (botaoSelecionado === "botao2") {
         setor = 2;
+        setorNome.innerHTML = "Torre de controle"
     } else if (botaoSelecionado === "botao3") {
         setor = 3;
+        setorNome.innerHTML = "Centro de meteorologia"
     }
 
     console.log(setor)
@@ -62,7 +64,18 @@ function puxarAlertas() {
 }
 
 function puxarAlertasCriticos() {
-    fetch("../empresas/puxarAlertasCriticos", {
+    const botaoSelecionado = sessionStorage.getItem("botaoSelecionado");
+    var setor = 0;
+
+    if (botaoSelecionado === "botao1") {
+        setor = 1;
+    } else if (botaoSelecionado === "botao2") {
+        setor = 2;
+    } else if (botaoSelecionado === "botao3") {
+        setor = 3;
+    }
+
+    fetch(`../empresas/puxarAlertasCriticos/${setor}`, {
         method: "GET",
     })
         .then(function (resposta) {
@@ -88,7 +101,18 @@ function puxarAlertasCriticos() {
 }
 
 function puxarTotalMaquinas() {
-    fetch("../empresas/puxarTotalMaquinas", {
+    const botaoSelecionado = sessionStorage.getItem("botaoSelecionado");
+    var setor = 0;
+
+    if (botaoSelecionado === "botao1") {
+        setor = 1;
+    } else if (botaoSelecionado === "botao2") {
+        setor = 2;
+    } else if (botaoSelecionado === "botao3") {
+        setor = 3;
+    }
+
+    fetch(`../empresas/puxarTotalMaquinas/${setor}`, {
         method: "GET",
     })
         .then(function (resposta) {
@@ -113,9 +137,20 @@ function puxarTotalMaquinas() {
 }
 
 function puxarMediaTotal() {
+    const botaoSelecionado = sessionStorage.getItem("botaoSelecionado");
+    var setor = 0;
+
+    if (botaoSelecionado === "botao1") {
+        setor = 1;
+    } else if (botaoSelecionado === "botao2") {
+        setor = 2;
+    } else if (botaoSelecionado === "botao3") {
+        setor = 3;
+    }
+
     var cardCPU = document.getElementById('cardMediaCPU')
     var cardRAM = document.getElementById('cardMediaRAM')
-    fetch("../empresas/puxarMediaTotal", {
+    fetch(`../empresas/puxarMediaTotal/${setor}`, {
         method: "GET",
     })
         .then(function (resposta) {
@@ -160,9 +195,20 @@ let graficoAlertasCPU
 let graficoAlertasRAM
 
 function rankearAlertasTotais() {
+    const botaoSelecionado = sessionStorage.getItem("botaoSelecionado");
+    var setor = 0;
+
+    if (botaoSelecionado === "botao1") {
+        setor = 1;
+    } else if (botaoSelecionado === "botao2") {
+        setor = 2;
+    } else if (botaoSelecionado === "botao3") {
+        setor = 3;
+    }
+
     var componente = document.getElementById('Comp').value
 
-    fetch(`/empresas/rankearAlertasTotais/${componente}`)
+    fetch(`/empresas/rankearAlertasTotais/${componente}/${setor}`)
         .then(response => response.json())
         .then(data => {
             console.log(data)
@@ -176,70 +222,70 @@ function rankearAlertasTotais() {
 
             if (componente == "CPU") {
                 const ctx = document.getElementById('alertChart').getContext('2d');
-            graficoAlertasCPU = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: maquinas,
-                    datasets: [
-                        {
-                            label: 'Torre de Controle',
-                            data: qtd_alertas,
-                            backgroundColor: '#472c72',
-                            pointBackgroundColor: '#2c1153',
-                            pointRadius: 5
-                        },
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            display: false
-                        }
+                graficoAlertasCPU = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: maquinas,
+                        datasets: [
+                            {
+                                label: 'Torre de Controle',
+                                data: qtd_alertas,
+                                backgroundColor: '#472c72',
+                                pointBackgroundColor: '#2c1153',
+                                pointRadius: 5
+                            },
+                        ]
                     },
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            ticks: {
-                                stepSize: 5
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    stepSize: 5
+                                }
                             }
                         }
                     }
-                }
-            });
+                });
             } else {
                 const ctx3 = document.getElementById('alertChart3').getContext('2d');
-            graficoAlertasRAM = new Chart(ctx3, {
-                type: 'bar',
-                data: {
-                    labels: maquinas,
-                    datasets: [
-                        {
-                            label: 'Torre de Controle',
-                            data: qtd_alertas,
-                            backgroundColor: '#472c72',
-                            pointBackgroundColor: '#2c1153',
-                            pointRadius: 5
-                        },
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            display: false
-                        }
+                graficoAlertasRAM = new Chart(ctx3, {
+                    type: 'bar',
+                    data: {
+                        labels: maquinas,
+                        datasets: [
+                            {
+                                label: 'Torre de Controle',
+                                data: qtd_alertas,
+                                backgroundColor: '#472c72',
+                                pointBackgroundColor: '#2c1153',
+                                pointRadius: 5
+                            },
+                        ]
                     },
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            ticks: {
-                                stepSize: 5
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    stepSize: 5
+                                }
                             }
                         }
                     }
-                }
-            });
+                });
             }
         })
         .catch(error => console.error('Erro ao plotar gráfico', error));
@@ -249,8 +295,18 @@ let graficoCriticoCPU
 let graficoCriticoRAM
 
 function rankearMaquinasCriticas() {
+    const botaoSelecionado = sessionStorage.getItem("botaoSelecionado");
+    var setor = 0;
 
-    fetch(`../empresas/rankearMaquinasCriticas`)
+    if (botaoSelecionado === "botao1") {
+        setor = 1;
+    } else if (botaoSelecionado === "botao2") {
+        setor = 2;
+    } else if (botaoSelecionado === "botao3") {
+        setor = 3;
+    }
+
+    fetch(`../empresas/rankearMaquinasCriticas/${setor}`)
         .then(response => response.json())
         .then(data => {
             console.log(data)
@@ -259,8 +315,8 @@ function rankearMaquinasCriticas() {
             const mediasCriticasCPU = data.map(item => item.mediaCPU);
             const mediasCriticasRAM = data.map(item => item.mediaRAM);
 
-            
-                const ctx2 = document.getElementById('alertChart2').getContext('2d');
+
+            const ctx2 = document.getElementById('alertChart2').getContext('2d');
             graficoCriticoCPU = new Chart(ctx2, {
                 type: 'bar',
                 data: {
@@ -293,8 +349,8 @@ function rankearMaquinasCriticas() {
                     }
                 }
             });
-            
-                const ctx4 = document.getElementById('alertChart4').getContext('2d');
+
+            const ctx4 = document.getElementById('alertChart4').getContext('2d');
             graficoCriticoRAM = new Chart(ctx4, {
                 type: 'bar',
                 data: {

@@ -28,23 +28,23 @@ router.get("/puxarAlertas/:setor", function (req, res) { // rota luvizones
   empresaController.puxarAlertas(req, res);
 })
 
-router.get("/puxarAlertasCriticos", function (req, res) { // rota luvizones
+router.get("/puxarAlertasCriticos/:setor", function (req, res) { // rota luvizones
   empresaController.puxarAlertasCriticos(req, res);
 })
 
-router.get("/puxarTotalMaquinas", function (req, res) { // rota luvizones
+router.get("/puxarTotalMaquinas/:setor", function (req, res) { // rota luvizones
   empresaController.puxarTotalMaquinas(req, res);
 })
 
-router.get("/puxarMediaTotal", function (req, res) { // rota luvizones
+router.get("/puxarMediaTotal/:setor", function (req, res) { // rota luvizones
   empresaController.puxarMediaTotal(req, res);
 })
 
-router.get("/rankearAlertasTotais/:componente", function (req, res) { // rota luvizones
+router.get("/rankearAlertasTotais/:componente/:setor", function (req, res) { // rota luvizones
   empresaController.rankearAlertasTotais(req, res);
 })
 
-router.get("/rankearMaquinasCriticas", function (req, res) { // rota luvizones
+router.get("/rankearMaquinasCriticas/:setor", function (req, res) { // rota luvizones
   empresaController.rankearMaquinasCriticas(req, res);
 })
 

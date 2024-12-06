@@ -68,8 +68,10 @@ function puxarAlertas (req, res) { // rota luvizones
 }
 
 function puxarAlertasCriticos (req, res) { // rota luvizones
+  const {setor} = req.params
+
   console.log("puxando total de alertas")
-  empresaModel.puxarAlertasCriticos()
+  empresaModel.puxarAlertasCriticos(setor)
   .then(function (resposta) {
       if(resposta.length > 0) {
           res.status(200).json(resposta);
@@ -85,8 +87,10 @@ function puxarAlertasCriticos (req, res) { // rota luvizones
 }
 
 function puxarTotalMaquinas(req, res) { // rota luvizones
+  const {setor} = req.params
+
   console.log("puxando total de maquinas")
-  empresaModel.puxarTotalMaquinas()
+  empresaModel.puxarTotalMaquinas(setor)
   .then(function (resposta) {
       if(resposta.length > 0) {
           res.status(200).json(resposta);
@@ -103,8 +107,10 @@ function puxarTotalMaquinas(req, res) { // rota luvizones
 }
 
 function puxarMediaTotal(req, res) { // rota luvizones
+  const {setor} = req.params
+
   console.log("puxando média das médias das máquinas")
-  empresaModel.puxarMediaTotal()
+  empresaModel.puxarMediaTotal(setor)
   .then(function (resposta) {
       if(resposta.length > 0) {
           res.status(200).json(resposta);
@@ -121,10 +127,11 @@ function puxarMediaTotal(req, res) { // rota luvizones
 }
 
 function rankearAlertasTotais(req, res) { // rota luvizones
+  const {setor} = req.params
   const {componente} = req.params
 
   console.log("plotando gráfico")
-  empresaModel.rankearAlertasTotais(componente)
+  empresaModel.rankearAlertasTotais(componente,setor)
   .then(function (resposta) {
       if(resposta.length > 0) {
           res.status(200).json(resposta);
@@ -141,8 +148,10 @@ function rankearAlertasTotais(req, res) { // rota luvizones
 }
 
 function rankearMaquinasCriticas(req, res) { // rota luvizones
+  const {setor} = req.params
+
   console.log("plotando gráfico")
-  empresaModel.rankearMaquinasCriticas()
+  empresaModel.rankearMaquinasCriticas(setor)
   .then(function (resposta) {
       if(resposta.length > 0) {
           res.status(200).json(resposta);
