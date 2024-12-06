@@ -159,7 +159,7 @@
 
 function analisar(idComputador){
         sessionStorage.setItem('idMaquina', idComputador); 
-    window.location.href = "../requena/cadastroMaq.html";
+    window.location.href = "../requena/detalhes.html";
 }
 
     
@@ -222,8 +222,8 @@ let maquinasEstaveis = 0;
         var setor = document.getElementById("filter").value;
         console.log("filtro selecionado: ", setor);
         const maquinasOrdenadas = [];
-
         maquinas.forEach((item) => {
+            verificarEstado(item);
         if (setor === "setor" || item.fkSetor == setor) {
             const cpuPorcentagem = item.cpuPorcentagem || 0; 
             const memoriaPorcentagem = item.memoriaPorcentagem || 0;
@@ -249,14 +249,22 @@ let maquinasEstaveis = 0;
 
     
     console.log("Máquinas Ordenadas Depois de organizar:", maquinasOrdenadas);
-    
+    var nomeSetor = "";
     maquinasOrdenadas.forEach((item) => {
+    if(item.fkSetor = 1){
+        nomeSetor = "Despache Operacional";
+    } else if(item.fkSetor = 2) {
+        nomeSetor = "Coordenador de Voos";
+    } else {
+        nomeSetor = "Centro de meteorologia";
+    }
+
         machineList.innerHTML += 
             `<div class="machine-card">
                 <div class="infos">
                     <div class="machine-info">
                         <p><strong>Máquina:</strong> <span id="nomeMaquina">${item.hostname}</span></p>
-                        <p><strong>Setor:</strong> ${item.fkSetor}</p>
+                        <p><strong>Setor:</strong> ${nomeSetor}</p>
                     </div>
                     <div class="machine-status">
                         <div id="maquina-indicador${item.idComputador}" class="machine-indicator warning"></div>
@@ -268,7 +276,7 @@ let maquinasEstaveis = 0;
 
         // Atualiza o indicador de status (verde, amarelo ou vermelho)
         plotarIndicador(item, item.idComputador);
-        verificarEstado(item);
+        //Aqui ficava verificarEstado(item);
     });
 
     console.log("Máquinas Ordenadas:", maquinasOrdenadas);
