@@ -91,8 +91,8 @@
                     <div class="custom-select">
                         <select id="filter" onchange="salvarMaquinasNoSessionStorage(idUsuario)">
                             <option value="setor">Setor</option>
-                            <option value="1">Despache Operacional</option>
-                            <option value="2">Coordenador de Voos</option>
+                            <option value="1">Despache de voo</option>
+                            <option value="2">Torre de Controle</option>
                             <option value="3">Centro de Meteorologia</option>
                         </select>
                         <span class="arrow">&#9662;</span>
@@ -249,22 +249,13 @@ let maquinasEstaveis = 0;
 
     
     console.log("Máquinas Ordenadas Depois de organizar:", maquinasOrdenadas);
-    var nomeSetor = "";
     maquinasOrdenadas.forEach((item) => {
-    if(item.fkSetor = 1){
-        nomeSetor = "Despache Operacional";
-    } else if(item.fkSetor = 2) {
-        nomeSetor = "Torre de Controle";
-    } else {
-        nomeSetor = "Centro de meteorologia";
-    }
-
         machineList.innerHTML += 
             `<div class="machine-card">
                 <div class="infos">
                     <div class="machine-info">
                         <p><strong>Máquina:</strong> <span id="nomeMaquina">${item.hostname}</span></p>
-                        <p><strong>Setor:</strong> ${nomeSetor}</p>
+                        <p><strong>Setor:</strong> ${item.setor}</p>
                     </div>
                     <div class="machine-status">
                         <div id="maquina-indicador${item.idComputador}" class="machine-indicator warning"></div>
