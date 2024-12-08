@@ -16,7 +16,7 @@
             <aside class="sidebar">
                 <img src="../martinez/img/Protótipo_Dashboard-removebg-preview.png" alt="Logo da Empresa">
                 <a href="../ricken/index.html" class="sidebar-btn">RESUMO</a>
-                <a href="./index.html" class="sidebar-btn">COMPARAR</a>
+                <a href="../martinez/index.html" class="sidebar-btn">COMPARAR</a>
                 <a href="../martinezCrawler/index.html" class="sidebar-btn">PREVISÃO DO TEMPO</a>
                 <a class="sidebar-btn" onclick="limparSessao()">SAIR</a>
             </aside>
@@ -43,9 +43,9 @@
 </html>
 
 <script>
-    let currentWordCloudData = JSON.parse(localStorage.getItem('wordCloudData')) || null;
+    let currentWordCloudData = null;
 
-    function graficoWordCloud() {
+    function atualizarWordCloud() {
         fetch("/wordcloud/cloudNuvem")
             .then(response => {
                 if (!response.ok) {
@@ -53,46 +53,41 @@
                 }
                 return response.json();
             })
-            .then(data => {
-                console.log("Dados recebidos para a Word Cloud:", data);
+            .then(novosDados => {
+                console.log("Dados recebidos para a Word Cloud:", novosDados);
 
-                const wordList = data.map(item => [item.palavra, item.frequencia]);
+                if (novosDados.length === 0) {
+                    console.error("Nenhum dado recebido para a Word Cloud.");
+                    return;
+                }
 
-                WordCloud(document.getElementById('word-cloud'), {
+                const wordList = novosDados.map(item => [item.palavra, item.frequencia]);
+
+                // Garantir que o container tem dimensões
+                const wordCloudElement = document.getElementById('word-cloud');
+                wordCloudElement.style.height = "300px";
+                wordCloudElement.style.width = "1000px";
+
+                // Gerar Word Cloud
+                WordCloud(wordCloudElement, {
                     list: wordList,
-                    // gridSize: Math.round(12 * window.innerWidth / 1024), // Espaçamento entre palavras
-                    weightFactor: 15, // Fator de tamanho baseado na frequência
+                    gridSize: 16, // Aumenta o espaçamento entre palavras
+                    weightFactor: 5, // Aumenta o tamanho geral das palavras
                     fontFamily: 'Arial, sans-serif',
                     color: function () {
-                        // Alterna entre vermelho, cinza e preto
                         const colors = ['#D9534F', '#5A5A5A', '#000000'];
                         return colors[Math.floor(Math.random() * colors.length)];
                     },
-                    rotateRatio: 0.3, // Algumas palavras rotacionadas
-                    rotationSteps: 2, // Quantidade de ângulos disponíveis
-                    backgroundColor: '#ffffff', // Fundo branco
+                    rotateRatio: 0, // Apenas palavras horizontais
+                    backgroundColor: '#ffffff',
                 });
             })
-            .catch(err => console.error("Erro ao buscar os dados do web crawler:", err));
+            .catch(err => console.error("Erro ao buscar os dados do servidor:", err));
     }
 
-    // Ao carregar a página, renderiza os dados do localStorage se existirem
-    function carregarWordCloudDoLocalStorage() {
-        if (currentWordCloudData) {
-            console.log("Carregando Word Cloud do localStorage...");
-            const wordList = currentWordCloudData.map(item => [item.palavra, item.frequencia]);
-            WordCloud(document.getElementById('word-cloud'), {
-                list: wordList,
-                gridSize: Math.round(16 * window.innerWidth / 1024),
-                color: 'random-dark',
-                rotateRatio: 0.3,
-                backgroundColor: '#f9f9f9',
-            });
-        }
-    }
+    // Inicializar Word Cloud
+    atualizarWordCloud();
 
-    // Chamada ao carregar a página
-    carregarWordCloudDoLocalStorage();
 
 
     function climaSemana() {
