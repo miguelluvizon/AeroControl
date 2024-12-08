@@ -112,7 +112,7 @@ function rankearMaquinasCriticas(setor) { // rota luvizones
   JOIN Setor ON fkSetor = idSetor
   WHERE idSetor = ${setor} AND horaDado BETWEEN DATE_SUB(NOW(), INTERVAL 7 DAY) AND NOW()
 	GROUP BY idComputador, hostname
-	HAVING AVG(cpuPorcentagem) >= 1 AND AVG(memoriaPorcentagem) >= 1;`;
+	HAVING AVG(cpuPorcentagem) >= 80 OR AVG(memoriaPorcentagem) >= 80;`;
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
 }
