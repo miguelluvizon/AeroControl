@@ -388,3 +388,13 @@ function rankearMaquinasCriticas() {
 }
 
 
+function limparSessao() {
+    sessionStorage.clear();
+    window.location = "../index.html";
+}
+
+const sair = document.getElementById("botaoSair")
+
+sair.addEventListener('click', () => {
+    limparSessao()
+})

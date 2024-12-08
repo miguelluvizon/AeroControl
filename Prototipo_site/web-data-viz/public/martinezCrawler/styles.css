@@ -350,7 +350,6 @@ select:focus {
 }
 
 
-
 @media (max-width: 768px) {
     .container-graficos {
         grid-template-columns: 1fr;

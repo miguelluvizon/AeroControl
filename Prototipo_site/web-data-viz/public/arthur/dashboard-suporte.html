@@ -178,7 +178,7 @@ function analisar(idComputador){
             clearTimeout(proximaAtualizacao);
         }
 
-    fetch(`/suporteArthur/maquinas/${idUsuario}`)
+    fetch(`/suporteArthur/maquinas`)
         .then((response) => {
             if (!response.ok) {
                 throw new Error('Erro ao buscar máquinas.');

@@ -137,7 +137,7 @@ def monitorar():
                 status = 'atenção'
             
             if porcentagemCPU >= 80:
-                status = 'alerta'
+                status = 'crítico'
 
             cpuAlerta(jira, porcentagemCPU, idPc)
             cursor.execute("INSERT INTO Alerta VALUES (default, default, %s, %s, 'cpu')", (idPc,status))

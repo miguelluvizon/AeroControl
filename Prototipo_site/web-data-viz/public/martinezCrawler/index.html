@@ -11,14 +11,14 @@
 
 <body>
 
-    <body onload="graficoWordCloud(); climaSemana(); informacoesClima();">
+    <body onload="climaSemana(); informacoesClima();">
         <div class="container">
             <aside class="sidebar">
                 <img src="../martinez/img/Protótipo_Dashboard-removebg-preview.png" alt="Logo da Empresa">
                 <a href="../ricken/index.html" class="sidebar-btn">RESUMO</a>
                 <a href="./index.html" class="sidebar-btn">COMPARAR</a>
                 <a href="../martinezCrawler/index.html" class="sidebar-btn">PREVISÃO DO TEMPO</a>
-                <a class="sidebar-btn">SAIR</a>
+                <a class="sidebar-btn" onclick="limparSessao()">SAIR</a>
             </aside>
 
             <div class="content">
@@ -43,30 +43,57 @@
 </html>
 
 <script>
+    let currentWordCloudData = JSON.parse(localStorage.getItem('wordCloudData')) || null;
 
     function graficoWordCloud() {
         fetch("/wordcloud/cloudNuvem")
             .then(response => {
-                console.log("Status:", response.status);
-                console.log("Conteúdo:", response);
+                if (!response.ok) {
+                    throw new Error(`Erro na requisição: ${response.status}`);
+                }
                 return response.json();
             })
             .then(data => {
-                console.log("Dados do Crawler", data)
+                console.log("Dados recebidos para a Word Cloud:", data);
 
                 const wordList = data.map(item => [item.palavra, item.frequencia]);
 
                 WordCloud(document.getElementById('word-cloud'), {
                     list: wordList,
-                    gridSize: Math.round(16 * window.innerWidth / 1024),
-                    weightFactor: 10,
-                    rotateRatio: 0.5,
+                    // gridSize: Math.round(12 * window.innerWidth / 1024), // Espaçamento entre palavras
+                    weightFactor: 15, // Fator de tamanho baseado na frequência
+                    fontFamily: 'Arial, sans-serif',
+                    color: function () {
+                        // Alterna entre vermelho, cinza e preto
+                        const colors = ['#D9534F', '#5A5A5A', '#000000'];
+                        return colors[Math.floor(Math.random() * colors.length)];
+                    },
+                    rotateRatio: 0.3, // Algumas palavras rotacionadas
+                    rotationSteps: 2, // Quantidade de ângulos disponíveis
+                    backgroundColor: '#ffffff', // Fundo branco
                 });
             })
-            .catch(err =>
-                console.error("Erro ao buscar os dados do web crawler", err)
-            )
+            .catch(err => console.error("Erro ao buscar os dados do web crawler:", err));
     }
+
+    // Ao carregar a página, renderiza os dados do localStorage se existirem
+    function carregarWordCloudDoLocalStorage() {
+        if (currentWordCloudData) {
+            console.log("Carregando Word Cloud do localStorage...");
+            const wordList = currentWordCloudData.map(item => [item.palavra, item.frequencia]);
+            WordCloud(document.getElementById('word-cloud'), {
+                list: wordList,
+                gridSize: Math.round(16 * window.innerWidth / 1024),
+                color: 'random-dark',
+                rotateRatio: 0.3,
+                backgroundColor: '#f9f9f9',
+            });
+        }
+    }
+
+    // Chamada ao carregar a página
+    carregarWordCloudDoLocalStorage();
+
 
     function climaSemana() {
         fetch("/wordcloud/cloudNuvem")
@@ -106,6 +133,7 @@
                 console.log("Dados do Crawler Semana", data)
 
                 let palavraMaisFrequente = data[0];
+                console.log(palavraMaisFrequente)
                 for (let i = 1; i < data.length; i++) {
                     if (data[i].frequencia > palavraMaisFrequente.frequencia) {
                         palavraMaisFrequente = data[i];
@@ -113,17 +141,19 @@
                 }
 
                 const climaCard = document.getElementById("insights-semana");
-                
-                if(palavraMaisFrequente == "Chuva"){
-                    climaCard.textContent += "Com a chegada da chuva, o tráfego aéreo tende a reduzir, resultando em menor uso de CPU e RAM nos sistemas operacionais. A equipe técnica pode aproveitar este período de menor carga para realizar ajustes ou manutenções planejadas."
-                } else if(palavraMaisFrequente == "Chuvas esparsas"){
-                    climaCard.textContent += "As chuvas esparsas geram momentos variáveis de tráfego. Embora o impacto na CPU e na RAM seja moderado, é recomendável monitorar os sistemas para antecipar possíveis picos durante períodos de melhoria temporária no clima."
-                } else if(palavraMaisFrequente == "Limpo"){
-                    climaCard.textContent += "Em dias de clima limpo, o tráfego aéreo geralmente aumenta, causando maior demanda de processamento. O uso da CPU e da RAM pode atingir níveis elevados, exigindo atenção da equipe técnica para garantir a estabilidade do sistema."
-                } else if(palavraMaisFrequente == "Tempo Nublado"){
-                    climaCard.textContent += "O tempo nublado apresenta condições moderadas, resultando em um uso intermediário de CPU e RAM. Ainda que a demanda não seja extrema, a equipe deve manter a vigilância para lidar com possíveis alterações climáticas inesperadas."
-                } else if(palavraMaisFrequente == "Parcialmente Nublado"){
-                    climaCard.textContent += "Com o clima parcialmente nublado, a variabilidade nas operações aéreas é maior. Isso pode causar flutuações no uso de CPU e RAM, exigindo monitoramento contínuo para responder a eventuais aumentos na carga do sistema."
+
+                if (palavraMaisFrequente.palavra == 'Chuva') {
+                    climaCard.innerHTML = "Com a chegada da chuva, o tráfego aéreo tende a reduzir, resultando em menor uso de CPU e RAM nos sistemas operacionais. A equipe técnica pode aproveitar este período de menor carga para realizar ajustes ou manutenções planejadas."
+                } else if (palavraMaisFrequente.palavra == 'Chuvas esparsas') {
+                    climaCard.innerHTML = "As chuvas esparsas geram momentos variáveis de tráfego. Embora o impacto na CPU e na RAM seja moderado, é recomendável monitorar os sistemas para antecipar possíveis picos durante períodos de melhoria temporária no clima."
+                } else if (palavraMaisFrequente.palavra == "Limpo") {
+                    climaCard.innerHTML = "Em dias de clima limpo, o tráfego aéreo geralmente aumenta, causando maior demanda de processamento. O uso da CPU e da RAM pode atingir níveis elevados, exigindo atenção da equipe técnica para garantir a estabilidade do sistema."
+                } else if (palavraMaisFrequente.palavra == "Tempo Nublado") {
+                    climaCard.innerHTML = "O tempo nublado apresenta condições moderadas, resultando em um uso intermediário de CPU e RAM. Ainda que a demanda não seja extrema, a equipe deve manter a vigilância para lidar com possíveis alterações climáticas inesperadas."
+                } else if (palavraMaisFrequente.palavra == "Parcialmente Nublado") {
+                    climaCard.innerHTML = "Com o clima parcialmente nublado, a variabilidade nas operações aéreas é maior. Isso pode causar flutuações no uso de CPU e RAM, exigindo monitoramento contínuo para responder a eventuais aumentos na carga do sistema."
+                } else {
+                    climaCard.innerHTML = "Não hoje dado registrado"
                 }
 
 
@@ -131,6 +161,11 @@
             .catch(err =>
                 console.error("Erro ao buscar os dados do web crawler", err)
             )
+    }
+
+    function limparSessao() {
+        sessionStorage.clear();
+        window.location = "../index.html";
     }
 
 </script>

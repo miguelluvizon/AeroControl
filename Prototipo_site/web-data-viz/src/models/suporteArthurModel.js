@@ -48,8 +48,7 @@ JOIN
 JOIN 
     Usuario ON Computador.fkUsuario = Usuario.cpf
 WHERE 
-    Usuario.cpf = ${idUsuario}
-    AND DadoComputador.idDado = (
+    DadoComputador.idDado = (
         SELECT MAX(idDado) 
         FROM DadoComputador 
         WHERE fkComputador = Computador.idComputador

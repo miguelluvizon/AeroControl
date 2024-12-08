@@ -40,7 +40,7 @@ function puxarAlertas(setor) { // rota luvizones
   JOIN DadoComputador ON fkDadoComputador = idDado
   JOIN Computador ON fkComputador = idComputador
   JOIN Setor ON fkSetor = idSetor
-  WHERE idSetor = ${setor} AND horaDado BETWEEN DATE_SUB(NOW(), INTERVAL 7 DAY) AND NOW();`;
+  WHERE idSetor = ${setor} AND horaDado BETWEEN DATE_SUB(NOW(), INTERVAL 7 DAY) AND NOW() AND tipo = "atenção";`;
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
 }

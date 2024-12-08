@@ -68,6 +68,13 @@ CREATE TABLE webCrawler(
     clima varchar(50)
 );
 
+    SELECT palavra, COUNT(*) AS frequencia  
+    FROM (
+        SELECT clima AS palavra FROM webCrawler
+    ) AS palavras
+    GROUP BY palavra
+    ORDER BY frequencia DESC;
+
 select * from webCrawler;
 
 
@@ -119,8 +126,6 @@ SELECT * FROM DadoComputador;
 SELECT * FROM Alerta;
 
 -- 12345678977
-
-delete from Computador where idComputador = 3;
 
 -- SELECT LUVIZONES
 SELECT idComputador, hostname as Maquina, COUNT(a.idAlerta) AS total_alertas FROM Alerta a
@@ -289,3 +294,16 @@ GROUP BY
     s.nomeSetor
 ORDER BY 
     s.nomeSetor;
+    
+select * from Alerta;
+
+SELECT 
+  origem,
+  COUNT(*) AS total
+FROM Alerta
+JOIN DadoComputador ON fkDadoComputador = idDado
+JOIN Computador ON fkComputador = idComputador
+JOIN Setor ON fkSetor = idSetor
+WHERE idSetor = 1 
+  AND horaDado BETWEEN DATE_SUB(NOW(), INTERVAL 7 DAY) AND NOW()
+GROUP BY origem;

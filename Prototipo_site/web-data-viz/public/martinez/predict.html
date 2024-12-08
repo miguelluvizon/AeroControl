@@ -16,7 +16,7 @@
             <a href="../ricken/index.html" class="sidebar-btn">RESUMO</a>
             <a href="./index.html" class="sidebar-btn">COMPARAR</a>
             <a href="../martinezCrawler/index.html" class="sidebar-btn">PREVISÃO DO TEMPO</a>
-            <a class="sidebar-btn">SAIR</a>
+            <a class="sidebar-btn" onclick="limparSessao()">SAIR</a>
         </aside>
         <main class="main-content">
             <h1>PREVISÃO DE ALERTAS NOS PRÓXIMOS MESES</h1>
@@ -34,7 +34,7 @@
 </html>
 
 <script>
-    function calcularPredictPorSetor(dados){
+    function calcularPredictPorSetor(dados) {
         if (dados.length < 2) {
             throw new Error('É necessário pelo menos 2 dados para calcular a previsão.');
         }
@@ -191,5 +191,10 @@
                 });
             })
             .catch(error => console.error('Erro ao buscar os dados para o gráfico de previsão', error));
+    }
+
+    function limparSessao() {
+        sessionStorage.clear();
+        window.location = "../index.html";
     }
 </script>

@@ -16,7 +16,8 @@
             <img src="img/Protótipo Dashboard.png" alt="">
             <a href="./index.html" class="sidebar-btn">RESUMO</a>
             <a href="../martinez/index.html" class="sidebar-btn">COMPARAR</a>
-            <a class="sidebar-btn">SAIR</a>
+            <a href="../martinezCrawler/index.html" class="sidebar-btn">PREVISÃO DO TEMPO</a>
+            <a class="sidebar-btn" onclick="limparSessao()">SAIR</a>
         </aside>
         <main class="main-content">
             <h1>PAINEL DE RESUMO SEMANAL</h1>
@@ -321,6 +322,11 @@
             config3
         );
 
+    }
+
+    function limparSessao() {
+        sessionStorage.clear();
+        window.location = "../index.html";
     }
 
 </script>

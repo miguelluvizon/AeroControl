@@ -16,7 +16,7 @@
             <a href="../ricken/index.html" class="sidebar-btn">RESUMO</a>
             <a href="./index.html" class="sidebar-btn">COMPARAR</a>
             <a href="../martinezCrawler/index.html" class="sidebar-btn">PREVISÃO DO TEMPO</a>
-            <a class="sidebar-btn">SAIR</a>
+            <a class="sidebar-btn" onclick="limparSessao()">SAIR</a>
         </aside>
         <main class="main-content">
             <h1>COMPARAÇÃO SEMANAL DE MÁQUINAS POR SETOR</h1>
@@ -24,19 +24,20 @@
             <a href="index.html" class="button btn2">&larr; Comparar Setor</a>
             <a href="predict.html" class="button btn3">Ver previsão &rarr;</a>
 
-            <div display: flex; justify-content: space-around; align-items: center; >
-            <div class="chart-container3">
-                <h2>MÉDIA DE UTILIZAÇÃO DE CPU E MEMÓRIA RAM (%)</h2>
-                <div class="chart-maquina">
-                    <p>Setor</p>
-                    <select id="setor" class="setor_grafico" onchange="graficoComparacaoMaquina();">
-                        <option value="1" selected>Despache de Voo</option>
-                        <option value="2">Torre de Controle</option>
-                        <option value="3">Centro de Meteorologia</option>
-                    </select>
+            <div display: flex; justify-content: space-around; align-items: center;>
+                <div class="chart-container3">
+                    <h2>MÉDIA DE UTILIZAÇÃO DE CPU E MEMÓRIA RAM (%)</h2>
+                    <div class="chart-maquina">
+                        <p>Setor</p>
+                        <select id="setor" class="setor_grafico" onchange="graficoComparacaoMaquina();">
+                            <option value="1" selected>Despache de Voo</option>
+                            <option value="2">Torre de Controle</option>
+                            <option value="3">Centro de Meteorologia</option>
+                        </select>
+                    </div>
+                    <canvas id="alertChart-maquina" class="chart-graficoM" width="1000" height="400"></canvas>
                 </div>
-                <canvas id="alertChart-maquina" class="chart-graficoM" width="1000" height="400"></canvas>
-            </div></div>
+            </div>
         </main>
     </div>
 </body>
@@ -117,5 +118,10 @@
 
             })
             .catch(error => console.error('Erro ao buscar as maquinas para o gráfico comparativo', error));
+    }
+
+    function limparSessao() {
+        sessionStorage.clear();
+        window.location = "../index.html";
     }
 </script>

@@ -17,7 +17,7 @@
             <a href="../ricken/index.html" class="sidebar-btn">RESUMO</a>
             <a href="./index.html" class="sidebar-btn">COMPARAR</a>
             <a href="../martinezCrawler/index.html" class="sidebar-btn">PREVISÃO DO TEMPO</a>
-            <a class="sidebar-btn">SAIR</a>
+            <a class="sidebar-btn" onclick="limparSessao()">SAIR</a>
         </aside>
         <main class="main-content">
             <h1>COMPARAÇÃO MENSAL DE ALERTAS ENTRE SETORES: <span id="mes" style="text-decoration: underline;"></span> /
@@ -29,7 +29,7 @@
                 <option value="1">Janeiro</option>
                 <option value="2">Fevereiro</option>
                 <option value="3"">Março</option>
-                <option value="4">Abril</option>
+                <option value=" 4">Abril</option>
                 <option value="5">Maio</option>
                 <option value="6">Junho</option>
                 <option value="7">Julho</option>
@@ -48,14 +48,18 @@
 
             <div style="display: flex; gap: 10%; justify-content: center;">
                 <div class="kpi-alertas">
-                    <p>Quantidades de Alertas do mês de: <br> 
-                    <span id="mesAlerta" style="color: rgb(0, 0, 0); border: none; text-decoration: underline;"></span></p>
+                    <p>Quantidades de Alertas do mês de: <br>
+                        <span id="mesAlerta"
+                            style="color: rgb(0, 0, 0); border: none; text-decoration: underline;"></span>
+                    </p>
                     <span id="quantidadeDeAlertas"></span>
                 </div>
 
                 <div class="kpi-alertas2">
-                    <p>Total de Alertas por setor  <br>
-                    <span style="color: rgb(0, 0, 0); text-decoration: underline;" id="qtdAlertasNome" class="teste"></span></p>
+                    <p>Total de Alertas por setor <br>
+                        <span style="color: rgb(0, 0, 0); text-decoration: underline;" id="qtdAlertasNome"
+                            class="teste"></span>
+                    </p>
                     </p>
                     <span id="quantidadeDeAlertasSetor"></span>
                 </div>
@@ -63,7 +67,8 @@
 
             <a href="compararMaquinas.html" class="button btn1">Comparar Máquinas &rarr;</a>
 
-            <div style="display: flex; justify-content: space-around; align-items: center; gap: 0px; position: relative; bottom: 6%;">
+            <div
+                style="display: flex; justify-content: space-around; align-items: center; gap: 0px; position: relative; bottom: 6%;">
                 <div class="chart-container">
                     <h2>QUANTIDADE DE ALERTAS EM CADA SETOR</h2>
                     <canvas id="alertChart"></canvas>
@@ -114,7 +119,7 @@
 
         const mes = document.getElementById("mes");
         const mesAlerta = document.getElementById("mesAlerta")
-        
+
         mes.innerHTML = nomeMeses[mesSelecionado - 1].toUpperCase()
         mesAlerta.innerHTML = nomeMeses[mesSelecionado - 1].toLocaleUpperCase()
     }
@@ -288,5 +293,10 @@
             '#9f86c0'
         ];
         return colors[index % colors.length];
+    }
+
+    function limparSessao() {
+        sessionStorage.clear();
+        window.location = "../index.html";
     }
 </script>
