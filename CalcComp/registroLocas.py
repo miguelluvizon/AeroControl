@@ -131,6 +131,8 @@ def monitorar():
         cursor.execute(sql, (porcentagemCPU, porcentagemRAM, ramTransformada, idPc))
         mydb.commit()
 
+        idDadoComputador = cursor.lastrowid
+
         if porcentagemCPU > cpu_limite:
 
             if porcentagemCPU >= 50 or porcentagemCPU < 80:
@@ -140,7 +142,7 @@ def monitorar():
                 status = 'crítico'
 
             cpuAlerta(jira, porcentagemCPU, idPc)
-            cursor.execute("INSERT INTO Alerta VALUES (default, default, %s, %s, 'cpu')", (idPc,status))
+            cursor.execute("INSERT INTO Alerta (fkDadoComputador,tipo, origem) VALUES (%s,%s,%s)", (idDadoComputador,status,'cpu'))
             mydb.commit()
 
         if porcentagemRAM > porcentagemRAM_limite:
@@ -152,7 +154,7 @@ def monitorar():
                 status = 'crítico'
 
             porcentagemRamAlerta(jira, porcentagemRAM, idPc)
-            cursor.execute("INSERT INTO Alerta VALUES (default, default, %s, %s, 'ram')", (idPc,status))
+            cursor.execute("INSERT INTO Alerta (fkDadoComputador,tipo, origem) VALUES (%s,%s,%s)", (idDadoComputador,status,'ram'))
             mydb.commit()
 
         # dados_json = carregar_json(nome_arquivo_json)

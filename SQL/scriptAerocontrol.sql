@@ -304,6 +304,22 @@ FROM Alerta
 JOIN DadoComputador ON fkDadoComputador = idDado
 JOIN Computador ON fkComputador = idComputador
 JOIN Setor ON fkSetor = idSetor
-WHERE idSetor = 1 
+WHERE idSetor = '11223344556677'
   AND horaDado BETWEEN DATE_SUB(NOW(), INTERVAL 7 DAY) AND NOW()
 GROUP BY origem;
+
+
+SELECT
+  SUM(CASE WHEN origem = 'cpu' THEN total_alertas ELSE 0 END) AS somaTotalCPU,
+  SUM(CASE WHEN origem = 'ram' THEN total_alertas ELSE 0 END) AS somaTotalRAM
+FROM (
+  SELECT idComputador, hostname AS Maquina, origem, COUNT(a.idAlerta) AS total_alertas 
+  FROM Alerta a
+  JOIN DadoComputador ON fkDadoComputador = idDado
+  JOIN Computador ON fkComputador = idComputador
+  JOIN Setor ON fkSetor = idSetor
+  WHERE idSetor = 1 
+    AND horaDado BETWEEN DATE_SUB(NOW(), INTERVAL 7 DAY) AND NOW()
+  GROUP BY idComputador, hostname, origem
+  ORDER BY total_alertas ASC
+) AS somaCritica;

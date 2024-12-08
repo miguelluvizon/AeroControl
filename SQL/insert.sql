@@ -10,10 +10,8 @@ FROM
      FROM (SELECT 0 AS num UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9) units
      CROSS JOIN (SELECT 0 AS num UNION SELECT 1 UNION SELECT 2 UNION SELECT 3) tens) numbers
 WHERE 
-    DATE_ADD('2024-10-01', INTERVAL num DAY) <= LEAST('2024-10-31', CURDATE()); 
-
-
-
+    DATE_ADD('2024-10-01', INTERVAL num DAY) <= LEAST('2024-10-31', CURDATE());    
+    
 INSERT INTO Alerta (dataAlerta, fkDadoComputador, tipo, origem)
 SELECT 
     DATE_ADD('2024-10-01', INTERVAL num DAY) AS dataAlerta, -- Datas no mês de outubro
@@ -52,8 +50,6 @@ FROM
      CROSS JOIN (SELECT 0 AS num UNION SELECT 1 UNION SELECT 2 UNION SELECT 3) tens) numbers
 WHERE 
     DATE_ADD('2024-11-01', INTERVAL num DAY) <= LEAST('2024-11-30', CURDATE()); -- Limita a data ao máximo de 30 de novembro ou data atual
-
-    
     
     
 INSERT INTO webCrawler (dia, clima) VALUES ('04/12', 'Chuvas esparsas');
