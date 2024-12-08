@@ -40,7 +40,7 @@ function puxarAlertas(setor) { // rota luvizones
   JOIN DadoComputador ON fkDadoComputador = idDado
   JOIN Computador ON fkComputador = idComputador
   JOIN Setor ON fkSetor = idSetor
-  WHERE idSetor = ${setor} AND horaDado BETWEEN DATE_SUB(NOW(), INTERVAL 7 DAY) AND NOW() AND tipo = "atenção";`;
+  WHERE idSetor = ${setor} AND horaDado BETWEEN DATE_SUB(NOW(), INTERVAL 7 DAY) AND NOW();`;
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
 }
@@ -112,7 +112,7 @@ function rankearMaquinasCriticas(setor) { // rota luvizones
   JOIN Setor ON fkSetor = idSetor
   WHERE idSetor = ${setor} AND horaDado BETWEEN DATE_SUB(NOW(), INTERVAL 7 DAY) AND NOW()
 	GROUP BY idComputador, hostname
-	HAVING AVG(cpuPorcentagem) >= 80 AND AVG(memoriaPorcentagem) >= 80;`;
+	HAVING AVG(cpuPorcentagem) >= 1 AND AVG(memoriaPorcentagem) >= 1;`;
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
 }

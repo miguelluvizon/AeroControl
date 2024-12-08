@@ -1,7 +1,7 @@
 var database = require("../database/config");
 
 function estadoMaquinas() {
-    var instrucao = ` SELECT (SELECT count(*) FROM Alerta WHERE tipo = "alerta" AND dataAlerta BETWEEN DATE_SUB(NOW(), INTERVAL 7 DAY) AND NOW()) as AlertasTotais,
+    var instrucao = ` SELECT (SELECT count(*) FROM Alerta WHERE tipo = "crítico" AND dataAlerta BETWEEN DATE_SUB(NOW(), INTERVAL 7 DAY) AND NOW()) as AlertasTotais,
 (SELECT count(*) FROM Alerta Where tipo = "atenção" AND dataAlerta BETWEEN DATE_SUB(NOW(), INTERVAL 7 DAY) AND NOW()) as AtencaoTotais,
 (SELECT count(*) FROM DadoComputador WHERE week(horaDado) = week(curdate())) as DadosTotais;
     `;
@@ -23,7 +23,7 @@ SELECT
      FROM Computador
      JOIN DadoComputador ON fkComputador = idComputador
      JOIN Alerta ON fkDadoComputador = idDado
-     WHERE tipo = "alerta" AND fkSetor = 1
+     WHERE tipo = "crítico" AND fkSetor = 1
 		AND dataAlerta BETWEEN DATE_SUB(NOW(), INTERVAL 7 DAY) AND NOW()) AS CriticoSetor1,
 
 (SELECT count(*)
@@ -37,7 +37,7 @@ SELECT
      FROM Computador
      JOIN DadoComputador ON fkComputador = idComputador
      JOIN Alerta ON fkDadoComputador = idDado
-     WHERE tipo = "alerta" AND fkSetor = 2
+     WHERE tipo = "crítico" AND fkSetor = 2
 		AND dataAlerta BETWEEN DATE_SUB(NOW(), INTERVAL 7 DAY) AND NOW()) AS CriticoSetor2,
 
 (SELECT count(*)
@@ -51,7 +51,7 @@ SELECT
      FROM Computador
      JOIN DadoComputador ON fkComputador = idComputador
      JOIN Alerta ON fkDadoComputador = idDado
-     WHERE tipo = "alerta" AND fkSetor = 3
+     WHERE tipo = "crítico" AND fkSetor = 3
 		AND dataAlerta BETWEEN DATE_SUB(NOW(), INTERVAL 7 DAY) AND NOW()) AS CriticoSetor3,
 
 	(SELECT count(DISTINCT idComputador)
