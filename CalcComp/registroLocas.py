@@ -16,9 +16,9 @@ def obter_hostname():
 
 # Configurações do banco de dados
 mydb = mysql.connector.connect(
-    user='inserirNuvem',
-    password='aerocontrol',
-    host='localhost',
+    user='root',
+    password='urubu100',
+    host='34.237.248.209',
     database='aeroControl',
     port="3306"
 )
