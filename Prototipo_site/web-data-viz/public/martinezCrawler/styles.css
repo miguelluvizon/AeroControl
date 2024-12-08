@@ -349,6 +349,19 @@ select:focus {
     left: 1%;
 }
 
+.wordcloud {
+    flex: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #e0e0e0; /* Um fundo para depuração */
+    border: 2px dashed #ccc; /* Borda para ajudar na visualização */
+    height: 100%; /* Certifique-se de que o container ocupe o espaço */
+    width: 100%;
+    position: relative;
+}
+
+
 
 @media (max-width: 768px) {
     .container-graficos {

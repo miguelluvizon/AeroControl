@@ -57,9 +57,9 @@
                 <div id="div-alertas" class="div-alertas">
                     <div class="avisos-gerais">
                             <div class="card-avisos"><h2>Ultima máquina com aviso</h2>
-                            <div class="numero-maquina">02</div></div>
-                            <div class="card-avisos"> <h2>Maquina com mais avisos semanais</h2>
-                             <div class="numero-maquina">04</div></div>
+                            <div class="numero-maquina"></div></div>
+                            <div class="card-avisos"> <h2>Maquina com mais avisos</h2>
+                             <div class="numero-maquina"></div></div>
                         </div>
                     <div class="avisos-jira-div">
                         
@@ -368,9 +368,46 @@ function exibirAlertasDoUsuario() {
         ;
     });
 
-    
+    atualizarInformacoesAvisos(alertas);
         
     }
+
+
+    function atualizarInformacoesAvisos(alertas) {
+
+    // Máquina com mais avisos
+    const contagemAvisos = {};
+    alertas.forEach(alerta => {
+        if (!contagemAvisos[alerta.idComputador]) {
+            contagemAvisos[alerta.idComputador] = {
+                hostname: alerta.hostname,
+                count: 0
+            };
+        }
+        contagemAvisos[alerta.idComputador].count++;
+    });
+
+    const maquinaMaisAvisos = Object.values(contagemAvisos).reduce((maisAvisos, maquinaAtual) =>
+        maquinaAtual.count > maisAvisos.count ? maquinaAtual : maisAvisos
+    );
+
+    // Última máquina com aviso
+    const alertaMaisRecente = alertas.reduce((maisRecente, alertaAtual) =>
+        new Date(`${alertaAtual.dataAlerta}T${alertaAtual.horaAlerta}`) >
+        new Date(`${maisRecente.dataAlerta}T${maisRecente.horaAlerta}`) ? alertaAtual : maisRecente
+    );
+
+    // Atualizando os elementos na tela
+    const elementoUltimaMaquina = document.querySelector(".avisos-gerais .card-avisos:nth-child(1) .numero-maquina");
+    const elementoMaisAvisos = document.querySelector(".avisos-gerais .card-avisos:nth-child(2) .numero-maquina");
+
+    elementoUltimaMaquina.innerHTML = `<a onclick = "analisar(${alertaMaisRecente.idComputador})">${alertaMaisRecente.hostname}</a>`;
+    elementoMaisAvisos.innerHTML = `<a onclick = "analisar(${maquinaMaisAvisos.idComputador})">${maquinaMaisAvisos.hostname}</a>`;
+
+    console.log("Máquina com mais avisos:", maquinaMaisAvisos);
+    console.log("Última máquina com aviso:", alertaMaisRecente);
+}
+
 
 
     function limparSessao() {

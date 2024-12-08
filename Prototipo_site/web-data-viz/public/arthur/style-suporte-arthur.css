@@ -390,6 +390,7 @@ color: black;
     border-radius: 5px;
     padding: 1%;
     border-radius: 5px;
+    cursor: default;
     }
 
 /* .tabela-jira{
@@ -407,15 +408,22 @@ th, td{
     width: 100%;
     border-width: 5px;
     border-color: #FFFFFF;
-    border-collapse: collapse; /* Importante para combinar bordas */
+    border-collapse: collapse;
+    cursor: default;
 }
 
 th, td {
     border-width: 5px;
     border-color: #FFFFFF;
     border-style: solid;
-    padding: 8px; /* Ajusta o espaçamento dentro das células */
-    /* background-color: #FFFFFF; Fundo branco */
+    padding: 8px; 
+    cursor: default;
+
+}
+
+td a{
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 th {
@@ -488,6 +496,11 @@ th {
     margin-top: 3%;
 }
 
+.numero-maquina a{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
 .card-avisos h2{
     text-align: center;
 }
@@ -548,6 +561,7 @@ th {
 .div-alertas{
     display: none;
     flex-direction: column;
+    cursor: default;
 }
 
 
