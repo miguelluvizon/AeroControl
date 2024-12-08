@@ -5,6 +5,7 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.S3Event;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import com.amazonaws.services.s3.model.ObjectMetadata;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -31,25 +32,59 @@ public class Main implements RequestHandler<S3Event, String> {
             // Leitura do arquivo JSON do bucket de origem
             InputStream s3InputStream = s3Client.getObject(sourceBucket, sourceKey).getObjectContent();
 
-            // Conversão do JSON para uma lista de objetos Stock usando o Mapper
-            Mapper mapper = new Mapper();
-            List<Stock> stocks = mapper.map(s3InputStream);
+            // Determinando a Extensão do Arquivo do Bucket de Origem:
+            String fileExtension = pegarExtensao(sourceKey);
 
-            // Geração do arquivo CSV a partir da lista de Stock usando o CsvWriter
-            CsvWriter csvWriter = new CsvWriter();
-            ByteArrayOutputStream csvOutputStream = csvWriter.writeCsv(stocks);
+            if(fileExtension.equals(".csv")) {
+                // Conversão do CSV para uma lista de objetos Stock usando o Mapper
+                Mapper mapper = new Mapper();
+                List<Stock> stocks = mapper.map(s3InputStream);
 
-            // Converte o ByteArrayOutputStream para InputStream para enviar ao bucket de destino
-            InputStream csvInputStream = new ByteArrayInputStream(csvOutputStream.toByteArray());
+                // Geração do arquivo CSV a partir da lista de Stock usando o CsvWriter
+                JsonWriter jsonWriter = new JsonWriter();
+                ByteArrayOutputStream jsonOutputStream = jsonWriter.writeFile(stocks);
 
-            // Envio do CSV para o bucket de destino
-            s3Client.putObject(DESTINATION_BUCKET, sourceKey.replace(".json", ".csv"), csvInputStream, null);
+                // Converte o ByteArrayOutputStream para InputStream para enviar ao bucket de destino
+                InputStream JsonInputStream = new ByteArrayInputStream(jsonOutputStream.toByteArray());
 
-            return "Sucesso no processamento";
+                // Envio do CSV para o bucket de destino
+                s3Client.putObject(DESTINATION_BUCKET, sourceKey.replace(".csv", ".json"), JsonInputStream, null);
+
+                return "Sucesso no processamento";
+            } else if (fileExtension.equals(".json")) {
+                // Conversão do JSON para uma lista de objetos Stock usando o Mapper
+                Mapper mapper = new Mapper();
+                List<Stock> stocks = mapper.map(s3InputStream);
+
+                // Geração do arquivo CSV a partir da lista de Stock usando o CsvWriter
+                CsvWriter csvWriter = new CsvWriter();
+                ByteArrayOutputStream csvOutputStream = csvWriter.writeCsv(stocks);
+
+                // Converte o ByteArrayOutputStream para InputStream para enviar ao bucket de destino
+                InputStream csvInputStream = new ByteArrayInputStream(csvOutputStream.toByteArray());
+
+                // Envio do CSV para o bucket de destino
+                s3Client.putObject(DESTINATION_BUCKET, sourceKey.replace(".json", ".csv"), csvInputStream, null);
+
+                return "Sucesso no processamento";
+            }
         } catch (Exception e) {
             // Tratamento de erros e log do contexto em caso de exceção
             context.getLogger().log("Erro: " + e.getMessage());
             return "Erro no processamento";
         }
     }
+}
+
+private String pegarExtensao(String sourceKey) {
+    // Buscando o Index do Último Ponto ( . ), que indica a Extensão:
+    int lastIndexOfDot = sourceKey.lastIndexOf('.');
+
+    // Caso o Arquivo não tenha Extensão, retorna Vazio:
+    if (lastIndexOfDot == -1) {
+        return "";
+    }
+
+    // Retornando a Extensão em Formato String:
+    return sourceKey.substring(lastIndexOfDot);
 }
