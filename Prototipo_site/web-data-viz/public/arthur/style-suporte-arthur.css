@@ -76,6 +76,7 @@ body {
 }
 
 .persona{
+    text-align: center;
     font-size: 120%;
     color: #3B1690;
     font-weight: bold;

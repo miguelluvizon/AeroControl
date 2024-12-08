@@ -15,6 +15,9 @@
             <div class="logo">
                 <img src="../martinez/img/Protótipo_Dashboard-removebg-preview.png" alt="Logo">
             </div>
+            <div class="persona">Usuario:</div>
+            <div class="persona" id="nomeUser" style="color: black;"></div>
+            <br>
             <div class="persona">Técnico de TI</div>
             <nav class="sidebar-nav">
                 <a class="sidebar-btn" href="dashboard-suporte.html">PAINEL</a>
@@ -60,25 +63,15 @@
                         </div>
                     <div class="avisos-jira-div">
                         
-                        <table class="tabela-jira">
+                        <table id="tabela_jira" class="tabela-jira">
                             <tr>
                                 <th>ID</th>
                                 <th>Data</th>
+                                <th>Hora</th>
                                 <th>Descrição</th>
                                 <th>Máquina</th>
                             </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>22/10/2024</td>
-                                <td>Alerta de RAM</td>
-                                <td>PC100</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>22/10/2024</td>
-                                <td>Alerta de CPU</td>
-                                <td>PC400</td>
-                            </tr>
+                        </div>
                         </table>
     
                     </div>
@@ -119,6 +112,8 @@
 
 <script>
 
+    var nomeUsuario = sessionStorage.NOME_USUARIO;
+    nomeUser.innerHTML = `${nomeUsuario}`
    
     //Seleção do visualizador
     console.log("Script carregado com sucesso!");
@@ -178,7 +173,24 @@ function analisar(idComputador){
             clearTimeout(proximaAtualizacao);
         }
 
-    fetch(`/suporteArthur/maquinas`)
+
+        fetch(`/suporteArthur/alertas/${idUsuario}`)
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error('Erro ao buscar avisos.');
+            }
+            return response.json();
+        })
+        .then((alertas) => {
+            sessionStorage.setItem('ALERTAS', JSON.stringify(alertas));
+            console.log('Alertas salvos no sessionStorage:', alertas);
+            
+        })
+        .catch((erro) => {
+            console.error('Erro ao salvar avisos:', erro);
+        });
+
+    fetch(`/suporteArthur/maquinas/${idUsuario}`)
         .then((response) => {
             if (!response.ok) {
                 throw new Error('Erro ao buscar máquinas.');
@@ -191,6 +203,7 @@ function analisar(idComputador){
             
             // proximaAtualizacao = setTimeout(() => salvarMaquinasNoSessionStorage(idUsuario), 5000);
             exibirMaquinasDoUsuario()
+            exibirAlertasDoUsuario()
             // setTimeout(() => exibirMaquinasDoUsuario(), 2000);
             
         })
@@ -324,6 +337,40 @@ function plotarIndicador(dados, idMaquina) {
         indicador.style.backgroundColor = 'green';
     }
 }
+
+
+function exibirAlertasDoUsuario() {
+            
+    
+        var alertasTabela = document.getElementById("tabela_jira");
+        alertasTabela.innerHTML = `
+                            <tr>
+                                <th>ID</th>
+                                <th>Data</th>
+                                <th>Hora</th>
+                                <th>Descrição</th>
+                                <th>Máquina</th>
+                            </tr>`;
+
+        var alertas = JSON.parse(sessionStorage.ALERTAS);
+    
+    console.log(`json ALERTAS: `, alertas);
+    alertas.forEach((item) => {
+        alertasTabela.innerHTML += 
+            `
+            <tr>
+            <td>${item.idAlerta}</td>
+            <td>${item.dataAlerta}</td>
+            <td>${item.horaAlerta}</td>
+            <td>${item.tipo}</td>
+            <td><a onclick="analisar(${item.idComputador})">${item.hostname}</a></td>
+            </tr>`
+        ;
+    });
+
+    
+        
+    }
 
 
     function limparSessao() {

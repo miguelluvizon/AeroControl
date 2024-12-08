@@ -48,7 +48,8 @@ JOIN
 JOIN 
     Usuario ON Computador.fkUsuario = Usuario.cpf
 WHERE 
-    DadoComputador.idDado = (
+    Usuario.cpf = ${idUsuario}
+    AND DadoComputador.idDado = (
         SELECT MAX(idDado) 
         FROM DadoComputador 
         WHERE fkComputador = Computador.idComputador
@@ -60,8 +61,43 @@ ORDER BY
     return database.executar(instrucaoSql);
 }
 
+
+function buscarAlertas(idUsuario) {
+    var instrucaoSql = `  
+    SELECT 
+    Alerta.idAlerta AS idAlerta,
+    DATE_FORMAT(Alerta.dataAlerta, '%d/%m/%Y') AS dataAlerta,
+    DATE_FORMAT(Alerta.dataAlerta, '%H:%i:%s') AS horaAlerta,
+    Alerta.Tipo AS tipo,
+    Computador.idComputador AS idComputador,
+    Computador.hostname AS hostname,
+    DadoComputador.cpuPorcentagem AS cpuPorcentagem,
+    DadoComputador.memoriaPorcentagem AS memoriaPorcentagem
+FROM 
+    Alerta
+JOIN 
+    DadoComputador ON Alerta.fkDadoComputador = DadoComputador.idDado
+JOIN 
+    Computador ON DadoComputador.fkComputador = Computador.idComputador
+JOIN 
+    Usuario AS DonoComputador ON Computador.fkUsuario = DonoComputador.cpf
+JOIN 
+    Aeroporto ON DonoComputador.fkAeroporto = Aeroporto.cnpj
+JOIN 
+    Usuario AS UsuarioFiltro ON UsuarioFiltro.fkAeroporto = Aeroporto.cnpj
+WHERE 
+    UsuarioFiltro.cpf = '${idUsuario}'
+ORDER BY 
+    Alerta.dataAlerta DESC limit 5;
+`;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
     buscarMaquinasPorUsuario,
     buscarUltimasMedidas,
-    buscarMedidasEmTempoReal
+    buscarMedidasEmTempoReal,
+    buscarAlertas
 }
