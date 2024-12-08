@@ -1,3 +1,5 @@
+use aeroControl;
+
 INSERT INTO DadoComputador (horaDado, cpuPorcentagem, memoriaPorcentagem, memoriaGB, fkComputador)
 SELECT 
     DATE_ADD('2024-10-01', INTERVAL num DAY) AS horaDado,	 -- Gera as datas para o mês de outubro
