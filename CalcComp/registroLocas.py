@@ -36,9 +36,9 @@ chave_projeto = "KAN"
 api_token = ""
 
 # Limites para alertas
-cpu_limite = 1
-usoRAM_limite = 100
-porcentagemRAM_limite = 100
+cpu_limite = 50
+usoRAM_limite = 50
+porcentagemRAM_limite = 50
 
 # Conectar ao Jira
 def conectar():
@@ -135,10 +135,10 @@ def monitorar():
 
         if porcentagemCPU > cpu_limite:
 
-            if porcentagemCPU >= 1 or porcentagemCPU < 1.2:
+            if porcentagemCPU >= 50 or porcentagemCPU < 80:
                 status = 'atenção'
             
-            if porcentagemCPU >= 3:
+            if porcentagemCPU >= 80:
                 status = 'crítico'
 
             cpuAlerta(jira, porcentagemCPU, idPc)
