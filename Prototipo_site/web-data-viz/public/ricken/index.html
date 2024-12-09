@@ -22,93 +22,100 @@
         <main class="main-content">
             <h1>PAINEL DE RESUMO SEMANAL</h1>
 
-            <div class="painel">
+            <div class="painel visible">
+                <div class="painel">
 
-                <div class="configGraficoPizza">
-                    <canvas id="grafico"></canvas>
-                </div>
-
-                <div class="painel2">
-                    <div class="alertas" style="border: 3px solid #c02f1b; box-shadow: 1px 1px 8px #c02f1b;">
-                        <div class="corAlerta" style="background-color: #c02f1b; color: white;">
-                        </div>
-                        <div class="descricao">
-                            <h1>CRÍTICO</h1>
-                            <p>CPU ou RAM excedeu 80% de uso</p>
-                        </div>
+                    <div class="configGraficoPizza">
+                        <canvas id="grafico"></canvas>
                     </div>
 
-                    <div class="alertas" style="border: 3px solid #EFCA08; box-shadow: 1px 1px 8px #EFCA08;">
-                        <div class="corAlerta" style="background-color: #EFCA08; color: black;">
+                    <div class="painel2">
+                        <div class="alertas" style="border: 3px solid #c02f1b; box-shadow: 1px 1px 8px #c02f1b;">
+                            <div class="corAlerta" style="background-color: #c02f1b; color: white;">
+                            </div>
+                            <div class="descricao">
+                                <h1>CRÍTICO</h1>
+                                <p>CPU ou RAM excedeu 80% de uso</p>
+                            </div>
                         </div>
-                        <div class="descricao">
-                            <h1>ATENÇÃO</h1>
-                            <p>O uso de CPU ou RAM esteve entre 50% e 80%</p>
+
+                        <div class="alertas" style="border: 3px solid #EFCA08; box-shadow: 1px 1px 8px #EFCA08;">
+                            <div class="corAlerta" style="background-color: #EFCA08; color: black;">
+                            </div>
+                            <div class="descricao">
+                                <h1>ATENÇÃO</h1>
+                                <p>O uso de CPU ou RAM esteve entre 50% e 80%</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="chart-container">
-                <div class="titulo">
-                    <h2>SETORES</h2>
-                </div>
-
-                <div class="alertChart">
-
-                    <div class="cardSetor">
-                        <p>Setor: Despache de voo</p>
-                        <p id="totalMaquinaSetor1"></p>
-
-                        <div class="conteudo">
-                            <p>Chamados <br> longo da semana:</p>
-                        </div>
-                        <div class="metricas">
-                            <div class="configGraficoBarra">
-                                <canvas id="grafico2"></canvas>
-                            </div>
-                        </div>
-
-                        <button class="maisDetalhes" onclick="redirecionarTela('botao1')">Mais Detalhes</button>
+            <div class="chart-container hidden">
+                <div class="chart-container">
+                    <div class="titulo">
+                        <h2>SETORES</h2>
                     </div>
 
-                    <div class="cardSetor">
-                        <p>Setor: Torre de controle</p>
-                        <p id="TotalMaquinaSetor2"></p>
+                    <div class="alertChart">
 
+                        <div class="cardSetor">
+                            <p>Setor: Despache de voo</p>
+                            <p id="totalMaquinaSetor1"></p>
 
-                        <div class="conteudo">
-                            <p>Chamados <br> longo da semana:</p>
-                        </div>
-                        <div class="metricas">
-                            <div class="configGraficoBarra">
-                                <canvas id="grafico3"></canvas>
+                            <div class="conteudo">
+                                <p>Chamados <br> longo da semana:</p>
                             </div>
-                        </div>
-
-                        <button class="maisDetalhes" onclick="redirecionarTela('botao2')">Mais Detalhes</button>
-                    </div>
-
-                    <div class="cardSetor">
-                        <p>Setor: Centro de meteorologia </p>
-                        <p id="totalMaquinaSetor3"></p>
-
-
-                        <div class="conteudo">
-                            <p>Chamados <br> longo da semana:</p>
-                        </div>
-                        <div class="metricas">
-
-                            <div class="configGraficoBarra">
-                                <canvas id="grafico4"></canvas>
+                            <div class="metricas">
+                                <div class="configGraficoBarra">
+                                    <canvas id="grafico2"></canvas>
+                                </div>
                             </div>
+
+                            <button class="maisDetalhes" onclick="redirecionarTela('botao1')">Mais Detalhes</button>
                         </div>
 
-                        <button class="maisDetalhes" onclick="redirecionarTela('botao3')">Mais Detalhes</button>
+                        <div class="cardSetor">
+                            <p>Setor: Torre de controle</p>
+                            <p id="TotalMaquinaSetor2"></p>
+
+
+                            <div class="conteudo">
+                                <p>Chamados <br> longo da semana:</p>
+                            </div>
+                            <div class="metricas">
+                                <div class="configGraficoBarra">
+                                    <canvas id="grafico3"></canvas>
+                                </div>
+                            </div>
+
+                            <button class="maisDetalhes" onclick="redirecionarTela('botao2')">Mais Detalhes</button>
+                        </div>
+
+                        <div class="cardSetor">
+                            <p>Setor: Centro de meteorologia </p>
+                            <p id="totalMaquinaSetor3"></p>
+
+
+                            <div class="conteudo">
+                                <p>Chamados <br> longo da semana:</p>
+                            </div>
+                            <div class="metricas">
+
+                                <div class="configGraficoBarra">
+                                    <canvas id="grafico4"></canvas>
+                                </div>
+                            </div>
+
+                            <button class="maisDetalhes" onclick="redirecionarTela('botao3')">Mais Detalhes</button>
+                        </div>
                     </div>
                 </div>
             </div>
+            <button class="botaoSetores" onclick="mudarTela()">Ver por setores</button>
         </main>
+
+
     </div>
 </body>
 
@@ -319,5 +326,23 @@
         sessionStorage.clear();
         window.location = "../index.html";
     }
+
+    function mudarTela() {
+        const painel = document.querySelector('.painel');
+        const chartContainer = document.querySelector('.chart-container');
+
+        if (painel.classList.contains('visible')) {
+            painel.classList.remove('visible');
+            painel.classList.add('hidden');
+            chartContainer.classList.remove('hidden');
+            chartContainer.classList.add('visible');
+        } else {
+            chartContainer.classList.remove('visible');
+            chartContainer.classList.add('hidden');
+            painel.classList.remove('hidden');
+            painel.classList.add('visible');
+        }
+    }
+
 
 </script>

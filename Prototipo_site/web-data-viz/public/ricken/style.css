@@ -8,6 +8,7 @@ body {
     font-family: Arial, sans-serif;
     height: 100vh;
     background-color: #f4f4f4;
+    overflow: hidden;
 }
 
 .container {
@@ -142,12 +143,12 @@ body {
 /* parte dos setores */
 .chart-container {
     background-color: #e0e0e0;
-    margin: 4rem;
     padding: 20px;
     border-radius: 8px;
-    height: 36rem;
+    height: 31rem;
     display: flex;
     flex-direction: column;
+    margin-top: -1rem;
 }
 
 .titulo {
@@ -239,4 +240,27 @@ body {
 .configGraficoBarra {
     width: 350px;
     height: 125px;
+}
+
+.hidden {
+    display: none;
+}
+
+.visible {
+    display: block;
+}
+
+.botaoSetores{
+    width: 20%;
+    padding: 12px;
+    margin: 10px 0;
+    background-color: #3f2182;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    text-decoration: none;
+    text-align: center;
+    margin-left: 33rem;
 }
