@@ -217,6 +217,10 @@ function rankearAlertasTotais() {
                 graficoAlertasCPU.destroy();
             }
 
+            if (graficoAlertasRAM) {
+                graficoAlertasRAM.destroy()
+            }
+
             const maquinas = data.map(item => item.Maquina);
             const qtd_alertas = data.map(item => item.total_alertas);
 
@@ -311,21 +315,38 @@ function rankearMaquinasCriticas() {
         .then(data => {
             console.log(data)
 
-            const maquinas = data.map(item => item.Maquina);
-            const mediasCriticasCPU = data.map(item => item.mediaCPU);
-            const mediasCriticasRAM = data.map(item => item.mediaRAM);
+            var maquinas = data.map(item => item.Maquina);
+            var mediasCriticasCPU = data.map(item => item.mediaCPU);
+            var mediasCriticasRAM = data.map(item => item.mediaRAM);
 
+            var vetorMaquinasCPU = [];
+            var vetorCPU = [];
+            var vetorMaquinasRam = [];
+            var vetorRAM = [];
 
-            if (mediasCriticasCPU > 80) {
+            for (var index = 0; index < maquinas.length; index++) {
+                console.log(mediasCriticasCPU[index])
+                
+                if (mediasCriticasCPU[index] > 80) {
+                    vetorMaquinasCPU.push(maquinas[index])
+                    vetorCPU.push(mediasCriticasCPU[index])
+                }
+
+                if (mediasCriticasRAM[index] > 80) {
+                    vetorMaquinasRam.push(maquinas[index])
+                    vetorRAM.push(mediasCriticasRAM[index])
+                }
+            }
+
                 const ctx2 = document.getElementById('alertChart2').getContext('2d');
                 graficoCriticoCPU = new Chart(ctx2, {
                     type: 'bar',
                     data: {
-                        labels: maquinas,
+                        labels: vetorMaquinasCPU,
                         datasets: [
                             {
                                 label: 'Torre de Controle',
-                                data: mediasCriticasCPU,
+                                data: vetorCPU,
                                 backgroundColor: '#472c72',
                                 pointBackgroundColor: '#2c1153',
                                 pointRadius: 5
@@ -350,18 +371,18 @@ function rankearMaquinasCriticas() {
                         }
                     }
                 });
-            }
+            
 
-            if (mediasCriticasRAM > 80) {
+            
                 const ctx4 = document.getElementById('alertChart4').getContext('2d');
                 graficoCriticoRAM = new Chart(ctx4, {
                     type: 'bar',
                     data: {
-                        labels: maquinas,
+                        labels: vetorMaquinasRam,
                         datasets: [
                             {
                                 label: 'Torre de Controle',
-                                data: mediasCriticasRAM,
+                                data: vetorRAM,
                                 backgroundColor: '#472c72',
                                 pointBackgroundColor: '#2c1153',
                                 pointRadius: 5
@@ -386,7 +407,7 @@ function rankearMaquinasCriticas() {
                         }
                     }
                 });
-            }  
+            
         })
         .catch(error => console.error('Erro ao plotar gráfico', error));
 }
