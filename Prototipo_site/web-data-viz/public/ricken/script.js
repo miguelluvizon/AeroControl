@@ -12,6 +12,10 @@ function estadoMaquinas() {
           resposta.reverse();
 
           plotar(resposta);
+
+          totalCritico.innerHTML = `${resposta[0].AlertasTotais}`
+          totalAtencao.innerHTML = `${resposta[0].AtencaoTotais}`
+          
         });
       } else {
         console.error("Nenhum dado foi econtrado na API.");
@@ -44,6 +48,8 @@ function estadoSetor() {
           totalMaquinaSetor1.innerHTML = `Máquinas: ${resposta[0].MaquinasTotaisSetor1}`
           TotalMaquinaSetor2.innerHTML = `Máquinas: ${resposta[0].MaquinasTotaisSetor2}`
           totalMaquinaSetor3.innerHTML = `Máquinas: ${resposta[0].MaquinasTotaisSetor3}`
+          totalMaqui.innerHTML = `Total de máquinas: ${resposta[0].MaquinasTotaisSetor1 + resposta[0].MaquinasTotaisSetor2 + resposta[0].MaquinasTotaisSetor3}`
+
         });
       } else {
         console.error("Nenhum dado foi econtrado na API.");

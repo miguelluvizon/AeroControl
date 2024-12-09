@@ -13,14 +13,14 @@
 <body onload="estadoMaquinas(), estadoSetor()">
     <div class="container">
         <aside class="sidebar">
-            <img src="img/Protótipo Dashboard.png" alt="">
+            <img src="img/Aerocontrol.png" alt="" style="width: 100%;">
             <a href="./index.html" class="sidebar-btn">RESUMO</a>
             <a href="../martinez/index.html" class="sidebar-btn">COMPARAR</a>
             <a href="../martinezCrawler/index.html" class="sidebar-btn">PREVISÃO DO TEMPO</a>
             <a class="sidebar-btn" onclick="limparSessao()">SAIR</a>
         </aside>
         <main class="main-content">
-            <h1>PAINEL DE RESUMO SEMANAL</h1>
+            <h1>PAINEL - CHAMADOS DOS ÚLTIMOS 7 DIAS</h1>
 
             <div class="painel visible">
                 <div class="painel">
@@ -30,8 +30,12 @@
                     </div>
 
                     <div class="painel2">
+
+                        <h2 class="totalMaquinas" id="totalMaqui"></h2>
+
                         <div class="alertas" style="border: 3px solid #c02f1b; box-shadow: 1px 1px 8px #c02f1b;">
                             <div class="corAlerta" style="background-color: #c02f1b; color: white;">
+                                <div class="qtdMaq"><p id="totalCritico"></p></div>
                             </div>
                             <div class="descricao">
                                 <h1>CRÍTICO</h1>
@@ -41,6 +45,7 @@
 
                         <div class="alertas" style="border: 3px solid #EFCA08; box-shadow: 1px 1px 8px #EFCA08;">
                             <div class="corAlerta" style="background-color: #EFCA08; color: black;">
+                                <div class="qtdMaq"><p id="totalAtencao"></p></div>
                             </div>
                             <div class="descricao">
                                 <h1>ATENÇÃO</h1>
@@ -64,7 +69,7 @@
                             <p id="totalMaquinaSetor1"></p>
 
                             <div class="conteudo">
-                                <p>Chamados <br> longo da semana:</p>
+                                <p>Chamados ao <br> longo da semana:</p>
                             </div>
                             <div class="metricas">
                                 <div class="configGraficoBarra">
@@ -81,7 +86,7 @@
 
 
                             <div class="conteudo">
-                                <p>Chamados <br> longo da semana:</p>
+                                <p>Chamados ao <br> longo da semana:</p>
                             </div>
                             <div class="metricas">
                                 <div class="configGraficoBarra">
@@ -98,7 +103,7 @@
 
 
                             <div class="conteudo">
-                                <p>Chamados <br> longo da semana:</p>
+                                <p>Chamados ao <br> longo da semana:</p>
                             </div>
                             <div class="metricas">
 
@@ -133,7 +138,7 @@
             labels: ['Crítico', 'Atenção'],
             datasets: [
                 {
-                    label: 'Máquinas',
+                    label: 'Porcentagem',
                     borderColor: ['black'],
                     data: [],
                     backgroundColor: ['#c02f1b', '#EFCA08'],
@@ -142,8 +147,8 @@
         };
 
         console.log(resposta)
-        data.datasets[0].data.push(resposta[0].AlertasTotais);
-        data.datasets[0].data.push(resposta[0].AtencaoTotais);
+        data.datasets[0].data.push(((resposta[0].AlertasTotais) / (resposta[0].AlertasTotais + resposta[0].AtencaoTotais)) * 100 );
+        data.datasets[0].data.push(((resposta[0].AtencaoTotais) / (resposta[0].AlertasTotais + resposta[0].AtencaoTotais)) * 100 );
 
 
         const config = {
@@ -157,7 +162,7 @@
                     },
                     title: {
                         display: true,
-                        text: 'Maquinas que ficaram:'
+                        text: 'Chamados abertos (%):'
                     }
                 }
             },
@@ -177,7 +182,7 @@
             labels: ['Crítico', 'Atenção'],
             datasets: [
                 {
-                    label: ['Máquina'],
+                    label: ['Chamados'],
                     data: [],
                     borderColor: ['white'],
                     backgroundColor: ['#c02f1b', '#EFCA08'],
@@ -228,7 +233,7 @@
             labels: ['Crítico', 'Atenção'],
             datasets: [
                 {
-                    label: ['Máquina'],
+                    label: ['Chamados'],
                     data: [],
                     borderColor: ['white'],
                     backgroundColor: ['#c02f1b', '#EFCA08'],
@@ -278,7 +283,7 @@
             labels: ['Crítico', 'Atenção'],
             datasets: [
                 {
-                    label: ['Máquina'],
+                    label: ['Chamados'],
                     data: [],
                     borderColor: ['white'],
                     backgroundColor: ['#c02f1b', '#EFCA08'],
