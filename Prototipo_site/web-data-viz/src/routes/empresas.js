@@ -28,7 +28,7 @@ router.get("/puxarAlertas/:setor", function (req, res) { // rota luvizones
   empresaController.puxarAlertas(req, res);
 })
 
-router.get("/puxarAlertasCriticos/:setor", function (req, res) { // rota luvizones
+router.get("/puxarAlertasCriticos/:setor/:componente", function (req, res) { // rota luvizones
   empresaController.puxarAlertasCriticos(req, res);
 })
 

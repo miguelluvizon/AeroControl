@@ -45,21 +45,29 @@ function puxarAlertas(setor) { // rota luvizones
   return database.executar(instrucaoSql);
 }
 
-function puxarAlertasCriticos(setor) { // rota luvizones
+function puxarAlertasCriticos(setor,componente) { // rota luvizones
   var instrucaoSql = `
-  SELECT
-	SUM(CASE WHEN origem = 'cpu' THEN total_alertas ELSE 0 END) AS somaTotalCPU,
-	SUM(CASE WHEN origem = 'ram' THEN total_alertas ELSE 0 END) AS somaTotalRAM
-	FROM (SELECT idComputador, hostname AS Maquina, origem, COUNT(a.idAlerta) AS total_alertas 
-	FROM Alerta a
-	JOIN DadoComputador ON fkDadoComputador = idDado
-	JOIN Computador ON fkComputador = idComputador
-	JOIN Setor ON fkSetor = idSetor
-	WHERE idSetor = ${setor} AND horaDado BETWEEN DATE_SUB(NOW(), INTERVAL 7 DAY) AND NOW()
-	GROUP BY idComputador, hostname, origem
-	ORDER BY total_alertas ASC
-	LIMIT 10
-	) AS somaCritica;`;
+  SELECT 
+    idComputador, 
+    hostname AS Maquina, 
+    SUM(CASE WHEN origem = 'cpu' THEN 1 ELSE 0 END) AS total_alertas_cpu,
+    SUM(CASE WHEN origem = 'ram' THEN 1 ELSE 0 END) AS total_alertas_ram
+FROM 
+    Alerta a
+JOIN 
+    DadoComputador ON fkDadoComputador = idDado
+JOIN 
+    Computador ON fkComputador = idComputador
+JOIN 
+    Setor ON fkSetor = idSetor
+WHERE 
+    idSetor = ${setor} 
+    AND horaDado BETWEEN DATE_SUB(NOW(), INTERVAL 7 DAY) AND NOW()
+GROUP BY 
+    idComputador, hostname
+ORDER BY 
+    (total_alertas_cpu + total_alertas_ram) ASC
+LIMIT 10;`;
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
 }

@@ -23,7 +23,7 @@ trocarConteudo();
 
 function puxarAlertas() {
     const botaoSelecionado = sessionStorage.getItem("botaoSelecionado");
-    var setor = 0;
+  
 
     if (botaoSelecionado === "botao1") {
         setor = 1;
@@ -62,10 +62,10 @@ function puxarAlertas() {
 
     return false;
 }
-
+var setor = 0;
 function puxarAlertasCriticos() {
     const botaoSelecionado = sessionStorage.getItem("botaoSelecionado");
-    var setor = 0;
+    
 
     if (botaoSelecionado === "botao1") {
         setor = 1;
@@ -75,7 +75,9 @@ function puxarAlertasCriticos() {
         setor = 3;
     }
 
-    fetch(`../empresas/puxarAlertasCriticos/${setor}`, {
+    var componente = document.getElementById('Comp').value
+
+    fetch(`../empresas/puxarAlertasCriticos/${setor}/${componente}`, {
         method: "GET",
     })
         .then(function (resposta) {
@@ -86,8 +88,17 @@ function puxarAlertasCriticos() {
                     .then(function (resposta) {
                         console.log(resposta)
 
-                        alertasTotaisCriticosCPU.innerHTML = `${resposta[0].somaTotalCPU}`
-                        alertasTotaisCriticosRAM.innerHTML = `${resposta[0].somaTotalRAM}`
+                        var totalAlertasCPU = 0;
+                        var totalAlertasRAM = 0;
+
+                        
+                        for (var index = 0; index < resposta.length; index++) {
+                            totalAlertasCPU += Number(resposta[index].total_alertas_cpu);
+                            totalAlertasRAM += Number(resposta[index].total_alertas_ram);
+                        }
+
+                        alertasTotaisCriticosCPU.innerHTML = `${totalAlertasCPU}`
+                        alertasTotaisCriticosRAM.innerHTML = `${totalAlertasRAM}`
                     })
             } else {
                 throw "Houve ao puxar qtd";
@@ -102,7 +113,7 @@ function puxarAlertasCriticos() {
 
 function puxarTotalMaquinas() {
     const botaoSelecionado = sessionStorage.getItem("botaoSelecionado");
-    var setor = 0;
+    
 
     if (botaoSelecionado === "botao1") {
         setor = 1;
@@ -138,7 +149,7 @@ function puxarTotalMaquinas() {
 
 function puxarMediaTotal() {
     const botaoSelecionado = sessionStorage.getItem("botaoSelecionado");
-    var setor = 0;
+  
 
     if (botaoSelecionado === "botao1") {
         setor = 1;
@@ -196,8 +207,7 @@ let graficoAlertasRAM
 
 function rankearAlertasTotais() {
     const botaoSelecionado = sessionStorage.getItem("botaoSelecionado");
-    var setor = 0;
-
+   
     if (botaoSelecionado === "botao1") {
         setor = 1;
     } else if (botaoSelecionado === "botao2") {
@@ -300,7 +310,7 @@ let graficoCriticoRAM
 
 function rankearMaquinasCriticas() {
     const botaoSelecionado = sessionStorage.getItem("botaoSelecionado");
-    var setor = 0;
+  
 
     if (botaoSelecionado === "botao1") {
         setor = 1;

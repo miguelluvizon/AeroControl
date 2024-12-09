@@ -69,9 +69,10 @@ function puxarAlertas (req, res) { // rota luvizones
 
 function puxarAlertasCriticos (req, res) { // rota luvizones
   const {setor} = req.params
+  const {componente} = req.params
 
   console.log("puxando total de alertas")
-  empresaModel.puxarAlertasCriticos(setor)
+  empresaModel.puxarAlertasCriticos(setor, componente)
   .then(function (resposta) {
       if(resposta.length > 0) {
           res.status(200).json(resposta);
