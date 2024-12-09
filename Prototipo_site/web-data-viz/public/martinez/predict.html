@@ -115,14 +115,20 @@
 
                 const alertasSetorB = obterAlertasPorSetor(data, "Torre de Controle")
 
+                const alertasSetorC = obterAlertasPorSetor(data, "Centro de Meteorologia")
+
                 console.log('Alertas Despache de Voo:', alertasSetorA);
                 console.log('Alertas Torre de Controle:', alertasSetorB);
+                console.log('Alertas Centro de Meteorologia:', alertasSetoCB);
 
                 const previsoesSetorA = calcularPredictPorSetor(alertasSetorA);
                 const previsoesSetorB = calcularPredictPorSetor(alertasSetorB);
+                const previsoesSetorC = calcularPredictPorSetor(alertasSetorC);
 
                 console.log('Previsões Despache de Voo:', previsoesSetorA);
                 console.log('Previsões Torre de Controle:', previsoesSetorB);
+                console.log('Previsões Centro de Meteorologia:', previsoesSetorC);
+
 
                 const meses = ["Outubro", "Novembro", "Dezembro", "Janeiro", "Fevereiro"];
 
@@ -151,6 +157,15 @@
                 alertasSetorBComPrevisao.push(previsoesSetorB.janeiro);
                 alertasSetorBComPrevisao.push(previsoesSetorB.fevereiro);
 
+                let alertasSetorCComPrevisao = [];
+                for (let i = 0; i < alertasSetorA.length; i++) {
+                    alertasSetorCComPrevisao.push(alertasSetorC[i]);
+                }
+
+                // Adicionar previsões
+                alertasSetorCComPrevisao.push(previsoesSetorC.janeiro);
+                alertasSetorCComPrevisao.push(previsoesSetorC.fevereiro);
+
                 // Criar o gráfico
                 const ctx = document.getElementById('predict-grafico').getContext('2d');
                 const chart = new Chart(ctx, {
@@ -167,6 +182,11 @@
                                 label: 'Torre de Controle',
                                 data: alertasSetorBComPrevisao,
                                 backgroundColor: '#5e548e'
+                            },
+                            {
+                                label: 'Centro de Meteorologia',
+                                data: alertasSetorCComPrevisao,
+                                backgroundColor: '#9f86c0'
                             }
                         ]
                     },
